@@ -1,0 +1,24 @@
+{
+  "name": "countingted",
+  "version": "1.0.0",
+  "description": "Calorie Counting Web Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeckard2000/CountingTed.git"
+  },
+  "author": "Trent Deckard InterestingTed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tdeckard2000/CountingTed/issues"
+  },
+  "homepage": "https://github.com/tdeckard2000/CountingTed#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  }
+}

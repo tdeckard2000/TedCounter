@@ -11,3 +11,7 @@ body{
     right: 100px;
     filter: invert(1);
 }
+
+.navbar{
+    background-color: #ff9c3e;
+}

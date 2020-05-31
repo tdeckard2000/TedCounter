@@ -1,0 +1,8 @@
+/* Navbar Styles */
+.navbarTitle img{
+    position: absolute;
+    height: 52px;
+    top: 2px;
+    right: 100px;
+    filter: invert(1);
+}

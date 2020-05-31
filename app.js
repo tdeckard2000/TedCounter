@@ -8,6 +8,11 @@ app.get('/', (req, res)=>{
     res.render('index');
 });
 
-app.listen('3000', ()=>{
-    console.log('Listening on 3000');
-});
+let port = process.env.PORT;
+if (port == null || port == "") {
+  app.listen('3000', ()=>{
+    console.log('Listening on Port 3000') 
+  });
+}else{
+  app.listen(port);  
+}

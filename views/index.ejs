@@ -1,5 +1,16 @@
 <%-include('header');-%>
 
 <h3>Hello!</h3>
+<link href="signin.css" rel="stylesheet">
+<form class="form-signin text-center">
+    <img class="mb-4" src="/docs/4.5/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 signInText mb-3 font-weight-normal">Welcome Back</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-info btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  </form>
 
 <%-include('footer');-%>

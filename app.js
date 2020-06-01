@@ -3,6 +3,9 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 
 const foodItemSchema = new mongoose.Schema({
@@ -34,9 +37,6 @@ foodItem.find({},(err, doc)=>{
   console.log(doc);
   console.log(err);
 });
-
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res)=>{
     res.render('index');

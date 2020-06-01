@@ -18,7 +18,11 @@ body{
 
 /* Index Page - Sign In */
 .copyYear{
+    bottom: 0;
     color: #3a3a3a;
+    left: 0;
+    position: absolute;
+    width: 100%;
 }
 
 .form-signin{

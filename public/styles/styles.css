@@ -4,9 +4,63 @@ body{
 }
 
 /* Dashboard Page ========================================== */
+.bottomBar{
+    background-color: #ff9c3e;
+    border-radius: 3px 3px 0 0;
+}
+
 .headerRow{
-    margin-top: 10px;
+    background-color: #ff9c3e;
+    border-radius: 0 0 3px 3px;
+    padding: 10px 0;
+    position: fixed;
     text-align: center;
+    width: 100%;
+    z-index: 100;
+}
+
+.itemListContainer{
+    padding-top: 95px;
+    
+}
+
+.itemRow{
+    background-color: lightgreen;
+    border: #70b570 solid 2px;
+    border-radius: 3px;
+    margin: 1px;
+    padding: 5px 0;
+}
+
+.itemRowContainer{
+    padding: 1px;
+}
+
+.itemTime{
+    font-size: .8rem;
+    text-align: left;
+    margin: 0;
+    padding: 2px 0;
+}
+
+.itemTimeNameDiv{
+    padding: 0 0 0 10px;
+}
+
+.itemName{
+    font-size: 1.4rem;
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+.itemValue{
+    font-size: .8rem;
+    margin: 0;
+    text-align: end;
+}
+
+.itemValueDiv{
+    padding: 2px 10px;
 }
 
 /* Navbar Styles ========================================== */

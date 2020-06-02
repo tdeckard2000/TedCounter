@@ -12,6 +12,8 @@ body{
 .headerRow{
     background-color: #ff9c3e;
     border-radius: 0 0 3px 3px;
+    left: 0;
+    margin: 0;
     padding: 10px 0;
     position: fixed;
     text-align: center;

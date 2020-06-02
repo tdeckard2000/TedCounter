@@ -1,9 +1,15 @@
+/* Site Wide ========================================== */
 body{
     background-color: #5f65d8;
-    /* background-color: #e28934; */
 }
 
-/* Navbar Styles */
+/* Dashboard Page ========================================== */
+.headerRow{
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Navbar Styles ========================================== */
 .navbarTitle img{
     position: absolute;
     height: 52px;
@@ -16,7 +22,7 @@ body{
     background-color: #ff9c3e;
 }
 
-/* Index Page - Sign In */
+/* Index Page - Sign In ========================================== */
 .copyYear{
     bottom: 0;
     color: #3a3a3a;

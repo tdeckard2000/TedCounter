@@ -85,6 +85,7 @@
     font-size: 1.8rem;
     height: 60px;
     opacity: .7;
+    padding: 0 0 4px 0;
     position: absolute;
     width: 60px;
 }
@@ -97,7 +98,6 @@
 .buttonSettings{
     bottom: 55px;
     left: 10px;
-    padding: 0 0 4px 0;
 }
 
 .buttonQuickAdd{

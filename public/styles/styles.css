@@ -78,16 +78,31 @@
 }
 
 /* Dashboard Bottom Buttons ========================================== */
-.settingsButton{
+.bottomBar button{
+    background-color: #5f65d8;
     border-radius: 100%;
-    bottom: 45px;
+    border-width: 0;
     font-size: 1.8rem;
     height: 60px;
-    left: 10px;
-    opacity: .9;
-    padding: 0 0 4px 0;
+    opacity: .7;
     position: absolute;
     width: 60px;
+}
+
+.buttonAddMeal{
+    bottom: 55px;
+    right: 10px;
+}
+
+.buttonSettings{
+    bottom: 55px;
+    left: 10px;
+    padding: 0 0 4px 0;
+}
+
+.buttonQuickAdd{
+    bottom: 120px;
+    right: 10px;
 }
 
 /* Index Page - Sign In ========================================== */

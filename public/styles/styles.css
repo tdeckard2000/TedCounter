@@ -29,17 +29,17 @@
 }
 
 /* Dashboard List ========================================== */
+.dashboardBody{
+    background-color: gray;
+}
 
 .itemListContainer{
-    padding: 95px 0 70px 0;
+    padding: 56px 0 70px 0;
 }
 
 .itemRow{
     background-color: lightgreen;
-    border: #70b570 solid 2px;
-    border-radius: 3px;
     margin: 1px;
-    padding: 5px 0;
 }
 
 .itemRowContainer{
@@ -58,7 +58,7 @@
 }
 
 .itemName{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-align: left;
     margin-bottom: 2px;
 }
@@ -76,9 +76,13 @@
 .topBar{
     background-color: #ff9c3e;
 }
+/* Round Corners of Last List Item */
+.itemListContainer > .itemRowContainer:last-child > .itemRow{
+    border-radius: 0 0 4px 4px;
+}
 
 /* Dashboard Bottom Buttons ========================================== */
-.bottomBar button{
+.bottomButtons button{
     background-color: #5f65d8;
     border-radius: 100%;
     border-width: 0;
@@ -103,6 +107,23 @@
 .buttonQuickAdd{
     bottom: 120px;
     right: 10px;
+}
+
+/* Dashboard Bottom Bar ========================================== */
+.bottomBar{
+    background-color: #ff9c3e;
+    height: 45px;
+}
+
+.bottomBarDay{
+    color: white;
+    margin: auto;
+}
+
+.bottomBarLogo{
+    filter: invert(1);
+    position: absolute;
+    width: 30px;
 }
 
 /* Index Page - Sign In ========================================== */
@@ -146,6 +167,11 @@
     color: #FFFFFF;
     display: block;
     text-decoration: underline;
+}
+
+.tryItOut{
+    bottom: 30px;
+    color: white;
 }
 
 #inputEmail{

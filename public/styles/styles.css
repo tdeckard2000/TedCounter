@@ -121,6 +121,7 @@
 }
 
 .bottomBarLogo{
+    bottom: 6px;
     filter: invert(1);
     position: absolute;
     width: 30px;

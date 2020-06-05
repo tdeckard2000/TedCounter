@@ -156,6 +156,7 @@ button.close{
     margin: auto;
     padding-bottom: 10px;
     width: fit-content;
+    -webkit-appearance: none;
 }
 
 .dropDownMeals{

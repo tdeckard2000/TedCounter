@@ -67,6 +67,17 @@
     padding: 60px 0 60px 0;
 }
 
+.itemName{
+    bottom: -3px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    position: relative;
+    text-align: left;
+    margin-bottom: 0px;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
 .itemRow{
     background-color: #ffffff;
     margin: 1px;
@@ -87,15 +98,6 @@
 
 .itemTimeNameDiv{
     padding: 0 0 0 10px;
-}
-
-.itemName{
-    bottom: -3px;
-    font-size: 1.3rem;
-    font-weight: 300;
-    position: relative;
-    text-align: left;
-    margin-bottom: 0px;
 }
 
 .itemValue{

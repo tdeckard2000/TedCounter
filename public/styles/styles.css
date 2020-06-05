@@ -3,7 +3,7 @@
 /* Dashboard Header ========================================== */
 .headerRow{
     background-color: #ff9c3e;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     left: 0;
     margin: 0;
     padding: 2px 0;
@@ -31,6 +31,14 @@
 }
 
 /* Dashboard List ========================================== */
+.backgroundLogo{
+    bottom: 60px;
+    opacity: .2;
+    padding: 30px;
+    position: relative;
+    width: 100%;
+}
+
 .dashboardBody{
     background-color: #cacaca;
 }
@@ -57,7 +65,7 @@
 }
 
 .itemListContainer{
-    padding: 56px 0 70px 0;
+    padding: 60px 0 60px 0;
 }
 
 .itemRow{
@@ -191,7 +199,8 @@ button.close{
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
     background-color: #5f65d8;
-    height: 45px;
+    height: 50px;
+    border-radius: 0 0 10px 10px;
 }
 
 .bottomBarDay{
@@ -200,7 +209,7 @@ button.close{
 }
 
 .bottomBarLogo{
-    bottom: 6px;
+    bottom: 9px;
     filter: invert(1);
     position: absolute;
     width: 30px;

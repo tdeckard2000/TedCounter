@@ -135,6 +135,19 @@
     right: 10px;
 }
 
+/* Dashboard Modal Pop-Ups */
+.modal-content{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    bottom: 183px;
+}
+
+.modal-header{
+    background-color: #ff9c3e;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
     background-color: #ff9c3e;

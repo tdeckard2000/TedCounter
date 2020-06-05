@@ -21,7 +21,25 @@
     </div>
   </div>
 </div>
+
 <div class="itemListContainer">
+
+  <%foodItemList.forEach((element)=>{%>
+    <div class="container itemRowContainer">
+      <div class="row itemRow">
+        <div class="col-9 itemTimeNameDiv">
+          <h2 class="itemTime">4:35pm</h2>
+          <h2 class="itemName"><%=element.name%></h2>
+        </div>
+        <div class="col-3 itemValueDiv">
+          <h6 class="itemValue"><%=element.calories%> cal</h6>
+          <h6 class="itemValue"><%=element.sodium%> sdm</h6>
+          <h6 class="itemValue"><%=element.protein%> pro</h6>
+          <h6 class="itemValue"><%=element.carbs%> pro</h6>
+        </div>
+      </div>
+    </div>
+  <%});%>
 
   <div class="container itemRowContainer">
     <div class="row itemRow">
@@ -92,19 +110,6 @@
       </div>
       <div class="col-3 itemValueDiv">
         <img class="foodIcon" src="./files/taco.svg" alt="">
-      </div>
-    </div>
-  </div>
-  <div class="container itemRowContainer">
-    <div class="row itemRow">
-      <div class="col-9 itemTimeNameDiv">
-        <h2 class="itemTime">4:35pm</h2>
-        <h2 class="itemName">Taco Bell 7 Layer Burrito</h2>
-      </div>
-      <div class="col-3 itemValueDiv">
-        <h6 class="itemValue">1010 cal</h6>
-        <h6 class="itemValue">350 sdm</h6>
-        <h6 class="itemValue">12 pro</h6>
       </div>
     </div>
   </div>
@@ -423,16 +428,73 @@
 
 </div>
 
+<!-- BootStrap Modals -->
+
+<!-- Quick Add -->
+<div class="modal" id="quickAdd" tabindex="-1" role="dialog">
+  <div class="modalQuickAdd modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Quick Add</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- AddMeal -->
+<div class="modal" id="mealAdd" tabindex="-1" role="dialog">
+  <div class="modalQuickAdd modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Meal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Settings -->
+<div class="modal" id="settings" tabindex="-1" role="dialog">
+  <div class="modalQuickAdd modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <nav class="bottomButtons fixed-bottom">
-  <form action="">
-    <button class="buttonSettings">⚙</button>
-  </form>
-  <form action="">
-    <button class="buttonAddMeal">🍽</button>
-  </form>
-  <form action="">
-    <button class="buttonQuickAdd">🔥</button>
-  </form>
+  <button class="buttonSettings" data-target="#settings" data-toggle="modal">⚙</button>
+  <button class="buttonAddMeal" data-target="#mealAdd" data-toggle="modal">🍽</button>
+  <button class="buttonQuickAdd" data-target="#quickAdd" data-toggle="modal">🔥</button>
 </nav>
 
 <nav class=" bottomBar navbar fixed-bottom">

@@ -33,11 +33,22 @@ const foodItem = mongoose.model('foodItem', foodItemSchema);
 //   console.log(err);
 //   console.log(doc);
 // })
+let foodItemList = [0,1,2,3,4,5];
 
-// foodItem.find({},(err, doc)=>{
-//   console.log(doc);
-//   console.log(err);
-// });
+function findFoodItems(){
+  foodItem.find({},(err, doc)=>{
+    if(err){
+      console.log("ERROR at findFoodItems")
+      console.log(err);
+    }else{
+      foodItemList = (doc);
+    }
+  });
+}
+
+findFoodItems();
+
+
 
 // Get Requests ==========================================================
 app.get('/', (req, res)=>{
@@ -45,7 +56,8 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/dashboard', (req, res)=>{
-  res.render('dashboard');
+  console.log(foodItemList);
+  res.render('dashboard', {foodItemList: foodItemList});
 });
 
 

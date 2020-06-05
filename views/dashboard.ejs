@@ -455,26 +455,29 @@
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add Meal</h5>
+        <h5 class="modal-title">Meal</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form action="">
-      <div class="modal-body">
+
+      <form action="">
+        <div class="modal-body">
+            <select class="dropDownMeals" name="mealSelect">
+            <%foodItemList.forEach((element)=>{%>
+              <option value="<%=element.id%>"><%=element.name%></option>
+            <%});%>
+            </select>
+        </div>
         
-          <select name="mealSelect">
-          <%foodItemList.forEach((element)=>{%>
-            <option value="<%=element.id%>"><%=element.name%></option>
-          <%});%>
-        </select>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary save">Save</button>
-      </div>
-    </form>
+        <button class="buttonCreateMeal" data-target="#settings" data-toggle="modal">Create a Meal</button>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary save">Save</button>
+        </div>
+      </form>
+
     </div>
   </div>
 </div>

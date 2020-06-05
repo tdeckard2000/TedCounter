@@ -145,11 +145,15 @@
     right: 10px;
 }
 
-/* Dashboard Modal Pop-Ups */
+/* Dashboard Modal Pop-Ups ========================================== */
 button.close{
     bottom: 8px;
     position: relative;
     right: 3px;
+}
+
+.dropDownMeals{
+    width: 100%;
 }
 
 .modal .btn{

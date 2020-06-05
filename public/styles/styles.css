@@ -3,7 +3,6 @@
 /* Dashboard Header ========================================== */
 .headerRow{
     background-color: #ff9c3e;
-    border-radius: 10px 10px 0px 0px;
     left: 0;
     margin: 0;
     padding: 2px 0;
@@ -161,17 +160,19 @@ button.close{
 }
 
 .modal-content{
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-color: black;
+    border-width: 1px;
     bottom: 183px;
 }
 
 .modal-footer{
     background-color: #5f65d8;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     height: 51px;
 }
 
@@ -189,8 +190,8 @@ button.close{
 
 .modal-header{
     background-color: #ff9c3e;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     height: 45px;
 }
 
@@ -203,7 +204,6 @@ button.close{
 .bottomBar{
     background-color: #5f65d8;
     height: 50px;
-    border-radius: 0 0 10px 10px;
 }
 
 .bottomBarDay{

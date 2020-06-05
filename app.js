@@ -21,18 +21,19 @@ const foodItemSchema = new mongoose.Schema({
 const foodItem = mongoose.model('foodItem', foodItemSchema);
 
 // const item = new foodItem({
-//   "name": '20 Grapes',
-//   "calories": 25,
-//   "protein": 1,
-//   "carbs": .5,
-//   "sugars": 1.5,
-//   "sodium": 0
+//   "name": 'Peanuts Shelled Small Bowl',
+//   "calories": 230,
+//   "protein": 18,
+//   "carbs": 23,
+//   "sugars": 2,
+//   "sodium": 1000
 // })
 
 // item.save((err, doc)=>{
 //   console.log(err);
 //   console.log(doc);
 // })
+
 let foodItemList = [0,1,2,3,4,5];
 
 function findFoodItems(){

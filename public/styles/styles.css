@@ -152,6 +152,12 @@ button.close{
     right: 3px;
 }
 
+.buttonCreateMeal{
+    margin: auto;
+    padding-bottom: 10px;
+    width: fit-content;
+}
+
 .dropDownMeals{
     width: 100%;
 }
@@ -181,12 +187,14 @@ button.close{
 }
 
 .modal-footer .save{
-    right: 15px;
+    font-weight: 300;
     position: absolute;
+    right: 15px;
     width: 150px;
 }
 
 .modal-footer .cancel{
+    font-weight: 300;
     left: 15px;
     position: absolute;
     width: 150px;
@@ -201,6 +209,7 @@ button.close{
 
 .modal-title{
     bottom: 9px;
+    font-weight: 300;
     position: relative;
 }
 

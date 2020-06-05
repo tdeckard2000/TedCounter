@@ -26,7 +26,7 @@
 .topTotalCount{
     color: white;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 300;
     line-height: 100%;
 }
 
@@ -91,9 +91,12 @@
 }
 
 .itemName{
-    font-size: 1.2rem;
+    bottom: -3px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    position: relative;
     text-align: left;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
 }
 
 .itemValue{
@@ -205,6 +208,7 @@ button.close{
 
 .bottomBarDay{
     color: white;
+    font-weight: 300;
     margin: auto;
 }
 

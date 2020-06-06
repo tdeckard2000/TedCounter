@@ -148,37 +148,12 @@
 }
 
 /* Dashboard Modal Pop-Ups ========================================== */
-.addItemQuestion{
-    border-radius: 100%;
-    border-style: solid;
-    border-width: 1px;
-    color: #8c8c8c;
-    font-size: 12px;
-    height: 18px;
-    line-height: 17px;
-    position: absolute;
-    right: 10px;
-    top: 22px;
-    text-align: center;
-    width: 18px;
-    -webkit-appearance: none;
-    
-}
 
+/* All Dashboard Modals */
 button.close{
     bottom: 8px;
     position: relative;
     right: 3px;
-}
-
-.buttonNewEdit{
-    text-align: center;
-    padding-top: 3px;
-}
-
-.buttonNewEdit a{
-    color: #464646;
-    padding: 0 20px;
 }
 
 .card-body{
@@ -237,7 +212,58 @@ button.close{
     position: relative;
 }
 
-.saveMealDiv{
+/* Select Item Modal */
+.addItemQuestion{
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 1px;
+    color: #8c8c8c;
+    font-size: 12px;
+    height: 22px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    text-align: center;
+    width: 22px;
+    -webkit-appearance: none;
+    
+}
+
+.buttonNewEdit{
+    text-align: center;
+    padding-top: 3px;
+}
+
+.buttonNewEdit a{
+    color: #464646;
+    padding: 0 20px;
+}
+
+.selectableItems{
+    max-height: 115px;
+    overflow: auto;
+}
+
+.selectableItems button{
+    background-color: #ffffff;
+    border: none;
+    outline-color: #5f65d8;
+    padding: 0;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.selectItemBody{
+    text-align: center;
+}
+
+.selectItemHR{
+    margin: 5px auto;
+    width: 90%;
+    text-align: center;
+}
+
+/* .saveMealDiv{
     padding-top: 10px;
     text-align: center;
 }
@@ -261,11 +287,7 @@ button.close{
     margin: 5px;
     outline-color: #5f65d8;
     width: 35%;
-}
-
-.selectItemBody{
-    text-align: center;
-}
+} */
 
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{

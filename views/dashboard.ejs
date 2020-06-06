@@ -78,17 +78,22 @@
       
       <div class=" selectItemBody modal-body">
         <form action="">    
-            <input type="text" class="" name="">
+            <input type="text" placeholder="filter">
             <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
             <div class="buttonNewEdit">
               <a href="">Edit Items</a>
               <a href="./newitem.ejs">New Item</a>
             </div>
-            <div>
+            <hr class="selectItemHR">
+            
+            <div class="selectableItems">
               <%foodItemList.forEach((element)=>{%>
-              <p value="<%=element.id%>"><%=element.name%></p>
+                <div class="selectableItem">
+                  <button value="<%=element.id%>"><%=element.name%></button>
+                </div>
               <%});%>
             </div>
+
         </form>    
       </div>
         

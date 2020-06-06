@@ -132,7 +132,7 @@
     width: 60px;
 }
 
-.buttonAddMeal{
+.buttonAddItem{
     bottom: 55px;
     right: 80px;
 }
@@ -148,26 +148,38 @@
 }
 
 /* Dashboard Modal Pop-Ups ========================================== */
+.addItemQuestion{
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 1px;
+    color: #8c8c8c;
+    font-size: 12px;
+    height: 15px;
+    line-height: 14px;
+    text-align: center;
+    width: 15px;
+    
+}
+
 button.close{
     bottom: 8px;
     position: relative;
     right: 3px;
 }
 
-.buttonCreateMeal{
-    margin: auto;
-    padding-bottom: 10px;
-    width: fit-content;
-    -webkit-appearance: none;
+.buttonNewEdit{
+    text-align: center;
+    padding-top: 3px;
+}
+
+.buttonNewEdit a{
+    color: #464646;
+    padding: 0 20px;
 }
 
 .card-body{
     max-height: 173px;
     overflow-x: auto;
-}
-
-.dropDownMeals{
-    width: 100%;
 }
 
 .modal .btn{
@@ -245,6 +257,10 @@ button.close{
     margin: 5px;
     outline-color: #5f65d8;
     width: 35%;
+}
+
+.selectItemBody{
+    text-align: center;
 }
 
 /* Dashboard Bottom Bar ========================================== */

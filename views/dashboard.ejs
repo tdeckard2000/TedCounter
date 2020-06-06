@@ -41,7 +41,7 @@
   <%});%>
 </div>
 
-<!-- BootStrap Modals -->
+<!-- BootStrap Modals ==================== -->
 
 <!-- Quick Add -->
 <div class="modal" id="quickAdd" tabindex="-1" role="dialog">
@@ -63,51 +63,38 @@
     </div>
   </div>
 </div>
-<!-- AddMeal -->
-<div class="modal" id="mealAdd" tabindex="-1" role="dialog">
+
+<!-- Select Item -->
+<div class="modal" id="itemAdd" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Meal</h5>
+        <h5 class="modal-title">Select Item</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
-      <form action="">
-        <div class="modal-body">
-            <select class="dropDownMeals" name="mealSelect">
+      
+      <div class=" selectItemBody modal-body">
+        <form action="">    
+            <input type="text" class="" name="">
+            <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
             <%foodItemList.forEach((element)=>{%>
               <option value="<%=element.id%>"><%=element.name%></option>
             <%});%>
             </select>
-        </div>
+            <div class="buttonNewEdit">
+              <a href="">Edit Items</a>
+              <a href="./newitem.ejs">New Item</a>
+            </div>
+        </form>    
+      </div>
         
-        <div type="button" class="buttonCreateMeal" data-toggle="collapse" data-target="#collapseExamples">Create Meal +</div>
         
-        <div class="collapse" id="collapseExamples">
+        <div class="collapse" id="addItemCollapse">
           <div class="card card-body">
-            <form action="">
-              <input class="saveMealInput1" placeholder="name (required)" type="text" maxlength="30">
-              <div class="saveMealDiv">
-                <input class="saveMealInput2 topFour" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="calories" type="text">
-                <input class="saveMealInput3 topFour" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="sodium" type="text">
-                <input class="saveMealInput4 topFour" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="protein" type="text">
-                <input class="saveMealInput5 topFour" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="carbs" type="text">
-                <input class="saveMealInput6"placeholder="cal" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput7"placeholder="sdm" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput8"placeholder="pro" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput9"placeholder="crb" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput10"placeholder="cal" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput11"placeholder="sdm" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput12"placeholder="pro" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput13"placeholder="crb" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput14"placeholder="cal" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput15"placeholder="sdm" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput16"placeholder="pro" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="saveMealInput17"placeholder="crb" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-              </div>
-            </form>
+            Help Text Here?
           </div>
         </div>
 
@@ -115,11 +102,12 @@
           <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
           <button type="submit" class="btn btn-primary save">Save</button>
         </div>
-      </form>
+      
 
     </div>
   </div>
 </div>
+
 <!-- Settings -->
 <div class="modal" id="settings" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
@@ -143,10 +131,11 @@
 <img class="backgroundLogo" src="./files/TedCounterLogo.svg" alt="">
 <nav class="bottomButtons fixed-bottom">
   <button class="buttonSettings" data-target="#settings" data-toggle="modal">⚙</button>
-  <button class="buttonAddMeal" data-target="#mealAdd" data-toggle="modal">🍽</button>
+  <button class="buttonAddItem" data-target="#itemAdd" data-toggle="modal">🍽</button>
   <button class="buttonQuickAdd" data-target="#quickAdd" data-toggle="modal">🔥</button>
 </nav>
 
+<!-- Bottom Navigation Bar -->
 <nav class=" bottomBar navbar fixed-bottom">
   <a href="/">
     <img class="bottomBarLogo" src="./files/logoCup.svg" alt="">

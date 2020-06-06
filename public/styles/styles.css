@@ -155,9 +155,13 @@
     color: #8c8c8c;
     font-size: 12px;
     height: 15px;
-    line-height: 14px;
+    line-height: 12px;
+    padding: 1px 4px;
+    position: absolute;
+    right: 10px;
+    top: 24px;
     text-align: center;
-    width: 15px;
+    -webkit-appearance: none;
     
 }
 

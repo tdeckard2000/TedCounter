@@ -80,13 +80,13 @@
         <form action="">    
             <input type="text" class="" name="">
             <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
-            <%foodItemList.forEach((element)=>{%>
-              <option value="<%=element.id%>"><%=element.name%></option>
-            <%});%>
-            </select>
             <div class="buttonNewEdit">
               <a href="">Edit Items</a>
               <a href="./newitem.ejs">New Item</a>
+            </div>
+            <div><%foodItemList.forEach((element)=>{%>
+              <option value="<%=element.id%>"><%=element.name%></option>
+              <%});%>
             </div>
         </form>    
       </div>

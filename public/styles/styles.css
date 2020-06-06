@@ -161,6 +161,11 @@ button.close{
     -webkit-appearance: none;
 }
 
+.card-body{
+    max-height: 173px;
+    overflow-x: auto;
+}
+
 .dropDownMeals{
     width: 100%;
 }
@@ -214,6 +219,32 @@ button.close{
     bottom: 9px;
     font-weight: 300;
     position: relative;
+}
+
+.saveMealDiv{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.saveMealDiv .topFour{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    outline-color: #ff9c3e;
+}
+
+.saveMealInput1{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    margin: 0 25%;
+    outline-color: #ff9c3e;
+}
+
+.saveMealDiv input{
+    border-color: #5f65d8;
+    border-width: 1px;
+    margin: 5px;
+    outline-color: #5f65d8;
+    width: 35%;
 }
 
 /* Dashboard Bottom Bar ========================================== */

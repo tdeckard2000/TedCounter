@@ -154,13 +154,13 @@
     border-width: 1px;
     color: #8c8c8c;
     font-size: 12px;
-    height: 15px;
-    line-height: 12px;
-    padding: 1px 4px;
+    height: 18px;
+    line-height: 17px;
     position: absolute;
     right: 10px;
-    top: 24px;
+    top: 22px;
     text-align: center;
+    width: 18px;
     -webkit-appearance: none;
     
 }

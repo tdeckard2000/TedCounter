@@ -33,9 +33,10 @@
     background-color: #ff9c3e;
 }
 
-/* Nutrition Input Buttons */
+/* Nutrition Input Fields */
 .itemInputsContainer{
-    padding-top: 50px;
+    padding: 70px 0 55px 0;
+    text-align: center;
 }
 
 .newItemDiv{
@@ -52,7 +53,6 @@
 .newItemInput1{
     border-color: #ff9c3e;
     border-width: 1px;
-    margin: 0 25%;
     outline-color: #ff9c3e;
 }
 
@@ -62,6 +62,28 @@
     margin: 5px;
     outline-color: #5f65d8;
     width: 35%;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* Cancel & Save Buttons */
+.buttonsDiv{
+    padding-top: 30px;
+}
+
+.buttonsDiv button{
+    background-color: #464646;
+    color: #ffffff;
+    font-weight: 300;
+    margin: 0 5px;
+    max-width: 170px;
+    width: 40%;
 }
 
 /* New Item Bottom Bar ========================================== */

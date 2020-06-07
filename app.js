@@ -57,8 +57,11 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/dashboard', (req, res)=>{
-  console.log(foodItemList);
   res.render('dashboard', {foodItemList: foodItemList});
+});
+
+app.get('/newitem', (req, res)=>{
+  res.render('newitem', {foodItemList: foodItemList})
 });
 
 

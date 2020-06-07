@@ -1,4 +1,8 @@
 <%-include('header');-%>
+<!-- Custom Styles -->
+<link rel="stylesheet" href="/styles/styles.css">
+</head>
+
 <body class="dashboardBody">
 
 <div class="container">
@@ -16,8 +20,8 @@
       <div class="topOutOf">/165 pro</div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount">60</div>
-      <div class="topOutOf">/165 pro</div> 
+      <div class="topTotalCount">100</div>
+      <div class="topOutOf">/165 crb</div> 
     </div>
   </div>
 </div>
@@ -78,11 +82,11 @@
       
       <div class=" selectItemBody modal-body">
         <form action="">    
-            <input type="text" placeholder="filter">
+            <input class="filterInput" type="text" placeholder="filter">
             <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
             <div class="buttonNewEdit">
               <a href="">Edit Items</a>
-              <a href="./newitem.ejs">New Item</a>
+              <a href="./newitem">New Item</a>
             </div>
             <hr class="selectItemHR">
             

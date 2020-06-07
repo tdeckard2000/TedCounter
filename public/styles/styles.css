@@ -1,4 +1,4 @@
-/* Site Wide ========================================== */
+/* FOR INDEX & DASHBOARD PAGES */
 
 /* Dashboard Header ========================================== */
 .headerRow{
@@ -40,27 +40,6 @@
 
 .dashboardBody{
     background-color: #cacaca;
-}
-
-.foodIcon{
-    bottom: 5px;
-    height: 30px;
-    position: absolute;
-    right: 9px;
-}
-
-.foodIconTEST{
-    width: 25px;
-}
-
-.foodIconTEST2{
-    width: 25px;
-    margin-left: 8px;
-}
-
-.foodIconTEST3{
-    width: 25px;
-    margin-right: 8px;
 }
 
 .itemListContainer{
@@ -166,6 +145,7 @@ button.close{
     border: 0;
     bottom: 2px;
     position: absolute;
+    width: 40%;
 }
 
 .modal-content{
@@ -175,7 +155,7 @@ button.close{
     border-top-right-radius: 5px;
     border-color: black;
     border-width: 1px;
-    bottom: 80px;
+    bottom: 20px;
 }
 
 .modal-footer{
@@ -189,14 +169,12 @@ button.close{
     font-weight: 300;
     position: absolute;
     right: 15px;
-    width: 150px;
 }
 
 .modal-footer .cancel{
     font-weight: 300;
     left: 15px;
     position: absolute;
-    width: 150px;
 }
 
 .modal-header{
@@ -236,11 +214,17 @@ button.close{
 
 .buttonNewEdit a{
     color: #464646;
+    font-weight: 300;
     padding: 0 20px;
 }
 
+.filterInput{
+    max-width: 250px;
+    width: 80%;
+}
+
 .selectableItems{
-    max-height: 115px;
+    max-height: 135px;
     overflow: auto;
 }
 
@@ -248,7 +232,7 @@ button.close{
     background-color: #ffffff;
     border: none;
     outline-color: #5f65d8;
-    padding: 0;
+    padding: 2px 0;
     white-space: nowrap;
     width: 100%;
 }
@@ -262,32 +246,6 @@ button.close{
     width: 90%;
     text-align: center;
 }
-
-/* .saveMealDiv{
-    padding-top: 10px;
-    text-align: center;
-}
-
-.saveMealDiv .topFour{
-    border-color: #ff9c3e;
-    border-width: 1px;
-    outline-color: #ff9c3e;
-}
-
-.saveMealInput1{
-    border-color: #ff9c3e;
-    border-width: 1px;
-    margin: 0 25%;
-    outline-color: #ff9c3e;
-}
-
-.saveMealDiv input{
-    border-color: #5f65d8;
-    border-width: 1px;
-    margin: 5px;
-    outline-color: #5f65d8;
-    width: 35%;
-} */
 
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{

@@ -1,0 +1,84 @@
+/* FOR NEW ITEM PAGE */
+
+/* NewItem Header ========================================== */
+.headerRow{
+    background-color: #ff9c3e;
+    left: 0;
+    margin: 0;
+    padding: 2px 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
+}
+
+.topCounterDiv{
+    padding: 2px 1px;
+}
+
+.topOutOf{
+    color: #545454;
+    font-size: .8rem;
+    padding-bottom: 1px;
+}
+
+.topTotalCount{
+    color: white;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.topBar{
+    background-color: #ff9c3e;
+}
+
+/* Nutrition Input Buttons */
+.itemInputsContainer{
+    padding-top: 50px;
+}
+
+.newItemDiv{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.newItemDiv .topFour{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    outline-color: #ff9c3e;
+}
+
+.newItemInput1{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    margin: 0 25%;
+    outline-color: #ff9c3e;
+}
+
+.newItemDiv input{
+    border-color: #5f65d8;
+    border-width: 1px;
+    margin: 5px;
+    outline-color: #5f65d8;
+    width: 35%;
+}
+
+/* New Item Bottom Bar ========================================== */
+.bottomBar{
+    background-color: #5f65d8;
+    height: 50px;
+}
+
+.bottomBarDay{
+    color: white;
+    font-weight: 300;
+    margin: auto;
+}
+
+.bottomBarLogo{
+    bottom: 9px;
+    filter: invert(1);
+    position: absolute;
+    width: 30px;
+}

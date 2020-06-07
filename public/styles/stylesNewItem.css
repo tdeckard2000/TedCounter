@@ -35,6 +35,7 @@
 
 /* Nutrition Input Fields */
 .itemInputsContainer{
+    padding: 70px 0 60px 0;
     text-align: center;
 }
 
@@ -61,14 +62,6 @@
     margin: 5px;
     outline-color: #5f65d8;
     width: 35%;
-}
-
-.vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 
 /* Cancel & Save Buttons */
@@ -102,4 +95,21 @@
     filter: invert(1);
     position: absolute;
     width: 30px;
+}
+
+
+/* Media Queries ========================================== */
+
+/* Allow Scrollable Page On Small Devices */
+@media (min-height: 550px) {
+    .itemInputsContainer{
+        padding: 0;
+    }
+    .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
 }

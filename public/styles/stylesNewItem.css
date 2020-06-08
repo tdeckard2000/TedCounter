@@ -101,7 +101,7 @@
 /* Media Queries ========================================== */
 
 /* Allow Scrollable Page On Small Devices */
-@media (min-height: 550px) {
+@media (min-height: 600px) {
     .itemInputsContainer{
         padding: 0;
     }

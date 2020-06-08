@@ -33,10 +33,11 @@ function findFoodItems(){
       console.log(err);
     }else{
       foodItemList = (doc);
-      return
     }
   });
 }
+
+findFoodItems();
 
 //Save New Item to Database
 function addNewItem(name, calories, protein, carbs, sodium){

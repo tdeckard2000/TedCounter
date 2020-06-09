@@ -50,8 +50,11 @@ function addNewItem(name, calories, protein, carbs, sodium){
   });
 
   item.save((err, doc)=>{
-    console.log(err);
-    console.log(doc);
+    if(err){
+      console.log(err);
+    }else{
+      console.log(doc);
+    }
   });
 }
 
@@ -77,8 +80,7 @@ app.post('/newitem', (req, res)=>{
     req.body.protein, 
     req.body.carbs, 
     req.body.sodium);
-
-  findFoodItems();
+    
   res.redirect('/dashboard');
 });
 

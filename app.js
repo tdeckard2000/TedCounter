@@ -26,21 +26,22 @@ const foodItem = mongoose.model('foodItem', foodItemSchema);
 let foodItemList = [0,1,2,3,4,5];
 
 // Save All Food Items To foodItemList
-function findFoodItems(){
-  foodItem.find({},(err, doc)=>{
-    if(err){
-      console.log("ERROR at findFoodItems")
-      console.log(err);
-    }else{
-      foodItemList = (doc);
-    }
+let findFoodItems = function(){
+    return new Promise((resolve, reject)=>{
+      foodItem.find({},(err, doc)=>{
+      if(err){
+        console.log("ERROR at findFoodItems")
+        reject(err);
+      }else{
+        foodItemList = (doc);
+        resolve(doc);
+      }
+    });
   });
 }
 
-findFoodItems();
-
 //Save New Item to Database
-function addNewItem(name, calories, protein, carbs, sodium){
+const addNewItem = function(name, calories, protein, carbs, sodium){
   const item = new foodItem({
     "name": name,
     "calories": calories,
@@ -49,14 +50,16 @@ function addNewItem(name, calories, protein, carbs, sodium){
     "sodium": sodium
   });
 
-  item.save((err, doc)=>{
-    if(err){
-      console.log(err);
-    }else{
-      console.log(doc);
-    }
-  });
-}
+  return new Promise((resolve, reject)=>{
+    item.save((err, doc)=>{
+      if(err){
+        reject(err);
+      }else{
+        console.log('resolving promise');
+        resolve(doc);
+      }
+    });
+  })};
 
 // Get Requests ==========================================================
 app.get('/', (req, res)=>{
@@ -64,8 +67,10 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/dashboard', (req, res)=>{
-  findFoodItems();
-  res.render('dashboard', {foodItemList: foodItemList});
+  findFoodItems()
+  .then(function(){
+    res.render('dashboard', {foodItemList: foodItemList});
+  });
 });
 
 app.get('/newitem', (req, res)=>{
@@ -79,9 +84,11 @@ app.post('/newitem', (req, res)=>{
     req.body.calories, 
     req.body.protein, 
     req.body.carbs, 
-    req.body.sodium);
-
-  res.redirect('/dashboard');
+    req.body.sodium)
+    .then(function(){
+      console.log('redirecting')
+      res.redirect('/dashboard');  
+    });
 });
 
 // Server ==========================================================
@@ -94,5 +101,3 @@ if (port == null || port == "") {
   app.listen(port);
   console.log('Listening on Port 5000') 
 }
-
-// Mongo Scripts ==========================================================

@@ -80,7 +80,7 @@ app.post('/newitem', (req, res)=>{
     req.body.protein, 
     req.body.carbs, 
     req.body.sodium);
-    
+
   res.redirect('/dashboard');
 });
 

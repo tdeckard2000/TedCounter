@@ -23,9 +23,9 @@ const foodItemSchema = new mongoose.Schema({
 
 const foodItem = mongoose.model('foodItem', foodItemSchema);
 
-let foodItemList = [0,1,2,3,4,5];
 
-// Save All Food Items To foodItemList
+
+// Return All Food Items
 let findFoodItems = function(){
     return new Promise((resolve, reject)=>{
       foodItem.find({},(err, doc)=>{
@@ -33,7 +33,6 @@ let findFoodItems = function(){
         console.log("ERROR at findFoodItems")
         reject(err);
       }else{
-        foodItemList = (doc);
         resolve(doc);
       }
     });
@@ -55,7 +54,6 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
       if(err){
         reject(err);
       }else{
-        console.log('resolving promise');
         resolve(doc);
       }
     });
@@ -68,13 +66,13 @@ app.get('/', (req, res)=>{
 
 app.get('/dashboard', (req, res)=>{
   findFoodItems()
-  .then(function(){
+  .then(function(foodItemList){
     res.render('dashboard', {foodItemList: foodItemList});
   });
 });
 
 app.get('/newitem', (req, res)=>{
-  res.render('newitem', {foodItemList: foodItemList})
+  res.render('newitem')
 });
 
 // Post Requests ==========================================================
@@ -86,7 +84,6 @@ app.post('/newitem', (req, res)=>{
     req.body.carbs, 
     req.body.sodium)
     .then(function(){
-      console.log('redirecting')
       res.redirect('/dashboard');  
     });
 });

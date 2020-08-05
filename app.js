@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Database ==========================================================
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+mongoose.connect(process.env.DB_URI, {useNewUrlParser: true});
 
 const foodItemSchema = new mongoose.Schema({
   "name": String,

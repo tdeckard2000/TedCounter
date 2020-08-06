@@ -31,9 +31,9 @@ const foodItem = mongoose.model('foodItem', foodItemSchema);
 
 const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
 
-
+// Functions ==========================================================
 // Return All Food Items
-let findFoodItems = function(){
+const findFoodItems = function(){
     return new Promise((resolve, reject)=>{
       foodItem.find({},(err, doc)=>{
       if(err){
@@ -66,6 +66,18 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
     });
   })};
 
+//Filter Food Items - Filters fullList by filterBy and returns filtered list.
+const filterItems = function(fullList, filterBy){
+  let filteredList = []
+  fullList.forEach(element => {
+    if (element.toString().includes(filterBy)){
+      filteredList.push(element);
+    }
+  });
+  console.log(filteredList)
+  return filteredList;
+} 
+
 // Get Requests ==========================================================
 app.get('/', (req, res)=>{
   res.render('index');
@@ -74,7 +86,8 @@ app.get('/', (req, res)=>{
 app.get('/dashboard', (req, res)=>{
   findFoodItems()
   .then(function(foodItemList){
-    res.render('dashboard', {foodItemList: foodItemList});
+    const foodItemsFiltered = filterItems(foodItemList, 'Bananna');
+    res.render('dashboard', {foodItemList: foodItemList, foodItemsFiltered: foodItemsFiltered});
   });
 });
 

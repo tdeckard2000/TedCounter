@@ -82,7 +82,7 @@
       
       <div class=" selectItemBody modal-body">
         <form action="">    
-            <input class="filterInput" type="text" placeholder="filter">
+            <input class="filterInput" type="text" placeholder="filter" id="foodItemFilter">
             <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
             <div class="buttonNewEdit">
               <a href="">Edit Items</a>
@@ -90,8 +90,10 @@
             </div>
             <hr class="selectItemHR">
             
+           
+
             <div class="selectableItems">
-              <%foodItemList.forEach((element)=>{%>
+              <%foodItemsFiltered.forEach((element)=>{%>
                 <div class="selectableItem">
                   <button value="<%=element.id%>"><%=element.name%></button>
                 </div>

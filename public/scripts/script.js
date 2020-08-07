@@ -10,12 +10,22 @@ $('.saveMealDiv input').on('propertychange input', (doc)=>{
     }
 });
 
-document.getElementById('foodItemFilter').addEventListener('keyup', (doc)=>{
+//Filter list items from meal selector modal based on text input.
+$('#foodItemFilter').on('keyup', (doc)=>{
     const textEntered = doc.target.value;
-    console.log(textEntered);
-    return textEntered;
-})
+    numListItems = $('.selectableItem').length
 
-let cat = 43;
+    //If list item doesn't inputted text, hide and remove from document flow.
+    for(i=0; i<numListItems; i++){
+        const singleListItem = $('#listItem'+i).text()
+        console.log('Entered: '+textEntered)
+        if (singleListItem.search(textEntered) == -1){
+            $('#listItem'+i).css({'position':'absolute', 'visibility':'hidden'})
+            //Else, place back into flow and un-hide. Handles backspace events.
+        }else{
+            $('#listItem'+i).css({'position':'relative', 'visibility':'visible'})
+        }
+    }
+})
 
 //currentTarget.attributes[0].textContent

@@ -86,7 +86,7 @@ app.get('/', (req, res)=>{
 app.get('/dashboard', (req, res)=>{
   findFoodItems()
   .then(function(foodItemList){
-    const foodItemsFiltered = filterItems(foodItemList, 'Bananna');
+    const foodItemsFiltered = filterItems(foodItemList, 'a');
     res.render('dashboard', {foodItemList: foodItemList, foodItemsFiltered: foodItemsFiltered});
   });
 });

@@ -1,0 +1,116 @@
+/* For Index Page */
+
+/* Header */
+.topBar{
+    background-color: #ff9c3e;
+}
+
+/* Index Page - Sign In ========================================== */
+.copyYear{
+    bottom: 0;
+    color: #3a3a3a;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.form-signin{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 120px;
+}
+
+.indexBody{
+    background-color: #5f65d8;
+}
+
+.navbarTitle img{
+    position: absolute;
+    height: 52px;
+    top: 2px;
+    right: 100px;
+    filter: invert(1);
+}
+
+.signInText{
+    color: white;
+}
+
+.signupLink{
+    color: #FFFFFF;
+    display: block;
+    margin: 18px 0 0 0;
+    font-size: .95rem;
+}
+
+.forgotLink{
+    color: #000000;
+    font-size: .77rem;
+}
+
+.tryItOut{
+    bottom: 30px;
+    color: #000000;
+}
+
+#inputEmail{
+    border-radius: .25rem .25rem 0 0;
+}
+
+#inputPassword{
+    margin-bottom: 15px;
+    border-radius: 0 0 .25rem .25rem;
+}
+
+/* Sign Up Modal =============================================*/
+button.close{
+    background-color: #464646;
+    font-weight: 300;
+    left: 10px;
+    position: absolute;
+    
+}
+
+button.createAccount{
+    background-color: #17a2b8;
+    font-weight: 300;
+    position: absolute;
+    right: 15px;
+}
+
+.modalBottomBar{
+    display: block;
+    background-color: #5f65d8;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 51px;
+}
+
+.modal-content{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-color: black;
+    border-width: 1px;
+}
+
+.modal-footer .btn{
+    border: 0;
+    bottom: 2px;
+    position: absolute;
+    width: 40%;
+}
+
+.modalTopBar{
+    background-color: #ff9c3e;
+    display: block;
+    height: 40px;
+    text-align: center;
+}
+
+.modal-title{
+    line-height: .5rem;
+    font-weight: 300;
+}

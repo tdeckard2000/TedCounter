@@ -1,4 +1,4 @@
-/* FOR INDEX & DASHBOARD PAGES */
+/* FOR DASHBOARD PAGES */
 
 /* Dashboard Header ========================================== */
 .headerRow{
@@ -175,6 +175,7 @@ button.close{
     font-weight: 300;
     left: 15px;
     position: absolute;
+    left: 10px;
 }
 
 .modal-header{
@@ -224,7 +225,7 @@ button.close{
 }
 
 .selectableItems{
-    max-height: 135px;
+    height: 135px;
     overflow: auto;
 }
 
@@ -264,61 +265,4 @@ button.close{
     filter: invert(1);
     position: absolute;
     width: 30px;
-}
-
-/* Index Page - Sign In ========================================== */
-.copyYear{
-    bottom: 0;
-    color: #3a3a3a;
-    left: 0;
-    position: absolute;
-    width: 100%;
-}
-
-.form-signin{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 120px;
-}
-
-.indexBody{
-    background-color: #5f65d8;
-}
-
-.navbarTitle img{
-    position: absolute;
-    height: 52px;
-    top: 2px;
-    right: 100px;
-    filter: invert(1);
-}
-
-.signInText{
-    color: white;
-}
-
-.signup{
-    color: #FFFFFF;
-    margin: 18px 0 0 0;
-}
-
-.signupLink{
-    color: #FFFFFF;
-    display: block;
-    text-decoration: underline;
-}
-
-.tryItOut{
-    bottom: 30px;
-    color: white;
-}
-
-#inputEmail{
-    border-radius: .25rem .25rem 0 0;
-}
-
-#inputPassword{
-    margin-bottom: 15px;
-    border-radius: 0 0 .25rem .25rem;
 }

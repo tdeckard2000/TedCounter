@@ -94,6 +94,7 @@ button.createAccount{
     border-top-right-radius: 5px;
     border-color: black;
     border-width: 1px;
+    bottom: 20px;
 }
 
 .modal-footer .btn{

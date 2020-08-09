@@ -95,7 +95,7 @@
             <div class="selectableItems">
               <!-- Create list of items in food selector modal. Add an ID to each, starting with zero. -->
               <%itemNumber = -1%>
-              <%foodItemsFiltered.forEach((element)=>{%>
+              <%foodItemList.forEach((element)=>{%>
                 <%itemNumber++%>
                 <div class="selectableItem">
                   <button id="listItem<%=itemNumber%>" value="<%=element.id%>"><%=element.name%></button>

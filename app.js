@@ -97,6 +97,21 @@ app.post('/newitem', (req, res)=>{
     });
 });
 
+//testing array for adding users
+let tempArray = []
+app.post('/newUser', (req, res)=>{
+  const newEmail = (req.body.newEmail);
+  const newPassword = (req.body.newPassword)
+  const confirmPassword = (req.body.confirmPassword)
+  tempArray.push(
+    {
+      'emailAddress': newEmail,
+      'password': newPassword
+    }
+  );
+  console.log(tempArray);
+  res.redirect('/')
+});
 
 
 // Server ==========================================================

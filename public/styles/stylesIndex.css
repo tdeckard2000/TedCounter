@@ -115,3 +115,17 @@ button.createAccount{
     line-height: .5rem;
     font-weight: 300;
 }
+
+#confirmPassword{
+    border-radius: 0 0 .25rem .25rem;
+}
+
+#newPassword{
+    border-radius: 0px;
+    margin-bottom: -1px;
+}
+
+#newEmail{
+    border-radius: .25rem .25rem 0 0;
+    margin-bottom: -1px;
+}

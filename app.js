@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs'); //used for user authentication
+
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
@@ -94,6 +96,8 @@ app.post('/newitem', (req, res)=>{
       res.redirect('/dashboard');  
     });
 });
+
+
 
 // Server ==========================================================
 let port = process.env.PORT;

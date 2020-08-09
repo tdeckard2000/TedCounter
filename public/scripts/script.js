@@ -12,13 +12,14 @@ $('.saveMealDiv input').on('propertychange input', (doc)=>{
 
 //Filter list items from meal selector modal based on text input.
 $('#foodItemFilter').on('keyup', (doc)=>{
-    const textEntered = doc.target.value;
+    let textEntered = doc.target.value;
+    textEntered = textEntered.toLowerCase();
     numListItems = $('.selectableItem').length
 
-    //If list item doesn't inputted text, hide and remove from document flow.
+    //If list item doesn't match inputted text, hide and remove from document flow.
     for(i=0; i<numListItems; i++){
-        const singleListItem = $('#listItem'+i).text()
-        console.log('Entered: '+textEntered)
+        let singleListItem = $('#listItem'+i).text();
+        singleListItem = singleListItem.toLowerCase();
         if (singleListItem.search(textEntered) == -1){
             $('#listItem'+i).css({'position':'absolute', 'visibility':'hidden'})
             //Else, place back into flow and un-hide. Handles backspace events.

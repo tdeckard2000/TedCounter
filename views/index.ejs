@@ -38,8 +38,10 @@
       </div>
       <form action="./newUser"  method="POST">
         <div class="modal-body">
+          <label for="newName" class="sr-only">Name</label>
+          <input name="newName" id="newName" class="form-control" placeholder="Username" autofocus>
           <label for="newEmail" class="sr-only">Email</label>
-          <input name="newEmail" type="email" id="newEmail" class="form-control" placeholder="Email" required autofocus>
+          <input name="newEmail" type="email" id="newEmail" class="form-control" placeholder="Email" required>
           <label for="newPassword" class="sr-only">newPassword</label>
           <input name="newPassword" type="password" id="newPassword" class="form-control" placeholder="Password" required>
           <label for="confirmPassword" class="sr-only">confirmPassword</label>

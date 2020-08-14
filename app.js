@@ -29,9 +29,15 @@ const itemDiarySchema = new mongoose.Schema({
   "itemId": String
 });
 
-const foodItem = mongoose.model('foodItem', foodItemSchema);
+const userSchema = new mongoose.Schema({
+  'name': String,
+  'email':String,
+  'password': String
+})
 
+const foodItem = mongoose.model('foodItem', foodItemSchema);
 const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
+const user = mongoose.model('user', userSchema); 
 
 // Functions ==========================================================
 // Return All Food Items
@@ -68,6 +74,28 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
     });
   })};
 
+  const addNewUser = function(name, email, passwordHashed){
+    const newUser = new user({
+      'name': name,
+      'email': email,
+      'password': passwordHashed
+    });
+    newUser.save((err,doc)=>{
+      if(err){
+        console.log('Error Saving User: ' + err);
+      }
+    });
+  }
+
+  const checkForNewName = function(newName){
+    if(newName != null && newName != 'undefined'){
+      return newName;
+    }else{
+      return null
+    }
+  }
+
+
 // Get Requests ==========================================================
 app.get('/', (req, res)=>{
   res.render('index');
@@ -97,19 +125,15 @@ app.post('/newitem', (req, res)=>{
     });
 });
 
-//testing array for adding users
-let tempArray = []
 app.post('/newUser', (req, res)=>{
-  const newEmail = (req.body.newEmail);
-  const newPassword = (req.body.newPassword)
-  const confirmPassword = (req.body.confirmPassword)
-  tempArray.push(
-    {
-      'emailAddress': newEmail,
-      'password': newPassword
-    }
-  );
-  console.log(tempArray);
+  const name = checkForNewName(req.body.newName);
+  const newEmail = req.body.newEmail
+  const newPassword = req.body.newPassword
+  console.log(name);
+  //const confirmPassword = (req.body.confirmPassword);
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(newPassword, salt);
+  addNewUser(name, newEmail, hashedPassword);
   res.redirect('/')
 });
 

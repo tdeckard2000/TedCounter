@@ -126,6 +126,11 @@ button.createAccount{
 }
 
 #newEmail{
+    border-radius: 0px;
+    margin-bottom: -1px;
+}
+
+#newName{
     border-radius: .25rem .25rem 0 0;
     margin-bottom: -1px;
 }

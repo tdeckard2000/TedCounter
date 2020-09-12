@@ -38,6 +38,7 @@ const userSchema = new mongoose.Schema({
 const foodItem = mongoose.model('foodItem', foodItemSchema);
 const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
 const user = mongoose.model('user', userSchema); 
+let foodItemList = ['my', 'test'];
 
 // Functions ==========================================================
 // Return All Food Items
@@ -52,6 +53,31 @@ const findFoodItems = function(){
       }
     });
   });
+}
+
+//Order given array
+const orderObjects = function(unorderedObjects, fieldName){
+  fieldName = 'name'
+  let valueChanged = false;
+  while(valueChanged === false){
+    valueChanged = true;
+    for(let i=0; i<=unorderedObjects.length; i++){
+      console.log('i: ' + i) 
+      //end loop if nothing left to compare
+      if(unorderedObjects[i+1] == undefined){
+        break
+      }
+      let obj1 = unorderedObjects[i][fieldName];
+      let obj2 = unorderedObjects[i+1].name;
+      if(obj1 > obj2){
+        let item1 = unorderedObjects[i];
+        let item2 = unorderedObjects[i+1];
+        unorderedObjects.splice(i,2, item2, item1);
+        valueChanged = false;
+      }
+    }
+  } 
+  return unorderedObjects;
 }
 
 //Save New Item to Database
@@ -104,6 +130,7 @@ app.get('/', (req, res)=>{
 app.get('/dashboard', (req, res)=>{
   findFoodItems()
   .then(function(foodItemList){
+    foodItemList = orderObjects(foodItemList, 'name');
     res.render('dashboard', {foodItemList: foodItemList});
   });
 });
@@ -165,24 +192,3 @@ if (port == null || port == "") {
 
 
 //tests only
-let myItems = [
-  'goat', 'cat', 'apple', 'banana', 'dog', 'zoo', 'crow'
-  ]
-
-  let jack = function(orderArray){
-    let valueChanged = false;
-    while(valueChanged === false){
-      valueChanged = true;
-      for(let i=0; i<=myItems.length; i++){
-        if(myItems[i] > myItems[i+1]){
-          let item1 = myItems[i];
-          let item2 = myItems[i+1];
-          myItems.splice(i,2, item2, item1);
-          valueChanged = false;
-          console.log(myItems);
-        }
-      }
-    } 
-  }
-
-  jack(myItems);

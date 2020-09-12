@@ -81,7 +81,7 @@
 
       
       <div class=" selectItemBody modal-body">
-        <form action="">    
+        <form method="POST" action="/addToDiary">    
             <input class="filterInput" type="text" placeholder="filter" id="foodItemFilter">
             <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
             <div class="buttonNewEdit">
@@ -98,7 +98,7 @@
               <%foodItemList.forEach((element)=>{%>
                 <%itemNumber++%>
                 <div class="selectableItem">
-                  <button id="listItem<%=itemNumber%>" value="<%=element.id%>"><%=element.name%></button>
+                  <button id="listItem<%=itemNumber%>" value="<%=element.id%>" ><%=element.name%></button>
                 </div>
               <%});%>
             </div>

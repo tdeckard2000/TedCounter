@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs'); //used for user authentication
+const { response } = require('express');
 
 require('dotenv').config();
 
@@ -37,8 +38,7 @@ const userSchema = new mongoose.Schema({
 
 const foodItem = mongoose.model('foodItem', foodItemSchema);
 const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
-const user = mongoose.model('user', userSchema); 
-let foodItemList = ['my', 'test'];
+const user = mongoose.model('user', userSchema);
 
 // Functions ==========================================================
 // Return All Food Items
@@ -62,7 +62,6 @@ const orderObjects = function(unorderedObjects, fieldName){
   while(valueChanged === false){
     valueChanged = true;
     for(let i=0; i<=unorderedObjects.length; i++){
-      console.log('i: ' + i) 
       //end loop if nothing left to compare
       if(unorderedObjects[i+1] == undefined){
         break
@@ -113,6 +112,24 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
     });
   }
 
+  const addToDiary = function(userId, itemId){
+    const item = new itemDiary({
+      'date': new Date().toISOString(),
+      'userId': userId,
+      'itemId': itemId
+    });
+    return new Promise((resolve, reject)=>{
+      item.save((err, doc)=>{
+        if(err){
+          console.log('Failed to save new diary item to DB');
+          reject(err);
+        }else if(doc){
+          resolve(doc);
+        }
+      });
+    });
+  }
+
   const checkForNewName = function(newName){
     if(newName != null && newName != 'undefined'){
       return newName;
@@ -151,6 +168,12 @@ app.post('/newitem', (req, res)=>{
       res.redirect('/dashboard');  
     });
 });
+
+app.post('/addToDiary',(req, res)=>{
+  addToDiary('test@email.com', '283947298').then(()=>{
+    res.redirect('/dashboard')
+  })
+})
 
 app.post('/newUser', (req, res)=>{
   const name = checkForNewName(req.body.newName);

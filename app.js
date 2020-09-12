@@ -162,3 +162,27 @@ if (port == null || port == "") {
 // > typeof(myday)
 // 'string'
 // >
+
+
+//tests only
+let myItems = [
+  'goat', 'cat', 'apple', 'banana', 'dog', 'zoo', 'crow'
+  ]
+
+  let jack = function(orderArray){
+    let valueChanged = false;
+    while(valueChanged === false){
+      valueChanged = true;
+      for(let i=0; i<=myItems.length; i++){
+        if(myItems[i] > myItems[i+1]){
+          let item1 = myItems[i];
+          let item2 = myItems[i+1];
+          myItems.splice(i,2, item2, item1);
+          valueChanged = false;
+          console.log(myItems);
+        }
+      }
+    } 
+  }
+
+  jack(myItems);

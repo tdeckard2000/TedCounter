@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs'); //used for user authentication
 const { response } = require('express');
+const { parseJSON, type } = require('jquery');
 
 require('dotenv').config();
 
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Database ==========================================================
-mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true});
+mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const foodItemSchema = new mongoose.Schema({
   "name": String,
@@ -112,22 +113,22 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
     });
   }
 
-  const addToDiary = function(userId, itemId){
-    const item = new itemDiary({
-      'date': new Date().toISOString(),
-      'userId': userId,
-      'itemId': itemId
-    });
+  const addToDiary =function(userId, itemId){
     return new Promise((resolve, reject)=>{
-      item.save((err, doc)=>{
-        if(err){
-          console.log('Failed to save new diary item to DB');
-          reject(err);
-        }else if(doc){
-          resolve(doc);
-        }
+      const item = new itemDiary({
+        'date': new Date().toISOString(),
+        'userId': userId,
+        'itemId': itemId
       });
-    });
+        item.save((err, doc)=>{
+          if(err){
+            console.log('Failed to save new diary item to DB');
+            reject(err);
+          }else if(doc){
+            resolve("cats");
+          }
+        });
+    })
   }
 
   const checkForNewName = function(newName){
@@ -170,6 +171,8 @@ app.post('/newitem', (req, res)=>{
 });
 
 app.post('/addToDiary',(req, res)=>{
+  bodyData = req.body.foodItem
+  console.log(bodyData)
   addToDiary('test@email.com', '283947298').then(()=>{
     res.redirect('/dashboard')
   })

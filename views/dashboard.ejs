@@ -98,7 +98,7 @@
               <%foodItemList.forEach((element)=>{%>
                 <%itemNumber++%>
                 <div class="selectableItem">
-                  <button id="listItem<%=itemNumber%>" value="<%=element.id%>" ><%=element.name%></button>
+                  <button name="foodItem" type="submit" id="listItem<%=itemNumber%>" value="<%=element%>" ><%=element.name%></button>
                 </div>
               <%});%>
             </div>

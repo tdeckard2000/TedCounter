@@ -97,8 +97,9 @@
               <%itemNumber = -1%>
               <%foodItemList.forEach((element)=>{%>
                 <%itemNumber++%>
+                <%fullElement=JSON.stringify(element)%>
                 <div class="selectableItem">
-                  <button name="foodItem" type="submit" id="listItem<%=itemNumber%>" value="<%=element%>" ><%=element.name%></button>
+                  <button data-itemData="<%=element%>" name="foodItem" type="submit" id="listItem<%=itemNumber%>" value="<%=fullElement%>" ><%=element.name%></button>
                 </div>
               <%});%>
             </div>

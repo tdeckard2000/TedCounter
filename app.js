@@ -102,9 +102,9 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
 
   const addNewUser = function(name, email, passwordHashed){
     const newUser = new user({
-      'name': name,
-      'email': email,
-      'password': passwordHashed
+      "name": name,
+      "email": email,
+      "password": passwordHashed
     });
     newUser.save((err,doc)=>{
       if(err){
@@ -116,9 +116,9 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
   const addToDiary =function(userId, itemId){
     return new Promise((resolve, reject)=>{
       const item = new itemDiary({
-        'date': new Date().toISOString(),
-        'userId': userId,
-        'itemId': itemId
+        "date": new Date().toISOString(),
+        "userId": userId,
+        "itemId": itemId
       });
         item.save((err, doc)=>{
           if(err){
@@ -171,9 +171,10 @@ app.post('/newitem', (req, res)=>{
 });
 
 app.post('/addToDiary',(req, res)=>{
-  bodyData = req.body.foodItem
-  console.log(bodyData)
-  addToDiary('test@email.com', '283947298').then(()=>{
+  let bodyData = (req.body.foodItem)
+  let jsonedData = JSON.parse(bodyData);
+  console.log(jsonedBodyData);
+  addToDiary('test@email.com', jsonedData).then(()=>{
     res.redirect('/dashboard')
   })
 })

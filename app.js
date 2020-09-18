@@ -19,17 +19,44 @@ mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true, useUnifiedTopology
 const foodItemSchema = new mongoose.Schema({
   "name": String,
   "calories": Number,
+  "sodium": Number,
   "protein": Number,
   "carbs": Number,
-  "sugars": Number,
-  "sodium": Number
+  "fat": Number,
+  "cholesterol": Number,
+  "fiber": Number,
+  "sugar": Number,
+  "iron": Number,
+  "vitA": Number,
+  "vitC": Number,
+  "vitD": Number,
+  "vitE": Number,
+  "calcium": Number,
+  "potassium": Number,
+  "zinc": Number
 });
 
 const itemDiarySchema = new mongoose.Schema({
   "date": Date,
   "userId": String,
   "item":{
-    "name":String
+    "name": String,
+    "calories": Number,
+    "sodium": Number,
+    "protein": Number,
+    "carbs": Number,
+    "fat": Number,
+    "cholesterol": Number,
+    "fiber": Number,
+    "sugar": Number,
+    "iron": Number,
+    "vitA": Number,
+    "vitC": Number,
+    "vitD": Number,
+    "vitE": Number,
+    "calcium": Number,
+    "potassium": Number,
+    "zinc": Number
   }
 });
 
@@ -83,13 +110,26 @@ const orderObjects = function(unorderedObjects, fieldName){
 }
 
 //Save New Item to Database
-const addNewItem = function(name, calories, protein, carbs, sodium){
+const addNewItem = function(name, calories, sodium, protein, carbs, fat, 
+  cholesterol, fiber, sugar, iron, vitA, vitC, vitD, vitE, calcium, potasium, zinc){
   const item = new foodItem({
     "name": name,
     "calories": calories,
+    "sodium": sodium,
     "protein": protein,
     "carbs": carbs,
-    "sodium": sodium
+    "fat": fat,
+    "cholesterol": cholesterol,
+    "fiber": fiber,
+    "sugar": sugar,
+    "iron": iron,
+    "vitA": vitA,
+    "vitC": vitC,
+    "vitD": vitD,
+    "vitE": vitE,
+    "calcium": calcium,
+    "potassium": potasium,
+    "zinc": zinc
   });
 
   return new Promise((resolve, reject)=>{
@@ -166,10 +206,22 @@ app.post('/newitem', (req, res)=>{
   addNewItem(
     req.body.itemName, 
     req.body.calories, 
+    req.body.sodium, 
     req.body.protein, 
-    req.body.carbs, 
-    req.body.sodium)
-    .then(function(){
+    req.body.carbs,
+    req.body.fat,
+    req.body.cholesterol,
+    req.body.fiber,
+    req.body.sugar,
+    req.body.iron,
+    req.body.vitA,
+    req.body.vitC,
+    req.body.vitD,
+    req.body.vitE,
+    req.body.calcium,
+    req.body.potassium,
+    req.body.zinc
+    ).then(function(){
       res.redirect('/dashboard');  
     });
 });

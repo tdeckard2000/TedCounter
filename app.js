@@ -28,7 +28,9 @@ const foodItemSchema = new mongoose.Schema({
 const itemDiarySchema = new mongoose.Schema({
   "date": Date,
   "userId": String,
-  "itemId": String
+  "item":{
+    "name":String
+  }
 });
 
 const userSchema = new mongoose.Schema({
@@ -113,12 +115,14 @@ const addNewItem = function(name, calories, protein, carbs, sodium){
     });
   }
 
-  const addToDiary =function(userId, itemId){
+  const addToDiary =function(userId, itemInfo){
     return new Promise((resolve, reject)=>{
       const item = new itemDiary({
         "date": new Date().toISOString(),
         "userId": userId,
-        "itemId": itemId
+        "item":{
+          "name": itemInfo.name
+        }
       });
         item.save((err, doc)=>{
           if(err){

@@ -173,7 +173,6 @@ app.post('/newitem', (req, res)=>{
 app.post('/addToDiary',(req, res)=>{
   let bodyData = (req.body.foodItem)
   let jsonedData = JSON.parse(bodyData);
-  console.log(jsonedBodyData);
   addToDiary('test@email.com', jsonedData).then(()=>{
     res.redirect('/dashboard')
   })

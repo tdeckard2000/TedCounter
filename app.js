@@ -85,6 +85,19 @@ const findFoodItems = function(){
   });
 }
 
+const findDiaryItems = function(user, day){
+  return new Promise((resolve, reject)=>{
+    itemDiary.find({}, (err, doc)=>{
+      if(err){
+        console.log("ERROR at findDiaryItems")
+      }else{
+        console.log("Got Diary Items: " + doc)
+        resolve(doc);
+      }
+    })
+  })
+}
+
 //Order given array
 const orderObjects = function(unorderedObjects, fieldName){
   fieldName = 'name'
@@ -161,7 +174,23 @@ const addNewItem = function(name, calories, sodium, protein, carbs, fat,
         "date": new Date().toISOString(),
         "userId": userId,
         "item":{
-          "name": itemInfo.name
+          "name": itemInfo.name,
+          "calories": itemInfo.calories,
+          "sodium": itemInfo.sodium,
+          "protein": itemInfo.protein,
+          "carbs": itemInfo.carbs,
+          "fat": itemInfo.fat,
+          "cholesterol": itemInfo.cholesterol,
+          "fiber": itemInfo.fiber,
+          "sugar": itemInfo.sugar,
+          "iron": itemInfo.iron,
+          "vitA": itemInfo.vitA,
+          "vitC": itemInfo.vitC,
+          "vitD": itemInfo.vitD,
+          "vitE": itemInfo.vitE,
+          "calcium": itemInfo.calcium,
+          "potassium": itemInfo.potassium,
+          "zinc": itemInfo.zinc
         }
       });
         item.save((err, doc)=>{

@@ -222,8 +222,6 @@ app.get('/dashboard', (req, res)=>{
   .then((orderedData)=>findDiaryItems("need user", "need day", orderedData)).then((bothResults)=>{
     foodDiary = bothResults[0];
     foodItemList = bothResults[1];
-    console.log("diaryList: " + bothResults[0][0]);
-    console.log("foodItemList: " + bothResults[1][0]);
     res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
   }).catch(()=>{console.log("Error getting to Dashboard: ")})
 });

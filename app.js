@@ -74,7 +74,7 @@ const findFoodItems = function(){
     return new Promise((resolve, reject)=>{
       foodItem.find({},(err, doc)=>{
       if(err){
-        console.log("ERROR at findFoodItems")
+        console.warn("ERROR at findFoodItems")
         reject(err);
       }else{
         resolve(doc);
@@ -87,7 +87,7 @@ const findDiaryItems = function(user, day, orderedData){
   return new Promise((resolve, reject)=>{
     itemDiary.find({}, (err, doc)=>{
       if(err){
-        console.log("ERROR at findDiaryItems")
+        console.warn("ERROR at findDiaryItems")
       }else{
         resolve([doc, orderedData]);
       }
@@ -160,7 +160,7 @@ const addNewItem = function(name, calories, sodium, protein, carbs, fat,
     });
     newUser.save((err,doc)=>{
       if(err){
-        console.log('Error Saving User: ' + err);
+        console.warn('Error Saving User: ' + err);
       }
     });
   }
@@ -192,7 +192,7 @@ const addNewItem = function(name, calories, sodium, protein, carbs, fat,
       });
         item.save((err, doc)=>{
           if(err){
-            console.log('Failed to save new diary item to DB');
+            console.warn('Failed to save new diary item to DB');
             reject(err);
           }else if(doc){
             resolve("cats");
@@ -219,11 +219,12 @@ app.get('/dashboard', (req, res)=>{
   let foodItemList = {} //stored here to avoid passing it through .then chain.
   findFoodItems()
   .then((foodItemData)=>orderObjects(foodItemData, 'name'))
-  .then((orderedData)=>findDiaryItems("need user", "need day", orderedData)).then((bothResults)=>{
+  .then((orderedData)=>findDiaryItems("need user", "need day", orderedData))
+  .then((bothResults)=>{
     foodDiary = bothResults[0];
     foodItemList = bothResults[1];
     res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
-  }).catch(()=>{console.log("Error getting to Dashboard: ")})
+  }).catch(()=>{console.warn("Error getting to Dashboard: ")})
 });
 
 app.get('/newitem', (req, res)=>{

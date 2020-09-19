@@ -26,10 +26,11 @@
   </div>
 </div>
 
+<!-- Diary List on Dashboard -->
 <div class="itemListContainer">
   <%foodDiary.forEach((element)=>{%>
     <div class="container itemRowContainer">
-      <div class="row itemRow">
+      <div type="button" class="row itemRow" value='<%=element._id%>' data-toggle="collapse" data-target="#id<%=element._id%>">
         <div class="col-9 itemTimeNameDiv">
           <h2 class="itemTime">4:35pm</h2>
           <h2 class="itemName"><%=element.item.name%></h2>
@@ -39,6 +40,18 @@
           <h6 class="itemValue"><%=element.item.sodium%> sdm</h6>
           <h6 class="itemValue"><%=element.item.protein%> pro</h6>
           <h6 class="itemValue"><%=element.item.carbs%> crb</h6>
+        </div>
+      </div>
+      <div class="collapse" id="id<%=element._id%>">
+        <div class="listItemExpand">
+          Calories:<%=element.item.calories%>, Sodium: <%=element.item.sodium%>,
+          Protein: <%=element.item.protein%>, Carbs: <%=element.item.carbs%>,
+          Fat: <%=element.item.fat%>, Cholesterol: <%=element.item.cholesterol%>,
+          Fiber: <%=element.item.fiber%>, Sugar: <%=element.item.sugar%>,
+          Iron: <%=element.item.iron%>, vitA: <%=element.item.vitA%>,
+          vitC: <%=element.item.vitC%>, vitD: <%=element.item.vitD%>,
+          vitE: <%=element.item.vitE%>, Calcium: <%=element.item.calcium%>,
+          Potassium: <%=element.item.potassium%>, Zinc: <%=element.item.zinc%>
         </div>
       </div>
     </div>
@@ -99,7 +112,7 @@
                 <%itemNumber++%>
                 <%fullElement=JSON.stringify(element)%>
                 <div class="selectableItem">
-                  <button data-itemData="<%=element%>" name="foodItem" type="submit" id="listItem<%=itemNumber%>" value="<%=fullElement%>" ><%=element.name%></button>
+                  <button name="foodItem" type="submit" id="listItem<%=itemNumber%>" value="<%=fullElement%>" ><%=element.name%></button>
                 </div>
               <%});%>
             </div>

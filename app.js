@@ -3,8 +3,6 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs'); //used for user authentication
-const { response } = require('express');
-const { parseJSON, type } = require('jquery');
 
 require('dotenv').config();
 
@@ -85,14 +83,13 @@ const findFoodItems = function(){
   });
 }
 
-const findDiaryItems = function(user, day){
+const findDiaryItems = function(user, day, orderedData){
   return new Promise((resolve, reject)=>{
     itemDiary.find({}, (err, doc)=>{
       if(err){
         console.log("ERROR at findDiaryItems")
       }else{
-        console.log("Got Diary Items: " + doc)
-        resolve(doc);
+        resolve([doc, orderedData]);
       }
     })
   })
@@ -219,11 +216,16 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/dashboard', (req, res)=>{
+  let foodItemList = {} //stored here to avoid passing it through .then chain.
   findFoodItems()
-  .then(function(foodItemList){
-    foodItemList = orderObjects(foodItemList, 'name');
-    res.render('dashboard', {foodItemList: foodItemList});
-  });
+  .then((foodItemData)=>orderObjects(foodItemData, 'name'))
+  .then((orderedData)=>findDiaryItems("need user", "need day", orderedData)).then((bothResults)=>{
+    foodDiary = bothResults[0];
+    foodItemList = bothResults[1];
+    console.log("diaryList: " + bothResults[0][0]);
+    console.log("foodItemList: " + bothResults[1][0]);
+    res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
+  }).catch(()=>{console.log("Error getting to Dashboard: ")})
 });
 
 app.get('/newitem', (req, res)=>{

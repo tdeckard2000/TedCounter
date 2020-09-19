@@ -30,7 +30,7 @@
 <div class="itemListContainer">
   <%foodDiary.forEach((element)=>{%>
     <div class="container itemRowContainer">
-      <div type="button" class="row itemRow" value='<%=element._id%>' data-toggle="collapse" data-target="#id<%=element._id%>">
+      <div class="row itemRow" value='<%=element._id%>' data-toggle="collapse" data-target="#id<%=element._id%>">
         <div class="col-9 itemTimeNameDiv">
           <h2 class="itemTime">4:35pm</h2>
           <h2 class="itemName"><%=element.item.name%></h2>

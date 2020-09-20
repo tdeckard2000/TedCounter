@@ -233,7 +233,7 @@ app.get('/newitem', (req, res)=>{
 app.post('/newitem', (req, res)=>{
   for (const key in req.body) {//set zero default
     if(req.body[key] == ''){
-      req.body[key]='-'
+      req.body[key]=''
     }
   }
   addNewItem(

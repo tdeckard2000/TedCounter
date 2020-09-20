@@ -43,15 +43,17 @@
 }
 
 .itemDropdownBox{
-    padding: 0px 1px;
+    background-color: #e2e2e2;
+    border-radius: 0 0 5px 5px;
+    font-size: .6rem;
+    margin: 0 1px;
+    position: relative;
 }
 
 .itemDropdownButtons{
-    display: inline-flex;
-    height: 100%;
     position: absolute;
     right: 0px;
-    bottom: 0px;
+    bottom: 27%;
 }
 
 .itemDropdownTable{
@@ -102,6 +104,15 @@
     padding: 0 0 0 10px;
 }
 
+.itemDuplicateIcon{
+    height: 25px;
+}
+
+.itemTrashIcon{
+    height: 25px;
+    margin: 0 15px;
+}
+
 .itemValue{
     font-size: .7rem;
     font-weight: 400;
@@ -111,14 +122,6 @@
 
 .itemValueDiv{
     padding: 2px 10px;
-}
-
-.listItemExpand{
-    background-color: #e2e2e2;
-    border-radius: 0 0 5px 5px;
-    font-size: .6rem;
-    padding: 6px;
-    position: relative;
 }
 
 .topBar{

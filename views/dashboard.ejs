@@ -43,7 +43,6 @@
         </div>
       </div>
       <div class="collapse itemDropdownBox" id="id<%=element._id%>">
-        <div class="listItemExpand">
           <table class="itemDropdownTable">
             <tr>
               <td>cal: <%=element.item.calories%></td>
@@ -71,9 +70,9 @@
             </tr>
           </table>
           <div class="itemDropdownButtons">
-            <div>Duplicate</div><div>Remove</div>
+            <img class="itemDuplicateIcon" src="./files/duplicateIcon.svg" alt="">
+            <img class="itemTrashIcon" src="./files/trashCan.svg" alt="">
           </div>
-        </div>
       </div>
     </div>
   <%});%>

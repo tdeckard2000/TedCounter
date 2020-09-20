@@ -42,16 +42,37 @@
           <h6 class="itemValue"><%=element.item.carbs%> crb</h6>
         </div>
       </div>
-      <div class="collapse" id="id<%=element._id%>">
+      <div class="collapse itemDropdownBox" id="id<%=element._id%>">
         <div class="listItemExpand">
-          Calories:<%=element.item.calories%>, Sodium: <%=element.item.sodium%>,
-          Protein: <%=element.item.protein%>, Carbs: <%=element.item.carbs%>,
-          Fat: <%=element.item.fat%>, Cholesterol: <%=element.item.cholesterol%>,
-          Fiber: <%=element.item.fiber%>, Sugar: <%=element.item.sugar%>,
-          Iron: <%=element.item.iron%>, vitA: <%=element.item.vitA%>,
-          vitC: <%=element.item.vitC%>, vitD: <%=element.item.vitD%>,
-          vitE: <%=element.item.vitE%>, Calcium: <%=element.item.calcium%>,
-          Potassium: <%=element.item.potassium%>, Zinc: <%=element.item.zinc%>
+          <table class="itemDropdownTable">
+            <tr>
+              <td>Cal: <%=element.item.calories%></td>
+              <td>Sod: <%=element.item.sodium%></td>
+              <td>Pro: <%=element.item.protein%></td>
+              <td>Carb: <%=element.item.carbs%></td>
+            </tr>
+            <tr>
+              <td>Fat: <%=element.item.fat%></td>
+              <td>Chol: <%=element.item.cholesterol%></td>
+              <td>Fiber: <%=element.item.fiber%></td>
+              <td>Sug: <%=element.item.sugar%></td>
+            </tr>
+            <tr>
+              <td>vitE: <%=element.item.vitE%></td>
+              <td>vitA: <%=element.item.vitA%></td>
+              <td>vitC: <%=element.item.vitC%></td>
+              <td>vitD: <%=element.item.vitD%></td>
+            </tr>
+            <tr>
+              <td>Iron: <%=element.item.iron%></td>
+              <td>Calc: <%=element.item.calcium%></td>
+              <td>Potas: <%=element.item.potassium%></td>
+              <td>Zinc: <%=element.item.zinc%></td>
+            </tr>
+          </table>
+          <div class="itemDropdownButtons">
+            <div>Duplicate</div><div>Remove</div>
+          </div>
         </div>
       </div>
     </div>

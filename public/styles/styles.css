@@ -42,6 +42,26 @@
     background-color: #cacaca;
 }
 
+.itemDropdownBox{
+    padding: 0px 1px;
+}
+
+.itemDropdownButtons{
+    display: inline-flex;
+    position: absolute;
+    right: 5px;
+}
+
+.itemDropdownTable{
+    display: inline-flex;
+
+}
+
+.itemDropdownTable td{
+    padding: 0 3px;
+    width: fit-content;
+}
+
 .itemListContainer{
     padding: 60px 0 60px 0;
 }
@@ -50,6 +70,7 @@
     bottom: -3px;
     font-size: 1.3rem;
     font-weight: 300;
+    height: 25px;
     position: relative;
     text-align: left;
     margin-bottom: 0px;
@@ -92,8 +113,10 @@
 
 .listItemExpand{
     background-color: #e2e2e2;
-    font-size: .7rem;
+    border-radius: 0 0 5px 5px;
+    font-size: .6rem;
     padding: 6px;
+    position: relative;
 }
 
 .topBar{

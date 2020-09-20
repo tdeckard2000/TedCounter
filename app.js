@@ -120,25 +120,25 @@ const orderObjects = function(unorderedObjects, fieldName){
 }
 
 //Save New Item to Database
-const addNewItem = function(reqBody){
+const addNewItem = function(newItems){
   const item = new foodItem({
-    "name": reqBody.itemName,
-    "calories": reqBody.calories,
-    "sodium": reqBody.sodium,
-    "protein": reqBody.protein,
-    "carbs": reqBody.carbs,
-    "fat": reqBody.fat,
-    "cholesterol": reqBody.cholesterol,
-    "fiber": reqBody.fiber,
-    "sugar": reqBody.sugar,
-    "iron": reqBody.iron,
-    "vitA": reqBody.vitA,
-    "vitC": reqBody.vitC,
-    "vitD": reqBody.vitD,
-    "vitE": reqBody.vitE,
-    "calcium": reqBody.calcium,
-    "potassium": reqBody.potasium,
-    "zinc": reqBody.zinc
+    "name": newItems.itemName,
+    "calories": newItems.calories,
+    "sodium": newItems.sodium,
+    "protein": newItems.protein,
+    "carbs": newItems.carbs,
+    "fat": newItems.fat,
+    "cholesterol": newItems.cholesterol,
+    "fiber": newItems.fiber,
+    "sugar": newItems.sugar,
+    "iron": newItems.iron,
+    "vitA": newItems.vitA,
+    "vitC": newItems.vitC,
+    "vitD": newItems.vitD,
+    "vitE": newItems.vitE,
+    "calcium": newItems.calcium,
+    "potassium": newItems.potasium,
+    "zinc": newItems.zinc
   });
   return new Promise((resolve, reject)=>{
     item.save((err, doc)=>{

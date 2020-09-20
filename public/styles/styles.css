@@ -194,8 +194,6 @@ button.close{
 
 .modal-footer{
     background-color: #5f65d8;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     height: 51px;
 }
 
@@ -214,8 +212,6 @@ button.close{
 
 .modal-header{
     background-color: #ff9c3e;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     height: 45px;
 }
 

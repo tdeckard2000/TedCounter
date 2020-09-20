@@ -120,28 +120,27 @@ const orderObjects = function(unorderedObjects, fieldName){
 }
 
 //Save New Item to Database
-const addNewItem = function(name, calories, sodium, protein, carbs, fat, 
-  cholesterol, fiber, sugar, iron, vitA, vitC, vitD, vitE, calcium, potasium, zinc){
+const addNewItem = function(reqBody){
   const item = new foodItem({
-    "name": name,
-    "calories": calories,
-    "sodium": sodium,
-    "protein": protein,
-    "carbs": carbs,
-    "fat": fat,
-    "cholesterol": cholesterol,
-    "fiber": fiber,
-    "sugar": sugar,
-    "iron": iron,
-    "vitA": vitA,
-    "vitC": vitC,
-    "vitD": vitD,
-    "vitE": vitE,
-    "calcium": calcium,
-    "potassium": potasium,
-    "zinc": zinc
+    "name": reqBody.itemName,
+    "calories": reqBody.calories,
+    "sodium": reqBody.sodium,
+    "protein": reqBody.protein,
+    "carbs": reqBody.carbs,
+    "fat": reqBody.fat,
+    "cholesterol": reqBody.cholesterol,
+    "fiber": reqBody.fiber,
+    "sugar": reqBody.sugar,
+    "iron": reqBody.iron,
+    "vitA": reqBody.vitA,
+    "vitC": reqBody.vitC,
+    "vitD": reqBody.vitD,
+    "vitE": reqBody.vitE,
+    "calcium": reqBody.calcium,
+    "potassium": reqBody.potasium,
+    "zinc": reqBody.zinc
   });
-
+  console.log("item" + item)
   return new Promise((resolve, reject)=>{
     item.save((err, doc)=>{
       if(err){
@@ -233,24 +232,14 @@ app.get('/newitem', (req, res)=>{
 
 // Post Requests ==========================================================
 app.post('/newitem', (req, res)=>{
+  for (const key in req.body) {//set zero default
+    if(req.body[key] == ''){
+      req.body[key]=0
+    }
+  }
+  console.log(req.body)
   addNewItem(
-    req.body.itemName, 
-    req.body.calories, 
-    req.body.sodium, 
-    req.body.protein, 
-    req.body.carbs,
-    req.body.fat,
-    req.body.cholesterol,
-    req.body.fiber,
-    req.body.sugar,
-    req.body.iron,
-    req.body.vitA,
-    req.body.vitC,
-    req.body.vitD,
-    req.body.vitE,
-    req.body.calcium,
-    req.body.potassium,
-    req.body.zinc
+    req.body
     ).then(function(){
       res.redirect('/dashboard');  
     });

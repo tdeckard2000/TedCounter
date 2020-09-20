@@ -48,8 +48,10 @@
 
 .itemDropdownButtons{
     display: inline-flex;
+    height: 100%;
     position: absolute;
-    right: 5px;
+    right: 0px;
+    bottom: 0px;
 }
 
 .itemDropdownTable{

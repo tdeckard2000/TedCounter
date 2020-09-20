@@ -43,7 +43,7 @@
 }
 
 .itemDropdownBox{
-    background-color: #e2e2e2;
+    background-color: #f1efef;
     border-radius: 0 0 5px 5px;
     font-size: .6rem;
     margin: 0 1px;
@@ -110,7 +110,7 @@
 
 .itemTrashIcon{
     height: 25px;
-    margin: 0 15px;
+    margin: 0 15px 0 25px;
 }
 
 .itemValue{

@@ -140,7 +140,6 @@ const addNewItem = function(reqBody){
     "potassium": reqBody.potasium,
     "zinc": reqBody.zinc
   });
-  console.log("item" + item)
   return new Promise((resolve, reject)=>{
     item.save((err, doc)=>{
       if(err){
@@ -237,7 +236,6 @@ app.post('/newitem', (req, res)=>{
       req.body[key]=0
     }
   }
-  console.log(req.body)
   addNewItem(
     req.body
     ).then(function(){
@@ -257,7 +255,7 @@ app.post('/newUser', (req, res)=>{
   const name = checkForNewName(req.body.newName);
   const newEmail = req.body.newEmail
   const newPassword = req.body.newPassword
-  console.log(name);
+  console.warn(name);
   //const confirmPassword = (req.body.confirmPassword);
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
@@ -270,11 +268,11 @@ app.post('/newUser', (req, res)=>{
 let port = process.env.PORT;
 if (port == null || port == "") {
   app.listen('3000', ()=>{
-    console.log('Listening on Port 3000') 
+    console.warn('Listening on Port 3000') 
   });
 }else{
   app.listen(port);
-  console.log('Listening on Port 5000') 
+  console.warn('Listening on Port 5000') 
 }
 
 

@@ -137,7 +137,7 @@ const addNewItem = function(newItems){
     "vitD": newItems.vitD,
     "vitE": newItems.vitE,
     "calcium": newItems.calcium,
-    "potassium": newItems.potasium,
+    "potassium": newItems.potassium,
     "zinc": newItems.zinc
   });
   return new Promise((resolve, reject)=>{

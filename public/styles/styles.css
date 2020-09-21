@@ -38,6 +38,10 @@
     width: 100%;
 }
 
+.buttonNoFormat{
+    border: none;
+}
+
 .dashboardBody{
     background-color: #cacaca;
 }

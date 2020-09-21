@@ -70,8 +70,14 @@
             </tr>
           </table>
           <div class="itemDropdownButtons">
-            <a href=""><img class="itemDuplicateIcon" src="./files/duplicateIcon.svg" alt=""></a>
-            <a href=""><img class="itemTrashIcon" src="./files/trashCan.svg" alt=""></a>
+            <form action="/dashboard/modifyDiary" method="POST">
+              <button name="duplicateItem" class="buttonNoFormat" value="<%=element._id%>">
+                <img class="itemDuplicateIcon" src="./files/duplicateIcon.svg" alt="duplicateItem">
+              </button>
+              <button name="removeItem" class="buttonNoFormat" value="<%=element._id%>">
+                <img class="itemTrashIcon" src="./files/trashCan.svg" alt="removeItem">
+              </button>
+            </form>
           </div>
       </div>
     </div>

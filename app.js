@@ -199,6 +199,18 @@ const addNewItem = function(newItems){
     })
   }
 
+ const removeFromDiary = function(itemId){
+   return new Promise((resolve, reject)=>{
+     itemDiary.deleteOne({_id:itemId}, (err)=>{
+       if(err){
+        reject("error removing item from diary: "+err);
+       }else()=>{
+         resolve
+       }
+     })
+   })
+ }
+
   const checkForNewName = function(newName){
     if(newName != null && newName != 'undefined'){
       return newName;
@@ -249,6 +261,20 @@ app.post('/addToDiary',(req, res)=>{
   addToDiary('test@email.com', jsonedData).then(()=>{
     res.redirect('/dashboard')
   })
+})
+
+app.post('/dashboard/modifyDiary', (req, res)=>{
+  let toDuplicate = (req.body.duplicateItem);
+  let toRemove = (req.body.removeItem);
+  if(toDuplicate){
+    console.log("duplicate: " + toDuplicate);
+  }else if(toRemove){
+    console.log("remove: " + toRemove)
+    removeFromDiary(toRemove).then(()=>{
+      res.redirect('/dashboard');
+    }).catch(()=>{console.log("error deleting item at POST")})
+  }
+  res.redirect('/dashboard');
 })
 
 app.post('/newUser', (req, res)=>{

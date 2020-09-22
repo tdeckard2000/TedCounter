@@ -29,10 +29,14 @@
 <!-- Diary List on Dashboard -->
 <div class="itemListContainer">
   <%foodDiary.forEach((element)=>{%>
+    <%let wholeISODate=(element.date)%>
+    <%let hour = wholeISODate.getUTCHours()+6;%>
+    <%let minute = wholeISODate.getUTCMinutes()%>
+    <%if(minute<10){minute = minute*10}%>
     <div class="container itemRowContainer">
       <div class="row itemRow" value='<%=element._id%>' data-toggle="collapse" data-target="#id<%=element._id%>">
         <div class="col-9 itemTimeNameDiv">
-          <h2 class="itemTime">4:35pm</h2>
+          <h2 class="itemTime"><%=hour%>:<%=minute%></h2>
           <h2 class="itemName"><%=element.item.name%></h2>
         </div>
         <div class="col-3 itemValueDiv">
@@ -71,7 +75,7 @@
           </table>
           <div class="itemDropdownButtons">
             <form action="/dashboard/modifyDiary" method="POST">
-              <button name="duplicateItem" class="buttonNoFormat" value="<%=element._id%>">
+              <button name="duplicateItem" class="buttonNoFormat" value="<%=JSON.stringify(element)%>">
                 <img class="itemDuplicateIcon" src="./files/duplicateIcon.svg" alt="duplicateItem">
               </button>
               <button name="removeItem" class="buttonNoFormat" value="<%=element._id%>">

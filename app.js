@@ -163,7 +163,7 @@ const addNewItem = function(newItems){
     });
   }
 
-  const addToDiary =function(userId, itemInfo){
+  const addToDiary = function(userId, itemInfo){
     return new Promise((resolve, reject)=>{
       const item = new itemDiary({
         "date": new Date().toISOString(),
@@ -196,6 +196,15 @@ const addNewItem = function(newItems){
             resolve("cats");
           }
         });
+    })
+  }
+
+  const duplicateDiaryItem = function(itemString){
+    let parsedItem = JSON.parse(itemString);
+    return new Promise((resolve, reject)=>{
+      addToDiary(parsedItem.userId, parsedItem.item).then(()=>{
+        resolve
+      })
     })
   }
 
@@ -267,7 +276,9 @@ app.post('/dashboard/modifyDiary', (req, res)=>{
   let toDuplicate = (req.body.duplicateItem);
   let toRemove = (req.body.removeItem);
   if(toDuplicate){
-    console.log("duplicate: " + toDuplicate);
+    duplicateDiaryItem(toDuplicate).then(()=>{
+      res.redirect('/dashboard');
+    })
   }else if(toRemove){
     console.log("remove: " + toRemove)
     removeFromDiary(toRemove).then(()=>{

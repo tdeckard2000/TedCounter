@@ -29,4 +29,6 @@ $('#foodItemFilter').on('keyup', (doc)=>{
     }
 })
 
+console.log(new Date().getTimezoneOffset())
+
 //currentTarget.attributes[0].textContent

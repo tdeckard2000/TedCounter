@@ -235,13 +235,12 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/dashboard', (req, res)=>{
-  let foodItemList = {} //stored here to avoid passing it through .then chain.
   findFoodItems()
   .then((foodItemData)=>orderObjects(foodItemData, 'name'))
   .then((orderedData)=>findDiaryItems("need user", "need day", orderedData))
   .then((bothResults)=>{
-    foodDiary = bothResults[0];
-    foodItemList = bothResults[1];
+    const foodDiary = bothResults[0];
+    const foodItemList = bothResults[1];
     res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
   }).catch(()=>{console.warn("Error getting to Dashboard: ")})
 });

@@ -30,5 +30,6 @@ $('#foodItemFilter').on('keyup', (doc)=>{
 })
 
 console.log(new Date().getTimezoneOffset())
+console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
 //currentTarget.attributes[0].textContent

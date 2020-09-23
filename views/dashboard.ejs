@@ -35,6 +35,7 @@
     <%console.log("UTCHours: "+hour)%>
     <%hour = hour - (new Date().getTimezoneOffset()/60)%>
     <%console.log('OffsetAmount: '+new Date().getTimezoneOffset())%>
+    <%console.log("TimeZone: "+Intl.DateTimeFormat().resolvedOptions().timeZone)%>
     <%console.log("Minus Offset: "+hour)%>
     <%if(hour<12 && hour>0){amPm="text-decoration:underline"}%>
     <%console.log("Underlined?: "+amPm)%>

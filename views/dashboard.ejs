@@ -32,9 +32,13 @@
     <%let amPm=""%>
     <%let wholeISODate=(element.date)%>
     <%let hour = wholeISODate.getUTCHours();%>
+    <%console.log("UTCHours: "+hour)%>
     <%hour = hour - (new Date().getTimezoneOffset()/60)%>
+    <%console.log("Minus Offset: "+hour)%>
     <%if(hour<12 && hour>0){amPm="text-decoration:underline"}%>
+    <%console.log("Underlined?: "+amPm)%>
     <%if(hour<1){hour += 12}else if(hour>12){hour -= 12}%>
+    <%console.log("Add/Remove12h: "+hour)%>
     <%let minute = wholeISODate.getUTCMinutes()%>
     <%if(minute<10){minute = '0'+minute}%>
     <div class="container itemRowContainer">

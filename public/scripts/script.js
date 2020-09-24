@@ -35,21 +35,23 @@ $(function(){
         oldTime = oldTime.split(':');
         let oldHour = oldTime[0];
         const oldMinute = oldTime[1];
-        const timezoneOffset = (new Date().getTimezoneOffset()/60)
-        let newHour = 411
+        const timezoneOffset = (new Date().getTimezoneOffset()/60);
+        let newHour = 'err1';
         if (timezoneOffset>0){
-            console.log('subtracted timezone time')
             newHour = oldHour - timezoneOffset;
         }else if (timezoneOffset<0){
             newHour = oldHour + timezoneOffset;
-            console.log('added timezone time')
         }
-        if(newHour<0){
-            newHour+=12
+        if(newHour<0 && newHour!==-12){
+            newHour+=12;
+            console.log('added')
         }else if(newHour>12){
-            newHour-=12
+            newHour-=12;
+
         }else if(newHour==0){
-            newHour=12
+            newHour=12;
+        }else{
+            $('.itemTime.'+i).css("text-decoration", "underline")
         }
         $('.itemTime').css("color", "#545454")
         return (newHour+':'+oldMinute)

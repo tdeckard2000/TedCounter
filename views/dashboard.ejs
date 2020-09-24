@@ -28,7 +28,9 @@
 
 <!-- Diary List on Dashboard -->
 <div class="itemListContainer">
+  <%let i=-1%>
   <%foodDiary.forEach((element)=>{%>
+    <%i++%>
     <%let wholeISODate=(element.date)%>
     <%let hour = wholeISODate.getUTCHours();%>
     <%let minute = wholeISODate.getUTCMinutes()%>
@@ -36,7 +38,7 @@
     <div class="container itemRowContainer">
       <div class="row itemRow" value='<%=element._id%>' data-toggle="collapse" data-target="#id<%=element._id%>">
         <div class="col-9 itemTimeNameDiv">
-          <h2 class="itemTime"><%=hour%>:<%=minute%></h2>
+          <h2 class="itemTime <%=i%>"><%=hour%>:<%=minute%></h2>
           <h2 class="itemName"><%=element.item.name%></h2>
         </div>
         <div class="col-3 itemValueDiv">

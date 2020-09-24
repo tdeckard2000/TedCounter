@@ -29,24 +29,14 @@
 <!-- Diary List on Dashboard -->
 <div class="itemListContainer">
   <%foodDiary.forEach((element)=>{%>
-    <%let amPm=""%>
     <%let wholeISODate=(element.date)%>
     <%let hour = wholeISODate.getUTCHours();%>
-    <%console.log("UTCHours: "+hour)%>
-    <%hour = hour - (new Date().getTimezoneOffset()/60)%>
-    <%console.log('OffsetAmount: '+new Date().getTimezoneOffset())%>
-    <%console.log("TimeZone: "+Intl.DateTimeFormat().resolvedOptions().timeZone)%>
-    <%console.log("Minus Offset: "+hour)%>
-    <%if(hour<12 && hour>0){amPm="text-decoration:underline"}%>
-    <%console.log("Underlined?: "+amPm)%>
-    <%if(hour<1){hour += 12}else if(hour>12){hour -= 12}%>
-    <%console.log("Add/Remove12h: "+hour)%>
     <%let minute = wholeISODate.getUTCMinutes()%>
     <%if(minute<10){minute = '0'+minute}%>
     <div class="container itemRowContainer">
       <div class="row itemRow" value='<%=element._id%>' data-toggle="collapse" data-target="#id<%=element._id%>">
         <div class="col-9 itemTimeNameDiv">
-          <h2 class="itemTime" style=<%=amPm%>><%=hour%>:<%=minute%></h2>
+          <h2 class="itemTime"><%=hour%>:<%=minute%></h2>
           <h2 class="itemName"><%=element.item.name%></h2>
         </div>
         <div class="col-3 itemValueDiv">

@@ -29,7 +29,29 @@ $('#foodItemFilter').on('keyup', (doc)=>{
     }
 })
 
-console.log(new Date().getTimezoneOffset())
-console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
-
-//currentTarget.attributes[0].textContent
+//Adjust Diary Item Times Based On Timezone Offset
+$(function(){
+    $('.itemTime').text((i, oldTime)=>{
+        oldTime = oldTime.split(':');
+        let oldHour = oldTime[0];
+        const oldMinute = oldTime[1];
+        const timezoneOffset = (new Date().getTimezoneOffset()/60)
+        let newHour = 411
+        if (timezoneOffset>0){
+            console.log('subtracted timezone time')
+            newHour = oldHour - timezoneOffset;
+        }else if (timezoneOffset<0){
+            newHour = oldHour + timezoneOffset;
+            console.log('added timezone time')
+        }
+        if(newHour<0){
+            newHour+=12
+        }else if(newHour>12){
+            newHour-=12
+        }else if(newHour==0){
+            newHour=12
+        }
+        $('.itemTime').css("color", "#545454")
+        return (newHour+':'+oldMinute)
+    })
+})

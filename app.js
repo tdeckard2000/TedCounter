@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs'); //used for user authentication
+const session = require('express-session')
 
 require('dotenv').config();
 
@@ -10,6 +11,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(session({secret: 'DrPepper Cherries', cookie:{maxAge: 60000}, resave: false, saveUninitialized: false}))
 
 // Database ==========================================================
 mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -60,7 +62,7 @@ const itemDiarySchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   'name': String,
-  'email':String,
+  'email': String,
   'password': String
 })
 
@@ -231,6 +233,11 @@ const addNewItem = function(newItems){
 
 // Get Requests ==========================================================
 app.get('/', (req, res)=>{
+  if (req.session.data){
+    console.log(req.session.data)
+  }else{
+    req.session.data = 45
+  }
   res.render('index');
 });
 
@@ -250,7 +257,11 @@ app.get('/newitem', (req, res)=>{
 });
 
 // Post Requests ==========================================================
-app.post('/newitem', (req, res)=>{
+app.post('/signIn', (req, res)=>{
+
+})
+
+app.post('/newItem', (req, res)=>{
   for (const key in req.body) {//set zero default
     if(req.body[key] == ''){
       req.body[key]=0
@@ -265,8 +276,8 @@ app.post('/newitem', (req, res)=>{
 
 app.post('/addToDiary',(req, res)=>{
   let bodyData = (req.body.foodItem)
-  let jsonedData = JSON.parse(bodyData);
-  addToDiary('test@email.com', jsonedData).then(()=>{
+  let jsonData = JSON.parse(bodyData);
+  addToDiary('test@email.com', jsonData).then(()=>{
     res.redirect('/dashboard')
   })
 })

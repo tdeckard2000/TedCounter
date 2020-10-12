@@ -71,6 +71,29 @@ const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
 const user = mongoose.model('user', userSchema);
 
 // Functions ==========================================================
+
+const authenticateUser = function(email, password){
+  return new Promise((resolve, reject)=>{
+    user.find({'email': email}, (err, doc)=>{
+
+      if(doc.length > 0){
+        const userHash = doc[0].password;
+        bcrypt.compare(password, userHash, (err, result)=>{
+          if(result === true){
+            resolve([true, doc[0].name]);
+          }else{
+            console.warn('ERROR_TED: ' + err);
+            resolve([false]);
+          }
+       });
+      }else{
+        resolve([false]);
+      }
+    });
+  });
+}
+
+
 // Return All Food Items
 const findFoodItems = function(){
     return new Promise((resolve, reject)=>{
@@ -152,11 +175,11 @@ const addNewItem = function(newItems){
     });
   })};
 
-  const addNewUser = function(name, email, passwordHashed){
+  const addNewUser = function(name, email, pHashed){
     const newUser = new user({
       "name": name,
       "email": email,
-      "password": passwordHashed
+      "password": pHashed
     });
     newUser.save((err,doc)=>{
       if(err){
@@ -232,9 +255,11 @@ const addNewItem = function(newItems){
 
 
 // Get Requests ==========================================================
-app.get('/', (req, res)=>{
+app.get(['/','/oops'], (req, res)=>{
+  console.log(req.query)
   if (req.session.data){
     console.log(req.session.data)
+    req.session.data += 1
   }else{
     req.session.data = 45
   }
@@ -252,12 +277,24 @@ app.get('/dashboard', (req, res)=>{
   }).catch(()=>{console.warn("Error getting to Dashboard: ")})
 });
 
-app.get('/newitem', (req, res)=>{
-  res.render('newitem')
+app.get('/newItem', (req, res)=>{
+  res.render('newItem')
 });
 
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
+  const email = req.body.email
+  const password = req.body.password
+  authenticateUser(email, password).then((result)=>{
+    if(result[0] === false){
+      res.redirect('/oops')
+    }else if(result[0] === true){
+      const userName = result[1];
+      res.redirect('/dashboard')
+    }else{
+      console.warn('Error During Sign In')
+    }
+  })
 
 })
 
@@ -290,10 +327,9 @@ app.post('/dashboard/modifyDiary', (req, res)=>{
       res.redirect('/dashboard');
     })
   }else if(toRemove){
-    console.log("remove: " + toRemove)
     removeFromDiary(toRemove).then(()=>{
       res.redirect('/dashboard');
-    }).catch(()=>{console.log("error deleting item at POST")})
+    }).catch(()=>{console.warn("error deleting item at POST")})
   }
   res.redirect('/dashboard');
 })

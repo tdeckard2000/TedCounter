@@ -277,8 +277,8 @@ app.get('/dashboard', (req, res)=>{
   }).catch(()=>{console.warn("Error getting to Dashboard: ")})
 });
 
-app.get('/newItem', (req, res)=>{
-  res.render('newItem')
+app.get('/newitem', (req, res)=>{
+  res.render('newitem')
 });
 
 // Post Requests ==========================================================

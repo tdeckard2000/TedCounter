@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs'); //used for user authentication
 const session = require('express-session')
+const MongoStore = require ('connect-mongo')(session);
 
 require('dotenv').config();
 
@@ -11,12 +12,22 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(session({secret: 'DrPepper Cherries', cookie:{maxAge: 60000}, resave: false, saveUninitialized: false}))
+app.use(session({
+  cookie:{
+    maxAge: 60000,
+    path:'/'
+  },
+  resave: false,
+  saveUninitialized: false,
+  secret: 'DrPepper Cherries',
+  store: new MongoStore({mongooseConnection:mongoose.connection})
+}));
 
 // Database ==========================================================
 mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const foodItemSchema = new mongoose.Schema({
+  "userId": String,
   "name": String,
   "calories": Number,
   "sodium": Number,
@@ -37,8 +48,8 @@ const foodItemSchema = new mongoose.Schema({
 });
 
 const itemDiarySchema = new mongoose.Schema({
-  "date": Date,
   "userId": String,
+  "date": Date,
   "item":{
     "name": String,
     "calories": Number,
@@ -75,17 +86,20 @@ const user = mongoose.model('user', userSchema);
 const authenticateUser = function(email, password){
   return new Promise((resolve, reject)=>{
     user.find({'email': email}, (err, doc)=>{
-
       if(doc.length > 0){
         const userHash = doc[0].password;
         bcrypt.compare(password, userHash, (err, result)=>{
           if(result === true){
-            resolve([true, doc[0].name]);
-          }else{
+            resolve([true, doc[0].name, doc[0].id]);
+
+          }else if(err){
             console.warn('ERROR_TED: ' + err);
+            resolve([false]);
+          }else{
             resolve([false]);
           }
        });
+
       }else{
         resolve([false]);
       }
@@ -95,11 +109,11 @@ const authenticateUser = function(email, password){
 
 
 // Return All Food Items
-const findFoodItems = function(){
+const findFoodItems = function(userDocId){
     return new Promise((resolve, reject)=>{
-      foodItem.find({},(err, doc)=>{
+      foodItem.find({userId:userDocId},(err, doc)=>{
       if(err){
-        console.warn("ERROR at findFoodItems")
+        console.warn("ERROR at findFoodItems: " + err)
         reject(err);
       }else{
         resolve(doc);
@@ -108,9 +122,13 @@ const findFoodItems = function(){
   });
 }
 
-const findDiaryItems = function(user, day, orderedData){
+const findDiaryItems = function(userDocId, day, orderedData){
+  if(userDocId.length < 1){
+    console.warn("ERR: No User ID")
+    reject("User ID Error")
+  }
   return new Promise((resolve, reject)=>{
-    itemDiary.find({}, (err, doc)=>{
+    itemDiary.find({userId:userDocId}, (err, doc)=>{
       if(err){
         console.warn("ERROR at findDiaryItems")
       }else{
@@ -121,9 +139,13 @@ const findDiaryItems = function(user, day, orderedData){
 }
 
 //Order given array
-const orderObjects = function(unorderedObjects, fieldName){
-  fieldName = 'name'
+const orderObjects = function(unorderedObjects){
   let valueChanged = false;
+
+  if(unorderedObjects.length<0 || unorderedObjects == undefined){
+    return []
+  }
+
   while(valueChanged === false){
     valueChanged = true;
     for(let i=0; i<=unorderedObjects.length; i++){
@@ -131,8 +153,9 @@ const orderObjects = function(unorderedObjects, fieldName){
       if(unorderedObjects[i+1] == undefined){
         break
       }
-      let obj1 = unorderedObjects[i][fieldName];
+      let obj1 = unorderedObjects[i].name;
       let obj2 = unorderedObjects[i+1].name;
+
       if(obj1 > obj2){
         let item1 = unorderedObjects[i];
         let item2 = unorderedObjects[i+1];
@@ -141,12 +164,13 @@ const orderObjects = function(unorderedObjects, fieldName){
       }
     }
   } 
-  return unorderedObjects;
+  return unorderedObjects; //this is now ordered
 }
 
 //Save New Item to Database
-const addNewItem = function(newItems){
+const addNewItem = function(newItems, userDocId){
   const item = new foodItem({
+    "userId":userDocId,
     "name": newItems.itemName,
     "calories": newItems.calories,
     "sodium": newItems.sodium,
@@ -191,8 +215,8 @@ const addNewItem = function(newItems){
   const addToDiary = function(userId, itemInfo){
     return new Promise((resolve, reject)=>{
       const item = new itemDiary({
-        "date": new Date().toISOString(),
         "userId": userId,
+        "date": new Date().toISOString(),
         "item":{
           "name": itemInfo.name,
           "calories": itemInfo.calories,
@@ -256,25 +280,24 @@ const addNewItem = function(newItems){
 
 // Get Requests ==========================================================
 app.get(['/','/oops'], (req, res)=>{
-  console.log(req.query)
-  if (req.session.data){
-    console.log(req.session.data)
-    req.session.data += 1
+  if(req.originalUrl === '/oops'){
+    res.render('index', {failedLogin:true})
   }else{
-    req.session.data = 45
+    res.render('index', {failedLogin:false});
   }
-  res.render('index');
 });
 
 app.get('/dashboard', (req, res)=>{
-  findFoodItems()
-  .then((foodItemData)=>orderObjects(foodItemData, 'name'))
-  .then((orderedData)=>findDiaryItems("need user", "need day", orderedData))
+  const userDocId = req.session.userDocId
+  const userName = req.session.userName
+  findFoodItems(req.session.userDocId)
+  .then((foodItemData)=>orderObjects(foodItemData))
+  .then((orderedData)=>findDiaryItems(userDocId, "need day", orderedData))
   .then((bothResults)=>{
     const foodDiary = bothResults[0];
     const foodItemList = bothResults[1];
     res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
-  }).catch(()=>{console.warn("Error getting to Dashboard: ")})
+  }).catch((err)=>{console.warn("Error getting to Dashboard: " + err.message)})
 });
 
 app.get('/newitem', (req, res)=>{
@@ -283,13 +306,16 @@ app.get('/newitem', (req, res)=>{
 
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
+  req.session.data = null //remove old session data
   const email = req.body.email
   const password = req.body.password
+
   authenticateUser(email, password).then((result)=>{
     if(result[0] === false){
       res.redirect('/oops')
     }else if(result[0] === true){
-      const userName = result[1];
+      req.session.userName = result[1];
+      req.session.userDocId = result[2];
       res.redirect('/dashboard')
     }else{
       console.warn('Error During Sign In')
@@ -304,9 +330,8 @@ app.post('/newItem', (req, res)=>{
       req.body[key]=0
     }
   }
-  addNewItem(
-    req.body
-    ).then(function(){
+  addNewItem(req.body, req.session.userDocId)
+  .then(function(){
       res.redirect('/dashboard');  
     });
 });
@@ -314,7 +339,7 @@ app.post('/newItem', (req, res)=>{
 app.post('/addToDiary',(req, res)=>{
   let bodyData = (req.body.foodItem)
   let jsonData = JSON.parse(bodyData);
-  addToDiary('test@email.com', jsonData).then(()=>{
+  addToDiary(req.session.userDocId, jsonData).then(()=>{
     res.redirect('/dashboard')
   })
 })

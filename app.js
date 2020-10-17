@@ -282,9 +282,9 @@ const addNewItem = function(newItems, userDocId){
 // Get Requests ==========================================================
 app.get(['/','/oops'], (req, res)=>{
   if(req.originalUrl === '/oops'){
-    res.render('index', {failedLogin:1})
+    res.render('index', {failedLogin: "showToast"})
   }else{
-    res.render('index', {failedLogin:0});
+    res.render('index', {failedLogin:"hideToast"});
   }
 });
 

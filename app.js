@@ -301,7 +301,7 @@ app.get('/dashboard', (req, res)=>{
     .then((bothResults)=>{
       const foodDiary = bothResults[0];
       const foodItemList = bothResults[1];
-      res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
+      res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary, userName:userName});
     }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})
   }
 });

@@ -59,26 +59,29 @@
 
 <!-- Main Form -->
 <form class="form-signIn text-center" action="./signIn" method="POST">
-    <img class="mb-4" src="./files/smileyFaceWhiteV2.svg" alt="" width="72" height="72">
-    <h1 class="h3 signInText mb-3 font-weight-normal">Welcome Back</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <button class="btn btn-lg btn-info btn-block" id="button-signIn" type="submit">Sign In</button>
-    <!-- Triggers Modal -->
-    <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#signupModal" id="button-signUp" type="submit">Sign Up</button>
-    <a class="forgotLink" href="/">Forgot Password?</a>
-    <p class="mt-5 mb-3"><a class="copyYear">&copy; 2017-2020</a></p>
-  </form>
+  <img class="mb-4" src="./files/smileyFaceWhiteV2.svg" alt="" width="72" height="72">
+  <h1 class="h3 signInText mb-3 font-weight-normal">Welcome Back</h1>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <button class="btn btn-lg btn-info btn-block" id="button-signIn" type="submit">Sign In</button>
+</form>
 
-  <!-- Forgot Password Toast -->
-  <div class="toast <%=failedLogin%>" id="signInErrorToast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-body ">
-      <strong style="font-style: bold;">Uh oh. There was an error signing in.</strong><br>
-      Tap 'Forgot Password' above to reset your password or 'Sign Up' to create a free account. <%=failedLogin%>
-    </div>
+<!-- Triggers Modal -->
+<div class="signUp forgotPassword">
+  <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#signupModal" id="button-signUp" type="">Sign Up</button>
+  <a class="forgotLink" href="/">Forgot Password?</a>
+  <p class="mt-5 mb-3"><a class="copyYear">&copy; 2017-2020</a></p>  
+</div>
+
+<!-- Forgot Password Toast -->
+<div class="toast <%=failedLogin%>" id="signInErrorToast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-body ">
+    <strong style="font-style: bold;">Uh oh. There was an error signing in.</strong><br>
+    Tap 'Forgot Password' above to reset your password or 'Sign Up' to create a free account. <%=failedLogin%>
   </div>
+</div>
 
 <%-include('footer');-%>
 </body>

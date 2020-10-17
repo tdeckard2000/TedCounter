@@ -64,6 +64,12 @@
     opacity: 1;
 }
 
+.signUp.forgotPassword{
+    margin: auto;
+    text-align: center;
+    width: 60%;
+}
+
 .forgotLink{
     color: #000000;
     display: block;

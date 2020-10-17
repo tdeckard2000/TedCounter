@@ -6,6 +6,21 @@
 }
 
 /* Index Page - Sign In ========================================== */
+#button-signUp{
+    border-radius: .3rem;
+    font-size: 1rem;
+    height: 40px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+#button-signIn{
+    border-radius:.3rem;
+    font-size: 1rem;
+    height: 40px;
+    padding: 0;
+}
+
 .copyYear{
     bottom: 0;
     color: #3a3a3a;
@@ -38,16 +53,18 @@
     color: white;
 }
 
-.signupLink{
-    color: #FFFFFF;
-    display: block;
-    margin: 18px 0 0 0;
-    font-size: .95rem;
+#signInErrorToast{
+    margin: auto;
+    opacity: 1;
+    position: relative;
+    text-align: center;
 }
 
 .forgotLink{
     color: #000000;
+    display: block;
     font-size: .77rem;
+    padding-top: 20px;
 }
 
 #inputEmail{
@@ -55,7 +72,7 @@
 }
 
 #inputPassword{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-radius: 0 0 .25rem .25rem;
 }
 

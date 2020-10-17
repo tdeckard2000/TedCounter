@@ -86,7 +86,7 @@ const user = mongoose.model('user', userSchema);
 const authenticateUser = function(email, password){
   return new Promise((resolve, reject)=>{
     user.find({'email': email}, (err, doc)=>{
-      if(doc.length > 0){
+      if(doc.length > 0 && doc.length != undefined){
         const userHash = doc[0].password;
         bcrypt.compare(password, userHash, (err, result)=>{
           if(result === true){
@@ -123,9 +123,10 @@ const findFoodItems = function(userDocId){
 }
 
 const findDiaryItems = function(userDocId, day, orderedData){
-  if(userDocId.length < 1){
+  if(userDocId == undefined){
     console.warn("ERR: No User ID")
-    reject("User ID Error")
+    let doc = {};
+    return(false);
   }
   return new Promise((resolve, reject)=>{
     itemDiary.find({userId:userDocId}, (err, doc)=>{
@@ -252,7 +253,7 @@ const addNewItem = function(newItems, userDocId){
     let parsedItem = JSON.parse(itemString);
     return new Promise((resolve, reject)=>{
       addToDiary(parsedItem.userId, parsedItem.item).then(()=>{
-        resolve
+        resolve();
       })
     })
   }
@@ -263,7 +264,7 @@ const addNewItem = function(newItems, userDocId){
        if(err){
         reject("error removing item from diary: "+err);
        }else()=>{
-         resolve
+         resolve();
        }
      })
    })
@@ -281,27 +282,36 @@ const addNewItem = function(newItems, userDocId){
 // Get Requests ==========================================================
 app.get(['/','/oops'], (req, res)=>{
   if(req.originalUrl === '/oops'){
-    res.render('index', {failedLogin:true})
+    res.render('index', {failedLogin:1})
   }else{
-    res.render('index', {failedLogin:false});
+    res.render('index', {failedLogin:0});
   }
 });
 
 app.get('/dashboard', (req, res)=>{
   const userDocId = req.session.userDocId
   const userName = req.session.userName
-  findFoodItems(req.session.userDocId)
-  .then((foodItemData)=>orderObjects(foodItemData))
-  .then((orderedData)=>findDiaryItems(userDocId, "need day", orderedData))
-  .then((bothResults)=>{
-    const foodDiary = bothResults[0];
-    const foodItemList = bothResults[1];
-    res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
-  }).catch((err)=>{console.warn("Error getting to Dashboard: " + err.message)})
+
+  if(!req.session.userDocId){
+    res.redirect('/');
+  }else{
+    findFoodItems(req.session.userDocId)
+    .then((foodItemData)=>orderObjects(foodItemData))
+    .then((orderedData)=>findDiaryItems(userDocId, "need day", orderedData))
+    .then((bothResults)=>{
+      const foodDiary = bothResults[0];
+      const foodItemList = bothResults[1];
+      res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary});
+    }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})
+  }
 });
 
 app.get('/newitem', (req, res)=>{
-  res.render('newitem')
+  if(!req.session.userDocId){
+    res.redirect('/');
+  }else{
+    res.render('newitem')
+  }
 });
 
 // Post Requests ==========================================================
@@ -325,38 +335,50 @@ app.post('/signIn', (req, res)=>{
 })
 
 app.post('/newItem', (req, res)=>{
-  for (const key in req.body) {//set zero default
-    if(req.body[key] == ''){
-      req.body[key]=0
+  if(!req.session.userDocId){
+    res.redirect('/');
+  }else{
+    for (const key in req.body) {//set zero default
+      if(req.body[key] == ''){
+        req.body[key]=0
+      }
     }
+    addNewItem(req.body, req.session.userDocId)
+    .then(function(){
+        res.redirect('/dashboard');  
+      });
   }
-  addNewItem(req.body, req.session.userDocId)
-  .then(function(){
-      res.redirect('/dashboard');  
-    });
 });
 
 app.post('/addToDiary',(req, res)=>{
-  let bodyData = (req.body.foodItem)
-  let jsonData = JSON.parse(bodyData);
-  addToDiary(req.session.userDocId, jsonData).then(()=>{
-    res.redirect('/dashboard')
-  })
+  if(!req.session.userDocId){
+    res.redirect('/');
+  }else{
+    let bodyData = (req.body.foodItem)
+    let jsonData = JSON.parse(bodyData);
+    addToDiary(req.session.userDocId, jsonData).then(()=>{
+      res.redirect('/dashboard')
+    })
+  }
 })
 
 app.post('/dashboard/modifyDiary', (req, res)=>{
-  let toDuplicate = (req.body.duplicateItem);
-  let toRemove = (req.body.removeItem);
-  if(toDuplicate){
-    duplicateDiaryItem(toDuplicate).then(()=>{
-      res.redirect('/dashboard');
-    })
-  }else if(toRemove){
-    removeFromDiary(toRemove).then(()=>{
-      res.redirect('/dashboard');
-    }).catch(()=>{console.warn("error deleting item at POST")})
+  if(!req.session.userDocId){
+    res.redirect('/');
+  }else{
+    let toDuplicate = (req.body.duplicateItem);
+    let toRemove = (req.body.removeItem);
+    if(toDuplicate){
+      duplicateDiaryItem(toDuplicate).then(()=>{
+        res.redirect('/dashboard');
+      })
+    }else if(toRemove){
+      removeFromDiary(toRemove).then(()=>{
+        res.redirect('/dashboard');
+      }).catch(()=>{console.warn("error deleting item at POST")})
+    }
+    res.redirect('/dashboard');
   }
-  res.redirect('/dashboard');
 })
 
 app.post('/newUser', (req, res)=>{

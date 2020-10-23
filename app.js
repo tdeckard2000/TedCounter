@@ -404,20 +404,3 @@ if (port == null || port == "") {
   app.listen(port);
   console.warn('Listening on Port 5000') 
 }
-
-
-//Getting the date to string:
-// > myday = new Date();
-// 2020-06-10T03:03:41.952Z
-// > myday = myday.toString()
-// 'Tue Jun 09 2020 21:03:41 GMT-0600 (Mountain Daylight Time)'
-// > myday = new Date();
-// 2020-06-10T03:04:21.850Z
-// > myday = myday.toISOString()
-// '2020-06-10T03:04:21.850Z'
-// > typeof(myday)
-// 'string'
-// >
-
-
-//tests only

@@ -40,7 +40,7 @@
     background-color: #5f65d8;
 }
 
-.navbarTitle img{
+.navbarTitle object{
     position: absolute;
     height: 52px;
     top: 2px;

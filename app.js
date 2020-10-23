@@ -14,11 +14,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(session({
   cookie:{
-    maxAge: 10000,
+    maxAge: 86400000, //24 hours
     path:'/'
   },
   resave: false,
-  rolling: true,
+  rolling: true, //renew session unless idle
   saveUninitialized: false,
   secret: 'DrPepper Cherries',
   store: new MongoStore({mongooseConnection:mongoose.connection})

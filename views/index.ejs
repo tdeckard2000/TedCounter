@@ -17,10 +17,7 @@
         <a class="nav-link" href="/" tabindex="2">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="3">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="4" >About</a>
+        <a class="nav-link" href="#" tabindex="3">Why TedCounter?</a>
       </li>
     </ul>
 
@@ -76,10 +73,18 @@
 </div>
 
 <!-- Forgot Password Toast -->
-<div class="toast <%=failedLogin%>" id="signInErrorToast" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast <%=toastAction%>" id="signInErrorToast" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-body ">
     <strong style="font-style: bold;">Uh oh. There was an error signing in.</strong><br>
     Tap 'Forgot Password' above to reset your password or 'Sign Up' to create a free account.
+  </div>
+</div>
+
+<!-- New Account Toast -->
+<div class="toast <%=toastAction%>" id="newAccountToast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-body ">
+    <strong style="font-style: bold;">Success! Your account has been created.</strong><br>
+    You can use your email address or username to sign-in above.
   </div>
 </div>
 

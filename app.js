@@ -281,11 +281,13 @@ const addNewItem = function(newItems, userDocId){
 
 
 // Get Requests ==========================================================
-app.get(['/','/oops'], (req, res)=>{
+app.get(['/','/oops', '/accountCreated'], (req, res)=>{
   if(req.originalUrl === '/oops'){
-    res.render('index', {failedLogin: "showToast"})
+    res.render('index', {toastAction: "showFailedToast"})
+  }else if(req.originalUrl === '/accountCreated'){
+    res.render('index', {toastAction:"showAccountCreatedToast"});
   }else{
-    res.render('index', {failedLogin:"hideToast"});
+    res.render('index', {toastAction:"hideToast"});
   }
 });
 
@@ -391,7 +393,7 @@ app.post('/newUser', (req, res)=>{
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
   addNewUser(name, newEmail, hashedPassword);
-  res.redirect('/')
+  res.redirect('/accountCreated')
 });
 
 

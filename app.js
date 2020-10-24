@@ -94,13 +94,16 @@ const authenticateUser = function(email, password){
             resolve([true, doc[0].name, doc[0].id]);
 
           }else if(err){
-            console.warn('ERROR_TED: ' + err);
+            console.warn('ERROR_TED0: ' + err);
             resolve([false]);
           }else{
             resolve([false]);
           }
        });
 
+      }else if(err){
+        console.warn('ERROR_TED1: ' + err);
+        resolve([false]);
       }else{
         resolve([false]);
       }
@@ -282,6 +285,7 @@ const addNewItem = function(newItems, userDocId){
 
 // Get Requests ==========================================================
 app.get(['/','/oops', '/accountCreated'], (req, res)=>{
+  console.log(req.body.timezoneOffset)
   if(req.originalUrl === '/oops'){
     res.render('index', {toastAction: "showFailedToast"})
   }else if(req.originalUrl === '/accountCreated'){
@@ -294,6 +298,7 @@ app.get(['/','/oops', '/accountCreated'], (req, res)=>{
 app.get('/dashboard', (req, res)=>{
   const userDocId = req.session.userDocId
   const userName = req.session.userName
+  console.log(req.session)
 
   if(!req.session.userDocId){
     res.redirect('/');
@@ -325,8 +330,10 @@ app.post('/signIn', (req, res)=>{
 
   authenticateUser(email, password).then((result)=>{
     if(result[0] === false){
+      //username or password didn't match
       res.redirect('/oops')
     }else if(result[0] === true){
+      //successful sign-in
       req.session.userName = result[1];
       req.session.userDocId = result[2];
       res.redirect('/dashboard')
@@ -336,6 +343,14 @@ app.post('/signIn', (req, res)=>{
   })
 
 })
+
+app.post('/', (req, res)=>{
+  const timezoneOffset = req.body.timezoneOffset;
+  console.log(timezoneOffset)
+  req.session.timezoneOffset = timezoneOffset;
+  console.log(req.session);
+  res.send();
+});
 
 app.post('/newItem', (req, res)=>{
   if(!req.session.userDocId){

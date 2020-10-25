@@ -140,6 +140,10 @@ const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObject
   endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
   console.log('Start of day: ' + startOfDay);
   console.log('End of day: ' + endOfDay);
+  startOfDay = (moment(startOfDay).add(timezoneOffset, 'hours')).toISOString();
+  endOfDay = (moment(endOfDay).add(timezoneOffset, 'hours')).toISOString();
+  console.log('Start of day: ' + startOfDay);
+  console.log('End of day: ' + endOfDay);
 
   if(userDocId == undefined){
     console.warn("ERR: No User ID")

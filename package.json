@@ -26,6 +26,7 @@
     "express-session": "^1.17.1",
     "express-sessions": "^1.0.6",
     "jquery": "^3.5.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.9"
   }
 }

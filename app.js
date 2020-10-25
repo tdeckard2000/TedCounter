@@ -285,7 +285,6 @@ const addNewItem = function(newItems, userDocId){
 
 // Get Requests ==========================================================
 app.get(['/','/oops', '/accountCreated'], (req, res)=>{
-  console.log(req.body.timezoneOffset)
   if(req.originalUrl === '/oops'){
     res.render('index', {toastAction: "showFailedToast"})
   }else if(req.originalUrl === '/accountCreated'){
@@ -346,9 +345,7 @@ app.post('/signIn', (req, res)=>{
 
 app.post('/', (req, res)=>{
   const timezoneOffset = req.body.timezoneOffset;
-  console.log(timezoneOffset)
   req.session.timezoneOffset = timezoneOffset;
-  console.log(req.session);
   res.send();
 });
 

@@ -1,12 +1,13 @@
 $(document).ready(()=>{
-    console.log('here')
+    const offsetHours = (new Date().getTimezoneOffset())/60
+    console.log(offsetHours)
     $.ajax({
         contentType: "application/json",
         dataType:"json",
         method: "POST",
         url:'/',
         data: JSON.stringify({
-            timezoneOffset:'thisIsATest'
+            timezoneOffset: offsetHours
             })
         })
 })

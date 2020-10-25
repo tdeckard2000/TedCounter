@@ -153,8 +153,7 @@ const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObject
   return new Promise((resolve, reject)=>{
     itemDiary.find({ //find diary items within date range for usrId
       userId:userDocId, 
-      date:{$gte:startOfDay}, 
-      date:{$lte:endOfDay}
+      date:{$gte:startOfDay, $lte:endOfDay}
     }, (err, doc)=>{
       if(err){
         console.warn("ERROR at findDiaryItems")

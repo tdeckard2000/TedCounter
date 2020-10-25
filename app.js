@@ -136,9 +136,11 @@ const findFoodItems = function(userDocId){
 // Return usr diary items based on day
 const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
   usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone
-  startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
-  endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
+  startOfDay = (moment(usrDayAdj).startOf('day')); //get beginning of day
+  endOfDay = (moment(usrDayAdj).endOf('day')); //get end of day
   console.log('Start of day: ' + startOfDay);
+  console.log('End of day: ' + endOfDay);
+
   if(userDocId == undefined){
     console.warn("ERR: No User ID")
     return(false);

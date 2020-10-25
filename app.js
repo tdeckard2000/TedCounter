@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs'); //used for user authentication
 const session = require('express-session')
 const MongoStore = require ('connect-mongo')(session);
+const moment = require('moment');
 
 require('dotenv').config();
 
@@ -23,6 +24,7 @@ app.use(session({
   secret: 'DrPepper Cherries',
   store: new MongoStore({mongooseConnection:mongoose.connection})
 }));
+moment().format();
 
 // Database ==========================================================
 mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -84,6 +86,11 @@ const user = mongoose.model('user', userSchema);
 
 // Functions ==========================================================
 
+const adjustTime = function(startDate, subtractHours){
+  let adjustedTime = moment.utc(startDate).subtract(subtractHours,'hour');
+  return(adjustedTime.toISOString());
+}
+
 const authenticateUser = function(email, password){
   return new Promise((resolve, reject)=>{
     user.find({'email': email}, (err, doc)=>{
@@ -112,7 +119,7 @@ const authenticateUser = function(email, password){
 }
 
 
-// Return All Food Items
+// Return All User Food Items
 const findFoodItems = function(userDocId){
     return new Promise((resolve, reject)=>{
       foodItem.find({userId:userDocId},(err, doc)=>{
@@ -126,18 +133,26 @@ const findFoodItems = function(userDocId){
   });
 }
 
-const findDiaryItems = function(userDocId, day, orderedData){
+// Return usr diary items based on day
+const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
+  usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone
+  startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
+  endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
+
   if(userDocId == undefined){
     console.warn("ERR: No User ID")
-    let doc = {};
     return(false);
   }
   return new Promise((resolve, reject)=>{
-    itemDiary.find({userId:userDocId}, (err, doc)=>{
+    itemDiary.find({ //find diary items within date range for usrId
+      userId:userDocId, 
+      date:{$gte:startOfDay}, 
+      date:{$lte:endOfDay}
+    }, (err, doc)=>{
       if(err){
         console.warn("ERROR at findDiaryItems")
       }else{
-        resolve([doc, orderedData]);
+        resolve([doc, orderedObjects]);
       }
     })
   })
@@ -295,19 +310,21 @@ app.get(['/','/oops', '/accountCreated'], (req, res)=>{
 });
 
 app.get('/dashboard', (req, res)=>{
-  const userDocId = req.session.userDocId
-  const userName = req.session.userName
-  console.log(req.session)
+  const userDocId = req.session.userDocId;
+  const userName = req.session.userName;
+  const timezoneOffset = req.session.timezoneOffset;
+  const usrDay = new Date().toISOString(); //using today's day for now
 
   if(!req.session.userDocId){
     res.redirect('/');
   }else{
-    findFoodItems(req.session.userDocId)
+    findFoodItems(userDocId)
     .then((foodItemData)=>orderObjects(foodItemData))
-    .then((orderedData)=>findDiaryItems(userDocId, "need day", orderedData))
+    .then((orderedObjects)=>findDiaryItems(userDocId, usrDay, timezoneOffset, orderedObjects))
     .then((bothResults)=>{
       const foodDiary = bothResults[0];
       const foodItemList = bothResults[1];
+      console.log(foodDiary);
       res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary, userName:userName});
     }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})
   }

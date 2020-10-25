@@ -138,7 +138,7 @@ const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObject
   usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone
   startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
   endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
-
+  console.log('Start of day: ' + startOfDay);
   if(userDocId == undefined){
     console.warn("ERR: No User ID")
     return(false);
@@ -324,7 +324,6 @@ app.get('/dashboard', (req, res)=>{
     .then((bothResults)=>{
       const foodDiary = bothResults[0];
       const foodItemList = bothResults[1];
-      console.log(foodDiary);
       res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary, userName:userName});
     }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})
   }

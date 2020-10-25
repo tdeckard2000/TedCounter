@@ -135,11 +135,12 @@ const findFoodItems = function(userDocId){
 
 // Return usr diary items based on day
 const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
-  usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone
+  usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
   startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
   endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
   console.log('Start of day: ' + startOfDay);
   console.log('End of day: ' + endOfDay);
+  //add timezone offset to start and end of day, since DB times are UTC.
   startOfDay = (moment(startOfDay).add(timezoneOffset, 'hours')).toISOString();
   endOfDay = (moment(endOfDay).add(timezoneOffset, 'hours')).toISOString();
   console.log('Start of day: ' + startOfDay);

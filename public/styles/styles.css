@@ -284,6 +284,37 @@ button.close{
     text-align: center;
 }
 
+/* Quick Add Form ========================================== */
+.newItemDiv{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.newItemDiv .topFour{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    outline-color: #ff9c3e;
+}
+
+.newItemInput1{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    outline-color: #ff9c3e;
+}
+
+.newItemDiv input{
+    border-color: #5f65d8;
+    border-width: 1px;
+    margin: 3px 3px 0 0;
+    outline-color: #5f65d8;
+    width: 48%;
+}
+
+.moreOptionsButton{
+    margin: 7px 0 0 0;
+    font-size: .7rem;
+}
+
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
     background-color: #5f65d8;

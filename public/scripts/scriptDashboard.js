@@ -58,3 +58,12 @@ $(function(){
         return (newHour+':'+oldMinute)
     })
 })
+
+//Tapping More Options changes text to fewer options
+$(".moreOptionsButton").on("click",()=>{
+    if($(".moreOptionsButton").text() == "more options"){
+        $(".moreOptionsButton").text("fewer options")
+    }else{
+        $(".moreOptionsButton").text("more options")
+    }
+});

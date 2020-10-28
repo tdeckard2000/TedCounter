@@ -138,13 +138,9 @@ const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObject
   usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
   startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
   endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
-  console.log('Start of day: ' + startOfDay);
-  console.log('End of day: ' + endOfDay);
   //add timezone offset to start and end of day, since DB times are UTC.
   startOfDay = (moment(startOfDay).add(timezoneOffset, 'hours')).toISOString();
   endOfDay = (moment(endOfDay).add(timezoneOffset, 'hours')).toISOString();
-  console.log('Start of day: ' + startOfDay);
-  console.log('End of day: ' + endOfDay);
 
   if(userDocId == undefined){
     console.warn("ERR: No User ID")
@@ -428,6 +424,18 @@ app.post('/newUser', (req, res)=>{
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
   addNewUser(name, newEmail, hashedPassword);
   res.redirect('/accountCreated')
+});
+
+app.post('/quickAdd', (req, res)=>{
+  if(!req.session.userDocId){
+    res.redirect('/');
+  }else{
+    let bodyData = (req.body)
+    bodyData.name = '✓'
+    addToDiary(req.session.userDocId, bodyData).then(()=>{
+      res.redirect('/dashboard')
+    })
+  }
 });
 
 

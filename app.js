@@ -118,6 +118,28 @@ const authenticateUser = function(email, password){
   });
 }
 
+// Calculate nutrition totals
+const calculateNutritionTotals = function(foodDiary){
+  let cal = 0;
+  let sdm = 0;
+  let pro = 0;
+  let crb = 0;
+
+  foodDiary.forEach(element => {
+    cal += (element.item.calories);
+    sdm += (element.item.sodium);
+    pro += (element.item.protein);
+    crb += (element.item.carbs);
+  });
+
+  const totals = {
+    "cal":cal,
+    "sdm":sdm,
+    "pro":pro,
+    "crb":crb
+  }
+  return totals
+}
 
 // Return All User Food Items
 const findFoodItems = function(userDocId){
@@ -326,7 +348,8 @@ app.get('/dashboard', (req, res)=>{
     .then((bothResults)=>{
       const foodDiary = bothResults[0];
       const foodItemList = bothResults[1];
-      res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary, userName:userName});
+      let nutritionTotals = calculateNutritionTotals(foodDiary);
+      res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary, userName:userName, nutritionTotals: nutritionTotals});
     }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})
   }
 });

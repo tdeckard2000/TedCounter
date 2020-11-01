@@ -68,33 +68,34 @@ $(".moreOptionsButton").on("click",()=>{
     }
 });
 
+//Below has been replaced with server-side code
 //Calculate total of selected nutrition info
-const getTotal = function(tableRowPosition, tableColumnPosition){
-    numDiaryItems = $('.itemDropdownTable').length;
-    let totalValue = 0;
-    //loop through each diary item
-    for(i=0; i<numDiaryItems; i++){
-        //get specific diary item nutrition info based on position in table
-        itemNutritionInfo = $('.itemDropdownTable')[i].rows[tableRowPosition].cells[tableColumnPosition].innerHTML;
-        //get number from item string "cal:120" --> int 120
-        itemNutritionInfoValue = parseInt(itemNutritionInfo.split(': ')[1]);
-        //filter out empty values and add remaining numbers to total
-        if(itemNutritionInfoValue > 0){
-            totalValue+=itemNutritionInfoValue;
-        }
-    }
-    return totalValue;
-}
+// const getTotal = function(tableRowPosition, tableColumnPosition){
+//     numDiaryItems = $('.itemDropdownTable').length;
+//     let totalValue = 0;
+//     //loop through each diary item
+//     for(i=0; i<numDiaryItems; i++){
+//         //get specific diary item nutrition info based on position in table
+//         itemNutritionInfo = $('.itemDropdownTable')[i].rows[tableRowPosition].cells[tableColumnPosition].innerHTML;
+//         //get number from item string "cal:120" --> int 120
+//         itemNutritionInfoValue = parseInt(itemNutritionInfo.split(': ')[1]);
+//         //filter out empty values and add remaining numbers to total
+//         if(itemNutritionInfoValue > 0){
+//             totalValue+=itemNutritionInfoValue;
+//         }
+//     }
+//     return totalValue;
+// }
 
-//Update header counts with calculated total
-$(document).ready(()=>{
-    let totalCal = getTotal(0, 0);
-    let totalSdm = getTotal(0, 1);
-    let totalPro = getTotal(0,2);
-    let totalCrb = getTotal(0,3);
-    console.log(totalCal)
-    $('.topTotalCount')[0].innerHTML = totalCal;
-    $('.topTotalCount')[1].innerHTML = totalSdm;
-    $('.topTotalCount')[2].innerHTML = totalPro;
-    $('.topTotalCount')[3].innerHTML = totalCrb;
-})
+// //Update header counts with calculated total
+// $(document).ready(()=>{
+//     let totalCal = getTotal(0, 0);
+//     let totalSdm = getTotal(0, 1);
+//     let totalPro = getTotal(0,2);
+//     let totalCrb = getTotal(0,3);
+//     console.log(totalCal)
+//     $('.topTotalCount')[0].innerHTML = totalCal;
+//     $('.topTotalCount')[1].innerHTML = totalSdm;
+//     $('.topTotalCount')[2].innerHTML = totalPro;
+//     $('.topTotalCount')[3].innerHTML = totalCrb;
+// })

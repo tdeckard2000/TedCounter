@@ -173,9 +173,20 @@ const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObject
       userId:userDocId, 
       date:{$gte:startOfDay, $lte:endOfDay}
     }, (err, doc)=>{
+      
       if(err){
         console.warn("ERROR at findDiaryItems")
       }else{
+        doc.forEach(element => {
+          let utcDate = element.date;
+          //convert UTC date to user's local date
+          let timezoneAdjustedDate = (moment(utcDate).subtract(timezoneOffset, 'hours')).toISOString();
+          //convert military time to 12 hour time
+          let twelveHourDate = moment(timezoneAdjustedDate).format('YYYY-MM-DDThh:mm:ss.SSS')
+          //update JSON object with converted date
+          element.date = twelveHourDate;
+        });
+        //return all diary items with adjusted date
         resolve([doc, orderedObjects]);
       }
     })

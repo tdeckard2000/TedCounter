@@ -30,34 +30,6 @@ $('#foodItemFilter').on('keyup', (doc)=>{
     }
 })
 
-//Adjust Diary Item Times Based On Timezone Offset **This is being handled differently now.**
-$(function(){
-    $('.itemTime').text((i, oldTime)=>{
-        oldTime = oldTime.split(':');
-        let oldHour = oldTime[0];
-        const oldMinute = oldTime[1];
-        const timezoneOffset = (new Date().getTimezoneOffset()/60);
-        let newHour = 'err1';
-        if (timezoneOffset>0){
-            newHour = oldHour - timezoneOffset;
-        }else if (timezoneOffset<0){
-            newHour = oldHour + timezoneOffset;
-        }
-        if(newHour<0 && newHour!==-12){
-            newHour+=12;
-            console.log('added')
-        }else if(newHour>12){
-            newHour-=12;
-
-        }else if(newHour==0){
-            newHour=12;
-        }else{
-            $('.itemTime.'+i).css("text-decoration", "underline")
-        }
-        $('.itemTime').css("color", "#545454")
-        return (newHour+':'+oldMinute)
-    })
-})
 
 //Tapping 'more options' changes text to 'fewer options'
 $(".moreOptionsButton").on("click",()=>{
@@ -87,6 +59,7 @@ $(".moreOptionsButton").on("click",()=>{
 //     return totalValue;
 // }
 
+//Below has been replaced with server-side code
 // //Update header counts with calculated total
 // $(document).ready(()=>{
 //     let totalCal = getTotal(0, 0);
@@ -98,4 +71,34 @@ $(".moreOptionsButton").on("click",()=>{
 //     $('.topTotalCount')[1].innerHTML = totalSdm;
 //     $('.topTotalCount')[2].innerHTML = totalPro;
 //     $('.topTotalCount')[3].innerHTML = totalCrb;
+// })
+
+//Below has been replaced with server-side code
+// //Adjust Diary Item Times Based On Timezone Offset **This is being handled differently now.**
+// $(function(){
+//     $('.itemTime').text((i, oldTime)=>{
+//         oldTime = oldTime.split(':');
+//         let oldHour = oldTime[0];
+//         const oldMinute = oldTime[1];
+//         const timezoneOffset = (new Date().getTimezoneOffset()/60);
+//         let newHour = 'err1';
+//         if (timezoneOffset>0){
+//             newHour = oldHour - timezoneOffset;
+//         }else if (timezoneOffset<0){
+//             newHour = oldHour + timezoneOffset;
+//         }
+//         if(newHour<0 && newHour!==-12){
+//             newHour+=12;
+//             console.log('added')
+//         }else if(newHour>12){
+//             newHour-=12;
+
+//         }else if(newHour==0){
+//             newHour=12;
+//         }else{
+//             $('.itemTime.'+i).css("text-decoration", "underline")
+//         }
+//         $('.itemTime').css("color", "#545454")
+//         return (newHour+':'+oldMinute)
+//     })
 // })

@@ -14,6 +14,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 //settings for express-session module
 app.use(session({
   cookie:{
@@ -26,6 +27,7 @@ app.use(session({
   secret: 'DrPepper Cherries',
   store: new MongoStore({mongooseConnection:mongoose.connection})
 }));
+
 //settings for moment module
 moment().format();
 
@@ -95,6 +97,7 @@ const adjustTime = function(startDate, subtractHours){
 }
 
 const authenticateUser = function(email, password){
+  let email = email.toLowerCase();
   return new Promise((resolve, reject)=>{
     user.find({'email': email}, (err, doc)=>{
       if(doc.length > 0 && doc.length != undefined){
@@ -258,6 +261,7 @@ const addNewItem = function(newItems, userDocId){
   })};
 
   const addNewUser = function(name, email, pHashed){
+    let email = email.toLowerCase();
     const newUser = new user({
       "name": name,
       "email": email,
@@ -306,9 +310,10 @@ const addNewItem = function(newItems, userDocId){
     })
   }
 
-const checkForExistingUser = function(emailAddress){
+const checkForExistingUser = function(email){
+  let email = email.toLowerCase();
   return new Promise((resolve, reject)=>{
-    user.find({email:emailAddress}, (err, result)=>{
+    user.find({email:email}, (err, result)=>{
       console.log(result);
       if(result.length){
         resolve(true)
@@ -512,18 +517,18 @@ app.post('/quickAdd', (req, res)=>{
 });
 
 app.post('/passwordRecovery', (req, res)=>{
-  emailAddress = req.body.email;
+  let emailAddress = req.body.email;
+  emailAddress = emailAddress.toLowerCase();
+
   checkForExistingUser(emailAddress).then((result)=>{
     if(result === true){
       console.log('true')
-      // sendPassResetEmail(emailAddress);
+      sendPassResetEmail(emailAddress);
       res.status(200).send({message: true})
     }else{
       res.status(200).send({message: false});
     }
   })
-  console.log(emailAddress)
-  
 })
 
 // Server ==========================================================

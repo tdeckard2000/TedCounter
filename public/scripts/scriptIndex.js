@@ -30,7 +30,7 @@ $('#forgotPasswordForm').on("submit",(event)=>{
         let countdown = 30 //for tracking remaining time
         let myTimer = setInterval(()=>{ //set a 1 second timer (it will repeat)
             countdown --
-            $('.countDown').text("You can send again in " + countdown + " seconds.") //update text each second
+            $('.countdown').text("You can send again in " + countdown + " seconds.") //update text each second
             if(countdown == 0){ //when timer ends
                 clearInterval(myTimer)
                 $('.sendEmailButton').attr('disabled', false).text("Send Again"); //enable send button

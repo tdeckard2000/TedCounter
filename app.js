@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs'); //used for user authentication
 const session = require('express-session')
 const MongoStore = require ('connect-mongo')(session);
 const moment = require('moment');
+const nodemailer = require("nodemailer");
 
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+//settings for express-session module
 app.use(session({
   cookie:{
     maxAge: 86400000, //24 hours
@@ -24,6 +26,7 @@ app.use(session({
   secret: 'DrPepper Cherries',
   store: new MongoStore({mongooseConnection:mongoose.connection})
 }));
+//settings for moment module
 moment().format();
 
 // Database ==========================================================
@@ -332,6 +335,27 @@ const addNewItem = function(newItems, userDocId){
     }
   }
 
+  const sendPassResetEmail = function(emailAddress){
+    //email host information
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth:{
+        user: process.env.gmailUsr,
+        pass: process.env.gmailPass
+      }
+    });
+
+      transporter.sendMail({
+        from:'"TedCounter :)"<tedcounter@gmail.com>',
+        to: emailAddress,
+        subject:"HELLOO",
+        test:"hello fine young customer",
+        htm:"<b>This is a test body.<b>"
+      });
+  }
+
 
 // Get Requests ==========================================================
 app.get(['/','/oops', '/accountCreated'], (req, res)=>{
@@ -472,6 +496,12 @@ app.post('/quickAdd', (req, res)=>{
   }
 });
 
+app.post('/passwordRecovery', (req, res)=>{
+  emailAddress = req.body.email;
+  sendPassResetEmail(emailAddress);
+  console.log(emailAddress)
+  res.status(200).send({message: '123'});
+})
 
 // Server ==========================================================
 let port = process.env.PORT;

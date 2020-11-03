@@ -27,7 +27,7 @@
 <h3>Hello!</h3>
 
 <!-- New User Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalIndex" aria-hidden="true">
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signupModalIndex" aria-hidden="true">
   <div class="modal-dialog-centered modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header modalTopBar">
@@ -65,10 +65,33 @@
   <button class="btn btn-lg btn-info btn-block" id="button-signIn" type="submit">Sign In</button>
 </form>
 
+<!-- Forgot Password Modal-->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordIndex" aria-hidden="true">
+  <div class="modal-dialog-centered modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modalTopBar">
+        <h5 class="modal-title" id="forgotPasswordIndex">Reset Password</h5>
+      </div>
+      <form id='forgotPasswordForm'>
+        <div class="modal-body">
+          <label for="recoveryEmail" class="sr-only">Email</label>
+          <input name="recoveryEmail" type="email" id="recoveryEmail" class="form-control" placeholder="Email" required autofocus>
+          <div class="emailSentNotification hideElement">Please check your inbox and spam folder.</div>
+          <div class="countdown hideElement">You can send again in 30 seconds.</div>
+        </div>
+        <div class="modal-footer modalBottomBar">
+          <button type="button" class="btn buttonCancel btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary sendEmailButton">Send Email</button>
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>
+
 <!-- Triggers Modal -->
 <div class="signUp forgotPassword">
-  <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#signupModal" id="button-signUp" type="">Sign Up</button>
-  <a class="forgotLink" href="/">Forgot Password?</a>
+  <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#signUpModal" id="button-signUp" type="">Sign Up</button>
+  <a class="forgotLink" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
   <p class="mt-5 mb-3"><a class="copyYear">&copy; 2017-2020</a></p>  
 </div>
 

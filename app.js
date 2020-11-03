@@ -97,7 +97,7 @@ const adjustTime = function(startDate, subtractHours){
 }
 
 const authenticateUser = function(email, password){
-  let email = email.toLowerCase();
+  email = email.toLowerCase();
   return new Promise((resolve, reject)=>{
     user.find({'email': email}, (err, doc)=>{
       if(doc.length > 0 && doc.length != undefined){
@@ -261,7 +261,7 @@ const addNewItem = function(newItems, userDocId){
   })};
 
   const addNewUser = function(name, email, pHashed){
-    let email = email.toLowerCase();
+    email = email.toLowerCase();
     const newUser = new user({
       "name": name,
       "email": email,
@@ -311,7 +311,7 @@ const addNewItem = function(newItems, userDocId){
   }
 
 const checkForExistingUser = function(email){
-  let email = email.toLowerCase();
+  email = email.toLowerCase();
   return new Promise((resolve, reject)=>{
     user.find({email:email}, (err, result)=>{
       console.log(result);

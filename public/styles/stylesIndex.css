@@ -111,8 +111,6 @@ button.createAccount{
 .modalBottomBar{
     display: block;
     background-color: #5f65d8;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     height: 51px;
 }
 

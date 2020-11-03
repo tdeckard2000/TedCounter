@@ -306,6 +306,21 @@ const addNewItem = function(newItems, userDocId){
     })
   }
 
+const checkForExistingUser = function(emailAddress){
+  return new Promise((resolve, reject)=>{
+    user.find({email:emailAddress}, (err, result)=>{
+      console.log(result);
+      if(result.length){
+        resolve(true)
+      }else if(err){
+        console.warn("error checking for user: " + err);
+      }else{
+        resolve(false);
+      }
+    })
+  })
+}
+
   const duplicateDiaryItem = function(itemString){
     let parsedItem = JSON.parse(itemString);
     return new Promise((resolve, reject)=>{
@@ -498,9 +513,17 @@ app.post('/quickAdd', (req, res)=>{
 
 app.post('/passwordRecovery', (req, res)=>{
   emailAddress = req.body.email;
-  sendPassResetEmail(emailAddress);
+  checkForExistingUser(emailAddress).then((result)=>{
+    if(result === true){
+      console.log('true')
+      // sendPassResetEmail(emailAddress);
+      res.status(200).send({message: true})
+    }else{
+      res.status(200).send({message: false});
+    }
+  })
   console.log(emailAddress)
-  res.status(200).send({message: '123'});
+  
 })
 
 // Server ==========================================================

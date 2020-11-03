@@ -314,7 +314,6 @@ const checkForExistingUser = function(email){
   email = email.toLowerCase();
   return new Promise((resolve, reject)=>{
     user.find({email:email}, (err, result)=>{
-      console.log(result);
       if(result.length){
         resolve(true)
       }else if(err){
@@ -522,7 +521,6 @@ app.post('/passwordRecovery', (req, res)=>{
 
   checkForExistingUser(emailAddress).then((result)=>{
     if(result === true){
-      console.log('true')
       sendPassResetEmail(emailAddress);
       res.status(200).send({message: true})
     }else{

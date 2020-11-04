@@ -51,3 +51,56 @@ $('#forgotPasswordForm').on("submit",(event)=>{
         }, 1000);
     })
 })
+
+//Logic for New Account modal Create Account button
+$('#newUserForm').on("submit",(event)=>{
+    event.preventDefault();
+    const newName = $('#newName').val(); //store entered username
+    const newEmail = $('#newEmail').val(); //store entered email
+    const newPassword = $('#newPassword').val(); //store entered pass
+    const confirmPassword = $('#confirmPassword').val(); //store confirm pass
+    
+    if(newPassword !== confirmPassword){
+        $('#confirmPassword').addClass("highlight");
+        $('.passwordsNotMatchingNotification').removeClass('hideElement');
+        return
+    }
+
+    if(newPassword.length < 8){
+        $('.passwordTooShortNotification').removeClass('hideElement');
+        return
+    }
+
+    $.ajax({
+        method: "POST",
+        url: "./newUser",
+        data: {
+            newName: newName,
+            newEmail: newEmail,
+            newPassword: newPassword
+        }
+    }).done((data)=>{
+
+        if(data.message === true){ //user already exists
+            $('.accountExistsNotification').removeClass('hideElement');
+        }else{ //new user was created
+            window.location = '/accountCreated'; //redirect
+        }
+    });
+});
+
+//If confirm password is highlighted, un-highlight when matched
+$('#newPassword, #confirmPassword').on("keyup", ()=>{
+    newPassword = $('#newPassword').val();
+    confirmPassword = $('#confirmPassword').val();
+    
+    if(newPassword === confirmPassword){ //if passwords match
+        $('#confirmPassword').removeClass("highlight");
+        $('.passwordsNotMatchingNotification').addClass('hideElement');
+
+    }
+    
+    if(newPassword.length >= 8){
+        $('.passwordTooShortNotification').addClass('hideElement');
+    }
+})

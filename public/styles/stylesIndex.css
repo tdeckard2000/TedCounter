@@ -186,7 +186,37 @@ button.createAccount{
     right: 15px;
 }
 
+/* New Account Modal =============================================*/
+.accountExistsNotification{
+    color: #212529;
+    font-size: .77rem;
+    margin: 0;
+    padding: 0 7px 10px 7px;
+    text-align: center;
+}
+
+.passwordTooShortNotification{
+    color: #212529;
+    font-size: .77rem;
+    margin: 0;
+    padding: 0 7px 10px 7px;
+    text-align: center;
+}
+
+.passwordsNotMatchingNotification{
+    color: #212529;
+    font-size: .77rem;
+    margin: 0;
+    padding: 0 7px 10px 7px;
+    text-align: center;
+}
+
 /* for jQuery */
 .hideElement{
     display: none;
+}
+
+.highlight{
+    border-color: #ff9898;
+    border-width: 2px;
 }

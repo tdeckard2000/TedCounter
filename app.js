@@ -495,12 +495,23 @@ app.post('/newUser', (req, res)=>{
   const name = checkForNewName(req.body.newName);
   const newEmail = req.body.newEmail
   const newPassword = req.body.newPassword
-  console.warn(name);
   //const confirmPassword = (req.body.confirmPassword);
-  const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(newPassword, salt);
-  addNewUser(name, newEmail, hashedPassword);
-  res.redirect('/accountCreated')
+  console.log (newEmail)
+
+  checkForExistingUser(newEmail).then((result)=>{
+    console.log(result)
+    if(result === false){
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(newPassword, salt);
+      addNewUser(name, newEmail, hashedPassword);
+      res.send({message: '/accountCreated'})
+    }else{
+
+      //email already exists
+      res.status(200).send({message: true});
+    }
+  })
+
 });
 
 app.post('/quickAdd', (req, res)=>{

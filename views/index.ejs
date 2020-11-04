@@ -33,17 +33,21 @@
       <div class="modal-header modalTopBar">
         <h5 class="modal-title" id="signupModalIndex">New User</h5>
       </div>
-      <form action="./newUser"  method="POST">
+      <form id="newUserForm">
         <div class="modal-body">
           <label for="newName" class="sr-only">Name</label>
           <input name="newName" id="newName" class="form-control" placeholder="Username" autofocus>
           <label for="newEmail" class="sr-only">Email</label>
-          <input name="newEmail" type="email" id="newEmail" class="form-control" placeholder="Email*" required>
+          <input name="newEmail" type="email" id="newEmail" class="form-control" placeholder="Email* (used for password recovery)" required>
           <label for="newPassword" class="sr-only">newPassword</label>
           <input name="newPassword" type="password" id="newPassword" class="form-control" placeholder="Password*" required>
           <label for="confirmPassword" class="sr-only">confirmPassword</label>
           <input name="confirmPassword" type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password*" required>
         </div>
+        <div class="accountExistsNotification hideElement">This email address is already associated with an account.</div>
+        <div class="passwordTooShortNotification hideElement">Password must be at least 8 characters long.</div>
+        <div class="passwordsNotMatchingNotification hideElement">The two passwords to not match.</div>
+
         <div class="modal-footer modalBottomBar">
           <button type="button" class="btn buttonCancel btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary createAccount">Create Account</button>

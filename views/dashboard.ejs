@@ -144,10 +144,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+      
       <div class=" selectItemBody modal-body">
         <form method="POST" action="/addToDiary">    
             <input class="filterInput" type="text" placeholder="filter" id="foodItemFilter">
+            <span type="button" class="addItemQuestion" data-toggle="collapse" data-target="#addItemCollapse">?</span>
+            <div class="buttonNewEdit">
+              <a href="">Edit Items</a>
+              <a href="./newitem">New Item</a>
+            </div>
             <hr class="selectItemHR">
+            
+           
+
             <div class="selectableItems">
               <!-- Create list of items in food selector modal. Add an ID to each, starting with zero. -->
               <%itemNumber = -1%>
@@ -159,14 +169,23 @@
                 </div>
               <%});%>
             </div>
+
         </form>    
       </div>
-        <div class="modal-footer">
-          <form class="itemBottomForm" method="GET">
-            <button type="button" class="btn btn-secondary addEditButton cancel" formaction="./editItems">Edit Items</button>
-            <button type="submit" class="btn btn-primary addEditButton save" formaction="./newitem">Add Item</button>
-          </form>
+        
+        
+        <div class="collapse" id="addItemCollapse">
+          <div class="card card-body">
+            Help Text Here?
+          </div>
         </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary save">Save</button>
+        </div>
+      
+
     </div>
   </div>
 </div>

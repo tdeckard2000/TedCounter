@@ -227,6 +227,10 @@ button.close{
 }
 
 /* Select Item Modal */
+.addEditButton{
+    margin-bottom: 5px;
+}
+
 .addItemQuestion{
     border-radius: 100%;
     border-style: solid;
@@ -243,7 +247,7 @@ button.close{
     
 }
 
-.buttonNewEdit{
+/* .buttonNewEdit{
     text-align: center;
     padding: 7px 0 2px 0;
 }
@@ -252,7 +256,7 @@ button.close{
     color: #464646;
     font-weight: 300;
     padding: 0 20px;
-}
+} */
 
 .filterInput{
     max-width: 250px;

@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongoStore = require ('connect-mongo')(session);
 const moment = require('moment');
 const nodemailer = require("nodemailer");
+const fs = require('fs');
 
 require('dotenv').config();
 
@@ -346,6 +347,7 @@ const removeFromDiary = function(itemId){
   })
 }
 
+//Check if a name was provided for new account
 const checkForNewName = function(newName){
   if(newName != null && newName != 'undefined'){
     return newName;
@@ -354,6 +356,7 @@ const checkForNewName = function(newName){
   }
 }
 
+//Sends password reset email
 const sendPassResetEmail = function(emailAddress){
   //email host information
   const transporter = nodemailer.createTransport({
@@ -366,12 +369,18 @@ const sendPassResetEmail = function(emailAddress){
     }
   });
 
-    transporter.sendMail({
-      from:'"TedCounter :)"<tedcounter@gmail.com>',
-      to: emailAddress,
-      subject:"Ted Counter",
-      html:"<b>Password reset request.</b>"
-    });
+  fs.readFile('./emails/passwordReset.html', {encoding: 'utf-8'}, (err, data)=>{
+    if(err){
+      console.warn("Error getting password reset template: " + err);
+    }else{
+      transporter.sendMail({
+        from:'"TedCounter :)"<tedcounter@gmail.com>',
+        to: emailAddress,
+        subject:"Ted Counter",
+        html: data
+      });
+    }
+  });
 }
 
 const sendSignInEmail = function(userId){

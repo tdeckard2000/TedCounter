@@ -325,55 +325,74 @@ const checkForExistingUser = function(email){
   })
 }
 
-  const duplicateDiaryItem = function(itemString){
-    let parsedItem = JSON.parse(itemString);
-    return new Promise((resolve, reject)=>{
-      addToDiary(parsedItem.userId, parsedItem.item).then(()=>{
-        resolve();
-      })
+const duplicateDiaryItem = function(itemString){
+  let parsedItem = JSON.parse(itemString);
+  return new Promise((resolve, reject)=>{
+    addToDiary(parsedItem.userId, parsedItem.item).then(()=>{
+      resolve();
     })
-  }
+  })
+}
 
- const removeFromDiary = function(itemId){
-   return new Promise((resolve, reject)=>{
-     itemDiary.deleteOne({_id:itemId}, (err)=>{
-       if(err){
-        reject("error removing item from diary: "+err);
-       }else()=>{
-         resolve();
-       }
-     })
-   })
- }
-
-  const checkForNewName = function(newName){
-    if(newName != null && newName != 'undefined'){
-      return newName;
-    }else{
-      return null
-    }
-  }
-
-  const sendPassResetEmail = function(emailAddress){
-    //email host information
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth:{
-        user: process.env.gmailUsr,
-        pass: process.env.gmailPass
+const removeFromDiary = function(itemId){
+  return new Promise((resolve, reject)=>{
+    itemDiary.deleteOne({_id:itemId}, (err)=>{
+      if(err){
+      reject("error removing item from diary: "+err);
+      }else()=>{
+        resolve();
       }
-    });
+    })
+  })
+}
 
-      transporter.sendMail({
-        from:'"TedCounter :)"<tedcounter@gmail.com>',
-        to: emailAddress,
-        subject:"Ted Counter",
-        html:"<b>Password reset request.</b>"
-      });
+const checkForNewName = function(newName){
+  if(newName != null && newName != 'undefined'){
+    return newName;
+  }else{
+    return null
   }
+}
 
+const sendPassResetEmail = function(emailAddress){
+  //email host information
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth:{
+      user: process.env.gmailUsr,
+      pass: process.env.gmailPass
+    }
+  });
+
+    transporter.sendMail({
+      from:'"TedCounter :)"<tedcounter@gmail.com>',
+      to: emailAddress,
+      subject:"Ted Counter",
+      html:"<b>Password reset request.</b>"
+    });
+}
+
+const sendSignInEmail = function(userId){
+  //email host information
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth:{
+      user: process.env.gmailUsr,
+      pass: process.env.gmailPass
+    }
+  });
+
+    transporter.sendMail({
+      from:'"TedCounter"<tedcounter@gmail.com>',
+      to: process.env.alertCenter,
+      subject: "TedCounter Sign In",
+      html: userId
+    });
+}
 
 // Get Requests ==========================================================
 app.get(['/','/oops', '/accountCreated'], (req, res)=>{
@@ -427,6 +446,7 @@ app.post('/signIn', (req, res)=>{
       res.redirect('/oops')
     }else if(result[0] === true){
       //successful sign-in
+      sendSignInEmail(email);
       req.session.userName = result[1];
       req.session.userDocId = result[2];
       res.redirect('/dashboard')

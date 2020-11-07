@@ -369,9 +369,8 @@ const checkForExistingUser = function(email){
       transporter.sendMail({
         from:'"TedCounter :)"<tedcounter@gmail.com>',
         to: emailAddress,
-        subject:"HELLOO",
-        test:"hello fine young customer",
-        htm:"<b>This is a test body.<b>"
+        subject:"Ted Counter",
+        html:"<b>Password reset request.</b>"
       });
   }
 

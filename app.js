@@ -357,7 +357,7 @@ const checkForNewName = function(newName){
 }
 
 //Sends password reset email
-const sendPassResetEmail = function(emailAddress){
+const sendPassResetEmail = function(emailAddress, resetPassKey){
   //email host information
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -370,6 +370,9 @@ const sendPassResetEmail = function(emailAddress){
   });
 
   fs.readFile('./emails/passwordReset.html', {encoding: 'utf-8'}, (err, data)=>{
+    let htmlFile = data;
+    htmlFile = htmlFile.replace("#replaceWithLink#", resetPassKey);
+
     if(err){
       console.warn("Error getting password reset template: " + err);
     }else{
@@ -377,7 +380,7 @@ const sendPassResetEmail = function(emailAddress){
         from:'"TedCounter :)"<tedcounter@gmail.com>',
         to: emailAddress,
         subject:"Ted Counter",
-        html: data
+        html: htmlFile
       });
     }
   });
@@ -442,6 +445,10 @@ app.get('/newitem', (req, res)=>{
     res.render('newitem')
   }
 });
+
+app.get('/resetPassword', (req, res)=>{
+  res.send("<h1>Made It</h1>" + req.session.resetPassKey)
+})
 
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
@@ -559,8 +566,11 @@ app.post('/passwordRecovery', (req, res)=>{
   emailAddress = emailAddress.toLowerCase();
 
   checkForExistingUser(emailAddress).then((result)=>{
+
     if(result === true){
-      sendPassResetEmail(emailAddress);
+      //generate key to later validate password reset
+      req.session.resetPassKey = bcrypt.genSaltSync(10)
+      sendPassResetEmail(emailAddress, req.session.resetPassKey);
       res.status(200).send({message: true})
     }else{
       res.status(200).send({message: false});

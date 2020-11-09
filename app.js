@@ -446,7 +446,7 @@ app.get('/newitem', (req, res)=>{
   }
 });
 
-app.get('/resetPassword', (req, res)=>{
+app.get('/resetPassword/*', (req, res)=>{
   res.send("<h1>Made It</h1>" + req.session.resetPassKey)
 })
 

@@ -8,6 +8,7 @@ const MongoStore = require ('connect-mongo')(session);
 const moment = require('moment');
 const nodemailer = require("nodemailer");
 const fs = require('fs');
+const e = require('express');
 
 require('dotenv').config();
 
@@ -84,11 +85,21 @@ const userSchema = new mongoose.Schema({
   'name': String,
   'email': String,
   'password': String
-})
+});
+
+const passwordKeysSchema = new mongoose.Schema({
+  createdAt:{
+    type:String,
+    default:Date.now,
+    expires:'1m'
+  },
+  passResetKey: String
+});
 
 const foodItem = mongoose.model('foodItem', foodItemSchema);
 const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
 const user = mongoose.model('user', userSchema);
+const passwordKey = mongoose.model('passwordKey', passwordKeysSchema);
 
 // Functions ==========================================================
 
@@ -261,55 +272,55 @@ const addNewItem = function(newItems, userDocId){
     });
   })};
 
-  const addNewUser = function(name, email, pHashed){
-    email = email.toLowerCase();
-    const newUser = new user({
-      "name": name,
-      "email": email,
-      "password": pHashed
-    });
-    newUser.save((err,doc)=>{
-      if(err){
-        console.warn('Error Saving User: ' + err);
+const addNewUser = function(name, email, pHashed){
+  email = email.toLowerCase();
+  const newUser = new user({
+    "name": name,
+    "email": email,
+    "password": pHashed
+  });
+  newUser.save((err,doc)=>{
+    if(err){
+      console.warn('Error Saving User: ' + err);
+    }
+  });
+}
+
+const addToDiary = function(userId, itemInfo){
+  return new Promise((resolve, reject)=>{
+    const item = new itemDiary({
+      "userId": userId,
+      "date": new Date().toISOString(),
+      "item":{
+        "name": itemInfo.name,
+        "calories": itemInfo.calories,
+        "sodium": itemInfo.sodium,
+        "protein": itemInfo.protein,
+        "carbs": itemInfo.carbs,
+        "fat": itemInfo.fat,
+        "cholesterol": itemInfo.cholesterol,
+        "fiber": itemInfo.fiber,
+        "sugar": itemInfo.sugar,
+        "iron": itemInfo.iron,
+        "vitA": itemInfo.vitA,
+        "vitC": itemInfo.vitC,
+        "vitD": itemInfo.vitD,
+        "vitE": itemInfo.vitE,
+        "calcium": itemInfo.calcium,
+        "potassium": itemInfo.potassium,
+        "zinc": itemInfo.zinc
       }
     });
-  }
-
-  const addToDiary = function(userId, itemInfo){
-    return new Promise((resolve, reject)=>{
-      const item = new itemDiary({
-        "userId": userId,
-        "date": new Date().toISOString(),
-        "item":{
-          "name": itemInfo.name,
-          "calories": itemInfo.calories,
-          "sodium": itemInfo.sodium,
-          "protein": itemInfo.protein,
-          "carbs": itemInfo.carbs,
-          "fat": itemInfo.fat,
-          "cholesterol": itemInfo.cholesterol,
-          "fiber": itemInfo.fiber,
-          "sugar": itemInfo.sugar,
-          "iron": itemInfo.iron,
-          "vitA": itemInfo.vitA,
-          "vitC": itemInfo.vitC,
-          "vitD": itemInfo.vitD,
-          "vitE": itemInfo.vitE,
-          "calcium": itemInfo.calcium,
-          "potassium": itemInfo.potassium,
-          "zinc": itemInfo.zinc
+      item.save((err, doc)=>{
+        if(err){
+          console.warn('Failed to save new diary item to DB');
+          reject(err);
+        }else if(doc){
+          resolve("cats");
         }
       });
-        item.save((err, doc)=>{
-          if(err){
-            console.warn('Failed to save new diary item to DB');
-            reject(err);
-          }else if(doc){
-            resolve("cats");
-          }
-        });
-    })
-  }
+  })
+}
 
 const checkForExistingUser = function(email){
   email = email.toLowerCase();
@@ -354,6 +365,25 @@ const checkForNewName = function(newName){
   }else{
     return null
   }
+}
+
+const resetPassKeyStore = function(passResetKey){
+
+  const newKey = new passwordKey({
+    passResetKey: 'myTest123'
+  });
+
+  return new Promise((resolve, reject)=>{
+    newKey.save((err, data)=>{
+      if(err){
+        console.warn(err);
+        resolve
+      }else{
+        console.log(data);
+        resolve
+      }
+    });
+  });
 }
 
 //Sends password reset email
@@ -446,8 +476,10 @@ app.get('/newitem', (req, res)=>{
   }
 });
 
-app.get('/resetPassword/*', (req, res)=>{
-  res.send("<h1>Made It</h1>" + req.session.resetPassKey)
+app.get('/resetPassword', (req, res)=>{
+  const passResetKey = req.query.resetKey; //store key from email
+  testPasswordResetKey(passResetKey);
+  res.send("<h1>Made It</h1>" + passResetKey)
 })
 
 // Post Requests ==========================================================
@@ -569,8 +601,11 @@ app.post('/passwordRecovery', (req, res)=>{
 
     if(result === true){
       //generate key to later validate password reset
-      req.session.resetPassKey = bcrypt.genSaltSync(10)
-      sendPassResetEmail(emailAddress, req.session.resetPassKey);
+      resetPassKey = bcrypt.genSaltSync(10)
+      //store key in db (no need to wait)
+      resetPassKeyStore(resetPassKey);
+      //send the email
+      sendPassResetEmail(emailAddress, resetPassKey);
       res.status(200).send({message: true})
     }else{
       res.status(200).send({message: false});

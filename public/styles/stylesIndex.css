@@ -3,6 +3,7 @@
 /* Header */
 .topBar{
     background-color: #ff9c3e;
+    height: 56px;
 }
 
 /* Index Page - Sign In ========================================== */
@@ -219,4 +220,47 @@ button.createAccount{
 .highlight{
     border-color: #ff9898;
     border-width: 2px;
+}
+
+/* New Account Modal =============================================*/
+
+.resetPassLogo{
+    filter: invert(1);
+    margin: auto;
+    position: relative;
+    top: -2px;
+    width: 224px;
+}
+
+#inputNewPassword{
+    border-radius: .25rem .25rem 0 0;
+}
+
+#retypePassword{
+    margin-bottom: 10px;
+    border-radius: 0 0 .25rem .25rem;
+}
+
+.passwordTooShortAlert{
+    background-color: #e7e8f9;
+    border-radius: 5px;
+    border: solid 1px;
+    font-size: .85rem;
+    padding: 2px;
+}
+
+.passwordsNotMatchingAlert{
+    background-color: #e7e8f9;
+    border-radius: 5px;
+    border: solid 1px;
+    font-size: .85rem;
+    padding: 2px;
+}
+
+.resetKeyExpired{
+    background-color: #e7e8f9;
+    border-radius: 5px;
+    border: solid 1px;
+    font-size: .85rem;
+    padding: 2px;
 }

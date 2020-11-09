@@ -367,22 +367,19 @@ const checkForNewName = function(newName){
   }
 }
 
-const resetPassKeyStore = function(passResetKey){
-
+const savePassKey = function(passResetKey){
   const newKey = new passwordKey({
-    passResetKey: 'myTest123'
+    passResetKey: passResetKey
   });
 
-  return new Promise((resolve, reject)=>{
-    newKey.save((err, data)=>{
-      if(err){
-        console.warn(err);
-        resolve
-      }else{
-        console.log(data);
-        resolve
-      }
-    });
+  newKey.save((err, data)=>{
+    if(err){
+      console.warn(err);
+      return
+    }else{
+      console.log(data);
+      return
+    }
   });
 }
 
@@ -478,8 +475,8 @@ app.get('/newitem', (req, res)=>{
 
 app.get('/resetPassword', (req, res)=>{
   const passResetKey = req.query.resetKey; //store key from email
-  testPasswordResetKey(passResetKey);
-  res.send("<h1>Made It</h1>" + passResetKey)
+  // testPasswordResetKey(passResetKey);
+  res.render('resetPassword')
 })
 
 // Post Requests ==========================================================
@@ -603,7 +600,7 @@ app.post('/passwordRecovery', (req, res)=>{
       //generate key to later validate password reset
       resetPassKey = bcrypt.genSaltSync(10)
       //store key in db (no need to wait)
-      resetPassKeyStore(resetPassKey);
+      savePassKey(resetPassKey);
       //send the email
       sendPassResetEmail(emailAddress, resetPassKey);
       res.status(200).send({message: true})

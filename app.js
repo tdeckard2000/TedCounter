@@ -383,6 +383,25 @@ const savePassKey = function(passResetKey){
   });
 }
 
+//Check if reset password key is valid
+const validatePassKey = function(key){
+  return new Promise((resolve, reject)=>{
+    passwordKey.find({passResetKey:key}, (err, data)=>{
+      if(!data.length || err){
+        console.log(data + " false")
+        resolve(false)
+      }else if(data){ //remove the key so it can't be reused
+        passwordKey.deleteOne({passResetKey:key}, (err)=>{
+          if(err){
+            console.warn("Couldn't Delete Key " + err)
+          }
+        })
+        resolve(true)
+      }
+    })
+  })
+}
+
 //Sends password reset email
 const sendPassResetEmail = function(emailAddress, resetPassKey){
   //email host information
@@ -434,11 +453,13 @@ const sendSignInEmail = function(userId){
 }
 
 // Get Requests ==========================================================
-app.get(['/','/oops', '/accountCreated'], (req, res)=>{
+app.get(['/','/oops', '/accountCreated', '/passwordChanged'], (req, res)=>{
   if(req.originalUrl === '/oops'){
     res.render('index', {toastAction: "showFailedToast"})
   }else if(req.originalUrl === '/accountCreated'){
-    res.render('index', {toastAction:"showAccountCreatedToast"});
+    res.render('index', {toastAction: "showAccountCreatedToast"});
+  }else if(req.originalUrl === '/passwordChanged'){
+    res.render('index', {toastAction: "showNewPasswordToast"})
   }else{
     res.render('index', {toastAction:"hideToast"});
   }
@@ -608,6 +629,22 @@ app.post('/passwordRecovery', (req, res)=>{
       res.status(200).send({message: false});
     }
   })
+})
+
+app.post('/newPassword', (req, res)=>{
+  const newPassword = req.body.newPassword;
+  const passwordKey = req.body.key; //authentication key
+  if(newPassword.length && passwordKey.length){
+    validatePassKey(passwordKey)
+    .then((data)=>{
+      if(data === true){
+        //change password
+        res.redirect("/passwordChanged")
+      }else{
+        res.status(200).send({message:false})
+      }
+    })
+  }
 })
 
 // Server ==========================================================

@@ -16,6 +16,7 @@ $('#button-save').on("click",(data)=>{
     //Return if no key is in the url
     if(queryParam === undefined || queryParam.length < 20){
         $(".resetKeyExpired").removeClass("hideElement")
+        console.warn("script catch1")
         return
     }
 
@@ -36,10 +37,11 @@ $('#button-save').on("click",(data)=>{
                 key: queryParam
             }
         }).done((data)=>{
-            if(data.message === false || !data.message){ //reset key doesn't exist
+            if(!data.message || data.message === false){ //reset key doesn't exist
                 $('.resetKeyExpired').removeClass('hideElement');
+                console.log("returned false")
             }else{ //password reset succeeded
-                window.location = '/dashboard'; //redirect
+                window.location = '/passwordChanged'; //redirect
             }
         }).fail((err)=>{
             console.log("ajax error:" + err)

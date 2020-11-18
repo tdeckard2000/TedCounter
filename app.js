@@ -9,6 +9,7 @@ const moment = require('moment');
 const nodemailer = require("nodemailer");
 const fs = require('fs');
 const e = require('express');
+const { resolve } = require('path');
 
 require('dotenv').config();
 
@@ -93,6 +94,7 @@ const passwordKeysSchema = new mongoose.Schema({
     default:Date.now,
     expires:'1m'
   },
+  userEmail: String,
   passResetKey: String
 });
 
@@ -367,9 +369,11 @@ const checkForNewName = function(newName){
   }
 }
 
-const savePassKey = function(passResetKey){
+//Save password reset key to db
+const savePassKey = function(emailAddress, passResetKey){
   const newKey = new passwordKey({
-    passResetKey: passResetKey
+    passResetKey: passResetKey,
+    userEmail: emailAddress
   });
 
   newKey.save((err, data)=>{
@@ -377,7 +381,6 @@ const savePassKey = function(passResetKey){
       console.warn(err);
       return
     }else{
-      console.log(data);
       return
     }
   });
@@ -385,20 +388,37 @@ const savePassKey = function(passResetKey){
 
 //Check if reset password key is valid
 const validatePassKey = function(key){
+  console.log("key: " + key)
   return new Promise((resolve, reject)=>{
-    passwordKey.find({passResetKey:key}, (err, data)=>{
+    passwordKey.find({passResetKey: key}, (err, data)=>{
+      console.log("Data: " + data)
       if(!data.length || err){
-        console.log(data + " false")
-        resolve(false)
-      }else if(data){ //remove the key so it can't be reused
+        console.log("keyLengthFailed")
+        resolve()
+      }else{ //remove the key so it can't be reused
+        const userEmailAddress = data[0].userEmail;
         passwordKey.deleteOne({passResetKey:key}, (err)=>{
           if(err){
             console.warn("Couldn't Delete Key " + err)
           }
         })
-        resolve(true)
+        resolve(userEmailAddress);
       }
     })
+  })
+}
+
+//Change user password
+const changePassword = function(emailAddress, newPassword){
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(newPassword, salt);
+  console.log("preFindAndUpdate")
+  return new Promise((resolve, reject)=>{
+    user.findOneAndUpdate({email:emailAddress}, {useFindAndModify: false}, {password:hashedPassword}, ()=>{
+      console.log("foundAndUpdated")
+      resolve()
+    })
+
   })
 }
 
@@ -417,7 +437,7 @@ const sendPassResetEmail = function(emailAddress, resetPassKey){
 
   fs.readFile('./emails/passwordReset.html', {encoding: 'utf-8'}, (err, data)=>{
     let htmlFile = data;
-    htmlFile = htmlFile.replace("#replaceWithLink#", resetPassKey);
+    htmlFile = htmlFile.replace(/#replaceWithLink#/g, resetPassKey); //uses regex to replace all instances
 
     if(err){
       console.warn("Error getting password reset template: " + err);
@@ -580,11 +600,8 @@ app.post('/newUser', (req, res)=>{
   const name = checkForNewName(req.body.newName);
   const newEmail = req.body.newEmail
   const newPassword = req.body.newPassword
-  //const confirmPassword = (req.body.confirmPassword);
-  console.log (newEmail)
 
   checkForExistingUser(newEmail).then((result)=>{
-    console.log(result)
     if(result === false){
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(newPassword, salt);
@@ -621,7 +638,7 @@ app.post('/passwordRecovery', (req, res)=>{
       //generate key to later validate password reset
       resetPassKey = bcrypt.genSaltSync(10)
       //store key in db (no need to wait)
-      savePassKey(resetPassKey);
+      savePassKey(emailAddress, resetPassKey);
       //send the email
       sendPassResetEmail(emailAddress, resetPassKey);
       res.status(200).send({message: true})
@@ -634,12 +651,18 @@ app.post('/passwordRecovery', (req, res)=>{
 app.post('/newPassword', (req, res)=>{
   const newPassword = req.body.newPassword;
   const passwordKey = req.body.key; //authentication key
+
   if(newPassword.length && passwordKey.length){
     validatePassKey(passwordKey)
-    .then((data)=>{
-      if(data === true){
-        //change password
-        res.redirect("/passwordChanged")
+
+    .then((userEmailAddress)=>{
+      console.log("email: " + userEmailAddress)
+
+      if(userEmailAddress !== undefined && userEmailAddress.length){
+        changePassword(userEmailAddress, newPassword)
+        .then(()=>{
+          res.status(200).send({message:true})
+        })
       }else{
         res.status(200).send({message:false})
       }

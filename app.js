@@ -18,6 +18,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+//Settings for Mongoose
+mongoose.set('useFindAndModify', false);
+
 //settings for express-session module
 app.use(session({
   cookie:{
@@ -416,8 +419,8 @@ const changePassword = function(emailAddress, newPassword){
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
   console.log("preFindAndUpdate")
   return new Promise((resolve, reject)=>{
-    user.findOneAndUpdate({email:emailAddress}, {useFindAndModify: false}, {password:hashedPassword}, ()=>{
-      console.log("hashed password: " + hashedPassword)
+    console.log("hashed password: " + hashedPassword)
+    user.findOneAndUpdate({email:emailAddress}, {password:hashedPassword}, ()=>{
       console.log("foundAndUpdated")
       resolve()
     })

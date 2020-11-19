@@ -635,6 +635,7 @@ app.post('/passwordRecovery', (req, res)=>{
   checkForExistingUser(emailAddress).then((result)=>{
 
     if(result === true){
+      console.log("#1 This is the email address: " + emailAddress);
       //generate key to later validate password reset
       resetPassKey = bcrypt.genSaltSync(10)
       //store key in db (no need to wait)

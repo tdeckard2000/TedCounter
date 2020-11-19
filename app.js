@@ -410,11 +410,14 @@ const validatePassKey = function(key){
 
 //Change user password
 const changePassword = function(emailAddress, newPassword){
+  console.log("#4 Change password function called");
+
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
   console.log("preFindAndUpdate")
   return new Promise((resolve, reject)=>{
     user.findOneAndUpdate({email:emailAddress}, {useFindAndModify: false}, {password:hashedPassword}, ()=>{
+      console.log("hashed password: " + hashedPassword)
       console.log("foundAndUpdated")
       resolve()
     })
@@ -652,6 +655,7 @@ app.post('/passwordRecovery', (req, res)=>{
 app.post('/newPassword', (req, res)=>{
   const newPassword = req.body.newPassword;
   const passwordKey = req.body.key; //authentication key
+  console.log("#2 new pass is: " + newPassword);
 
   if(newPassword.length && passwordKey.length){
     validatePassKey(passwordKey)
@@ -660,6 +664,8 @@ app.post('/newPassword', (req, res)=>{
       console.log("email: " + userEmailAddress)
 
       if(userEmailAddress !== undefined && userEmailAddress.length){
+        console.log("#3 Changing the password next");
+
         changePassword(userEmailAddress, newPassword)
         .then(()=>{
           res.status(200).send({message:true})

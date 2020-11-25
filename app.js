@@ -391,12 +391,9 @@ const savePassKey = function(emailAddress, passResetKey){
 
 //Check if reset password key is valid
 const validatePassKey = function(key){
-  console.log("key: " + key)
   return new Promise((resolve, reject)=>{
     passwordKey.find({passResetKey: key}, (err, data)=>{
-      console.log("Data: " + data)
       if(!data.length || err){
-        console.log("keyLengthFailed")
         resolve()
       }else{ //remove the key so it can't be reused
         const userEmailAddress = data[0].userEmail;
@@ -413,15 +410,11 @@ const validatePassKey = function(key){
 
 //Change user password
 const changePassword = function(emailAddress, newPassword){
-  console.log("#4 Change password function called");
 
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(newPassword, salt);
-  console.log("preFindAndUpdate")
   return new Promise((resolve, reject)=>{
-    console.log("hashed password: " + hashedPassword)
     user.findOneAndUpdate({email:emailAddress}, {password:hashedPassword}, ()=>{
-      console.log("foundAndUpdated")
       resolve()
     })
 
@@ -524,6 +517,20 @@ app.get('/resetPassword', (req, res)=>{
   const passResetKey = req.query.resetKey; //store key from email
   // testPasswordResetKey(passResetKey);
   res.render('resetPassword')
+})
+
+app.get('/editItem', (req, res)=>{
+  userDocId = req.session.userDocId
+  
+  if(userDocId == undefined || userDocId.length<10){
+    res.redirect('/')
+  }else{
+    findFoodItems(userDocId).then((docs)=>{
+      const allFoodItems = docs;
+      res.render('editItem', {allFoodItems:allFoodItems})
+    })
+  }
+
 })
 
 // Post Requests ==========================================================
@@ -641,7 +648,6 @@ app.post('/passwordRecovery', (req, res)=>{
   checkForExistingUser(emailAddress).then((result)=>{
 
     if(result === true){
-      console.log("#1 This is the email address: " + emailAddress);
       //generate key to later validate password reset
       resetPassKey = bcrypt.genSaltSync(10)
       //store key in db (no need to wait)
@@ -658,16 +664,13 @@ app.post('/passwordRecovery', (req, res)=>{
 app.post('/newPassword', (req, res)=>{
   const newPassword = req.body.newPassword;
   const passwordKey = req.body.key; //authentication key
-  console.log("#2 new pass is: " + newPassword);
 
   if(newPassword.length && passwordKey.length){
     validatePassKey(passwordKey)
 
     .then((userEmailAddress)=>{
-      console.log("email: " + userEmailAddress)
 
       if(userEmailAddress !== undefined && userEmailAddress.length){
-        console.log("#3 Changing the password next");
 
         changePassword(userEmailAddress, newPassword)
         .then(()=>{

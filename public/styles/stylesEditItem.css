@@ -59,8 +59,9 @@
 
 /* List of Items */
 .itemListContainer{
-    border: 1px grey solid;
+    /* border: 1px grey solid; */
     border-radius: 10px;
+    box-shadow: 0px 8px 19px 0px #c1c1c1;
     height: 560px;
     margin: auto;
     overflow: scroll;
@@ -73,7 +74,7 @@
 .eachItemFormat{
     color: #212529;
     display: block;
-    font-size: .86rem;
+    font-size: .9rem;
     line-height: 1.6;
 }
 

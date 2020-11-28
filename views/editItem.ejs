@@ -30,13 +30,13 @@
       <!-- Scrolling Item List -->
       <div class="itemListContainer">
         <%allFoodItems.forEach((item)=>{%>
-          <div class="eachItemFormat" data-itemId=<%-item.id%> data-target="#editModal" data-toggle="modal"><%-item.name%></div>
+          <div class="singleItem" class="eachItemFormat" data-itemId=<%-item.id%> data-target="#editModal" data-toggle="modal"><%-item.name%></div>
         <%});%>
       </div>
 
       <!-- Return to Dashboard Cancel -->
-      <div class="mainCancelButtonDiv">
-        <button type="button" onclick="document.location='./dashboard'" class="btn buttonStyle cancel">Cancel</button>
+      <div class="doneButtonDiv">
+        <button type="button" onclick="document.location='./dashboard'" class="btn buttonStyle done">Done</button>
       </div>  
     </div>  
 
@@ -45,13 +45,13 @@
       <div class="modalQuickAdd modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Hello</h5>
+            <h5 class="modal-title">Edit Item</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>Settings and stats here.</p>
+            <h5 id="nameOfItem"></h5>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>

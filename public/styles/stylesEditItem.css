@@ -33,7 +33,7 @@
     background-color: #ff9c3e;
 }
 
-/* Item List & Cancel Button Div */
+/* Item List & Done Button Div */
 .mainContentDiv{
     position: absolute;
     top: 50%;
@@ -52,7 +52,7 @@
     width: 40%;
 }
 
-.mainCancelButtonDiv{
+.doneButtonDiv{
     padding-top: 20px;
     text-align: center;
 }
@@ -80,6 +80,10 @@
 }
 
 /* Modal Edit Items */
+#nameOfItem{
+    text-align: center;
+}
+
 button.close{
     bottom: 8px;
     position: relative;

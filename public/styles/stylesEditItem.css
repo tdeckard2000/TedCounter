@@ -85,7 +85,6 @@
 .pageTitle{
     position: relative;
     text-align: center;
-    top: 5px;
 }
 
 /* Modal Edit Items */
@@ -177,7 +176,7 @@ button.close{
 
 }
 
-@media (max-height: 530px) {
+@media (max-height: 565px) {
 
     .itemListContainer{
         height: 150px;

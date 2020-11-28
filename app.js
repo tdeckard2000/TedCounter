@@ -526,7 +526,7 @@ app.get('/editItem', (req, res)=>{
     res.redirect('/')
   }else{
     findFoodItems(userDocId).then((docs)=>{
-      const allFoodItems = docs;
+      const allFoodItems = orderObjects(docs);
       res.render('editItem', {allFoodItems:allFoodItems})
     })
   }

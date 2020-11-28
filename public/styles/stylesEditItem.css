@@ -73,6 +73,8 @@
 .eachItemFormat{
     color: #212529;
     display: block;
+    font-size: .86rem;
+    line-height: 1.6;
 }
 
 .eachItemFormat:hover{

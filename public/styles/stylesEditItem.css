@@ -60,8 +60,8 @@
 /* List of Items */
 .itemListContainer{
     /* border: 1px grey solid; */
-    border-radius: 10px;
-    box-shadow: 0px 8px 19px 0px #c1c1c1;
+    border-top: 1px grey solid;
+    border-bottom: 1px grey solid;
     height: 560px;
     margin: auto;
     overflow: scroll;
@@ -80,6 +80,12 @@
 
 .eachItemFormat:hover{
     color: black;
+}
+
+.pageTitle{
+    position: relative;
+    text-align: center;
+    top: 5px;
 }
 
 /* Modal Edit Items */

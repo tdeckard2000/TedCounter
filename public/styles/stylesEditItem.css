@@ -33,48 +33,16 @@
     background-color: #ff9c3e;
 }
 
-/* Nutrition Input Fields */
-.itemInputsContainer{
-    text-align: center;
-}
-
-.newItemDiv{
-    padding-top: 10px;
-    text-align: center;
-}
-
-.newItemDiv .topFour{
-    border-color: #ff9c3e;
-    border-width: 1px;
-    outline-color: #ff9c3e;
-}
-
-.newItemInput1{
-    border-color: #ff9c3e;
-    border-width: 1px;
-    outline-color: #ff9c3e;
-}
-
-.newItemDiv input{
-    border-color: #5f65d8;
-    border-width: 1px;
-    margin: 5px;
-    outline-color: #5f65d8;
-    width: 35%;
-}
-.vertical-center {
-    margin: 0;
+/* Item List & Cancel Button Div */
+.mainContentDiv{
     position: absolute;
     top: 50%;
-    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    width: 100%;
 }
+
 
 /* Cancel & Save Buttons */
-.buttonsDiv{
-    padding-top: 30px;
-}
-
 .buttonStyle{
     background-color: #464646;
     color: #ffffff;
@@ -85,9 +53,86 @@
 }
 
 .mainCancelButtonDiv{
-    padding-top: 160px;
+    padding-top: 20px;
     text-align: center;
 }
+
+/* List of Items */
+.itemListContainer{
+    border: 1px grey solid;
+    border-radius: 10px;
+    height: 560px;
+    margin: auto;
+    overflow: scroll;
+    padding: 10px 25px 25px 25px;
+    position: relative;
+    text-align: center;
+    width: 90%;
+}
+
+.eachItemFormat{
+    color: #212529;
+    display: block;
+}
+
+.eachItemFormat:hover{
+    color: black;
+}
+
+/* Modal Edit Items */
+button.close{
+    bottom: 8px;
+    position: relative;
+    right: 3px;
+}
+
+.modal .btn{
+    background-color: #464646;
+    border: 0;
+    bottom: 2px;
+    position: absolute;
+    width: 40%;
+}
+
+.modal-content{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-color: black;
+    border-width: 1px;
+    bottom: 20px;
+}
+
+.modal-footer{
+    background-color: #5f65d8;
+    height: 51px;
+}
+
+.modal-footer .save{
+    font-weight: 300;
+    position: absolute;
+    right: 15px;
+}
+
+.modal-footer .cancel{
+    font-weight: 300;
+    left: 15px;
+    position: absolute;
+    left: 10px;
+}
+
+.modal-header{
+    background-color: #ff9c3e;
+    height: 45px;
+}
+
+.modal-title{
+    bottom: 9px;
+    font-weight: 300;
+    position: relative;
+}
+
 
 /* New Item Bottom Bar ========================================== */
 .bottomBar{
@@ -108,43 +153,21 @@
     width: 30px;
 }
 
-
 /* Media Queries ========================================== */
 
 /* Support for Smaller Devices */
-@media (max-height: 570px) {
-    .buttonsDiv{
-        padding-top: 20px;
+@media (max-height: 760px) {
+
+    .itemListContainer{
+        height: 350px;
     }
 
-    .itemInputsContainer{
-        padding: 80px 0 60px 0;
-    }
-
-    .newItemDiv input{
-        margin: 2px;
-    }
-
-    .vertical-center{
-        margin: 0;
-        position: absolute;
-        top: 0;
-        -ms-transform: translateY(0);
-        transform: translateY(0);
-    }
 }
 
-/* List of Items */
+@media (max-height: 530px) {
 
-.itemListContainer{
-    border: 1px grey solid;
-    border-radius: 10px;
-    height: 350px;
-    margin: auto;
-    overflow: scroll;
-    padding: 10px 25px 25px 25px;
-    position: relative;
-    text-align: center;
-    top: 140px;
-    width: 90%;
+    .itemListContainer{
+        height: 150px;
+    }
+    
 }

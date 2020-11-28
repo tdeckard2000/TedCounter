@@ -2,76 +2,75 @@
 <!-- Custom Styles -->
 <link rel="stylesheet" href="/styles/stylesEditItem.css">
 </head>
-
   <body class="dashboardBody">
 
-  <div class="container">
-    <div class="row headerRow">
-      <div class=" topCounterDiv col-3">
-        <div class="topTotalCount">-</div>
-        <div class="topOutOf">/2000 cal</div> 
-      </div>
-      <div class="topCounterDiv col-3">
-        <div class="topTotalCount">-</div>
-        <div class="topOutOf">/1000 sdm</div> 
-      </div>
-      <div class="topCounterDiv col-3">
-        <div class="topTotalCount">-</div>
-        <div class="topOutOf">/165 pro</div> 
-      </div>
-      <div class="topCounterDiv col-3">
-        <div class="topTotalCount">-</div>
-        <div class="topOutOf">/165 crb</div> 
+    <!-- Top Bar -->
+    <div class="container">
+      <div class="row headerRow">
+        <div class=" topCounterDiv col-3">
+          <div class="topTotalCount">-</div>
+          <div class="topOutOf">/2000 cal</div> 
+        </div>
+        <div class="topCounterDiv col-3">
+          <div class="topTotalCount">-</div>
+          <div class="topOutOf">/1000 sdm</div> 
+        </div>
+        <div class="topCounterDiv col-3">
+          <div class="topTotalCount">-</div>
+          <div class="topOutOf">/165 pro</div> 
+        </div>
+        <div class="topCounterDiv col-3">
+          <div class="topTotalCount">-</div>
+          <div class="topOutOf">/165 crb</div> 
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="itemListContainer">
-    <%allFoodItems.forEach((item)=>{%>
-      <div><%-item.name%></div>
-    <%});%>
-  </div>
-
-  <!-- <div class="itemInputsContainer vertical-center">
-    <form action="./newitem" method="POST">
-      <input class="newItemInput1" name='itemName' placeholder="name (required)" type="text" maxlength="35" required>
-      <div class="newItemDiv">
-        <input class="newItemInput2 topFour" placeholder="calories" name="calories" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput3 topFour" placeholder="sodium" name="sodium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput4 topFour" placeholder="protein" name="protein" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput5 topFour" placeholder="carbs" name="carbs" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput6" placeholder="fat" name="fat" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput7" placeholder="cholesterol" name="cholesterol" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput8" placeholder="fiber" name="fiber" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput9" placeholder="sugar" name="sugar" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput10" placeholder="iron %" name="iron" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput11" placeholder="vitA %" name="vitA" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput12" placeholder="vitC %" name="vitC" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput13" placeholder="vitD %" name="vitD" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput14" placeholder="vitE %" name="vitE" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput15" placeholder="calcium %" name="calcium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput16" placeholder="potassium %" name="potassium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-        <input class="newItemInput17" placeholder="zinc" name="zinc" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+    <div class="mainContentDiv">
+      <!-- Scrolling Item List -->
+      <div class="itemListContainer">
+        <%allFoodItems.forEach((item)=>{%>
+          <div class="eachItemFormat" data-itemId=<%-item.id%> data-target="#editModal" data-toggle="modal"><%-item.name%></div>
+        <%});%>
       </div>
-      <div class="buttonsDiv">
-        <a href="./dashboard"><button type="button" class="btn cancel">Cancel</button></a>
-        <button type="submit" class="btn save">Save</button>
-      </div>    
-    </form>
-  </div> -->
 
-  <div class="mainCancelButtonDiv">
-    <button type="button" onclick="document.location='./dashboard'" class="btn buttonStyle cancel">Cancel</button>
-  </div>    
+      <!-- Return to Dashboard Cancel -->
+      <div class="mainCancelButtonDiv">
+        <button type="button" onclick="document.location='./dashboard'" class="btn buttonStyle cancel">Cancel</button>
+      </div>  
+    </div>  
 
-  <nav class=" bottomBar navbar fixed-bottom">
-    <a href="/">
-      <img class="bottomBarLogo" src="./files/logoCup.svg" alt="">
-    </a>
-    <a class="bottomBarDay" href="#">Today</a>
-  </nav>
+    <!-- Edit Item Modal -->
+    <div class="modal" id="editModal" tabindex="-1" role="dialog">
+      <div class="modalQuickAdd modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Hello</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Settings and stats here.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary save">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Purple Bar -->
+    <nav class=" bottomBar navbar fixed-bottom">
+      <a href="/">
+        <img class="bottomBarLogo" src="./files/logoCup.svg" alt="">
+      </a>
+      <a class="bottomBarDay" href="#">Today</a>
+    </nav>
 
   </body>
 </html>
 
 <%-include('footer');-%>
+<script src="/scripts/scriptEditItems.js"></script>

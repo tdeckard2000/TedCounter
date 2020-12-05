@@ -88,7 +88,10 @@ const itemDiarySchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   'name': String,
   'email': String,
-  'password': String
+  'password': String,
+  'nutritionTopFour': Array,
+  'nutritionOther': Array,
+  'nutritionGoals':Object
 });
 
 const passwordKeysSchema = new mongoose.Schema({
@@ -121,8 +124,7 @@ const authenticateUser = function(email, password){
         const userHash = doc[0].password;
         bcrypt.compare(password, userHash, (err, result)=>{
           if(result === true){
-            resolve([true, doc[0].name, doc[0].id]);
-
+            resolve([true, doc[0]]);
           }else if(err){
             console.warn('ERROR_TED0: ' + err);
             resolve([false]);
@@ -526,12 +528,18 @@ app.get('/editItem', (req, res)=>{
     res.redirect('/')
   }else{
     findFoodItems(userDocId).then((docs)=>{
+      const nutritionTopFour = req.session.nutritionTopFour;
+      const nutritionOther = req.session.nutritionOther;
       const allFoodItems = orderObjects(docs);
-      res.render('editItem', {allFoodItems:allFoodItems})
-    })
-  }
 
-})
+      res.render('editItem', {
+        allFoodItems:allFoodItems, 
+        nutritionTopFour:nutritionTopFour, 
+        nutritionOther:nutritionOther
+      });
+    });
+  }
+});
 
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
@@ -546,8 +554,11 @@ app.post('/signIn', (req, res)=>{
     }else if(result[0] === true){
       //successful sign-in
       sendSignInEmail(email);
-      req.session.userName = result[1];
-      req.session.userDocId = result[2];
+      req.session.userName = result[1].name;
+      req.session.userDocId = result[1]._id;
+      req.session.nutritionTopFour = result[1].nutritionTopFour;
+      req.session.nutritionOther = result[1].nutritionOther;
+      req.session.nutritionGoals = result[1].nutritionGoals;
       res.redirect('/dashboard')
     }else{
       console.warn('Error During Sign In')

@@ -7,7 +7,6 @@ $(".singleItem").on("click", (data)=>{
     let selectionName = data.currentTarget.innerHTML;
     let selectionId = data.currentTarget.dataset.itemid;
     setModalTitle(selectionName);
-    console.log(selectionName + " & " + selectionId)
 })
 
 // Functions ===================================

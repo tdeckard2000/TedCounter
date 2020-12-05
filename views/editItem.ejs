@@ -53,6 +53,13 @@
           </div>
           <div class="modal-body">
             <h5 id="nameOfItem"></h5>
+            <table>
+              <%nutritionOther.forEach((item)=>{%>
+                <label for="<%=item%>"></label>
+                <input id="<%=item%>" type="text">
+                <%=item%>
+              <%});%>
+            </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>

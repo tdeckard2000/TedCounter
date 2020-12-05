@@ -107,6 +107,14 @@ button.close{
     right: 3px;
 }
 
+.deleteButton{
+    background-color: #dc3545;
+    display: block;
+    font-weight: 300;
+    margin: auto;
+    position: relative;
+}
+
 .editItemTextBoxGeneral{
     border-color: #9da1f3;
     border-width: 1px;
@@ -134,8 +142,15 @@ button.close{
     justify-content: center;
 }
 
-.modal .btn{
+.modal .cancel{
     background-color: #464646;
+    border: 0;
+    bottom: 2px;
+    position: absolute;
+    width: 40%;
+}
+
+.modal .save{
     border: 0;
     bottom: 2px;
     position: absolute;

@@ -98,12 +98,29 @@ button.close{
     right: 3px;
 }
 
+.loadingIndicator{
+    bottom: 45%;
+    position: absolute;
+    z-index: 1055;
+}
+
+.loadingIndicatorDiv{
+    display: flex;
+    justify-content: center;
+}
+
 .modal .btn{
     background-color: #464646;
     border: 0;
     bottom: 2px;
     position: absolute;
     width: 40%;
+}
+
+.modal-body{
+    /* 50% of viewport height */
+    height:50vh;
+    overflow: auto;
 }
 
 .modal-content{
@@ -145,15 +162,20 @@ button.close{
     position: relative;
 }
 
-.loadingIndicator{
-    bottom: 45%;
-    position: absolute;
-    z-index: 1055;
+.textBoxFlexContainer{
+    display: flex;
+    flex-direction: row;
 }
 
-.loadingIndicatorDiv{
+.textBoxFlexColumn{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.textBoxLabel{
+    margin: 0;
 }
 
 /* New Item Bottom Bar ========================================== */

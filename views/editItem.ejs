@@ -52,20 +52,37 @@
             </button>
           </div>
           <div class="modal-body">
+
             <!-- Loading Indicator -->
             <div class="loadingIndicatorDiv hideElement">
               <div class="loadingIndicator spinner-border text-info" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
             </div>
-            <!-- Item Values -->
+
+            <!-- Item Text Boxes -->
             <h5 id="nameOfItem"></h5>
-            <table>
-              <%nutritionOther.forEach((item)=>{%>
-                <label for="<%=item%>"><%=item%></label>
-                <input class="editItemTextBox"id="<%=item%>" type="text">
-              <%});%>
-            </table>
+            <div class="textBoxFlexContainer">
+
+              <!-- Separate items into two columns. Even in first, odd in second. -->
+              <div class="textBoxFlexColumn">
+                <%for(i=0; i<nutritionOther.length; i++){%>
+                  <%if(i%2 == 0){%>
+                    <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
+                    <input class="editItemTextBox"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                  <%}%>
+                <%}%>
+              </div>
+              <div class="textBoxFlexColumn">
+                <%for(i=0; i<nutritionOther.length; i++){%>
+                  <%if(i%2 !== 0){%>
+                    <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
+                    <input class="editItemTextBox"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                  <%}%>
+                <%}%>
+              </div>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>

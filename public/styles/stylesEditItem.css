@@ -74,8 +74,11 @@
 .eachItemFormat{
     color: #212529;
     display: block;
-    font-size: .9rem;
-    line-height: 1.6;
+    font-size: inherit;
+    line-height: inherit;
+    /* Long item names horizontally scroll */
+    overflow: auto;
+    white-space: nowrap;
 }
 
 .eachItemFormat:hover{
@@ -89,13 +92,35 @@
 
 /* Modal Edit Items */
 #nameOfItem{
+    border-width: 1px;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto 5px auto;
+    outline-color: #464646;
     text-align: center;
+    width: 87.5%;
 }
 
 button.close{
     bottom: 8px;
     position: relative;
     right: 3px;
+}
+
+.editItemTextBoxGeneral{
+    border-color: #9da1f3;
+    border-width: 1px;
+    border-radius: 4px;
+    outline-color: #464646;
+    width: 75%;
+}
+
+.editItemTextBoxTopFour{
+    border-color: #ff9c3e;
+    border-width: 1px;
+    border-radius: 4px;
+    outline-color: #464646;
+    width: 75%;
 }
 
 .loadingIndicator{
@@ -168,6 +193,7 @@ button.close{
 }
 
 .textBoxFlexColumn{
+    align-items: center;
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
@@ -175,7 +201,8 @@ button.close{
 }
 
 .textBoxLabel{
-    margin: 0;
+    font-size: .8rem;
+    margin: 5px 0 0 0;
 }
 
 /* New Item Bottom Bar ========================================== */

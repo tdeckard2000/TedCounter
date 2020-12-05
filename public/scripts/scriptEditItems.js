@@ -1,24 +1,10 @@
 //Edit Items Script
-
-// Event Handlers ===============================
-
-//Respond to food item click
-$(".singleItem").on("click", (data)=>{
-    let selectionName = data.currentTarget.innerHTML;
-    let itemId = data.currentTarget.dataset.itemid;
-    //Disable text input and show loading indicator
-    $(".editItemTextBox").prop("disabled", true)
-    $(".loadingIndicatorDiv").removeClass("hideElement");
-    setItemValues(itemId);
-    setModalTitle(selectionName);
-});
-
 // Functions ===================================
 
 //Set Item Name in Edit Modal
-const setModalTitle = function(itemName){
-    $("#nameOfItem").html(itemName)
-}
+// const setModalTitle = function(itemName){
+//     $("#nameOfItem").html(itemName)
+// }
 
 //Get Item Values from DB
 const getItemValues = function(itemId){
@@ -39,7 +25,7 @@ const getItemValues = function(itemId){
 const setItemValues = function(itemId){
     getItemValues(itemId).then((foodItemValues)=>{
         //Get list of all text boxes in modal
-        let textBoxesArray = $(".editItemTextBox").toArray();
+        let textBoxesArray = $(".editItemTextBoxGeneral, .editItemTextBoxTopFour").toArray();
 
         textBoxesArray.forEach(element => {
             //Get id of each box element (fat, protein, etc)
@@ -53,7 +39,25 @@ const setItemValues = function(itemId){
         //timeout to display indicator for minimum time
         setTimeout(function(){
             $(".loadingIndicatorDiv").addClass("hideElement");
-            $(".editItemTextBox").prop("disabled", false)
+            $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").prop("disabled", false)
         }, 500)
     });
 }
+
+//Set Item Name in Edit Item Modal
+const setItemName = function(itemName){
+    $("#nameOfItem").val(itemName).attr("placeholder", itemName)
+}
+
+// Event Handlers ===============================
+
+//Respond to food item click
+$(".singleItem").on("click", (data)=>{
+    let selectionName = data.currentTarget.innerHTML;
+    let itemId = data.currentTarget.dataset.itemid;
+    //Disable text input and show loading indicator
+    $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").prop("disabled", true)
+    $(".loadingIndicatorDiv").removeClass("hideElement");
+    setItemValues(itemId);
+    setItemName(selectionName);
+});

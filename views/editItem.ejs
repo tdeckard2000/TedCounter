@@ -60,16 +60,36 @@
               </div>
             </div>
 
-            <!-- Item Text Boxes -->
-            <h5 id="nameOfItem"></h5>
-            <div class="textBoxFlexContainer">
+            <!-- Item Name -->
+            <input id="nameOfItem" type="text" maxlength="50">
 
-              <!-- Separate items into two columns. Even in first, odd in second. -->
+            <!-- Separate "Top Four" items into two columns. Even in first, odd in second. -->
+            <div class="textBoxFlexContainer">
+              <div class="textBoxFlexColumn">
+                <%for(i=0; i<nutritionTopFour.length; i++){%>
+                  <%if(i%2 == 0){%>
+                    <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=nutritionTopFour[i]%></label>
+                    <input class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                  <%}%>
+                <%}%>
+              </div>
+              <div class="textBoxFlexColumn">
+                <%for(i=0; i<nutritionTopFour.length; i++){%>
+                  <%if(i%2 !== 0){%>
+                    <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=nutritionTopFour[i]%></label>
+                    <input class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                  <%}%>
+                <%}%>
+              </div>
+            </div>
+
+            <!-- Separate "other" items into two columns. Even in first, odd in second. -->
+            <div class="textBoxFlexContainer">
               <div class="textBoxFlexColumn">
                 <%for(i=0; i<nutritionOther.length; i++){%>
                   <%if(i%2 == 0){%>
                     <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
-                    <input class="editItemTextBox"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                    <input class="editItemTextBoxGeneral"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                   <%}%>
                 <%}%>
               </div>
@@ -77,7 +97,7 @@
                 <%for(i=0; i<nutritionOther.length; i++){%>
                   <%if(i%2 !== 0){%>
                     <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
-                    <input class="editItemTextBox"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                    <input class="editItemTextBoxGeneral"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                   <%}%>
                 <%}%>
               </div>

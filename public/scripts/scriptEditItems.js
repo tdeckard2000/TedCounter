@@ -6,6 +6,9 @@
 $(".singleItem").on("click", (data)=>{
     let selectionName = data.currentTarget.innerHTML;
     let itemId = data.currentTarget.dataset.itemid;
+    //Disable text input and show loading indicator
+    $(".editItemTextBox").prop("disabled", true)
+    $(".loadingIndicatorDiv").removeClass("hideElement");
     setItemValues(itemId);
     setModalTitle(selectionName);
 });
@@ -42,9 +45,15 @@ const setItemValues = function(itemId){
             //Get id of each box element (fat, protein, etc)
             let itemId = element.id;
             //Update each text box value with value from DB
-            console.log(foodItemValues)
-            console.log(typeof(itemId))
-            $("#"+itemId).val(foodItemValues[itemId]);
+            $("#"+itemId).val(foodItemValues[itemId])
+            //and the placeholder text
+            .attr("placeholder",foodItemValues[itemId]);;
         });
+        //hide loading indicator and enable text input
+        //timeout to display indicator for minimum time
+        setTimeout(function(){
+            $(".loadingIndicatorDiv").addClass("hideElement");
+            $(".editItemTextBox").prop("disabled", false)
+        }, 500)
     });
 }

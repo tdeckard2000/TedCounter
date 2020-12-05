@@ -52,6 +52,13 @@
             </button>
           </div>
           <div class="modal-body">
+            <!-- Loading Indicator -->
+            <div class="loadingIndicatorDiv hideElement">
+              <div class="loadingIndicator spinner-border text-info" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <!-- Item Values -->
             <h5 id="nameOfItem"></h5>
             <table>
               <%nutritionOther.forEach((item)=>{%>

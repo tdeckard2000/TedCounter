@@ -145,6 +145,16 @@ button.close{
     position: relative;
 }
 
+.loadingIndicator{
+    bottom: 45%;
+    position: absolute;
+    z-index: 1055;
+}
+
+.loadingIndicatorDiv{
+    display: flex;
+    justify-content: center;
+}
 
 /* New Item Bottom Bar ========================================== */
 .bottomBar{
@@ -163,6 +173,11 @@ button.close{
     filter: invert(1);
     position: absolute;
     width: 30px;
+}
+
+/* JQuery Classes ========================================== */
+.hideElement{
+    display: none;
 }
 
 /* Media Queries ========================================== */

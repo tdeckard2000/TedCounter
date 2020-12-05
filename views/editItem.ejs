@@ -55,9 +55,8 @@
             <h5 id="nameOfItem"></h5>
             <table>
               <%nutritionOther.forEach((item)=>{%>
-                <label for="<%=item%>"></label>
-                <input id="<%=item%>" type="text">
-                <%=item%>
+                <label for="<%=item%>"><%=item%></label>
+                <input class="editItemTextBox"id="<%=item%>" type="text">
               <%});%>
             </table>
           </div>

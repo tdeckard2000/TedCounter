@@ -559,8 +559,8 @@ app.get('/editItem', (req, res)=>{
 app.get('/getItemValues', (req, res)=>{
   if(req.query.itemId != null){
     const itemId = req.query.itemId;
-    getItemValues(itemId).then((data)=>{
-      res.json({data:data});
+    getItemValues(itemId).then((itemValues)=>{
+      res.json({data:itemValues});
     });
   }else{
     res.json({data:"Error"});

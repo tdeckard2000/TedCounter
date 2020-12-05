@@ -205,7 +205,15 @@ button.close{
 /* Media Queries ========================================== */
 
 /* Support for Smaller Devices */
-@media (max-height: 760px) {
+@media (max-height: 770px) {
+
+    .itemListContainer{
+        height: 450px;
+    }
+
+}
+
+@media (max-height: 700px) {
 
     .itemListContainer{
         height: 350px;

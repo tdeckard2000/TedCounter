@@ -180,7 +180,7 @@ const findFoodItems = function(userDocId){
   });
 }
 
-// Return usr diary items based on day
+// Return user diary items based on day
 const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
   usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
   startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
@@ -216,6 +216,20 @@ const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObject
       }
     })
   })
+}
+
+//Get Food Item Values
+const getItemValues = function(itemId){
+  return new Promise((resolve, reject)=>{
+    foodItem.findById(itemId, (err, data)=>{
+      if(data){
+        resolve(data);
+      }else{
+        console.warn("Error getting values: " + err);
+        resolve("error getting item values");
+      }
+    });
+  });
 }
 
 //Order given array
@@ -540,6 +554,19 @@ app.get('/editItem', (req, res)=>{
     });
   }
 });
+
+//Returns food item values from DB
+app.get('/getItemValues', (req, res)=>{
+  if(req.query.itemId != null){
+    const itemId = req.query.itemId;
+    getItemValues(itemId).then((data)=>{
+      res.json({data:data});
+    });
+  }else{
+    res.json({data:"Error"});
+  }
+
+})
 
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{

@@ -735,9 +735,15 @@ app.post('/newPassword', (req, res)=>{
   }
 })
 
+app.post('/updateFoodItem', (req, res)=>{
+  console.log(req.body.foodItemInfo)
+  console.log(req.body.itemId)
+  res.send({result:true})
+})
+
 app.post('/deleteFoodItem', (req,res)=>{
   const itemId = req.body.itemId;
-  
+
   deleteFoodItem(itemId).then((data)=>{
     //Check if deletion was successful
     if(data === true){

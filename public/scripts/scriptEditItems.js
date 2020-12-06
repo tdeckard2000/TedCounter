@@ -49,7 +49,12 @@ const setItemName = function(itemName){
 const setDeleteButton = function(itemId){
     $("#deleteButton").attr("data-itemId", itemId);
     $("#deleteButton").prop("textContent", "Delete");
-    $("#deleteButton").prop("disabled", true);
+}
+
+const setSaveButton = function(itemId){
+    $("#saveButton").attr("data-itemId", itemId);
+    $("#saveButton").prop("textContent", "Save");
+
 }
 
 // Event Handlers #############################################################################################
@@ -59,11 +64,12 @@ $(".singleItem").on("click", (data)=>{
     let selectionName = data.currentTarget.innerHTML;
     let itemId = data.currentTarget.dataset.itemid;
     //Disable text input and show loading indicator
-    $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").prop("disabled", true)
+    $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem, #saveButton, #deleteButton").prop("disabled", true)
     $(".loadingIndicatorDiv").removeClass("hideElement");
     setItemValues(itemId);
     setItemName(selectionName);
     setDeleteButton(itemId);
+    setSaveButton(itemId);
 });
 
 //Respond to delete click
@@ -79,7 +85,6 @@ $("#deleteButton").on("click", (data)=>{
             url: "./deleteFoodItem",
             data: {itemId:itemId},
         }).done((data)=>{
-            console.log(data)
             //if deletion is successful or fails
             if(data.result == true){
                 location.reload({forceReload:true});
@@ -91,4 +96,27 @@ $("#deleteButton").on("click", (data)=>{
     }else{
         $("#deleteButton").prop("textContent", "Are You Sure?");
     }
+})
+
+//Respond to edit modal text box changes
+$(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").on("input", (data)=>{
+    //Enable save button
+    $("#saveButton").prop({"disabled": false, "textContent":"Save"});
+})
+
+//Respond to save button click
+$("#saveButton").on("click", (data)=>{
+    $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem, #saveButton, #deleteButton").prop("disabled", true)
+    $("#saveButton").prop("textContent", "Saving...")
+    let itemId = data.currentTarget.dataset.itemid;
+    let foodItemInfo = "placeholder123"
+    let formData = $('#editItemForm').serialize();
+    console.log(formData)
+    $.ajax({
+        type: "POST",
+        url: "./updateFoodItem",
+        data: {foodItemInfo:foodItemInfo, itemId:itemId}
+    }).done(()=>{
+        console.log("updated")
+    })
 })

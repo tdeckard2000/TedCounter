@@ -35,7 +35,7 @@ const setItemValues = function(itemId){
         //timeout to display indicator for minimum time
         setTimeout(function(){
             $(".loadingIndicatorDiv").addClass("hideElement");
-            $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").prop("disabled", false)
+            $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem, #deleteButton").prop("disabled", false)
         }, 500)
     });
 }
@@ -49,7 +49,7 @@ const setItemName = function(itemName){
 const setDeleteButton = function(itemId){
     $("#deleteButton").attr("data-itemId", itemId);
     $("#deleteButton").prop("textContent", "Delete");
-    $("#deleteButton").prop("disabled", false);
+    $("#deleteButton").prop("disabled", true);
 }
 
 // Event Handlers #############################################################################################
@@ -87,7 +87,7 @@ $("#deleteButton").on("click", (data)=>{
                 $("#deleteButton").prop("textContent", "Error");
             }
         })
-        
+
     }else{
         $("#deleteButton").prop("textContent", "Are You Sure?");
     }

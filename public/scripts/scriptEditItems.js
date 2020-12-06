@@ -106,11 +106,11 @@ $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").on("input", (
 
 //Respond to save button click
 $("#saveButton").on("click", (data)=>{
-    $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem, #saveButton, #deleteButton").prop("disabled", true)
+    $("#saveButton, #deleteButton").prop("disabled", true)
     $("#saveButton").prop("textContent", "Saving...")
     let itemId = data.currentTarget.dataset.itemid;
     let foodItemInfo = "placeholder123"
-    let formData = $('#editItemForm').serialize();
+    let formData = $('#editItemForm').serializeArray();
     console.log(formData)
     $.ajax({
         type: "POST",

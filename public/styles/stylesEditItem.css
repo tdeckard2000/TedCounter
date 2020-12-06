@@ -91,6 +91,15 @@
 }
 
 /* Modal Edit Items */
+#deleteButton{
+    background-color: #dc3545;
+    display: block;
+    font-weight: 300;
+    margin: 20px auto;
+    position: relative;
+    width: 130px;
+}
+
 #nameOfItem{
     border-width: 1px;
     border-radius: 4px;
@@ -105,15 +114,6 @@ button.close{
     bottom: 8px;
     position: relative;
     right: 3px;
-}
-
-.deleteButton{
-    background-color: #dc3545;
-    display: block;
-    font-weight: 300;
-    margin: 20px auto;
-    position: relative;
-    width: 130px;
 }
 
 .editItemTextBoxGeneral{

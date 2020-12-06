@@ -291,7 +291,36 @@ const addNewItem = function(newItems, userDocId){
         resolve(doc);
       }
     });
-  })};
+  })
+};
+
+//Delete Food Item from Database
+const deleteFoodItem = function(itemId){
+  return new Promise((resolve, reject)=>{
+    foodItem.findOneAndDelete({_id:itemId},(err, data)=>{
+      if(data){
+        resolve(true);
+      }else{
+        resolve(err);
+      }
+    });
+  })
+}
+
+const checkForExistingUser = function(email){
+  email = email.toLowerCase();
+  return new Promise((resolve, reject)=>{
+    user.find({email:email}, (err, result)=>{
+      if(result.length){
+        resolve(true)
+      }else if(err){
+        console.warn("error checking for user: " + err);
+      }else{
+        resolve(false);
+      }
+    })
+  })
+}
 
 const addNewUser = function(name, email, pHashed){
   email = email.toLowerCase();
@@ -340,21 +369,6 @@ const addToDiary = function(userId, itemInfo){
           resolve("cats");
         }
       });
-  })
-}
-
-const checkForExistingUser = function(email){
-  email = email.toLowerCase();
-  return new Promise((resolve, reject)=>{
-    user.find({email:email}, (err, result)=>{
-      if(result.length){
-        resolve(true)
-      }else if(err){
-        console.warn("error checking for user: " + err);
-      }else{
-        resolve(false);
-      }
-    })
   })
 }
 
@@ -719,6 +733,19 @@ app.post('/newPassword', (req, res)=>{
       }
     })
   }
+})
+
+app.post('/deleteFoodItem', (req,res)=>{
+  const itemId = req.body.itemId;
+  deleteFoodItem(itemId).then((data)=>{
+    console.log(data);
+    //Check if deletion was successful
+    if(data === true){
+      res.send({result:true})
+    }else{
+      res.send({result:false})
+    }
+  })
 })
 
 // Server ==========================================================

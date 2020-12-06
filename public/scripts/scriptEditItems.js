@@ -1,10 +1,6 @@
-//Edit Items Script
-// Functions ===================================
+//########### Edit Items Script ###########
 
-//Set Item Name in Edit Modal
-// const setModalTitle = function(itemName){
-//     $("#nameOfItem").html(itemName)
-// }
+// Functions #############################################################################################
 
 //Get Item Values from DB
 const getItemValues = function(itemId){
@@ -49,7 +45,14 @@ const setItemName = function(itemName){
     $("#nameOfItem").val(itemName).attr("placeholder", itemName)
 }
 
-// Event Handlers ===============================
+//Store itemId in delete button for deletion use and reset button values
+const setDeleteButton = function(itemId){
+    $("#deleteButton").attr("data-itemId", itemId);
+    $("#deleteButton").prop("textContent", "Delete");
+    $("#deleteButton").prop("disabled", false);
+}
+
+// Event Handlers #############################################################################################
 
 //Respond to food item click
 $(".singleItem").on("click", (data)=>{
@@ -60,4 +63,32 @@ $(".singleItem").on("click", (data)=>{
     $(".loadingIndicatorDiv").removeClass("hideElement");
     setItemValues(itemId);
     setItemName(selectionName);
+    setDeleteButton(itemId);
 });
+
+//Respond to delete click
+$("#deleteButton").on("click", (data)=>{
+    let itemId = data.currentTarget.dataset.itemid;
+
+    if($("#deleteButton").prop("textContent") === "Are You Sure?"){
+        $("#deleteButton").prop("disabled", true);
+
+        //Delete item from DB based on item's _id
+        $.ajax({
+            type: "POST",
+            url: "./deleteFoodItem",
+            data: {itemId:itemId},
+        }).done((data)=>{
+            console.log(data)
+            //if deletion is successful or fails
+            if(data.result == true){
+                location.reload({forceReload:true});
+            }else{
+                $("#deleteButton").prop("textContent", "Error");
+            }
+        })
+        
+    }else{
+        $("#deleteButton").prop("textContent", "Are You Sure?");
+    }
+})

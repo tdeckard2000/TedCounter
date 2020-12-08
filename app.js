@@ -10,6 +10,8 @@ const nodemailer = require("nodemailer");
 const fs = require('fs');
 const e = require('express');
 const { resolve } = require('path');
+const { json } = require('body-parser');
+const { data } = require('jquery');
 
 require('dotenv').config();
 
@@ -294,6 +296,20 @@ const addNewItem = function(newItems, userDocId){
   })
 };
 
+//Update Food Item Data
+const updateFoodItem = function(itemId, itemData){
+  return new Promise((resolve, reject)=>{
+
+    foodItem.findOneAndUpdate({_id:itemId}, itemData, (err, data)=>{
+      if(data){
+        resolve(true);
+      }else{
+        resolve(false);
+      }
+    });
+  });
+}
+
 //Delete Food Item from Database
 const deleteFoodItem = function(itemId){
   return new Promise((resolve, reject)=>{
@@ -307,6 +323,7 @@ const deleteFoodItem = function(itemId){
   })
 }
 
+//Check for Existing User
 const checkForExistingUser = function(email){
   email = email.toLowerCase();
   return new Promise((resolve, reject)=>{
@@ -322,6 +339,7 @@ const checkForExistingUser = function(email){
   })
 }
 
+//Create New User
 const addNewUser = function(name, email, pHashed){
   email = email.toLowerCase();
   const newUser = new user({
@@ -336,6 +354,7 @@ const addNewUser = function(name, email, pHashed){
   });
 }
 
+//Add Food Item to Diary
 const addToDiary = function(userId, itemInfo){
   return new Promise((resolve, reject)=>{
     const item = new itemDiary({
@@ -372,6 +391,7 @@ const addToDiary = function(userId, itemInfo){
   })
 }
 
+//Make Copy of Food Item in Diary
 const duplicateDiaryItem = function(itemString){
   let parsedItem = JSON.parse(itemString);
   return new Promise((resolve, reject)=>{
@@ -381,6 +401,7 @@ const duplicateDiaryItem = function(itemString){
   })
 }
 
+//Remove Item from Diary
 const removeFromDiary = function(itemId){
   return new Promise((resolve, reject)=>{
     itemDiary.deleteOne({_id:itemId}, (err)=>{
@@ -736,10 +757,17 @@ app.post('/newPassword', (req, res)=>{
 })
 
 app.post('/updateFoodItem', (req, res)=>{
-  console.log(req.body.foodItemInfo)
-  console.log(req.body.itemId)
-  res.send({result:true})
-})
+  itemData = JSON.parse(req.body.itemData);
+  itemId = (req.body.itemId);
+
+  updateFoodItem(itemId, itemData).then((data)=>{
+    if(data === true){
+      res.send({result:true})
+    }else{
+      res.send({result:false})
+    }
+  });
+});
 
 app.post('/deleteFoodItem', (req,res)=>{
   const itemId = req.body.itemId;

@@ -57,6 +57,25 @@ const setSaveButton = function(itemId){
 
 }
 
+//Convert array of key value pairs into one object.
+const arrayToObject = function(array){
+    let itemObject = {};
+
+    array.forEach((element)=>{
+        itemObject[element.name] = element.value;
+    });
+
+    return(itemObject);
+}
+
+//Get form data and convert to JSON object for Ajax post
+const getFormData = function(){
+    let formArray = $('#editItemForm').serializeArray();
+    let formObject = arrayToObject(formArray);
+    let jsonObject = JSON.stringify(formObject);
+    return(jsonObject);
+}
+
 // Event Handlers #############################################################################################
 
 //Respond to food item click
@@ -108,15 +127,26 @@ $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").on("input", (
 $("#saveButton").on("click", (data)=>{
     $("#saveButton, #deleteButton").prop("disabled", true)
     $("#saveButton").prop("textContent", "Saving...")
+
     let itemId = data.currentTarget.dataset.itemid;
-    let foodItemInfo = "placeholder123"
-    let formData = $('#editItemForm').serializeArray();
-    console.log(formData)
+    let itemData = getFormData();
+
     $.ajax({
         type: "POST",
         url: "./updateFoodItem",
-        data: {foodItemInfo:foodItemInfo, itemId:itemId}
-    }).done(()=>{
-        console.log("updated")
+        data: {itemData:itemData, itemId:itemId}
+    }).done((data)=>{
+
+        //If update was successful/failed
+        if(data.result === true){
+            $("#saveButton").prop("textContent", "Saved!")
+            $("#saveButton").css("background-color", "limegreen")
+
+            setTimeout(() => {
+                location.reload({forceReload:true});
+            }, 300);
+        }else{
+            $("#saveButton").prop("textContent", "Error Saving")
+        }
     })
 })

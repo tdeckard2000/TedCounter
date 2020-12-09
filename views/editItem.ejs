@@ -42,6 +42,7 @@
     </div>  
 
     <!-- Edit Item Modal -->
+  <form id="editItemForm">
     <div class="modal" id="editModal" tabindex="-1" role="dialog">
       <div class="modalQuickAdd modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -60,7 +61,6 @@
               </div>
             </div>
 
-            <form id="editItemForm">
               <!-- Item Name -->
               <input name="name" id="nameOfItem" type="text" maxlength="50">
 
@@ -105,17 +105,17 @@
                   <%}%>
                 </div>
               </div>
-            </form>
-
             <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
-            <button type="button" id="saveButton" class="btn btn-primary save">Save</button>
+            <button type="submit" id="saveButton" class="btn btn-primary save">Save</button>
           </div>
         </div>
       </div>
     </div>
+  </form>
+
 
     <!-- Bottom Purple Bar -->
     <nav class=" bottomBar navbar fixed-bottom">

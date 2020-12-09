@@ -51,10 +51,8 @@ const setDeleteButton = function(itemId){
     $("#deleteButton").prop("textContent", "Delete");
 }
 
-const setSaveButton = function(itemId){
-    $("#saveButton").attr("data-itemId", itemId);
+const setSaveButton = function(){
     $("#saveButton").prop("textContent", "Save");
-
 }
 
 //Convert array of key value pairs into one object.
@@ -85,10 +83,12 @@ $(".singleItem").on("click", (data)=>{
     //Disable text input and show loading indicator
     $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem, #saveButton, #deleteButton").prop("disabled", true)
     $(".loadingIndicatorDiv").removeClass("hideElement");
+    //Store item _id in form for use when submitting
+    $("#editItemForm").attr("data-ItemId", itemId);
     setItemValues(itemId);
     setItemName(selectionName);
     setDeleteButton(itemId);
-    setSaveButton(itemId);
+    setSaveButton();
 });
 
 //Respond to delete click
@@ -124,12 +124,18 @@ $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").on("input", (
 })
 
 //Respond to save button click
-$("#saveButton").on("click", (data)=>{
+$("#editItemForm").on("submit", (data)=>{
+    console.log("here")
+    data.preventDefault();
+    
     $("#saveButton, #deleteButton").prop("disabled", true)
     $("#saveButton").prop("textContent", "Saving...")
 
     let itemId = data.currentTarget.dataset.itemid;
+    console.log(itemId)
     let itemData = getFormData();
+
+    console.log("ajax")
 
     $.ajax({
         type: "POST",

@@ -12,6 +12,7 @@ const e = require('express');
 const { resolve } = require('path');
 const { json } = require('body-parser');
 const { data } = require('jquery');
+const request = require('request')
 
 require('dotenv').config();
 
@@ -520,6 +521,24 @@ const sendSignInEmail = function(userId){
       subject: "TedCounter Sign In",
       html: userId
     });
+}
+
+//Make API request to "OFF" Open Food Facts
+const openFoodFactsRequest = function(){
+  //DONT FORGET TO INCLUDE A HEADER
+  request('https://world.openfoodfacts.org/api/v0/product/729776413530.json', (err, res, body)=>{
+    console.log("Response: + " + res && res.statusCode);
+    console.log("Error: " + err);
+    const productInfo = JSON.parse(body);
+    const productSearchResult = productInfo.status;
+    const productName = productInfo.product.product_name_en;
+    const productNutrition = productInfo.product.nutriments;
+    const servingSize = productInfo.product.serving_size;
+    console.log(productName);
+    console.log(productNutrition);
+    console.log(productInfo)
+    console.log(servingSize);
+  });
 }
 
 // Get Requests ==========================================================

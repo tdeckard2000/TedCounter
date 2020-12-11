@@ -43,12 +43,6 @@
     text-align: center;
 }
 
-.newItemDiv .topFour{
-    border-color: #ff9c3e;
-    border-width: 1px;
-    outline-color: #ff9c3e;
-}
-
 .newItemInput1{
     border-color: #ff9c3e;
     border-width: 1px;
@@ -62,7 +56,7 @@
     outline-color: #5f65d8;
     width: 35%;
 }
-.vertical-center {
+.vertical-center{
     margin: 0;
     position: absolute;
     top: 50%;
@@ -70,7 +64,7 @@
     transform: translateY(-50%);
 }
 
-/* Cancel & Save Buttons */
+/* Button Formatting (Cancel, Save, Barcode */
 .buttonsDiv{
     padding-top: 30px;
 }
@@ -83,6 +77,118 @@
     max-width: 170px;
     width: 40%;
 }
+
+.barcodeButton{
+    background-color: #737373;
+    border-radius: 0 5px 5px 0;
+    color: #ffffff;
+    font-weight: 300;
+    height: 28px;
+    margin: 0 5px 5px 5px;
+    width: 38px;
+}
+
+.barcodeButton img{
+    bottom: 7px;
+    height: 18px;
+    position: relative;
+    right: 5px;
+
+}
+
+/* Barcode Modal */
+#barcodeField{
+    border-width: 1px;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto 5px auto;
+    outline-color: #464646;
+    text-align: center;
+    width: 87.5%;
+}
+
+.barcodeTips{
+    font-size: .75rem;
+    text-align: center;
+}
+
+button.close{
+    bottom: 8px;
+    position: relative;
+    right: 3px;
+}
+
+.loadingIndicator{
+    bottom: 45%;
+    position: absolute;
+    z-index: 1055;
+}
+
+.loadingIndicatorDiv{
+    display: flex;
+    justify-content: center;
+}
+
+.modal .cancel{
+    background-color: #464646;
+    border: 0;
+    bottom: 2px;
+    position: absolute;
+    width: 40%;
+}
+
+.modal .useButton{
+    border: 0;
+    bottom: 2px;
+    position: absolute;
+    width: 40%;
+}
+
+.modal-body{
+    /* 50% of viewport height */
+    height:50vh;
+    overflow: auto;
+}
+
+.modal-content{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-color: black;
+    border-width: 1px;
+    bottom: 20px;
+}
+
+.modal-footer{
+    background-color: #5f65d8;
+    height: 51px;
+}
+
+.modal-footer .useButton{
+    font-weight: 300;
+    position: absolute;
+    right: 15px;
+}
+
+.modal-footer .cancel{
+    font-weight: 300;
+    left: 15px;
+    position: absolute;
+    left: 10px;
+}
+
+.modal-header{
+    background-color: #ff9c3e;
+    height: 45px;
+}
+
+.modal-title{
+    bottom: 9px;
+    font-weight: 300;
+    position: relative;
+}
+
 
 /* New Item Bottom Bar ========================================== */
 .bottomBar{

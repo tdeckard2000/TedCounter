@@ -579,7 +579,12 @@ app.get('/newitem', (req, res)=>{
   if(!req.session.userDocId){
     res.redirect('/');
   }else{
-    res.render('newitem')
+    const nutritionTopFour = req.session.nutritionTopFour;
+    const nutritionOther = req.session.nutritionOther;
+    res.render('newitem', {
+      nutritionTopFour:nutritionTopFour,
+      nutritionOther:nutritionOther
+    })
   }
 });
 

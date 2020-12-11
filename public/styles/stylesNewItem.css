@@ -83,28 +83,44 @@
     border-radius: 0 5px 5px 0;
     color: #ffffff;
     font-weight: 300;
-    height: 28px;
-    margin: 0 5px 5px 5px;
+    height: 29px;
+    margin: 0 5px 4px 5px;
     width: 38px;
 }
 
 .barcodeButton img{
-    bottom: 7px;
+    bottom: 6px;
     height: 18px;
     position: relative;
     right: 5px;
 
 }
 
+.barcodeSearchButton{
+    background-color: #737373;
+    border-radius: 0 5px 5px 0;
+    color: #ffffff;
+    font-weight: 300;
+    height: 28px;
+    line-height: 0;
+    margin: 0 5px 4px 0px;
+    width: 70px;
+}
+
 /* Barcode Modal */
 #barcodeField{
     border-width: 1px;
-    border-radius: 4px;
-    display: block;
+    border-radius: 4px 0 0 4px;
+    display: inline;
     margin: 0 auto 5px auto;
     outline-color: #464646;
+    position: relative;
     text-align: center;
-    width: 87.5%;
+    width: 183px;
+}
+
+.barcodeSearchDiv{
+    text-align: center;
 }
 
 .barcodeTips{
@@ -209,6 +225,11 @@ button.close{
     width: 30px;
 }
 
+
+/* Javascript ========================================== */
+.hideElement{
+    display: none;
+}
 
 /* Media Queries ========================================== */
 

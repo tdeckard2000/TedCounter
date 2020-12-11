@@ -5,6 +5,15 @@
 
 // Event Handlers #############################################################################################
 
-$("#barcodeField").on("keyup",()=>{
-    console.log("keyUp")
+$(".barcodeSearchButton").on("click",()=>{
+    let barcodeNumber = $("#barcodeField").val();
+    console.log(barcodeNumber)
+
+    $.ajax({
+        type: "GET",
+        url: "./getBarcodeData",
+        data: {barcodeNumber:barcodeNumber}
+    }).done((data)=>{
+        console.log(data);
+    })
 })

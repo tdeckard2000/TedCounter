@@ -524,20 +524,47 @@ const sendSignInEmail = function(userId){
 }
 
 //Make API request to "OFF" Open Food Facts
-const openFoodFactsRequest = function(){
-  //DONT FORGET TO INCLUDE A HEADER
-  request('https://world.openfoodfacts.org/api/v0/product/729776413530.json', (err, res, body)=>{
+const openFoodFactsRequest = function(barcodeNumber){
+//DONT FORGET TO INCLUDE A HEADER
+  request('https://world.openfoodfacts.org/api/v0/product/' + barcodeNumber + '.json', (err, res, body)=>{
     console.log("Response: + " + res && res.statusCode);
     console.log("Error: " + err);
     const productInfo = JSON.parse(body);
-    const productSearchResult = productInfo.status;
-    const productName = productInfo.product.product_name_en;
-    const productNutrition = productInfo.product.nutriments;
-    const servingSize = productInfo.product.serving_size;
-    console.log(productName);
-    console.log(productNutrition);
-    console.log(productInfo)
-    console.log(servingSize);
+    
+    try{
+      const productSearchResult = productInfo.status;
+    }catch{
+      const productSearchResult = null;
+    }
+
+    try{
+      let productName = productInfo.product.product_name_en;
+    }catch{
+      let productName = null;
+    }
+
+    try{
+      const productNutrition = productInfo.product.nutriments;
+    }catch{
+      const productNutrition = null;
+    }
+
+    try{
+      const servingSize = productInfo.product.serving_size;
+    }catch{
+      const servingSize = null;
+    }
+
+    const productDetails = {
+      // productName:productName,
+      // productNutrition:productNutrition,
+      productInfo:productInfo,
+      // servingSize:servingSize
+    }
+    
+    console.log(productDetails)
+
+    return(productDetails);
   });
 }
 
@@ -625,6 +652,12 @@ app.get('/getItemValues', (req, res)=>{
     res.json({data:"Error"});
   }
 
+})
+
+//Get barcode data from Open Food Facts
+app.get('/getBarcodeData', (res, req)=>{
+  console.log(req.body)
+  openFoodFactsRequest(818094000024)
 })
 
 // Post Requests ==========================================================

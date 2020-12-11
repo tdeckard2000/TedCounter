@@ -531,10 +531,35 @@ const openFoodFactsRequest = function(barcodeNumber){
       console.log("Response: + " + res && res.statusCode);
       console.log("Error: " + err);
       const productInfo = JSON.parse(body);
-      const productSearchResult = productInfo.status || null;
-      const productName = productInfo.product.product_name_en || null;
-      const productNutrition = productInfo.product.nutriments || null;
-      const servingSize = productInfo.product.serving_size || null;
+
+      let productSearchResult = null;
+      let productName = null;
+      let productNutrition = null;
+      let servingSize = null;
+
+      if(productInfo && productInfo.status){
+        productSearchResult = productInfo.status;
+      }else{
+        productSearchResult = null;
+      }
+
+      if(productInfo && productInfo.product && productInfo.product.product_name_en){
+        productName = productInfo.product.product_name_en;
+      }else{
+        productName = null;
+      }
+
+      if(productInfo && productInfo.product && productInfo.product.nutriments){
+        productNutrition = productInfo.product.nutriments;
+      }else{
+        productNutrition = null;
+      }
+
+      if(productInfo && productInfo.product && productInfo.product.serving_size){
+        servingSize = productInfo.product.serving_size;
+      }else{
+        servingSize = null;
+      }
       
   
       const productDetails = {

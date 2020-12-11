@@ -526,46 +526,27 @@ const sendSignInEmail = function(userId){
 //Make API request to "OFF" Open Food Facts
 const openFoodFactsRequest = function(barcodeNumber){
 //DONT FORGET TO INCLUDE A HEADER
-  request('https://world.openfoodfacts.org/api/v0/product/' + barcodeNumber + '.json', (err, res, body)=>{
-    console.log("Response: + " + res && res.statusCode);
-    console.log("Error: " + err);
-    const productInfo = JSON.parse(body);
-    
-    try{
-      const productSearchResult = productInfo.status;
-    }catch{
-      const productSearchResult = null;
-    }
-
-    try{
-      let productName = productInfo.product.product_name_en;
-    }catch{
-      let productName = null;
-    }
-
-    try{
-      const productNutrition = productInfo.product.nutriments;
-    }catch{
-      const productNutrition = null;
-    }
-
-    try{
-      const servingSize = productInfo.product.serving_size;
-    }catch{
-      const servingSize = null;
-    }
-
-    const productDetails = {
-      // productName:productName,
-      // productNutrition:productNutrition,
-      productInfo:productInfo,
-      // servingSize:servingSize
-    }
-    
-    console.log(productDetails)
-
-    return(productDetails);
-  });
+  return new Promise((resolve, reject)=>{
+    request('https://world.openfoodfacts.org/api/v0/product/' + barcodeNumber + '.json', (err, res, body)=>{
+      console.log("Response: + " + res && res.statusCode);
+      console.log("Error: " + err);
+      const productInfo = JSON.parse(body);
+      const productSearchResult = productInfo.status || null;
+      const productName = productInfo.product.product_name_en || null;
+      const productNutrition = productInfo.product.nutriments || null;
+      const servingSize = productInfo.product.serving_size || null;
+      
+  
+      const productDetails = {
+        productSearchResult:productSearchResult,
+        productName:productName,
+        productNutrition:productNutrition,
+        servingSize:servingSize
+      }
+  
+      resolve(productDetails);
+    });
+  })
 }
 
 // Get Requests ==========================================================
@@ -655,9 +636,11 @@ app.get('/getItemValues', (req, res)=>{
 })
 
 //Get barcode data from Open Food Facts
-app.get('/getBarcodeData', (res, req)=>{
-  console.log(req.body)
-  openFoodFactsRequest(818094000024)
+app.get('/getBarcodeData', (req, res)=>{
+  barcodeNumber = req.query.barcodeNumber;
+  openFoodFactsRequest(barcodeNumber).then((data)=>{
+    res.json({data:data});
+  });
 })
 
 // Post Requests ==========================================================

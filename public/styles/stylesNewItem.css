@@ -95,8 +95,9 @@
 
 .newItemDiv label{
     font-size: .89rem;
-    margin-bottom: 0;
+    margin: 0 5px;
     max-width: 128px;
+    text-align: left;
     width: 60%;
 }
 
@@ -109,7 +110,7 @@ input.other{
 input.topFour{
     border-color: #ff9c3e;
     max-width: 128px;
-    margin-top: 0;
+    margin: 0 5px 3px 5px;
     outline-color: #ff9c3e;
     width: 60%;
 }
@@ -126,7 +127,7 @@ input.topFour{
 
 /* Button Formatting (Cancel, Save, Barcode */
 .buttonsDiv{
-    padding-top: 30px;
+    padding-top: 24px;
 }
 
 .buttonsDiv button{
@@ -321,7 +322,7 @@ button.close{
 /* Media Queries ========================================== */
 
 /* Support for Smaller Devices */
-@media (max-height: 570px) {
+@media (max-height: 655px) {
     .buttonsDiv{
         padding-top: 20px;
     }

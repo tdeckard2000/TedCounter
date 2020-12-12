@@ -94,6 +94,7 @@
 }
 
 .newItemDiv label{
+    font-size: .89rem;
     margin-bottom: 0;
     max-width: 128px;
     width: 60%;
@@ -115,9 +116,11 @@ input.topFour{
 
 .vertical-center{
     margin: 0;
+    padding-top: 65px;
+    padding-bottom: 55px;
     position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
+     top: 50%;
+     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 

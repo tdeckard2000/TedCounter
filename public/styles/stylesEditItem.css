@@ -73,6 +73,8 @@
 
 .eachItemFormat{
     color: #212529;
+    /* Show Mouse Pointer On Hover */
+    cursor: pointer;
     display: block;
     font-size: inherit;
     line-height: inherit;

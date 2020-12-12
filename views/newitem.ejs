@@ -29,11 +29,52 @@
 <div class="itemInputsContainer vertical-center">
   <form action="./newitem" method="POST">
     <div class="nameBarcodeDiv">
-      <input class="newItemInput1" name='itemName' placeholder="name (required)" type="text" maxlength="50" required>
+      <input class="newItemInputName" name='itemName' placeholder="name (required)" type="text" maxlength="50" required>
       <button type="button" data-toggle="modal" data-target="#barcodeModal" class="barcodeButton btn"><img src="./files/barcode.svg" alt=""></button>
     </div>
     <div class="newItemDiv">
-      <input class="newItemInput2 topFour" placeholder="calories" name="calories" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+
+      <!-- Display top four items separated into columns -->
+      <div class="flexRow">
+        <div class="flexColumn flexLeftColumn">
+          <%for(i=0; i<nutritionTopFour.length; i++){%>
+            <%if(i%2 == 0){%>
+              <label><%=nutritionTopFour[i]%></label>
+              <input class="topFour" name="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder = "<%=i%>" type="text">
+            <%}%>
+          <%}%>
+        </div>
+        <div class="flexColumn flexRightColumn">
+          <%for(i=0; i<nutritionTopFour.length; i++){%>
+            <%if(i%2 !== 0){%>
+              <label><%=nutritionTopFour[i]%></label>
+              <input class="topFour" name="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder = "<%=i%>" type="text">
+            <%}%>
+          <%}%>
+        </div>
+      </div>
+
+      <!-- Display other items separated into columns -->
+      <div class="flexRow">
+        <div class="flexColumn flexLeftColumn">
+          <%for(i=0; i<nutritionOther.length; i++){%>
+            <%if(i%2 == 0){%>
+              <label><%=nutritionOther[i]%></label>
+              <input class="other" name="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder = "<%=i%>" type="text">
+            <%}%>
+          <%}%>
+        </div>
+        <div class="flexColumn flexRightColumn">
+          <%for(i=0; i<nutritionOther.length; i++){%>
+            <%if(i%2 !== 0){%>
+              <label><%=nutritionOther[i]%></label>
+              <input class="other" name="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder = "<%=i%>" type="text">
+            <%}%>
+          <%}%>
+        </div>
+      </div>
+
+      <!-- <input class="newItemInput2 topFour" placeholder="calories" name="calories" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
       <input class="newItemInput3 topFour" placeholder="sodium" name="sodium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
       <input class="newItemInput4 topFour" placeholder="protein" name="protein" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
       <input class="newItemInput5 topFour" placeholder="carbs" name="carbs" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
@@ -48,7 +89,7 @@
       <input class="newItemInput14" placeholder="vitE %" name="vitE" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
       <input class="newItemInput15" placeholder="calcium %" name="calcium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
       <input class="newItemInput16" placeholder="potassium %" name="potassium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-      <input class="newItemInput17" placeholder="zinc" name="zinc" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+      <input class="newItemInput17" placeholder="zinc" name="zinc" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text"> -->
     </div>
     <div class="buttonsDiv">
       <a href="./dashboard"><button type="button" class="btn cancel">Cancel</button></a>

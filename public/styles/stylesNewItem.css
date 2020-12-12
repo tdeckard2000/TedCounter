@@ -34,8 +34,30 @@
 }
 
 /* Nutrition Input Fields */
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.flexColumn{
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+}
+
+.flexLeftColumn{
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+.flexRightColumn{
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
 .itemInputsContainer{
     text-align: center;
+    width: 100vw;
 }
 
 .nameBarcodeDiv{
@@ -50,7 +72,7 @@
     text-align: center;
 }
 
-.newItemInput1{
+.newItemInputName{
     border-color: #464646;
     border-radius: 3px 0 0 3px;
     border-width: 1px;
@@ -58,6 +80,7 @@
     height: inherit;
     left: 1px;
     position: relative;
+    z-index: 200;
 }
 
 .newItemDiv input{
@@ -70,9 +93,24 @@
     width: 35%;
 }
 
+.newItemDiv label{
+    margin-bottom: 0;
+    max-width: 128px;
+    width: 60%;
+}
+
+input.other{
+    max-width: 128px;
+    margin-top: 0;
+    width: 60%;
+}
+
 input.topFour{
     border-color: #ff9c3e;
+    max-width: 128px;
+    margin-top: 0;
     outline-color: #ff9c3e;
+    width: 60%;
 }
 
 .vertical-center{
@@ -111,6 +149,12 @@ input.topFour{
     position: relative;
     right: 1px;
     width: 50px;
+    z-index: 100;
+}
+
+.barcodeButton:focus{
+    box-shadow: none;
+    outline: 0;
 }
 
 .barcodeButton img{

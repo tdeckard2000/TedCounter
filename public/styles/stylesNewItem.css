@@ -99,7 +99,7 @@
 .barcodeSearchButton{
     background-color: #737373;
     border-radius: 0 5px 5px 0;
-    bottom: 3px;
+    bottom: 0;
     color: #ffffff;
     font-weight: 300;
     height: inherit;

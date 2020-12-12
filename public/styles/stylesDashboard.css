@@ -319,6 +319,13 @@ button.close{
     font-size: .7rem;
 }
 
+/* Settings Modal ================================================ */
+
+.settingsTabs{
+    position: relative;
+    top: -15px;
+}
+
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
     background-color: #5f65d8;

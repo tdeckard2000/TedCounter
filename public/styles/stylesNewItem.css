@@ -91,7 +91,7 @@
     height: inherit;
     left: 1px;
     position: relative;
-    z-index: 200;
+    z-index: 1;
 }
 
 .newItemDiv input{
@@ -163,7 +163,7 @@ input.topFour{
     position: relative;
     right: 1px;
     width: 50px;
-    z-index: 100;
+    z-index: 1;
 }
 
 .barcodeButton:focus{

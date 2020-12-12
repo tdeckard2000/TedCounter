@@ -98,7 +98,9 @@
 
 .barcodeSearchButton{
     background-color: #737373;
+    border-color: black;
     border-radius: 0 5px 5px 0;
+    border-width: 1px;
     bottom: 0;
     color: #ffffff;
     font-weight: 300;

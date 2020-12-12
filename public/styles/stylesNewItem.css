@@ -109,7 +109,9 @@
     left: -1px;
     line-height: 0;
     margin: 0;
+    padding: 0;
     position: relative;
+    text-align: center;
     width: 70px;
 }
 

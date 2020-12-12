@@ -99,11 +99,14 @@
 .barcodeSearchButton{
     background-color: #737373;
     border-radius: 0 5px 5px 0;
+    bottom: 3px;
     color: #ffffff;
     font-weight: 300;
-    height: 28px;
+    height: inherit;
+    left: -2px;
     line-height: 0;
-    margin: 0 5px 4px 0px;
+    margin: 0;
+    position: relative;
     width: 70px;
 }
 
@@ -112,15 +115,20 @@
     border-width: 1px;
     border-radius: 4px 0 0 4px;
     display: inline;
+    height: inherit;
+    left: 2px;
     margin: 0 auto 5px auto;
     outline-color: #464646;
     position: relative;
     text-align: center;
-    width: 183px;
+    width: 184px;
 }
 
 .barcodeSearchDiv{
+    height: 34px;
+    position: relative;
     text-align: center;
+    width: 100%;
 }
 
 .barcodeTips{

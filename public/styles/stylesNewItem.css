@@ -38,24 +38,43 @@
     text-align: center;
 }
 
+.nameBarcodeDiv{
+    height: 31px;
+    margin:auto;
+    text-align: center;
+    width: fit-content;
+}
+
 .newItemDiv{
     padding-top: 10px;
     text-align: center;
 }
 
 .newItemInput1{
-    border-color: #ff9c3e;
+    border-color: #464646;
+    border-radius: 3px 0 0 3px;
     border-width: 1px;
-    outline-color: #ff9c3e;
+    float: left;
+    height: inherit;
+    left: 1px;
+    position: relative;
 }
 
 .newItemDiv input{
     border-color: #5f65d8;
+    border-radius: 3px;
+    border-style: solid;
     border-width: 1px;
     margin: 5px;
     outline-color: #5f65d8;
     width: 35%;
 }
+
+input.topFour{
+    border-color: #ff9c3e;
+    outline-color: #ff9c3e;
+}
+
 .vertical-center{
     margin: 0;
     position: absolute;
@@ -79,20 +98,25 @@
 }
 
 .barcodeButton{
-    background-color: #737373;
+    background-color: #FFFFFF;
+    border-color: #464646;
     border-radius: 0 5px 5px 0;
+    border-style: solid;
+    border-width: 1px;
     color: #ffffff;
+    float: left;
     font-weight: 300;
-    height: 29px;
-    margin: 0 5px 4px 5px;
-    width: 38px;
+    height: inherit;
+    margin: 0;
+    position: relative;
+    right: 1px;
+    width: 50px;
 }
 
 .barcodeButton img{
     bottom: 6px;
     height: 18px;
     position: relative;
-    right: 5px;
 
 }
 

@@ -592,6 +592,10 @@ app.get('/dashboard', (req, res)=>{
   const userName = req.session.userName;
   const timezoneOffset = req.session.timezoneOffset;
   const usrDay = new Date().toISOString(); //using today's day for now
+  const nutritionTopFour = req.session.nutritionTopFour;
+  const nutritionOther = req.session.nutritionOther;
+  const nutritionGoals = req.session.nutritionGoals;
+  const userPreferences = JSON.stringify({nutritionTopFour, nutritionOther, nutritionGoals});
 
   if(!req.session.userDocId){
     res.redirect('/');
@@ -603,7 +607,13 @@ app.get('/dashboard', (req, res)=>{
       const foodDiary = bothResults[0];
       const foodItemList = bothResults[1];
       let nutritionTotals = calculateNutritionTotals(foodDiary);
-      res.render('dashboard', {foodItemList: foodItemList, foodDiary:foodDiary, userName:userName, nutritionTotals: nutritionTotals});
+      res.render('dashboard', {
+        foodItemList: foodItemList,
+        foodDiary: foodDiary,
+        userName: userName,
+        nutritionTotals: nutritionTotals,
+        userPreferences: userPreferences
+      });
     }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})
   }
 });

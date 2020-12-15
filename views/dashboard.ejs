@@ -5,7 +5,7 @@
 
 <body class="dashboardBody">
 
-<div class="container">
+<div id="goals" data-userPreferences="<%=userPreferences%>" class="container">
   <div class="row headerRow">
     <div class=" topCounterDiv col-3">
       <div class="topTotalCount"><%=nutritionTotals.cal%></div>
@@ -205,6 +205,7 @@
     </div>
   </div>
 </div>
+
 <object class="backgroundLogo" data="./files/TedCounterLogo.svg" type="image/svg+xml"></object>
 <nav class="bottomButtons fixed-bottom">
   <button class="buttonSettings" data-target="#settings" data-toggle="modal">⚙</button>
@@ -222,6 +223,29 @@
 
 </body>
 </html>
+
+<!-- Default Settings Modal -->
+<div class="modal" data-backdrop="static" id="userPreferencesModal" tabindex="-1" role="dialog">
+  <div class="modalQuickAdd modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Welcome, <%=userName%>!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Settings and stats here.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary cancel" id="userBackButton" data-dismiss="modal">Back</button>
+        <button type="button" id="userSaveButton" class="btn btn-primary save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%-include('footer');-%>
 <!-- Custom Script -->

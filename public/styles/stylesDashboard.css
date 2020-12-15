@@ -326,6 +326,16 @@ button.close{
     top: -15px;
 }
 
+/* User Preferences Modal ========================================== */
+
+#userPreferencesModal .modal-content{
+    height: 85vh;
+}
+
+#userPreferencesModal{
+    text-align: center;
+}
+
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
     background-color: #5f65d8;

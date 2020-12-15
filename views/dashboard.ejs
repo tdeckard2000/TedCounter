@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<!-- Diary List on Dashboard -->
+<!-- Diary Items List -->
 <div class="itemListContainer">
   <%for(i=0; i<foodDiary.length; i++){%>
     <%let wholeISODate=(foodDiary[i].date)%>
@@ -226,7 +226,7 @@
 
 <!-- Default Settings Modal -->
 <div class="modal" data-backdrop="static" id="userPreferencesModal" tabindex="-1" role="dialog">
-  <div class="modalQuickAdd modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Welcome, <%=userName%>!</h5>
@@ -235,8 +235,60 @@
         </button>
       </div>
       <div class="modal-body">
+        <h4>What four nutrition details are you most interested in?</h4>
+        <p>These four will always be visible.</p>
 
-        <p>Settings and stats here.</p>
+        <div class="topFourFlexRow">
+          <div class="topFourFlexColumn">
+            <select name="topFourSelection" id="topFourSelection">
+              <option value="none">----</option>
+              <option value="Calories">Calories</option>
+              <option value="Calories">Protein</option>
+              <option value="Calories">Fat</option>
+              <option value="Calories">Cholesterol</option>
+              <option value="Calories">Sodium</option>
+              <option value="Calories">Sugar</option>
+              <option value="Calories">Zinc</option>
+              <option value="Calories">Potassium</option>
+            </select>
+            <select name="topFourSelection" id="topFourSelection">
+              <option value="none">----</option>
+              <option value="Calories">Calories</option>
+              <option value="Calories">Protein</option>
+              <option value="Calories">Fat</option>
+              <option value="Calories">Cholesterol</option>
+              <option value="Calories">Sodium</option>
+              <option value="Calories">Sugar</option>
+              <option value="Calories">Zinc</option>
+              <option value="Calories">Potassium</option>
+            </select>
+          </div>
+
+          <div class="topFourFlexColumn">
+            <select name="topFourSelection" id="topFourSelection">
+              <option value="none">----</option>
+              <option value="Calories">Calories</option>
+              <option value="Calories">Protein</option>
+              <option value="Calories">Fat</option>
+              <option value="Calories">Cholesterol</option>
+              <option value="Calories">Sodium</option>
+              <option value="Calories">Sugar</option>
+              <option value="Calories">Zinc</option>
+              <option value="Calories">Potassium</option>
+            </select>
+            <select name="topFourSelection" id="topFourSelection">
+              <option value="none">----</option>
+              <option value="Calories">Calories</option>
+              <option value="Calories">Protein</option>
+              <option value="Calories">Fat</option>
+              <option value="Calories">Cholesterol</option>
+              <option value="Calories">Sodium</option>
+              <option value="Calories">Sugar</option>
+              <option value="Calories">Zinc</option>
+              <option value="Calories">Potassium</option>
+            </select>
+          </div>
+        </div>
 
       </div>
       <div class="modal-footer">

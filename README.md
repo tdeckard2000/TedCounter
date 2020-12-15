@@ -1,5 +1,5 @@
 # TedCounter
-#### Unique Calorie Counting Web Application - Started 5.30.20
+### Unique Calorie Counting Web Application - Started 5.30.20
 
 View it here: https://www.TedCounter.com
 
@@ -13,7 +13,7 @@ Make a free account, or sign in with:
 
 ---
 
-#### Features
+### Features
 
 - Responsive to many mobile display sizes (not yet ready for desktop)
 - Quickly save food items to be re-added at a later date

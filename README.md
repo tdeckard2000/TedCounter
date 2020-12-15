@@ -17,10 +17,10 @@ Make a free account, or sign in with:
 
 * Responsive to many mobile display sizes (not yet ready for desktop)
 * Quickly save food items to be re-added at a later date
- * Easily edit or delete item names or nutrition information
+  * Easily edit or delete item names or nutrition information
 * Tap on an item tile to:
- * Duplicate or remove items from daily food diary
- * View more nutrition information
+  * Duplicate or remove items from daily food diary
+  * View more nutrition information
 * Use Quick Add to save nutrition info without saving a new food item
 * Add saved food items with two taps
  * Includes an active text filter to easily find items on larger lists

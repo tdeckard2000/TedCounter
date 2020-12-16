@@ -329,7 +329,7 @@ button.close{
 /* User Preferences Modal ========================================== */
 
 #userPreferencesModal .modal-content{
-    height: 85vh;
+    height: 80vh;
 }
 
 #userPreferencesModal{

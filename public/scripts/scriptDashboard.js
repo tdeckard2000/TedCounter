@@ -14,6 +14,7 @@ $(window).on("load",()=>{
 
 //######################## Functions ########################
 
+//Populate top four dropdown lists and set default selection for each
 const setTopFourDropdownOptions = function (){
     nutritionOptions.forEach(element => {
         $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
@@ -24,6 +25,21 @@ const setTopFourDropdownOptions = function (){
     $("#topFourSelection2").val('Protein');
     $("#topFourSelection3").val('Sodium');
     $("#topFourSelection4").val('Carbs');
+}
+
+//Check for match in given array
+const checkForMatch = function(array){
+    for(i=0; i<array.length; i++){
+        let compare = array[i]
+        for(e=1; e<array.length; e++){
+            if(compare == array[i+e]){
+                console.log(compare + array[i+e])
+                return (true);
+            }
+        }
+        console.log("no match")
+        return(false);
+    }
 }
 
 //######################## Event Listeners ########################
@@ -48,7 +64,7 @@ $('#foodItemFilter').on('keyup', (doc)=>{
 });
 
 
-//Tapping 'more options' changes text to 'fewer options'
+//Quick Add: Tapping 'more options' changes text to 'fewer options'
 $(".moreOptionsButton").on("click",()=>{
     if($(".moreOptionsButton").text() == "more options"){
         $(".moreOptionsButton").text("fewer options")
@@ -57,13 +73,22 @@ $(".moreOptionsButton").on("click",()=>{
     }
 });
 
-//Open User Preferences Modal if No Top Four exists
+//Defaults Modal: Display if no Top Four data exists
 $(window).on("load", ()=>{
     if(userPreferences.nutritionTopFour.length < 1){
         $("#userPreferencesModal").modal("toggle");
     }
 
     $(".modal-footer .back").prop("disabled", true)
-
     setTopFourDropdownOptions();
 });
+
+//Defaults Modal: Disable Next button if dropdown selections match
+$(".topFourSelection").on("click", (data)=>{
+    let selections = [];
+    $(".topFourSelection").each(function(index, obj){
+       selections.push($(this).val())
+    })
+    
+    checkForMatch(selections);
+})

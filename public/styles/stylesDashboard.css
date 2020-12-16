@@ -336,6 +336,36 @@ button.close{
     text-align: center;
 }
 
+.defaultsModalBody{
+    overflow: auto;
+}
+
+.defaultsTitle{
+    margin: 5vh 0;
+}
+
+.modal-footer .back{
+    font-weight: 300;
+    left: 15px;
+    position: absolute;
+    left: 10px;
+}
+
+.topFourFlexColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.topFourFlexRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.topFourSelection{
+    margin: 5px;
+}
+
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
     background-color: #5f65d8;

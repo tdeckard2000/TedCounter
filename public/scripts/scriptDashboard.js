@@ -1,4 +1,4 @@
-//############ Dashboard Scripts ############
+//######################## Dashboard Script ########################
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
@@ -12,7 +12,21 @@ $(window).on("load",()=>{
     userPreferences = $("#goals").data().userpreferences;
 })
 
-//############ Event Listeners ############
+//######################## Functions ########################
+
+const setTopFourDropdownOptions = function (){
+    nutritionOptions.forEach(element => {
+        $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
+        .append("<option value=" + element + ">" + element + "</option>");
+    });
+
+    $("#topFourSelection1").val('Calories');
+    $("#topFourSelection2").val('Protein');
+    $("#topFourSelection3").val('Sodium');
+    $("#topFourSelection4").val('Carbs');
+}
+
+//######################## Event Listeners ########################
 
 //Filter list items from meal selector modal based on text input.
 $('#foodItemFilter').on('keyup', (doc)=>{
@@ -31,7 +45,7 @@ $('#foodItemFilter').on('keyup', (doc)=>{
             $('#listItem'+i).css({'position':'relative', 'visibility':'visible'})
         }
     }
-})
+});
 
 
 //Tapping 'more options' changes text to 'fewer options'
@@ -49,12 +63,7 @@ $(window).on("load", ()=>{
         $("#userPreferencesModal").modal("toggle");
     }
 
-    setTopFourDropdownOption();
-})
+    $(".modal-footer .back").prop("disabled", true)
 
-const setTopFourDropdownOption = function (){
-    nutritionOptions.forEach(element => {
-        $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
-        .append("<option value=" + element + ">" + element + "</option>")
-    });
-}
+    setTopFourDropdownOptions();
+});

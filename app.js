@@ -284,8 +284,9 @@ const addNewItem = function(newItems, userDocId){
     "vitE": newItems.vitE,
     "calcium": newItems.calcium,
     "potassium": newItems.potassium,
-    "zinc": newItems.zinc
+    "zinc": newItems.zinc,
   });
+
   return new Promise((resolve, reject)=>{
     item.save((err, doc)=>{
       if(err){

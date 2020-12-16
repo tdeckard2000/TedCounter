@@ -2,6 +2,10 @@
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
+const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber", "Histidine",
+"Iodine", "Iron","Isoleucine", "Leucine", "Lysine", "Magnesium", "Manganese", "Methionine", "Molybdenum","Phenylalanine", "Phosphorus", "Potassium", "Protein",
+"Saturated Fat", "Selenium", "Sodium", "Sugar", "Trans Fat", "Threonine", "Tryptophan", "Valine", "Vitamin A", "Vitamin B1", "Vitamin B2", "Vitamin B3",
+"Vitamin B5", "Vitamin B6", "Vitamin B7", "Vitamin B9", "Vitamin B12", "Vitamin C", "Vitamin D2", "Vitamin D3", "Vitamin E", "Vitamin K", "Zinc"]
 
 //Store user nutrition info in window from DOM when page loads
 $(window).on("load",()=>{
@@ -44,4 +48,13 @@ $(window).on("load", ()=>{
     if(userPreferences.nutritionTopFour.length < 1){
         $("#userPreferencesModal").modal("toggle");
     }
+
+    setTopFourDropdownOption();
 })
+
+const setTopFourDropdownOption = function (){
+    nutritionOptions.forEach(element => {
+        $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
+        .append("<option value=" + element + ">" + element + "</option>")
+    });
+}

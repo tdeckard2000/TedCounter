@@ -88,7 +88,8 @@ $(window).on("load", ()=>{
 $(".topFourSelection").on("click", (data)=>{
     let selections = [];
     $(".topFourSelection").each(function(){
-       selections.push($(this).val())
+       selections.push($('option:selected',this).text())
+       console.log(selections)
     })
     
     if(duplicateExists(selections) === true){

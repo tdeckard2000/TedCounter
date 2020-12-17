@@ -344,11 +344,27 @@ button.close{
     margin: 5vh 0;
 }
 
+.duplicateSelectionWarning{
+    background-color: #cccccc;
+    border-radius: 5px;
+    font-size: .8rem;
+    max-width: 250px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 5px;
+}
+
 .modal-footer .back{
     font-weight: 300;
     left: 15px;
     position: absolute;
     left: 10px;
+}
+
+.modal-footer .next{
+    font-weight: 300;
+    position: absolute;
+    right: 15px;
 }
 
 .topFourFlexColumn{
@@ -365,6 +381,7 @@ button.close{
 .topFourSelection{
     margin: 5px;
 }
+
 
 /* Dashboard Bottom Bar ========================================== */
 .bottomBar{
@@ -383,4 +400,9 @@ button.close{
     filter: invert(1);
     position: absolute;
     width: 30px;
+}
+
+/* Javascript Items ========================================== */
+.hidden{
+    display: none;
 }

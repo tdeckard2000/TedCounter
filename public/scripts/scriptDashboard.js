@@ -42,15 +42,7 @@ const duplicateExists = function(array){
     return(false)
 }
 
-//Initialize bootstrap duplicate items selected warning toast
-// const initializeDefaultsWarningToast = function(){
-//     var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-//     var toastList = toastElList.map(function (toastEl) {
-//       return new bootstrap.Toast(toastEl)
-//     })
-// }
-
-//######################## Event Listeners ########################
+//######################## Event Listeners (Filter and Quick Add) ########################
 
 //Filter list items from meal selector modal based on text input.
 $('#foodItemFilter').on('keyup', (doc)=>{
@@ -81,14 +73,15 @@ $(".moreOptionsButton").on("click",()=>{
     }
 });
 
+//######################## Event Listeners (Default Settings Modal) ########################
+
 //Display defaults modal if no Top Four data exists
 $(window).on("load", ()=>{
     if(userPreferences.nutritionTopFour.length < 1){
         $("#userPreferencesModal").modal("toggle");
+        $("#defaultsBackButton").prop("disabled", true)
+        setTopFourDropdownOptions();
     }
-
-    $("#userBackButton").prop("disabled", true)
-    setTopFourDropdownOptions();
 });
 
 //Defaults Modal: Disable Next button if topFour dropdown selections match
@@ -107,3 +100,40 @@ $(".topFourSelection").on("click", (data)=>{
 
     }
 })
+
+//On Next button click, mimic next page
+$("#defaultsNextButton").on("click", ()=>{
+    let currentPageNumber = $(".defaultsModalBody").attr("data-page");
+
+    if(currentPageNumber === "1"){
+    //store page number in modal body
+    $(".defaultsModalBody").attr("data-page", "2");
+    //enable back button
+    $("#defaultsBackButton").prop("disabled", false);
+    //change page title
+    $(".defaultsTitle").prop("textContent", "Would you like to track anything else?");
+    //Change subtitle
+    $(".defaultsSubTitle").prop("textContent", "These are optional")
+    //hide top four selectors
+    $(".topFourFlexRow").addClass("hidden")
+    }
+});
+
+//On back button click, mimic previous page
+$("#defaultsBackButton").on("click", ()=>{
+    console.log("click")
+    let currentPageNumber = $(".defaultsModalBody").attr("data-page");
+    console.log(currentPageNumber)
+    if(currentPageNumber === "2"){
+    //store page number as class in modal body
+    $(".defaultsModalBody").attr("data-page", "1");
+    //disable back button
+    $("#defaultsBackButton").prop("disabled", true);
+    //change page title
+    $(".defaultsTitle").prop("textContent", "Which nutrients are you most interested in?");
+    //Change subtitle
+    $(".defaultsSubTitle").prop("textContent", "These four will always be visible.")
+    //show top four selectors
+    $(".topFourFlexRow").removeClass("hidden")
+    }
+});

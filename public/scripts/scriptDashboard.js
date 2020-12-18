@@ -54,12 +54,12 @@ const setupDefaultsCheckboxes = function(){
         //remove item at index position
         allOptions.splice(matchingIndex, 1);
     });
-
-    for(i=0; i < allOptions.length; i=i+3){
-
-        console.log(allOptions[i])
-        console.log(allOptions[i+1])
-        console.log(allOptions[i+2])
+    console.log(allOptions)
+    for(i=0; i < allOptions.length; i=i+2){
+        $(".otherFlexColumn1").append('<input type="checkbox" id=' + allOptions[i] + 'name="test"></input>');
+        $(".otherFlexColumn1").append('<label for=' + allOptions[i] + '>' + allOptions[i] +'</label>');
+        $(".otherFlexColumn2").append('<input type="checkbox" id=' + allOptions[i+1] + 'name="test"></input>');
+        $(".otherFlexColumn2").append('<label for=' + allOptions[i+1] + '>' + allOptions[i+1] +'</label>');
     }
 }
 
@@ -117,7 +117,6 @@ $(window).on("load", ()=>{
 //Defaults Modal: Disable Next button if topFour dropdown selections match
 $(".topFourSelection").on("click", (data)=>{
         let selections = getTopFourSelection();
-        console.log(selections)
     if(duplicateExists(selections) === true){
         $("#defaultsNextButton").prop("disabled", true);
         $(".duplicateSelectionWarning").removeClass('hidden');
@@ -153,9 +152,7 @@ $("#defaultsNextButton").on("click", ()=>{
 
 //On back button click, mimic previous page
 $("#defaultsBackButton").on("click", ()=>{
-    console.log("click")
     let currentPageNumber = $(".defaultsModalBody").attr("data-page");
-    console.log(currentPageNumber)
     if(currentPageNumber === "2"){
     //store page number as class in modal body
     $(".defaultsModalBody").attr("data-page", "1");

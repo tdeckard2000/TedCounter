@@ -15,13 +15,14 @@ $(window).on("load",()=>{
 
 //######################## Functions ########################
 
-//Populate top four dropdown lists and set default selection for each
+//Populate top four dropdown lists on defaults modal
 const setTopFourDropdownOptions = function (){
     nutritionOptions.forEach(element => {
         $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
         .append("<option value=" + element + ">" + element + "</option>");
     });
 
+    //set default dropdown selections
     $("#topFourSelection1").val('Calories');
     $("#topFourSelection2").val('Protein');
     $("#topFourSelection3").val('Sodium');
@@ -40,6 +41,35 @@ const duplicateExists = function(array){
     }
     //if while loop completes, no matches were found
     return(false)
+}
+
+//Populate Other Options check boxes for defaults modal
+const setupDefaultsCheckboxes = function(){
+    let allOptions = nutritionOptions;
+    let topFourSelections = getTopFourSelection();
+
+    //remove top four selections from "all options"
+    topFourSelections.forEach(element => {
+        let matchingIndex = allOptions.indexOf(element);
+        //remove item at index position
+        allOptions.splice(matchingIndex, 1);
+    });
+
+    for(i=0; i < allOptions.length; i=i+3){
+
+        console.log(allOptions[i])
+        console.log(allOptions[i+1])
+        console.log(allOptions[i+2])
+    }
+}
+
+//Get top four selected items
+const getTopFourSelection = function(){
+    let selections = [];
+    $(".topFourSelection").each(function(){
+       selections.push($('option:selected', this).text());
+    });
+    return(selections)
 }
 
 //######################## Event Listeners (Filter and Quick Add) ########################
@@ -86,12 +116,8 @@ $(window).on("load", ()=>{
 
 //Defaults Modal: Disable Next button if topFour dropdown selections match
 $(".topFourSelection").on("click", (data)=>{
-    let selections = [];
-    $(".topFourSelection").each(function(){
-       selections.push($('option:selected',this).text())
-       console.log(selections)
-    })
-    
+        let selections = getTopFourSelection();
+        console.log(selections)
     if(duplicateExists(selections) === true){
         $("#defaultsNextButton").prop("disabled", true);
         $(".duplicateSelectionWarning").removeClass('hidden');
@@ -113,11 +139,16 @@ $("#defaultsNextButton").on("click", ()=>{
     $("#defaultsBackButton").prop("disabled", false);
     //change page title
     $(".defaultsTitle").prop("textContent", "Would you like to track anything else?");
-    //Change subtitle
+    //change subtitle
     $(".defaultsSubTitle").prop("textContent", "These are optional")
     //hide top four selectors
     $(".topFourFlexRow").addClass("hidden")
-    }
+    //populate checkbox options
+    setupDefaultsCheckboxes();
+
+    }else if(currentPageNumber === "2"){
+
+    }  
 });
 
 //On back button click, mimic previous page

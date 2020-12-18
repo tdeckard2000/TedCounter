@@ -367,6 +367,11 @@ button.close{
     right: 15px;
 }
 
+.otherItemsFlexRow{
+    display: flex;
+    justify-content: center;
+}
+
 .topFourFlexColumn{
     display: flex;
     flex-direction: column;

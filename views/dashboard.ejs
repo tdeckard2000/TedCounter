@@ -255,6 +255,14 @@
           </div>
         </div>
 
+        <p class="duplicateSelectionWarning hidden">You can't select the same one twice : )</p>
+
+        <a class="disclaimerLink" href="">Read Disclaimer</a>
+        <div class="disclaimerDiv">
+          <input type="checkbox" name="disclaimerCheckbox" id="disclaimerCheckbox">
+          <label for="disclaimerCheckbox">I have read and understand the disclaimer.</label>
+        </div>
+
         <!-- Other Items Checkboxes -->
         <div class="otherItemsFlexRow hidden">
           <div class="otherFlexColumn1 otherCheckBoxes">
@@ -271,13 +279,11 @@
           </div>
         </div>
 
-        <p class="duplicateSelectionWarning hidden">You can't select the same one twice : )</p>
-
         <hr>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary back" id="defaultsBackButton">Back</button>
-        <button type="button" id="defaultsNextButton" class="btn btn-primary next">Next</button>
+        <button type="button" id="defaultsNextButton" class="btn btn-primary next" disabled>Next</button>
       </div>
     </div>
   </div>

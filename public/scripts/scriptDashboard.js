@@ -45,19 +45,17 @@ const duplicateExists = function(array){
     return(false)
 }
 
-//Populate Other Options check boxes for defaults modal
+//Populate 'Other Options' check boxes for defaults modal
 const setupDefaultsCheckboxes = function(){
     //Array.from creates a copy of the array, otherwise it's just a reference
     let allOptions = Array.from(nutritionOptions);
     let topFourSelections = getTopFourSelection();
-    console.log(topFourSelections)
-    console.log(allOptions)
-    //remove top four selections from "all options"
+
+    //remove top four selections from 'allOptions' array
     topFourSelections.forEach(element => {
         let matchingIndex = allOptions.indexOf(element);
 
         if(matchingIndex !== -1){
-        //remove item at index position
         allOptions.splice(matchingIndex, 1);
         }
     });
@@ -65,11 +63,11 @@ const setupDefaultsCheckboxes = function(){
     //remove any existing checkboxes (if the user toggles pages)
     $(".otherFlexColumn1, .otherFlexColumn2").children("div").remove();
 
+    //populate checkboxes split into two columns
     for(i=0; i < allOptions.length; i=i+2){
-        //add column 1 checkboxes
         $(".otherFlexColumn1").append("<div><input type='checkbox' id='" 
         + allOptions[i] + "'name='test'></input><label for='" + allOptions[i] + "'>" + allOptions[i] + "</label></div>");
-        //add column 2 checkboxes
+
         if(allOptions[i+1] !== undefined){
             $(".otherFlexColumn2").append("<div><input type='checkbox' id='" + allOptions[i+1] 
             + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
@@ -77,18 +75,18 @@ const setupDefaultsCheckboxes = function(){
     }
 }
 
-//Populate goals text input boxes
+//Populate 'Goals' text input boxes
 const setupDefaultsGoalsTextBoxes = function(){
     let list = getUserSelections();
 
-    //remove any existing checkboxes (if user toggles pages)
+    //remove any existing input boxes (if user toggles pages)
     $(".goalsFlexColumn1, .goalsFlexColumn2").children("div").remove();
 
+    //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
-        //add column 1 text input boxes
         $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
          "</label><input id='" + list[i] + "'type='text'></div>")
-        //add column 1 text input boxes
+
          if(list[i+1] !== undefined){
             $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + list[i+1] +
             "</label><input id='" + list[i+1] + "'type='text'></div>")
@@ -107,7 +105,7 @@ const getTopFourSelection = function(){
     return(selections);
 }
 
-//Get 'other' checkbox selections
+//Get 'other' checkbox selected items
 const getOtherSelections = function(){
     let selections = [];
     $(".otherCheckBoxes :checked").each(function(){
@@ -116,7 +114,7 @@ const getOtherSelections = function(){
     return(selections);
 }
 
-//Get list of user 'top four' and 'other' selections
+//Get combined list of user 'top four' and 'other' selected items
 const getUserSelections = function(){
     let topFourSelections = getTopFourSelection();
     let otherSelections = getOtherSelections();
@@ -124,6 +122,18 @@ const getUserSelections = function(){
     return(combinesSelections);
 }
 
+//Disable or enable next button on first page of defaults modal
+const toggleDefaultsNextButton = function(){
+    let topFourSelections = getTopFourSelection();
+    let disclaimerChecked = $("#disclaimerCheckbox").prop("checked");
+
+    //Check if disclaimer box is checked & if top four selections match
+    if(duplicateExists(topFourSelections) === true || disclaimerChecked === false){
+        $("#defaultsNextButton").prop("disabled", true);
+    }else if(duplicateExists(topFourSelections) === false && disclaimerChecked === true){
+        $("#defaultsNextButton").prop("disabled", false);
+    }
+}
 
 //######################## Event Listeners (Filter and Quick Add) ########################
 
@@ -167,17 +177,20 @@ $(window).on("load", ()=>{
     }
 });
 
-//Defaults Modal: Disable Next button if topFour dropdown selections match
+//Disclaimer checkbox -> enable Next button if no top four matches and disclaimer checked
+$("#disclaimerCheckbox").on("click", function(){
+    toggleDefaultsNextButton();
+});
+
+//Top Four drop-down -> enable Next button if no matches or disclaimer unchecked
 $(".topFourSelection").on("change", ()=>{
-        let selections = getTopFourSelection();
-        console.log(selections)
-    if(duplicateExists(selections) === true){
-        $("#defaultsNextButton").prop("disabled", true);
+    let topFourSelections = getTopFourSelection();
+    toggleDefaultsNextButton();
+    
+    if(duplicateExists(topFourSelections) === true){
         $(".duplicateSelectionWarning").removeClass('hidden');
     }else{
-        $("#defaultsNextButton").prop("disabled", false);
         $(".duplicateSelectionWarning").addClass('hidden');
-
     }
 })
 
@@ -196,6 +209,8 @@ $("#defaultsNextButton").on("click", ()=>{
         $(".defaultsSubTitle").prop("textContent", "These are optional.")
         //hide top four selectors
         $(".topFourFlexRow").addClass("hidden")
+        //hide disclaimer checkbox and link
+        $(".disclaimerDiv, .disclaimerLink").addClass("hidden");
         //populate checkbox options
         setupDefaultsCheckboxes();
         //show checkboxes
@@ -233,6 +248,8 @@ $("#defaultsBackButton").on("click", ()=>{
         $(".defaultsSubTitle").prop("textContent", "These four will always be visible.")
         //show top four selectors
         $(".topFourFlexRow").removeClass("hidden")
+        //show disclaimer link and checkbox
+        $(".disclaimerDiv, .disclaimerLink").removeClass("hidden");
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
 
@@ -248,7 +265,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //hide top four selectors
         $(".topFourFlexRow").addClass("hidden")
         //populate checkbox options
-        setupDefaultsCheckboxes();
+        // setupDefaultsCheckboxes();
         //show checkboxes
         $(".otherItemsFlexRow").removeClass("hidden");
         //hide goals input boxes

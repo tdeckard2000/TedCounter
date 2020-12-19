@@ -351,6 +351,25 @@ button.close{
     margin: 5vh 0;
 }
 
+.disclaimerDiv{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-size: .8rem;
+    margin: auto;
+    width: fit-content;
+}
+
+.disclaimerDiv label{
+    margin: 0 0 0 5px;
+}
+
+.disclaimerLink{
+    display: inline-block;
+    font-size: .8rem;
+    margin-top: 20px;
+}
+
 .duplicateSelectionWarning{
     background-color: #cccccc;
     border-radius: 5px;
@@ -359,22 +378,6 @@ button.close{
     margin: auto;
     margin-top: 10px;
     padding: 5px;
-}
-
-.goalsFlexColumn1{
-
-}
-
-.goalsFlexColumn1 div{
-
-}
-
-.goalsFlexColumn2{
-
-}
-
-.goalsFlexColumn2 div{
-
 }
 
 .goalsFlexRow{

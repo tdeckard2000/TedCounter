@@ -54,12 +54,18 @@ const setupDefaultsCheckboxes = function(){
         //remove item at index position
         allOptions.splice(matchingIndex, 1);
     });
-    console.log(allOptions)
+
+    //remove any existing checkboxes (if the user goes back a page)
+    $(".otherFlexColumn1, .otherFlexColumn2").children("div").remove();
+
+    //add checkboxes
     for(i=0; i < allOptions.length; i=i+2){
-        $(".otherFlexColumn1").append('<input type="checkbox" id=' + allOptions[i] + 'name="test"></input>');
-        $(".otherFlexColumn1").append('<label for=' + allOptions[i] + '>' + allOptions[i] +'</label>');
-        $(".otherFlexColumn2").append('<input type="checkbox" id=' + allOptions[i+1] + 'name="test"></input>');
-        $(".otherFlexColumn2").append('<label for=' + allOptions[i+1] + '>' + allOptions[i+1] +'</label>');
+        //column 1
+        $(".otherFlexColumn1").append('<div><input type="checkbox" id=' 
+        + allOptions[i] + 'name="test"></input><label for=' + allOptions[i] + '>' + allOptions[i] +'</label></div>');
+        //column 2
+        $(".otherFlexColumn2").append('<div><input type="checkbox" id=' + allOptions[i+1] 
+        + 'name="test"></input><label for=' + allOptions[i+1] + '>' + allOptions[i+1] +'</label></div>');
     }
 }
 
@@ -139,11 +145,14 @@ $("#defaultsNextButton").on("click", ()=>{
     //change page title
     $(".defaultsTitle").prop("textContent", "Would you like to track anything else?");
     //change subtitle
-    $(".defaultsSubTitle").prop("textContent", "These are optional")
+    $(".defaultsSubTitle").prop("textContent", "These are optional.")
     //hide top four selectors
     $(".topFourFlexRow").addClass("hidden")
     //populate checkbox options
     setupDefaultsCheckboxes();
+    //show checkboxes
+    $(".otherItemsFlexRow").removeClass("hidden");
+
 
     }else if(currentPageNumber === "2"){
 
@@ -153,6 +162,7 @@ $("#defaultsNextButton").on("click", ()=>{
 //On back button click, mimic previous page
 $("#defaultsBackButton").on("click", ()=>{
     let currentPageNumber = $(".defaultsModalBody").attr("data-page");
+
     if(currentPageNumber === "2"){
     //store page number as class in modal body
     $(".defaultsModalBody").attr("data-page", "1");
@@ -164,5 +174,7 @@ $("#defaultsBackButton").on("click", ()=>{
     $(".defaultsSubTitle").prop("textContent", "These four will always be visible.")
     //show top four selectors
     $(".topFourFlexRow").removeClass("hidden")
+    //hide checkboxes from page 2
+    $(".otherItemsFlexRow").addClass("hidden");
     }
 });

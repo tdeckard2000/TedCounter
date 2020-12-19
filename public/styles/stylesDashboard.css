@@ -371,7 +371,7 @@ button.close{
 
 .otherItemsFlexRow{
     display: flex;
-    height: 15%;
+    height: 100px;
     justify-content: center;
     overflow: scroll;
     padding-left: 15px;

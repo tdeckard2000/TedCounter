@@ -135,6 +135,33 @@ const toggleDefaultsNextButton = function(){
     }
 }
 
+//Get goals from text inputs
+const getUserGoals = function(){
+    let userGoals = {};
+    let itemName = ""
+    let itemValue = 0
+
+    $(".goalsFlexRow input").each(function(data){
+        itemName = this.id
+        itemValue = $(this).val();
+        userGoals[itemName] = itemValue;
+    });
+
+    return userGoals;
+}
+
+//Send user goals to server to be saved
+const postDefaultSelections = function(){
+    let userGoals = JSON.stringify(getUserGoals());
+    $.ajax({
+        type: 'POST',
+        url: '/updateUserGoals',
+        data: {userGoals: userGoals}
+    }).done((data)=>{
+        console.log("done" + data);
+    });
+}
+
 //######################## Event Listeners (Filter and Quick Add) ########################
 
 //Filter list items from meal selector modal based on text input.
@@ -206,9 +233,9 @@ $("#defaultsNextButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Anything else?");
         //change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These are optional.")
+        $(".defaultsSubTitle").prop("textContent", "These are optional.");
         //hide top four selectors
-        $(".topFourFlexRow").addClass("hidden")
+        $(".topFourFlexRow").addClass("hidden");
         //hide disclaimer checkbox and link
         $(".disclaimerDiv, .disclaimerLink").addClass("hidden");
         //populate checkbox options
@@ -222,15 +249,28 @@ $("#defaultsNextButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.")
+        $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.");
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages
         setupDefaultsGoalsTextBoxes();
         //show goals input boxes
-        $(".goalsFlexRow").removeClass("hidden")
+        $(".goalsFlexRow").removeClass("hidden");
+        //change Next button text to 'Submit'
+        $("#defaultsNextButton").text("Submit");
+    }else if(currentPageNumber === "3"){
+        //store page number in modal body
+        $(".defaultsModalBody").attr("data-page", "4");
+        //change page title
+        $(".defaultsTitle").prop("textContent", "All done!");
+        //change subtitle
+        $(".defaultsSubTitle").prop("innerHTML", "What would you like to do now?");
+        //hide goal input boxes
+        $(".goalsFlexRow").addClass("hidden");
+        //send selections to server to be saved
+        postDefaultSelections();
 
-}  
+    }  
 });
 
 //On back button click, mimic previous page
@@ -245,9 +285,9 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Which nutrients are you most interested in?");
         //Change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These four will always be visible.")
+        $(".defaultsSubTitle").prop("textContent", "These four will always be visible.");
         //show top four selectors
-        $(".topFourFlexRow").removeClass("hidden")
+        $(".topFourFlexRow").removeClass("hidden");
         //show disclaimer link and checkbox
         $(".disclaimerDiv, .disclaimerLink").removeClass("hidden");
         //hide checkboxes from page 2
@@ -261,14 +301,25 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Anything else?");
         //change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These are optional.")
+        $(".defaultsSubTitle").prop("textContent", "These are optional.");
         //hide top four selectors
-        $(".topFourFlexRow").addClass("hidden")
+        $(".topFourFlexRow").addClass("hidden");
         //populate checkbox options
         // setupDefaultsCheckboxes();
         //show checkboxes
         $(".otherItemsFlexRow").removeClass("hidden");
         //hide goals input boxes
-        $(".goalsFlexRow").addClass("hidden")
+        $(".goalsFlexRow").addClass("hidden");
+        //change Next button text to 'Submit'
+        $("#defaultsNextButton").text("Next");
+    }else if(currentPageNumber === "4"){
+        //store page number in modal body
+        $(".defaultsModalBody").attr("data-page", "3");
+        //change page title
+        $(".defaultsTitle").prop("textContent", "Let's talk goals.");
+        //change subtitle
+        $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.");
+        //show goals input boxes
+        $(".goalsFlexRow").removeClass("hidden");
     }
 });

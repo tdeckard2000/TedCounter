@@ -47,13 +47,14 @@ const duplicateExists = function(array){
 
 //Populate Other Options check boxes for defaults modal
 const setupDefaultsCheckboxes = function(){
-    let allOptions = nutritionOptions;
+    //Array.from creates a copy of the array, otherwise it's just a reference
+    let allOptions = Array.from(nutritionOptions);
     let topFourSelections = getTopFourSelection();
-
+    console.log(topFourSelections)
+    console.log(allOptions)
     //remove top four selections from "all options"
     topFourSelections.forEach(element => {
         let matchingIndex = allOptions.indexOf(element);
-        console.log(matchingIndex)
 
         if(matchingIndex !== -1){
         //remove item at index position

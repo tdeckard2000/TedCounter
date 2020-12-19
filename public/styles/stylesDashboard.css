@@ -367,7 +367,7 @@ button.close{
 .disclaimerLink{
     display: inline-block;
     font-size: .8rem;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .duplicateSelectionWarning{
@@ -397,7 +397,7 @@ button.close{
 .goalsFlexRow label{
     display: block;
     font-size: .8rem;
-    margin-bottom: .1rem;
+    margin-bottom: 10px 0 1px 0;
 }
 
 .modal-footer .back{

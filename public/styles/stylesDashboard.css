@@ -397,7 +397,7 @@ button.close{
 .goalsFlexRow label{
     display: block;
     font-size: .8rem;
-    margin-bottom: 10px 0 1px 0;
+    margin: 10px 0 1px 0;
 }
 
 .modal-footer .back{

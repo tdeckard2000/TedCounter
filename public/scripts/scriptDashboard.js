@@ -2,7 +2,7 @@
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
-const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber", "Histidine",
+const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber", "Folic Acid", "Histidine",
 "Iodine", "Iron","Isoleucine", "Leucine", "Lysine", "Magnesium", "Manganese", "Methionine", "Molybdenum","Phenylalanine", "Phosphorus", "Potassium", "Protein",
 "Saturated Fat", "Selenium", "Sodium", "Sugar", "Trans Fat", "Threonine", "Tryptophan", "Valine", "Vitamin A", "Vitamin B1", "Vitamin B2", "Vitamin B3",
 "Vitamin B5", "Vitamin B6", "Vitamin B7", "Vitamin B9", "Vitamin B12", "Vitamin C", "Vitamin D2", "Vitamin D3", "Vitamin E", "Vitamin K", "Zinc"]
@@ -15,6 +15,8 @@ $(window).on("load",()=>{
 
 //######################## Functions ########################
 
+
+//######################## Functions (Defaults Modal) ########################
 //Populate top four dropdown lists on defaults modal
 const setTopFourDropdownOptions = function (){
     nutritionOptions.forEach(element => {
@@ -58,14 +60,15 @@ const setupDefaultsCheckboxes = function(){
     //remove any existing checkboxes (if the user goes back a page)
     $(".otherFlexColumn1, .otherFlexColumn2").children("div").remove();
 
-    //add checkboxes
     for(i=0; i < allOptions.length; i=i+2){
-        //column 1
+        //add checkboxes to column 1
         $(".otherFlexColumn1").append("<div><input type='checkbox' id='" 
         + allOptions[i] + "'name='test'></input><label for='" + allOptions[i] + "'>" + allOptions[i] + "</label></div>");
-        //column 2
-        $(".otherFlexColumn2").append("<div><input type='checkbox' id='" + allOptions[i+1] 
-        + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
+        //add checkboxes to column 2
+        if(allOptions[i+1] !== undefined){
+            $(".otherFlexColumn2").append("<div><input type='checkbox' id='" + allOptions[i+1] 
+            + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
+        }
     }
 }
 
@@ -75,8 +78,26 @@ const getTopFourSelection = function(){
     $(".topFourSelection").each(function(){
        selections.push($('option:selected', this).text());
     });
-    return(selections)
+    return(selections);
 }
+
+//Get 'other' checkbox selections
+const getOtherSelections = function(){
+    let selections = [];
+    $(".otherCheckBoxes :checked").each(function(){
+        selections.push($(this).attr("id"));
+    })
+    return(selections);
+}
+
+//Get list of user 'top four' and 'other' selections
+const getUserSelections = function(){
+    let topFourSelections = getTopFourSelection();
+    let otherSelections = getOtherSelections();
+    let combinesSelections = topFourSelections.concat(otherSelections);
+    return(combinesSelections);
+}
+
 
 //######################## Event Listeners (Filter and Quick Add) ########################
 
@@ -158,11 +179,15 @@ $("#defaultsNextButton").on("click", ()=>{
         //store page number in modal body
         $(".defaultsModalBody").attr("data-page", "3");
         //change page title
-        $(".defaultsTitle").prop("textContent", "Lets talk goals.");
+        $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("textContent", "Everyone's goals are different!")
+        $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.")
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
+        //get array of user's selections from first two pages
+        console.log(getUserSelections())
+        //show goals input boxes
+        $(".goalsFlexRow").removeClass("hidden")
 
 }  
 });
@@ -184,6 +209,7 @@ $("#defaultsBackButton").on("click", ()=>{
         $(".topFourFlexRow").removeClass("hidden")
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
+
     }else if(currentPageNumber === "3"){
         //store page number in modal body
         $(".defaultsModalBody").attr("data-page", "2");
@@ -199,5 +225,7 @@ $("#defaultsBackButton").on("click", ()=>{
         setupDefaultsCheckboxes();
         //show checkboxes
         $(".otherItemsFlexRow").removeClass("hidden");
+        //hide goals input boxes
+        $(".goalsFlexRow").addClass("hidden")
     }
 });

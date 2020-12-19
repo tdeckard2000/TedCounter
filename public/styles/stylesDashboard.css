@@ -361,6 +361,31 @@ button.close{
     padding: 5px;
 }
 
+.goalsFlexColumn1{
+    width: 80%;
+}
+
+.goalsFlexColumn2{
+    width: 80%;
+}
+
+.goalsFlexRow{
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    position: relative;
+}
+
+.goalsFlexRow input{
+    position: relative;
+    width: inherit;
+}
+
+.goalsFlexRow label{
+    font-size: .8rem;
+    margin-bottom: .1rem;
+}
+
 .modal-footer .back{
     font-weight: 300;
     left: 15px;

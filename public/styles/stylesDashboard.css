@@ -1,5 +1,9 @@
 /* FOR DASHBOARD PAGES */
 
+html, body{
+    height: 100%;
+}
+
 /* Dashboard Header ========================================== */
 .headerRow{
     background-color: #ff9c3e;
@@ -371,7 +375,7 @@ button.close{
 
 .otherItemsFlexRow{
     display: flex;
-    height: 100px;
+    height: 50%;
     justify-content: center;
     overflow: scroll;
     padding-left: 15px;

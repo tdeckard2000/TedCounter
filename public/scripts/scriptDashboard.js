@@ -57,19 +57,40 @@ const setupDefaultsCheckboxes = function(){
         allOptions.splice(matchingIndex, 1);
     });
 
-    //remove any existing checkboxes (if the user goes back a page)
+    //remove any existing checkboxes (if the user toggles pages)
     $(".otherFlexColumn1, .otherFlexColumn2").children("div").remove();
 
     for(i=0; i < allOptions.length; i=i+2){
-        //add checkboxes to column 1
+        //add column 1 checkboxes
         $(".otherFlexColumn1").append("<div><input type='checkbox' id='" 
         + allOptions[i] + "'name='test'></input><label for='" + allOptions[i] + "'>" + allOptions[i] + "</label></div>");
-        //add checkboxes to column 2
+        //add column 2 checkboxes
         if(allOptions[i+1] !== undefined){
             $(".otherFlexColumn2").append("<div><input type='checkbox' id='" + allOptions[i+1] 
             + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
         }
     }
+}
+
+//Populate goals text input boxes
+const setupDefaultsGoalsTextBoxes = function(){
+    let list = getUserSelections();
+
+    //remove any existing checkboxes (if user toggles pages)
+    $(".goalsFlexColumn1, .goalsFlexColumn2").children("div").remove();
+
+    for(i=0; i < list.length; i = i+2){
+        //add column 1 text input boxes
+        $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
+         "</label><input id='" + list[i] + "'type='text'></div>")
+        //add column 1 text input boxes
+         if(list[i+1] !== undefined){
+            $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + list[i+1] +
+            "</label><input id='" + list[i+1] + "'type='text'></div>")
+         }
+
+    }
+
 }
 
 //Get top four selected items
@@ -185,7 +206,7 @@ $("#defaultsNextButton").on("click", ()=>{
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages
-        console.log(getUserSelections())
+        setupDefaultsGoalsTextBoxes();
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden")
 

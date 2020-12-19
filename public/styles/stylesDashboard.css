@@ -219,6 +219,7 @@ button.close{
 .modal-header{
     background-color: #ff9c3e;
     height: 45px;
+    min-height: 45px;
 }
 
 .modal-title{
@@ -372,8 +373,10 @@ button.close{
     display: flex;
     height: 50%;
     justify-content: center;
-    overflow: auto;
+    overflow: scroll;
+    padding-left: 15px;
     position: relative;
+    -webkit-overflow-scrolling: touch;
 }
 
 .otherItemsFlexRow label{
@@ -386,6 +389,7 @@ button.close{
 
 .otherFlexColumn2{
     text-align: left;
+    padding-left: 10px;
 }
 
 .topFourFlexColumn{

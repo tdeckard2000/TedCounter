@@ -61,11 +61,11 @@ const setupDefaultsCheckboxes = function(){
     //add checkboxes
     for(i=0; i < allOptions.length; i=i+2){
         //column 1
-        $(".otherFlexColumn1").append('<div><input type="checkbox" id=' 
-        + allOptions[i] + 'name="test"></input><label for=' + allOptions[i] + '>' + allOptions[i] +'</label></div>');
+        $(".otherFlexColumn1").append("<div><input type='checkbox' id='" 
+        + allOptions[i] + "'name='test'></input><label for='" + allOptions[i] + "'>" + allOptions[i] + "</label></div>");
         //column 2
-        $(".otherFlexColumn2").append('<div><input type="checkbox" id=' + allOptions[i+1] 
-        + 'name="test"></input><label for=' + allOptions[i+1] + '>' + allOptions[i+1] +'</label></div>');
+        $(".otherFlexColumn2").append("<div><input type='checkbox' id='" + allOptions[i+1] 
+        + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
     }
 }
 
@@ -139,25 +139,32 @@ $("#defaultsNextButton").on("click", ()=>{
     let currentPageNumber = $(".defaultsModalBody").attr("data-page");
 
     if(currentPageNumber === "1"){
-    //store page number in modal body
-    $(".defaultsModalBody").attr("data-page", "2");
-    //enable back button
-    $("#defaultsBackButton").prop("disabled", false);
-    //change page title
-    $(".defaultsTitle").prop("textContent", "Would you like to track anything else?");
-    //change subtitle
-    $(".defaultsSubTitle").prop("textContent", "These are optional.")
-    //hide top four selectors
-    $(".topFourFlexRow").addClass("hidden")
-    //populate checkbox options
-    setupDefaultsCheckboxes();
-    //show checkboxes
-    $(".otherItemsFlexRow").removeClass("hidden");
-
+        //store page number in modal body
+        $(".defaultsModalBody").attr("data-page", "2");
+        //enable back button
+        $("#defaultsBackButton").prop("disabled", false);
+        //change page title
+        $(".defaultsTitle").prop("textContent", "Anything else?");
+        //change subtitle
+        $(".defaultsSubTitle").prop("textContent", "These are optional.")
+        //hide top four selectors
+        $(".topFourFlexRow").addClass("hidden")
+        //populate checkbox options
+        setupDefaultsCheckboxes();
+        //show checkboxes
+        $(".otherItemsFlexRow").removeClass("hidden");
 
     }else if(currentPageNumber === "2"){
+        //store page number in modal body
+        $(".defaultsModalBody").attr("data-page", "3");
+        //change page title
+        $(".defaultsTitle").prop("textContent", "Lets talk about your goals.");
+        //change subtitle
+        $(".defaultsSubTitle").prop("textContent", "Everyone's goals are different!")
+        //hide checkboxes from page 2
+        $(".otherItemsFlexRow").addClass("hidden");
 
-    }  
+}  
 });
 
 //On back button click, mimic previous page
@@ -165,17 +172,32 @@ $("#defaultsBackButton").on("click", ()=>{
     let currentPageNumber = $(".defaultsModalBody").attr("data-page");
 
     if(currentPageNumber === "2"){
-    //store page number as class in modal body
-    $(".defaultsModalBody").attr("data-page", "1");
-    //disable back button
-    $("#defaultsBackButton").prop("disabled", true);
-    //change page title
-    $(".defaultsTitle").prop("textContent", "Which nutrients are you most interested in?");
-    //Change subtitle
-    $(".defaultsSubTitle").prop("textContent", "These four will always be visible.")
-    //show top four selectors
-    $(".topFourFlexRow").removeClass("hidden")
-    //hide checkboxes from page 2
-    $(".otherItemsFlexRow").addClass("hidden");
+        //store page number as class in modal body
+        $(".defaultsModalBody").attr("data-page", "1");
+        //disable back button
+        $("#defaultsBackButton").prop("disabled", true);
+        //change page title
+        $(".defaultsTitle").prop("textContent", "Which nutrients are you most interested in?");
+        //Change subtitle
+        $(".defaultsSubTitle").prop("textContent", "These four will always be visible.")
+        //show top four selectors
+        $(".topFourFlexRow").removeClass("hidden")
+        //hide checkboxes from page 2
+        $(".otherItemsFlexRow").addClass("hidden");
+    }else if(currentPageNumber === "3"){
+        //store page number in modal body
+        $(".defaultsModalBody").attr("data-page", "2");
+        //enable back button
+        $("#defaultsBackButton").prop("disabled", false);
+        //change page title
+        $(".defaultsTitle").prop("textContent", "Anything else?");
+        //change subtitle
+        $(".defaultsSubTitle").prop("textContent", "These are optional.")
+        //hide top four selectors
+        $(".topFourFlexRow").addClass("hidden")
+        //populate checkbox options
+        setupDefaultsCheckboxes();
+        //show checkboxes
+        $(".otherItemsFlexRow").removeClass("hidden");
     }
 });

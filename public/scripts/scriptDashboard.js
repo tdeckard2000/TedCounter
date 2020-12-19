@@ -121,8 +121,9 @@ $(window).on("load", ()=>{
 });
 
 //Defaults Modal: Disable Next button if topFour dropdown selections match
-$(".topFourSelection").on("click", (data)=>{
+$(".topFourSelection").on("change", ()=>{
         let selections = getTopFourSelection();
+        console.log(selections)
     if(duplicateExists(selections) === true){
         $("#defaultsNextButton").prop("disabled", true);
         $(".duplicateSelectionWarning").removeClass('hidden');

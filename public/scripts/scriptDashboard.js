@@ -158,7 +158,7 @@ $("#defaultsNextButton").on("click", ()=>{
         //store page number in modal body
         $(".defaultsModalBody").attr("data-page", "3");
         //change page title
-        $(".defaultsTitle").prop("textContent", "Lets talk about your goals.");
+        $(".defaultsTitle").prop("textContent", "Lets talk goals.");
         //change subtitle
         $(".defaultsSubTitle").prop("textContent", "Everyone's goals are different!")
         //hide checkboxes from page 2

@@ -343,6 +343,7 @@ button.close{
 }
 
 .defaultsModalBody{
+    height: 100%;
     overflow: auto;
 }
 

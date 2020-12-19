@@ -679,6 +679,11 @@ app.get('/getBarcodeData', (req, res)=>{
   });
 })
 
+//Get disclaimer page
+app.get('/disclaimer', (req, res)=>{
+  res.render("disclaimer")
+})
+
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
   req.session.data = null //remove old session data

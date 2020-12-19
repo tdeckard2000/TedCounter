@@ -53,8 +53,12 @@ const setupDefaultsCheckboxes = function(){
     //remove top four selections from "all options"
     topFourSelections.forEach(element => {
         let matchingIndex = allOptions.indexOf(element);
+        console.log(matchingIndex)
+
+        if(matchingIndex !== -1){
         //remove item at index position
         allOptions.splice(matchingIndex, 1);
+        }
     });
 
     //remove any existing checkboxes (if the user toggles pages)

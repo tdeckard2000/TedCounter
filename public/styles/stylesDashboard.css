@@ -347,6 +347,10 @@ button.close{
     overflow: auto;
 }
 
+.defaultsForm{
+    width: 100%;
+}
+
 .defaultsTitle{
     margin: 5vh 0;
 }
@@ -358,6 +362,7 @@ button.close{
     font-size: .8rem;
     margin: auto;
     width: fit-content;
+    width: max-content;
 }
 
 .disclaimerDiv label{
@@ -398,6 +403,12 @@ button.close{
     display: block;
     font-size: .8rem;
     margin: 10px 0 1px 0;
+}
+
+.loadingIndicatorDiv{
+    bottom: 52%;
+    left: 45%;
+    position: fixed;
 }
 
 .modal-footer .back{

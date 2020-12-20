@@ -866,7 +866,7 @@ app.post('/deleteFoodItem', (req,res)=>{
 app.post('/updateUserGoals', (req, res)=>{
   const userPreferences = JSON.parse(req.body.userGoals);
   console.log(userPreferences);
-  res.status(200).send("got it")
+  res.status(200).send({result:false});
 })
 
 // Server ==========================================================

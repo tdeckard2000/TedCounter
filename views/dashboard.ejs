@@ -227,6 +227,7 @@
 <!-- Default Settings Modal -->
 <div class="modal" data-backdrop="static" id="userPreferencesModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered">
+    <form action="" class="defaultsForm" method="POST">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Welcome, <%=userName%>!</h5>
@@ -279,13 +280,22 @@
           </div>
         </div>
 
+        <!-- Loading Indicator -->
+        <div class="loadingIndicatorDiv hidden">
+          <div class="loadingIndicator spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
         <hr>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary back" id="defaultsBackButton">Back</button>
         <button type="button" id="defaultsNextButton" class="btn btn-primary next" disabled>Next</button>
+        <button type="submit" id="defaultsSubmitButton" class="btn btn-primary next hidden">Submit</button>
       </div>
     </div>
+  </form>
   </div>
 </div>
 

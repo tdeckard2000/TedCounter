@@ -1,5 +1,6 @@
 //######################## Dashboard Script ########################
 
+
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
 const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber", "Folic Acid", "Histidine",
@@ -85,11 +86,11 @@ const setupDefaultsGoalsTextBoxes = function(){
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
         $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
-         "</label><input id='" + list[i] + "'type='text'></div>")
+         "</label><input id='" + list[i] + "'type='text' inputmode='numeric' maxlength='4' pattern = '[0-9]*'></div>")
 
          if(list[i+1] !== undefined){
             $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + list[i+1] +
-            "</label><input id='" + list[i+1] + "'type='text'></div>")
+            "</label><input id='" + list[i+1] + "'type='text' inputmode='numeric' maxlength='4' pattern = '[0-9]*'></div>")
          }
 
     }
@@ -153,12 +154,30 @@ const getUserGoals = function(){
 //Send user goals to server to be saved
 const postDefaultSelections = function(){
     let userGoals = JSON.stringify(getUserGoals());
+    $(".loadingIndicatorDiv").removeClass("hidden"); //show loading icon
+    $(".defaultsTitle").prop("textContent", "Saving");
+    $(".defaultsSubTitle").prop("textContent", "please wait...");
+    $("#defaultsNextButton").prop("disabled", true);
+
     $.ajax({
         type: 'POST',
         url: '/updateUserGoals',
         data: {userGoals: userGoals}
+
     }).done((data)=>{
-        console.log("done" + data);
+
+        if(data.result === true){
+            $(".loadingIndicatorDiv").addClass("hidden");
+            $(".defaultsTitle").prop("textContent", "All done!");
+            $(".defaultsSubTitle").prop("textContent", "What would you like to do now?");
+            $("#defaultsNextButton").prop("disabled", false);
+
+        }else{
+            console.warn("Error saving user preferences at AJAX.")
+            $(".loadingIndicatorDiv").addClass("hidden");
+            $(".defaultsTitle").prop("textContent", "Error saving.. dang!");
+            $(".defaultsSubTitle").prop("textContent", "Tap the Back button, then Submit again.");
+        }
     });
 }
 
@@ -222,7 +241,7 @@ $(".topFourSelection").on("change", ()=>{
 })
 
 //On Next button click, mimic next page
-$("#defaultsNextButton").on("click", ()=>{
+$("#defaultsNextButton").on("click", function(){
     let currentPageNumber = $(".defaultsModalBody").attr("data-page");
 
     if(currentPageNumber === "1"){
@@ -257,18 +276,10 @@ $("#defaultsNextButton").on("click", ()=>{
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
         //change Next button text to 'Submit'
-        $("#defaultsNextButton").text("Submit");
+        $("#defaultsNextButton").addClass("hidden")
+        $("#defaultsSubmitButton").removeClass("hidden")
+        
     }else if(currentPageNumber === "3"){
-        //store page number in modal body
-        $(".defaultsModalBody").attr("data-page", "4");
-        //change page title
-        $(".defaultsTitle").prop("textContent", "All done!");
-        //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "What would you like to do now?");
-        //hide goal input boxes
-        $(".goalsFlexRow").addClass("hidden");
-        //send selections to server to be saved
-        postDefaultSelections();
 
     }  
 });
@@ -310,8 +321,11 @@ $("#defaultsBackButton").on("click", ()=>{
         $(".otherItemsFlexRow").removeClass("hidden");
         //hide goals input boxes
         $(".goalsFlexRow").addClass("hidden");
-        //change Next button text to 'Submit'
-        $("#defaultsNextButton").text("Next");
+        //show Next button
+        $("#defaultsNextButton").removeClass("hidden");
+        //hide submit button
+        $("#defaultsSubmitButton").addClass("hidden")
+
     }else if(currentPageNumber === "4"){
         //store page number in modal body
         $(".defaultsModalBody").attr("data-page", "3");
@@ -321,5 +335,30 @@ $("#defaultsBackButton").on("click", ()=>{
         $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.");
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
+        //update & show Next button
+        $("#defaultsNextButton").text("Next").attr("data-dismiss", "").addClass("hidden").prop("disabled", false);
+        //show submit button
+        $("#defaultsSubmitButton").removeClass("hidden");
+
+
     }
 });
+
+//Validate 'Submit' action on page 3 'goal' inputs
+$(".defaultsForm").on("submit", (e)=>{
+    e.preventDefault();
+     //store page number in modal body
+     $(".defaultsModalBody").attr("data-page", "4");
+     //change page title
+     $(".defaultsTitle").prop("textContent", "All done!");
+     //change subtitle
+     $(".defaultsSubTitle").prop("innerHTML", "What would you like to do now?");
+    //hide goal input boxes
+     $(".goalsFlexRow").addClass("hidden");
+    //update next button
+    $("#defaultsNextButton").removeClass("hidden")
+    $("#defaultsSubmitButton").addClass("hidden")
+    $("#defaultsNextButton").text("Close").prop("type", "button").attr("data-dismiss", "modal");
+    //send selections to server to be saved
+     postDefaultSelections();
+})

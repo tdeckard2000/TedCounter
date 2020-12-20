@@ -125,7 +125,6 @@ $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").on("input", (
 
 //Respond to save button click
 $("#editItemForm").on("submit", (data)=>{
-    console.log("here")
     data.preventDefault();
     
     $("#saveButton, #deleteButton").prop("disabled", true)

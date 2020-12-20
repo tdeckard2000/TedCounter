@@ -15,7 +15,28 @@ $(window).on("load",()=>{
 })
 
 //######################## Functions ########################
+const orderAlphabetically = function(startingPoint, unorderedArray){
+    let valueChanged = false;
+    while(valueChanged === false){
+        valueChanged = true;
+        for(let i=startingPoint; i<=unorderedArray.length; i++){
+            //end loop if nothing left to compare
+            if(unorderedArray[i+1] == undefined){
+            break
+            }
+            let obj1 = unorderedArray[i];
+            let obj2 = unorderedArray[i+1];
 
+            if(obj1 > obj2){
+            let item1 = unorderedArray[i];
+            let item2 = unorderedArray[i+1];
+            unorderedArray.splice(i, 2, item2, item1);
+            valueChanged = false;
+            }
+        }
+    }
+    return unorderedArray //now ordered alphabetically
+}
 
 //######################## Functions (Defaults Modal) ########################
 //Populate top four dropdown lists on defaults modal
@@ -80,10 +101,13 @@ const setupDefaultsCheckboxes = function(){
 const setupDefaultsGoalsTextBoxes = function(){
     let list = getUserSelections();
 
+    //order list alphabetically (keeping top four intact)
+    list = orderAlphabetically(4, list);
+
     //remove any existing input boxes (if user toggles pages)
     $(".goalsFlexColumn1, .goalsFlexColumn2").children("div").remove();
 
-    // console.log(list)
+    console.log(list)
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
         $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
@@ -106,7 +130,6 @@ const getTopFourSelection = function(){
     selections.push ($("#topFourSelection3").val())
     selections.push ($("#topFourSelection4").val())
 
-    console.log(selections)
     return(selections);
 }
 

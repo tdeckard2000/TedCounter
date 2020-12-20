@@ -83,14 +83,15 @@ const setupDefaultsGoalsTextBoxes = function(){
     //remove any existing input boxes (if user toggles pages)
     $(".goalsFlexColumn1, .goalsFlexColumn2").children("div").remove();
 
+    // console.log(list)
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
         $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
-         "</label><input id='" + list[i] + "'type='text' inputmode='numeric' maxlength='4' pattern = '[0-9]*'></div>")
+         "</label><input id='" + list[i] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
 
          if(list[i+1] !== undefined){
             $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + list[i+1] +
-            "</label><input id='" + list[i+1] + "'type='text' inputmode='numeric' maxlength='4' pattern = '[0-9]*'></div>")
+            "</label><input id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
     }
@@ -100,9 +101,12 @@ const setupDefaultsGoalsTextBoxes = function(){
 //Get top four selected items
 const getTopFourSelection = function(){
     let selections = [];
-    $(".topFourSelection").each(function(){
-       selections.push($('option:selected', this).text());
-    });
+    selections.push ($("#topFourSelection1").val())
+    selections.push ($("#topFourSelection2").val())
+    selections.push ($("#topFourSelection3").val())
+    selections.push ($("#topFourSelection4").val())
+
+    console.log(selections)
     return(selections);
 }
 

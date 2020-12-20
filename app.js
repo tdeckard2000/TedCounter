@@ -575,6 +575,15 @@ const openFoodFactsRequest = function(barcodeNumber){
   })
 }
 
+//Convert string key values to integers
+const convertToInt = function(jsonObject){
+  for(const [key, value] of Object.entries(jsonObject)){
+    jsonObject[key] = parseInt(value, 10);
+  }
+
+  return jsonObject;
+}
+
 // Get Requests ==========================================================
 app.get(['/','/oops', '/accountCreated', '/passwordChanged'], (req, res)=>{
   if(req.originalUrl === '/oops'){
@@ -864,9 +873,13 @@ app.post('/deleteFoodItem', (req,res)=>{
 })
 
 app.post('/updateUserGoals', (req, res)=>{
-  const userPreferences = JSON.parse(req.body.userGoals);
+  const userPreferencesStrings = JSON.parse(req.body.userGoals); //form data numbers are strings
+  const userPreferences = convertToInt(userPreferencesStrings); //convert strings to numbers
+
+
+  console.log(userPreferencesStrings)
   console.log(userPreferences);
-  res.status(200).send({result:false});
+  res.status(200).send({result:true});
 })
 
 // Server ==========================================================

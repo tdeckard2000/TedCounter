@@ -366,7 +366,7 @@ const updateUserDefaults = function(userId, topFourSelections, otherSelections, 
   }
 
   return new Promise((resolve, reject)=>{
-    user.update({_id:userId}, updates, (err, doc)=>{
+    user.updateOne({_id:userId}, updates, (err, doc)=>{
       if(doc){
         resolve(true);
       }else{
@@ -900,8 +900,15 @@ app.post('/updateUserGoals', (req, res)=>{
   const userId = (req.session.userDocId);
 
   updateUserDefaults(userId, topFourSelections, otherSelections, userGoals).then((data)=>{
-    console.log(data);
-    res.status(200).send({result:true});
+    if(data === true){ //successful update
+      req.session.nutritionTopFour = topFourSelections;
+      req.session.nutritionOther = otherSelections;
+      req.session.nutritionGoals = userGoals;
+      res.status(200).send({result:true});
+    }else{
+      console.log(data);
+      res.status(200).send({result:false});
+    }
   });
 });
 

@@ -56,6 +56,7 @@ const setTopFourDropdownOptions = function (){
 //Check for match in given array
 const duplicateExists = function(array){
     let item = ""
+    console.log(array)
     while(array.length > 1){
         //Remove last array item and store in item variable
         item = array.pop()
@@ -124,10 +125,10 @@ const setupDefaultsGoalsTextBoxes = function(){
 //Get top four selected items
 const getTopFourSelections = function(){
     let selections = [];
-    selections.push ($("#topFourSelection1").val())
-    selections.push ($("#topFourSelection2").val())
-    selections.push ($("#topFourSelection3").val())
-    selections.push ($("#topFourSelection4").val())
+    selections.push ($("#topFourSelection1").find('option:selected').text())
+    selections.push ($("#topFourSelection2").find('option:selected').text())
+    selections.push ($("#topFourSelection3").find('option:selected').text())
+    selections.push ($("#topFourSelection4").find('option:selected').text())
 
     return(selections);
 }

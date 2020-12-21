@@ -56,7 +56,6 @@ const setTopFourDropdownOptions = function (){
 //Check for match in given array
 const duplicateExists = function(array){
     let item = ""
-    console.log(array)
     while(array.length > 1){
         //Remove last array item and store in item variable
         item = array.pop()
@@ -208,11 +207,17 @@ const postDefaultSelections = function(){
             $("#defaultsNextButton").prop("disabled", false);
 
         }else{
-            console.warn("Error saving user preferences at AJAX.")
+            console.warn("Error saving user preferences at AJAX. - Done Catch")
             $(".loadingIndicatorDiv").addClass("hidden");
             $(".defaultsTitle").prop("textContent", "Error saving.. dang!");
             $(".defaultsSubTitle").prop("textContent", "Tap the Back button, then Submit again.");
         }
+
+    }).fail(()=>{
+        console.warn("Error saving user preferences at AJAX. - Fail Catch")
+        $(".loadingIndicatorDiv").addClass("hidden");
+        $(".defaultsTitle").prop("textContent", "Error reaching server.. dang!");
+        $(".defaultsSubTitle").html("Tap the Back button, then Submit again. <br/> Be sure to check you internet connection.");
     });
 }
 

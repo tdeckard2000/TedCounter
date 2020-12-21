@@ -217,7 +217,7 @@ const postDefaultSelections = function(){
         console.warn("Error saving user preferences at AJAX. - Fail Catch")
         $(".loadingIndicatorDiv").addClass("hidden");
         $(".defaultsTitle").prop("textContent", "Error reaching server.. dang!");
-        $(".defaultsSubTitle").html("Tap the Back button, then Submit again. <br/> Be sure to check you internet connection.");
+        $(".defaultsSubTitle").html("Tap the Back button, then Submit again. <br/> Be sure to check your internet connection.");
     });
 }
 
@@ -316,11 +316,11 @@ $("#defaultsNextButton").on("click", function(){
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
         //change Next button text to 'Submit'
-        $("#defaultsNextButton").addClass("hidden")
-        $("#defaultsSubmitButton").removeClass("hidden")
+        $("#defaultsNextButton").addClass("hidden");
+        $("#defaultsSubmitButton").removeClass("hidden");
         
-    }else if(currentPageNumber === "3"){
-
+    }else if(currentPageNumber === "4"){ //3 is handled at submit event below
+        location.reload(true);
     }  
 });
 
@@ -396,8 +396,8 @@ $(".defaultsForm").on("submit", (e)=>{
     //hide goal input boxes
      $(".goalsFlexRow").addClass("hidden");
     //update next button
-    $("#defaultsNextButton").removeClass("hidden")
-    $("#defaultsSubmitButton").addClass("hidden")
+    $("#defaultsNextButton").removeClass("hidden");
+    $("#defaultsSubmitButton").addClass("hidden");
     $("#defaultsNextButton").text("Close").prop("type", "button").attr("data-dismiss", "modal");
     //send selections to server to be saved
      postDefaultSelections();

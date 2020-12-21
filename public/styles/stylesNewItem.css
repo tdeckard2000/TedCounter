@@ -137,6 +137,7 @@ input.topFour{
 
 /* Button Formatting (Cancel, Save, Barcode */
 .buttonsDiv{
+    bottom: 0;
     padding-top: 24px;
 }
 

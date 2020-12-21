@@ -349,11 +349,31 @@ const addNewUser = function(name, email, pHashed){
     "email": email,
     "password": pHashed
   });
+
   newUser.save((err,doc)=>{
     if(err){
       console.warn('Error Saving User: ' + err);
     }
   });
+}
+
+//Update user defaults
+const updateUserDefaults = function(userId, topFourSelections, otherSelections, userGoals){
+  const updates = {
+    nutritionTopFour: topFourSelections,
+    nutritionOther: otherSelections,
+    nutritionGoals: userGoals
+  }
+
+  return new Promise((resolve, reject)=>{
+    user.update({_id:userId}, updates, (err, doc)=>{
+      if(doc){
+        resolve(true);
+      }else{
+        resolve(false);
+      }
+    })
+  })
 }
 
 //Add Food Item to Diary
@@ -695,9 +715,9 @@ app.get('/disclaimer', (req, res)=>{
 
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
-  req.session.data = null //remove old session data
-  const email = req.body.email
-  const password = req.body.password
+  req.session.data = null; //remove old session data
+  const email = req.body.email;
+  const password = req.body.password;
 
   authenticateUser(email, password).then((result)=>{
     if(result[0] === false){
@@ -873,14 +893,17 @@ app.post('/deleteFoodItem', (req,res)=>{
 })
 
 app.post('/updateUserGoals', (req, res)=>{
-  const userPreferencesStrings = JSON.parse(req.body.userGoals); //form data numbers are strings
-  const userPreferences = convertToInt(userPreferencesStrings); //convert strings to numbers
+  const topFourSelections = JSON.parse(req.body.topFourSelections);
+  const otherSelections = JSON.parse(req.body.otherSelections);
+  const userGoalsRaw = JSON.parse(req.body.userGoals);
+  const userGoals = convertToInt(userGoalsRaw); //convert object value strings to numbers
+  const userId = (req.session.userDocId);
 
-
-  console.log(userPreferencesStrings)
-  console.log(userPreferences);
-  res.status(200).send({result:true});
-})
+  updateUserDefaults(userId, topFourSelections, otherSelections, userGoals).then((data)=>{
+    console.log(data);
+    res.status(200).send({result:true});
+  });
+});
 
 // Server ==========================================================
 let port = process.env.PORT;

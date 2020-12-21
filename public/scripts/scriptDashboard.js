@@ -71,7 +71,7 @@ const duplicateExists = function(array){
 const setupDefaultsCheckboxes = function(){
     //Array.from creates a copy of the array, otherwise it's just a reference
     let allOptions = Array.from(nutritionOptions);
-    let topFourSelections = getTopFourSelection();
+    let topFourSelections = getTopFourSelections();
 
     //remove top four selections from 'allOptions' array
     topFourSelections.forEach(element => {
@@ -107,7 +107,6 @@ const setupDefaultsGoalsTextBoxes = function(){
     //remove any existing input boxes (if user toggles pages)
     $(".goalsFlexColumn1, .goalsFlexColumn2").children("div").remove();
 
-    console.log(list)
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
         $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
@@ -123,7 +122,7 @@ const setupDefaultsGoalsTextBoxes = function(){
 }
 
 //Get top four selected items
-const getTopFourSelection = function(){
+const getTopFourSelections = function(){
     let selections = [];
     selections.push ($("#topFourSelection1").val())
     selections.push ($("#topFourSelection2").val())
@@ -144,7 +143,7 @@ const getOtherSelections = function(){
 
 //Get combined list of user 'top four' and 'other' selected items
 const getUserSelections = function(){
-    let topFourSelections = getTopFourSelection();
+    let topFourSelections = getTopFourSelections();
     let otherSelections = getOtherSelections();
     let combinesSelections = topFourSelections.concat(otherSelections);
     return(combinesSelections);
@@ -152,7 +151,7 @@ const getUserSelections = function(){
 
 //Disable or enable next button on first page of defaults modal
 const toggleDefaultsNextButton = function(){
-    let topFourSelections = getTopFourSelection();
+    let topFourSelections = getTopFourSelections();
     let disclaimerChecked = $("#disclaimerCheckbox").prop("checked");
 
     //Check if disclaimer box is checked & if top four selections match
@@ -166,21 +165,25 @@ const toggleDefaultsNextButton = function(){
 //Get goals from text inputs
 const getUserGoals = function(){
     let userGoals = {};
-    let itemName = ""
-    let itemValue = 0
+    let itemName = "";
+    let itemValue = 0;
 
     $(".goalsFlexRow input").each(function(data){
-        itemName = this.id
-        itemValue = $(this).val();
-        userGoals[itemName] = itemValue;
+            itemName = this.id;
+            itemValue = $(this).val();
+            userGoals[itemName] = itemValue;
     });
+
 
     return userGoals;
 }
 
 //Send user goals to server to be saved
 const postDefaultSelections = function(){
+    let topFourSelections = JSON.stringify(getTopFourSelections());
+    let otherSelections = JSON.stringify(getOtherSelections());
     let userGoals = JSON.stringify(getUserGoals());
+
     $(".loadingIndicatorDiv").removeClass("hidden"); //show loading icon
     $(".defaultsTitle").prop("textContent", "Saving");
     $(".defaultsSubTitle").prop("textContent", "please wait...");
@@ -189,7 +192,11 @@ const postDefaultSelections = function(){
     $.ajax({
         type: 'POST',
         url: '/updateUserGoals',
-        data: {userGoals: userGoals}
+        data: {
+            topFourSelections: topFourSelections,
+            otherSelections: otherSelections,
+            userGoals: userGoals
+        }
 
     }).done((data)=>{
 
@@ -257,7 +264,7 @@ $("#disclaimerCheckbox").on("click", function(){
 
 //Top Four drop-down -> enable Next button if no matches or disclaimer unchecked
 $(".topFourSelection").on("change", ()=>{
-    let topFourSelections = getTopFourSelection();
+    let topFourSelections = getTopFourSelections();
     toggleDefaultsNextButton();
     
     if(duplicateExists(topFourSelections) === true){

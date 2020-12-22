@@ -215,6 +215,7 @@ const postDefaultSelections = function(){
                 $(".defaultsTitle").prop("textContent", "All done!");
                 $(".defaultsSubTitle").prop("textContent", "What would you like to do now?");
                 $(".loadingIndicatorDiv").addClass("hidden");
+                //show quick tips button & get started button
                 $(".defaultsFinalOptionsDiv").removeClass("hidden");
                 $("#defaultsNextButton").prop("disabled", false);
                 $("#defaultsBackButton").prop("disabled", false);
@@ -396,6 +397,8 @@ $("#defaultsBackButton").on("click", ()=>{
         $("#defaultsNextButton").text("Next").attr("data-dismiss", "").addClass("hidden").prop("disabled", false);
         //show submit button
         $("#defaultsSubmitButton").removeClass("hidden");
+        //hide quick tips and get started buttons
+        $(".defaultsFinalOptionsDiv").addClass("hidden");
     }
 });
 

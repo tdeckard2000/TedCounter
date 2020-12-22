@@ -29,7 +29,7 @@
   </p>
 </div>
 
-<button type="button" class="btn btn-secondary back" id="closeButton">Close</button>
+<button type="button" class="btn btn-secondary back" id="closeButton" onClick="javascript:window.close('','_parent','');">Close</button>
 
 
 </body>
@@ -37,10 +37,10 @@
 
 <%-include('footer');-%>
 
-<script>
+<!-- <script>
   $("#closeButton").on("click", ()=>{
     javascript:window.close('','_parent','');
   });
-</script>
+</script> -->
 
 <script src="./scripts/scriptNewItem.js"></script>

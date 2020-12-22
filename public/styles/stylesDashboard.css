@@ -396,15 +396,17 @@ button.close{
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 .goalsFlexRow{
     display: flex;
     flex-direction: row;
     height: 50%;
+    margin: auto;
     overflow: auto;
     position: relative;
+    width: fit-content;
 }
 
 .goalsFlexRow input{
@@ -420,9 +422,16 @@ button.close{
 }
 
 .loadingIndicatorDiv{
-    bottom: 52%;
-    left: 45%;
-    position: fixed;
+    display: flex;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.loadingIndicator{
+    margin: auto;
 }
 
 .modal-footer .back{
@@ -442,7 +451,7 @@ button.close{
     display: flex;
     height: 50%;
     justify-content: center;
-    overflow: scroll;
+    overflow: auto;
     padding-left: 15px;
     position: relative;
     -webkit-overflow-scrolling: touch;

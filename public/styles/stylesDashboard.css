@@ -333,6 +333,13 @@ button.close{
 }
 
 /* User Preferences Modal ========================================== */
+#buttonCloseDefaults, #buttonQuickTips{
+    background-color: #5ece5c;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    width: 150px;
+}
 
 #userPreferencesModal .modal-content{
     height: 80vh;
@@ -383,6 +390,13 @@ button.close{
     margin: auto;
     margin-top: 10px;
     padding: 5px;
+}
+
+.defaultsFinalOptionsDiv{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
 }
 
 .goalsFlexRow{

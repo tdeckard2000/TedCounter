@@ -185,9 +185,10 @@ const postDefaultSelections = function(){
     let userGoals = JSON.stringify(getUserGoals());
 
     $(".loadingIndicatorDiv").removeClass("hidden"); //show loading icon
-    $(".defaultsTitle").prop("textContent", "Saving");
-    $(".defaultsSubTitle").prop("textContent", "please wait...");
+    $(".defaultsTitle").prop("textContent", "Saving your preferences.");
+    $(".defaultsSubTitle").prop("textContent", "Please wait...");
     $("#defaultsNextButton").prop("disabled", true);
+    $("#defaultsBackButton").prop("disabled", true);
 
     $.ajax({
         type: 'POST',
@@ -201,16 +202,31 @@ const postDefaultSelections = function(){
     }).done((data)=>{
 
         if(data.result === true){
-            $(".loadingIndicatorDiv").addClass("hidden");
-            $(".defaultsTitle").prop("textContent", "All done!");
-            $(".defaultsSubTitle").prop("textContent", "What would you like to do now?");
-            $("#defaultsNextButton").prop("disabled", false);
+            setTimeout(()=>{
+                $(".defaultsTitle").prop("textContent", "Saved!");
+                console.log(1)
+            }, 3000);
+            setTimeout(()=>{
+                $(".defaultsTitle").prop("textContent", "Getting your account ready.");
+                $(".defaultsSubTitle").prop("textContent", "Adding some food items to get you started.");
+                console.log(2)
+            }, 3000);
+            setTimeout(()=>{
+                $(".defaultsTitle").prop("textContent", "All done!");
+                $(".defaultsSubTitle").prop("textContent", "What would you like to do now?");
+                $(".loadingIndicatorDiv").addClass("hidden");
+                $(".defaultsFinalOptionsDiv").removeClass("hidden");
+                $("#defaultsNextButton").prop("disabled", false);
+                $("#defaultsBackButton").prop("disabled", false);
+                console.log(3)
+            }, 10000);
 
         }else{
             console.warn("Error saving user preferences at AJAX. - Done Catch")
             $(".loadingIndicatorDiv").addClass("hidden");
             $(".defaultsTitle").prop("textContent", "Error saving.. dang!");
             $(".defaultsSubTitle").prop("textContent", "Tap the Back button, then Submit again.");
+            $("#defaultsBackButton").prop("disabled", false);
         }
 
     }).fail(()=>{
@@ -218,6 +234,7 @@ const postDefaultSelections = function(){
         $(".loadingIndicatorDiv").addClass("hidden");
         $(".defaultsTitle").prop("textContent", "Error reaching server.. dang!");
         $(".defaultsSubTitle").html("Tap the Back button, then Submit again. <br/> Be sure to check your internet connection.");
+        $("#defaultsBackButton").prop("disabled", false);
     });
 }
 
@@ -320,7 +337,7 @@ $("#defaultsNextButton").on("click", function(){
         $("#defaultsSubmitButton").removeClass("hidden");
         
     }else if(currentPageNumber === "4"){ //3 is handled at submit event below
-        location.reload(true);
+        location.reload();
     }  
 });
 
@@ -379,8 +396,6 @@ $("#defaultsBackButton").on("click", ()=>{
         $("#defaultsNextButton").text("Next").attr("data-dismiss", "").addClass("hidden").prop("disabled", false);
         //show submit button
         $("#defaultsSubmitButton").removeClass("hidden");
-
-
     }
 });
 
@@ -401,4 +416,16 @@ $(".defaultsForm").on("submit", (e)=>{
     $("#defaultsNextButton").text("Close").prop("type", "button").attr("data-dismiss", "modal");
     //send selections to server to be saved
      postDefaultSelections();
+});
+
+$("#buttonCloseDefaults").on("click", ()=>{
+    location.reload();
 })
+
+//(dev) Re-open defaults modal
+$("#buttonOpenDefaultsModal").on("click", ()=>{
+    $("#userPreferencesModal").modal("toggle");
+    $("#defaultsBackButton").prop("disabled", true)
+    setTopFourDropdownOptions();
+    console.log("click")
+});

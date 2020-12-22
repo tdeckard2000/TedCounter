@@ -1,0 +1,32 @@
+
+
+#closeButton{
+    display: block;
+    margin: auto;
+    position: relative;
+    width: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+img{
+    display: block;
+    margin: auto;
+    max-width: 380px;
+    padding: 20px 0 5px;
+    width: 75vw;
+}
+
+p{
+    margin: auto;
+    max-width: 500px;
+    padding: 10px 20px;
+}
+
+.paragraphDiv{
+    width: 100%;
+}
+
+.tedLogoDiv{
+    width: 100%;
+}

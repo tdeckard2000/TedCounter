@@ -5,42 +5,43 @@
 
 <body class="dashboardBody">
 
-<div class="container">
-  <div class="row headerRow">
-    <div class=" topCounterDiv col-3">
-      <div class="topTotalCount">-</div>
-      <div class="topOutOf">/2000 cal</div> 
-    </div>
-    <div class="topCounterDiv col-3">
-      <div class="topTotalCount">-</div>
-      <div class="topOutOf">/1000 sdm</div> 
-    </div>
-    <div class="topCounterDiv col-3">
-      <div class="topTotalCount">-</div>
-      <div class="topOutOf">/165 pro</div> 
-    </div>
-    <div class="topCounterDiv col-3">
-      <div class="topTotalCount">-</div>
-      <div class="topOutOf">/165 crb</div> 
-    </div>
-  </div>
+<div class="tedLogoDiv">
+  <img src="/files/TedCounterLogo.svg" alt="TedCounter Logo">
 </div>
 
-<div class="disclaimerBody vertical-center">
-    <div class="buttonsDiv">
-      <a href="./dashboard"><button type="button" class="btn cancel">Cancel</button></a>
-      <button type="submit" class="btn save">Save</button>
-</div>    
+<div class="paragraphDiv">
+  <p>TedCounter does not contain medical advice. The contents of this website, 
+    such as text, graphics, images and other material are intended for informational 
+    purposes only and not for the purpose of rendering medical advice. The contents of this
+    website are not intended to substitute for professional medical advice, diagnosis or treatment. 
+  </p>
+  
+  <p>
+    Please consult your physician for personalized medical advice. Always seek the advice of a physician 
+    or other qualified healthcare provider with any questions regarding a medical condition. Never disregard 
+    or delay seeking professional medical advice or treatment because of something you have read 
+    on the TedCounter website.
+  </p>
+  
+  <p>
+    In a medical emergency call 911 immediately. Reliance on any information provided by TedCounter,
+    TedCounter developers, TedCounter contributors, or Open Food Facts (OFF) is solely at your own risk.
+  </p>
+</div>
 
-<nav class=" bottomBar navbar fixed-bottom">
-  <a href="/">
-    <img class="bottomBarLogo" src="./files/logoCup.svg" alt="">
-  </a>
-  <a class="bottomBarDay" href="#">Today</a>
-</nav>
+<button type="button" class="btn btn-secondary back" id="closeButton">Close</button>
+
 
 </body>
 </html>
 
 <%-include('footer');-%>
+
+<script>
+  $("#closeButton").on("click", ()=>{
+    window.open("", "_self");
+    window.close();
+  })
+</script>
+
 <script src="./scripts/scriptNewItem.js"></script>

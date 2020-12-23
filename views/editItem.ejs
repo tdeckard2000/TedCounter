@@ -70,7 +70,7 @@
                   <%for(i=0; i<nutritionTopFour.length; i++){%>
                     <%if(i%2 == 0){%>
                       <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=nutritionTopFour[i]%></label>
-                      <input name="<%=nutritionTopFour[i]%>" class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                      <input name="<%=nutritionTopFour[i]%>" class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                       </label>
                     <%}%>
                   <%}%>
@@ -79,7 +79,7 @@
                   <%for(i=0; i<nutritionTopFour.length; i++){%>
                     <%if(i%2 !== 0){%>
                       <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=nutritionTopFour[i]%></label>
-                      <input name="<%=nutritionTopFour[i]%>" class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                      <input name="<%=nutritionTopFour[i]%>" class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                       </label>
                     <%}%>
                   <%}%>
@@ -92,7 +92,7 @@
                   <%for(i=0; i<nutritionOther.length; i++){%>
                     <%if(i%2 == 0){%>
                       <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
-                      <input name="<%=nutritionOther[i]%>" class="editItemTextBoxGeneral"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                      <input name="<%=nutritionOther[i]%>" class="editItemTextBoxGeneral"id="<%=nutritionOther[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                     <%}%>
                   <%}%>
                 </div>
@@ -100,7 +100,7 @@
                   <%for(i=0; i<nutritionOther.length; i++){%>
                     <%if(i%2 !== 0){%>
                       <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
-                      <input name="<%=nutritionOther[i]%>" class="editItemTextBoxGeneral"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                      <input name="<%=nutritionOther[i]%>" class="editItemTextBoxGeneral"id="<%=nutritionOther[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                     <%}%>
                   <%}%>
                 </div>

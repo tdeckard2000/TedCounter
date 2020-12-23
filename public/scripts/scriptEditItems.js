@@ -10,6 +10,7 @@ const getItemValues = function(itemId){
             url:"./getItemValues",
             data: {itemId: itemId},
             success: (data)=>{
+                console.log(data.data)
                 resolve(data.data);
             }
         }).done(()=>{

@@ -641,6 +641,7 @@ app.get('/dashboard', (req, res)=>{
         foodItemList: foodItemList,
         foodDiary: foodDiary,
         nutritionOther: nutritionOther,
+        nutritionGoals: nutritionGoals,
         nutritionTopFour: nutritionTopFour,
         nutritionTotals: nutritionTotals,
         userName: userName,

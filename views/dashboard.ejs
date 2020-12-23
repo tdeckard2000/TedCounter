@@ -103,24 +103,17 @@
         </div>
         <div class="modal-body">
             <div class="newItemDiv">
-              <input class="newItemInput2 topFour" placeholder="calories" name="calories" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-              <input class="newItemInput3 topFour" placeholder="sodium" name="sodium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-              <input class="newItemInput4 topFour" placeholder="protein" name="protein" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-              <input class="newItemInput5 topFour" placeholder="carbs" name="carbs" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+              <!-- populate quick add options based on user preferences -->
+              <%for(i = 0; i < nutritionTopFour.length; i++){%>
+                <input class="newItemInput<%=i+2%> topFour" placeholder="<%=nutritionTopFour[i]%>" name="<%=nutritionTopFour[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+              <%};%>
+
               <div class="collapse quickAddHidden" id="extraInputOptions">
-                <input class="newItemInput6" placeholder="fat" name="fat" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput7" placeholder="cholesterol" name="cholesterol" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput8" placeholder="fiber" name="fiber" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput9" placeholder="sugar" name="sugar" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput10" placeholder="iron %" name="iron" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput11" placeholder="vitA %" name="vitA" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput12" placeholder="vitC %" name="vitC" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput13" placeholder="vitD %" name="vitD" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput14" placeholder="vitE %" name="vitE" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput15" placeholder="calcium %" name="calcium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput16" placeholder="potassium %" name="potassium" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
-                <input class="newItemInput17" placeholder="zinc" name="zinc" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                <%for(i = 0; i < nutritionOther.length; i++){%>
+                  <input class="newItemInput<%=i+6%>" placeholder="<%=nutritionOther[i]%>" name="<%=nutritionOther[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                <%};%>
               </div>
+
               <!-- show/hide extra input options -->
               <p class="moreOptionsButton" data-toggle="collapse" href="#extraInputOptions">more options</p>
             </div>
@@ -213,9 +206,91 @@
   <button class="buttonQuickAdd" data-target="#quickAdd" data-toggle="modal">🔥</button>
 </nav>
 
+<!-- Default Settings Modal -->
+<div class="modal" data-backdrop="static" id="userPreferencesModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <form action="" class="defaultsForm" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Welcome, <%=userName%>!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body defaultsModalBody" data-page="1">
+          <h4 class="defaultsTitle">Which nutrients are you most interested in?</h4>
+          <hr>
+          <p class="defaultsSubTitle">These four will always be visible.</p>
+          
+          <!-- Top Four Dropdown Options -->
+          <div class="topFourFlexRow">
+            <div class="topFourFlexColumn">
+              <select name="topFourSelection" class="topFourSelection" id="topFourSelection1">
+              </select>
+              <select name="topFourSelection" class="topFourSelection" id="topFourSelection3">
+              </select>
+            </div>
+            <div class="topFourFlexColumn">
+              <select name="topFourSelection" class="topFourSelection" id="topFourSelection2">
+              </select>
+              <select name="topFourSelection" class="topFourSelection" id="topFourSelection4">
+              </select>
+            </div>
+          </div>
+          
+          <p class="duplicateSelectionWarning hidden">You can't select the same one twice : )</p>
+          
+          <a class="disclaimerLink" href="/disclaimer" target="_blank">Read Disclaimer</a>
+          <div class="disclaimerDiv">
+            <input type="checkbox" name="disclaimerCheckbox" id="disclaimerCheckbox">
+            <label for="disclaimerCheckbox">I have read and understand the disclaimer.</label>
+          </div>
+          
+          <!-- Other Items Checkboxes -->
+          <div class="otherItemsFlexRow hidden">
+            <div class="otherFlexColumn1 otherCheckBoxes">
+            </div>
+            <div class="otherFlexColumn2 otherCheckBoxes">
+            </div>
+          </div>
+          
+          <!-- Goals Input Boxes -->
+          <div class="goalsFlexRow hidden">
+            <div class="goalsFlexColumn1">
+            </div>
+            <div class="goalsFlexColumn2">
+            </div>
+          </div>
+          
+          <hr>
+          
+          <!-- What would you like to do now? -->
+          <div class="defaultsFinalOptionsDiv hidden">
+            <button type="button" class="btn btn-secondary back" id="buttonQuickTips">View Quick Tips</button>
+            <button type="button" class="btn btn-secondary back" id="buttonCloseDefaults">Get Started</button>
+          </div>
+          
+          <!-- Loading Indicator -->
+          <div class="loadingIndicatorDiv hidden">
+            <div class="loadingIndicator spinner-border text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary back" id="defaultsBackButton">Back</button>
+          <button type="button" id="defaultsNextButton" class="btn btn-primary next" disabled>Next</button>
+          <button type="submit" id="defaultsSubmitButton" class="btn btn-primary next hidden">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- Bottom Navigation Bar -->
 <nav class=" bottomBar navbar fixed-bottom">
-  <a href="/">
+  <a href="">
     <img class="bottomBarLogo" src="./files/logoCup.svg" alt="">
   </a>
   <a class="bottomBarDay" href="#">Today</a>
@@ -223,88 +298,6 @@
 
 </body>
 </html>
-
-<!-- Default Settings Modal -->
-<div class="modal" data-backdrop="static" id="userPreferencesModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <form action="" class="defaultsForm" method="POST">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Welcome, <%=userName%>!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body defaultsModalBody" data-page="1">
-        <h4 class="defaultsTitle">Which nutrients are you most interested in?</h4>
-        <hr>
-        <p class="defaultsSubTitle">These four will always be visible.</p>
-
-        <!-- Top Four Dropdown Options -->
-        <div class="topFourFlexRow">
-          <div class="topFourFlexColumn">
-            <select name="topFourSelection" class="topFourSelection" id="topFourSelection1">
-            </select>
-            <select name="topFourSelection" class="topFourSelection" id="topFourSelection3">
-            </select>
-          </div>
-          <div class="topFourFlexColumn">
-            <select name="topFourSelection" class="topFourSelection" id="topFourSelection2">
-            </select>
-            <select name="topFourSelection" class="topFourSelection" id="topFourSelection4">
-            </select>
-          </div>
-        </div>
-
-        <p class="duplicateSelectionWarning hidden">You can't select the same one twice : )</p>
-
-        <a class="disclaimerLink" href="/disclaimer" target="_blank">Read Disclaimer</a>
-        <div class="disclaimerDiv">
-          <input type="checkbox" name="disclaimerCheckbox" id="disclaimerCheckbox">
-          <label for="disclaimerCheckbox">I have read and understand the disclaimer.</label>
-        </div>
-
-        <!-- Other Items Checkboxes -->
-        <div class="otherItemsFlexRow hidden">
-          <div class="otherFlexColumn1 otherCheckBoxes">
-          </div>
-          <div class="otherFlexColumn2 otherCheckBoxes">
-          </div>
-        </div>
-
-        <!-- Goals Input Boxes -->
-        <div class="goalsFlexRow hidden">
-          <div class="goalsFlexColumn1">
-          </div>
-          <div class="goalsFlexColumn2">
-          </div>
-        </div>
-
-        <hr>
-
-        <!-- What would you like to do now? -->
-        <div class="defaultsFinalOptionsDiv hidden">
-          <button type="button" class="btn btn-secondary back" id="buttonQuickTips">View Quick Tips</button>
-          <button type="button" class="btn btn-secondary back" id="buttonCloseDefaults">Get Started</button>
-        </div>
-
-        <!-- Loading Indicator -->
-        <div class="loadingIndicatorDiv hidden">
-          <div class="loadingIndicator spinner-border text-info" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary back" id="defaultsBackButton">Back</button>
-        <button type="button" id="defaultsNextButton" class="btn btn-primary next" disabled>Next</button>
-        <button type="submit" id="defaultsSubmitButton" class="btn btn-primary next hidden">Submit</button>
-      </div>
-    </div>
-  </form>
-  </div>
-</div>
 
 <%-include('footer');-%>
 <!-- Custom Script -->

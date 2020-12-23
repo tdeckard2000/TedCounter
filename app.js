@@ -640,8 +640,10 @@ app.get('/dashboard', (req, res)=>{
       res.render('dashboard', {
         foodItemList: foodItemList,
         foodDiary: foodDiary,
-        userName: userName,
+        nutritionOther: nutritionOther,
+        nutritionTopFour: nutritionTopFour,
         nutritionTotals: nutritionTotals,
+        userName: userName,
         userPreferences: userPreferences
       });
     }).catch((error)=>{console.warn("Error getting to Dashboard: " + error.message)})

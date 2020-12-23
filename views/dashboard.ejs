@@ -105,12 +105,12 @@
             <div class="newItemDiv">
               <!-- populate quick add options based on user preferences -->
               <%for(i = 0; i < nutritionTopFour.length; i++){%>
-                <input class="newItemInput<%=i+2%> topFour" placeholder="<%=nutritionTopFour[i]%>" name="<%=nutritionTopFour[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                <input class="topFour" placeholder="<%=nutritionTopFour[i]%>" name="<%=nutritionTopFour[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
               <%};%>
 
               <div class="collapse quickAddHidden" id="extraInputOptions">
                 <%for(i = 0; i < nutritionOther.length; i++){%>
-                  <input class="newItemInput<%=i+6%>" placeholder="<%=nutritionOther[i]%>" name="<%=nutritionOther[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
+                  <input placeholder="<%=nutritionOther[i]%>" name="<%=nutritionOther[i].toLowerCase()%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                 <%};%>
               </div>
 

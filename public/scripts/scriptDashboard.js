@@ -43,7 +43,7 @@ const orderAlphabetically = function(startingPoint, unorderedArray){
 const setTopFourDropdownOptions = function (){
     nutritionOptions.forEach(element => {
         $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
-        .append("<option value=" + element + ">" + element + "</option>");
+        .append("<option value='" + element + "'>" + element + "</option>");
     });
 
     //set default dropdown selections
@@ -124,10 +124,10 @@ const setupDefaultsGoalsTextBoxes = function(){
 //Get top four selected items
 const getTopFourSelections = function(){
     let selections = [];
-    selections.push ($("#topFourSelection1").find('option:selected').text())
-    selections.push ($("#topFourSelection2").find('option:selected').text())
-    selections.push ($("#topFourSelection3").find('option:selected').text())
-    selections.push ($("#topFourSelection4").find('option:selected').text())
+    selections.push ($("#topFourSelection1").find('option:selected').val());
+    selections.push ($("#topFourSelection2").find('option:selected').val());
+    selections.push ($("#topFourSelection3").find('option:selected').val());
+    selections.push ($("#topFourSelection4").find('option:selected').val());
 
     return(selections);
 }

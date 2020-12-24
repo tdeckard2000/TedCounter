@@ -48,30 +48,29 @@
       </div>
       <div class="collapse itemDropdownBox" id="id<%=foodDiary[i]._id%>">
           <table class="itemDropdownTable">
-            <tr>
-              <td>cal: <%=foodDiary[i].item.calories%></td>
-              <td>sdm: <%=foodDiary[i].item.sodium%></td>
-              <td>pro: <%=foodDiary[i].item.protein%></td>
-              <td>crb: <%=foodDiary[i].item.carbs%></td>
-            </tr>
-            <tr>
-              <td>fat: <%=foodDiary[i].item.fat%></td>
-              <td>chol: <%=foodDiary[i].item.cholesterol%></td>
-              <td>fibr: <%=foodDiary[i].item.fiber%></td>
-              <td>sgr: <%=foodDiary[i].item.sugar%></td>
-            </tr>
-            <tr>
-              <td>vitE: <%=foodDiary[i].item.vitE%></td>
-              <td>vitA: <%=foodDiary[i].item.vitA%></td>
-              <td>vitC: <%=foodDiary[i].item.vitC%></td>
-              <td>vitD: <%=foodDiary[i].item.vitD%></td>
-            </tr>
-            <tr>
-              <td>iron: <%=foodDiary[i].item.iron%></td>
-              <td>calc: <%=foodDiary[i].item.calcium%></td>
-              <td>ptas: <%=foodDiary[i].item.potassium%></td>
-              <td>zinc: <%=foodDiary[i].item.zinc%></td>
-            </tr>
+            <%for(e = 0; e < nutritionOther.length; e++){%>
+              <%console.log(nutritionOther + " " + e + " " + foodDiary[i]);%>
+              <tr>
+                <%if(e < 5){%>
+                  <td><%=nutritionOther[e].substring(0,3)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                <%}%>
+              </tr>
+              <tr>
+                <%if(e < 10 && e > 5){%>
+                  <td><%=nutritionOther[e].substring(0,3)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                <%}%>
+              </tr>
+              <tr>
+                <%if(e < 15 && e > 10){%>
+                  <td><%=nutritionOther[e].substring(0,3)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                <%}%>
+              </tr>
+              <tr>
+                <%if(e < 20 && e > 15){%>
+                  <td><%=nutritionOther[e].substring(0,3)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                <%}%>
+              </tr>
+            <%}%>
           </table>
           <div class="itemDropdownButtons">
             <form action="/dashboard/modifyDiary" method="POST">

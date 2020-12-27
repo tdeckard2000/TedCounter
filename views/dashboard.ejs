@@ -8,19 +8,19 @@
 <div id="goals" data-userPreferences="<%=userPreferences%>" class="container">
   <div class="row headerRow">
     <div class=" topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals.cal%></div>
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[0].toLowerCase()]%></div>
       <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[0].toLowerCase()]%> <%=nutritionTopFour[0].substring(0, 4)%></div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals.sdm%></div>
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[1].toLowerCase()]%></div>
       <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[1].toLowerCase()]%> <%=nutritionTopFour[1].substring(0, 4)%></div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals.pro%></div>
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[2].toLowerCase()]%></div>
       <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[2].toLowerCase()]%> <%=nutritionTopFour[2].substring(0, 4)%></div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals.crb%></div>
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[3].toLowerCase()]%></div>
       <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[3].toLowerCase()]%> <%=nutritionTopFour[3].substring(0, 4)%></div> 
     </div>
   </div>

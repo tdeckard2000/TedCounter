@@ -178,6 +178,12 @@ const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
 const user = mongoose.model('user', userSchema);
 const passwordKey = mongoose.model('passwordKey', passwordKeysSchema);
 
+const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber",
+"Folic Acid", "Histidine", "Iodine", "Iron","Isoleucine", "Leucine", "Lysine", "Magnesium", "Manganese", "Methionine", "Molybdenum","Phenylalanine",
+"Phosphorus", "Potassium", "Protein", "Saturated Fat", "Selenium", "Sodium", "Sugar", "Trans Fat", "Threonine", "Tryptophan", "Valine", "Vitamin A",
+"Vitamin B1", "Vitamin B2", "Vitamin B3", "Vitamin B5", "Vitamin B6", "Vitamin B7", "Vitamin B9", "Vitamin B12", "Vitamin C", "Vitamin D2",
+"Vitamin D3", "Vitamin E", "Vitamin K", "Zinc"];
+
 // Functions ==========================================================
 
 const adjustTime = function(startDate, subtractHours){
@@ -214,25 +220,69 @@ const authenticateUser = function(email, password){
 
 // Calculate nutrition totals
 const calculateNutritionTotals = function(foodDiary){
-  let cal = 0;
-  let sdm = 0;
-  let pro = 0;
-  let crb = 0;
+  let diaryTotals = {
+    "caffeine": 0,
+    "calcium": 0,
+    "calories": 0,
+    "carbs": 0,
+    "chloride": 0,
+    "choline": 0,
+    "cholesterol": 0,
+    "chromium": 0,
+    "copper": 0,
+    "fat": 0,
+    "fiber": 0,
+    "folicAcid": 0,
+    "histidine": 0,
+    "iodine": 0,
+    "iron": 0,
+    "isoleucine": 0,
+    "leucine": 0,
+    "lysine": 0,
+    "magnesium": 0,
+    "manganese": 0,
+    "methionine": 0,
+    "molybdenum": 0,
+    "phenylalanine": 0,
+    "phosphorus": 0,
+    "potassium": 0,
+    "protein": 0,
+    "saturatedFat": 0,
+    "selenium": 0,
+    "sodium": 0,
+    "sugar": 0,
+    "transFat": 0,
+    "threonine": 0,
+    "tryptophan": 0,
+    "valine": 0,
+    "vitaminA": 0,
+    "vitaminB1": 0,
+    "vitaminB2": 0,
+    "vitaminB3": 0,
+    "vitaminB5": 0,
+    "vitaminB6": 0,
+    "vitaminB7": 0,
+    "vitaminB9": 0,
+    "vitaminB12": 0,
+    "vitaminC": 0,
+    "vitaminD2": 0,
+    "vitaminD3": 0,
+    "vitaminE": 0,
+    "vitaminK": 0,
+    "zinc": 0
+  };
 
-  foodDiary.forEach(element => {
-    cal += (element.item.calories);
-    sdm += (element.item.sodium);
-    pro += (element.item.protein);
-    crb += (element.item.carbs);
+  //Loop through each item in diary
+  foodDiary.forEach(diaryItem =>{
+    //total each nutrition option
+    nutritionOptions.forEach(nutrient =>{
+      if(diaryItem.item[nutrient.toLowerCase()]){
+        diaryTotals[nutrient.toLowerCase()] += diaryItem.item[nutrient.toLowerCase()];
+      }
+    });
   });
 
-  const totals = {
-    "cal":cal,
-    "sdm":sdm,
-    "pro":pro,
-    "crb":crb
-  }
-  return totals
+  return(diaryTotals);
 }
 
 // Return All User Food Items
@@ -687,8 +737,6 @@ const openFoodFactsRequest = function(barcodeNumber){
 //DONT FORGET TO INCLUDE A HEADER
   return new Promise((resolve, reject)=>{
     request('https://world.openfoodfacts.org/api/v0/product/' + barcodeNumber + '.json', (err, res, body)=>{
-      console.log("Response: + " + res && res.statusCode);
-      console.log("Error: " + err);
       const productInfo = JSON.parse(body);
 
       let productSearchResult = null;
@@ -774,7 +822,8 @@ app.get('/dashboard', (req, res)=>{
     .then((bothResults)=>{
       const foodDiary = bothResults[0];
       const foodItemList = bothResults[1];
-      let nutritionTotals = calculateNutritionTotals(foodDiary);
+      const nutritionTotals = calculateNutritionTotals(foodDiary);
+
       res.render('dashboard', {
         foodItemList: foodItemList,
         foodDiary: foodDiary,
@@ -1046,7 +1095,6 @@ app.post('/updateUserGoals', (req, res)=>{
       req.session.nutritionTopFour = topFourSelections;
       req.session.nutritionOther = otherSelections;
       req.session.nutritionGoals = userGoals;
-      console.log(userGoals);
       res.status(200).send({result:true});
     }else{
       res.status(200).send({result:false});

@@ -346,7 +346,7 @@ const addNewItem = function(newItems, userDocId){
     "copper": newItems.copper,
     "fat": newItems.fat,
     "fiber": newItems.fiber,
-    "folic acid": newItems.folicAcid,
+    "folicAcid": newItems.folicAcid,
     "histidine": newItems.histidine,
     "iodine": newItems.iodine,
     "iron": newItems.iron,
@@ -369,20 +369,20 @@ const addNewItem = function(newItems, userDocId){
     "threonine": newItems.threonine,
     "tryptophan": newItems.tryptophan,
     "valine": newItems.valine,
-    "vitamin A": newItems.vitaminA,
-    "vitamin B1": newItems.vitaminA,
-    "vitamin B2": newItems.vitaminB2,
-    "vitamin B3": newItems.vitaminB3,
-    "vitamin B5": newItems.vitaminB5,
-    "vitamin B6": newItems.vitaminB6,
-    "vitamin B7": newItems.vitaminB7,
-    "vitamin B9": newItems.vitaminB9,
-    "vitamin B12": newItems.vitaminB12,
-    "vitamin C": newItems.vitaminC,
-    "vitamin D2": newItems.vitaminD2,
-    "vitamin D3": newItems.vitaminD3,
-    "vitamin E": newItems.vitaminE,
-    "vitamin K": newItems.vitaminK,
+    "vitaminA": newItems.vitaminA,
+    "vitaminB1": newItems.vitaminB1,
+    "vitaminB2": newItems.vitaminB2,
+    "vitaminB3": newItems.vitaminB3,
+    "vitaminB5": newItems.vitaminB5,
+    "vitaminB6": newItems.vitaminB6,
+    "vitaminB7": newItems.vitaminB7,
+    "vitaminB9": newItems.vitaminB9,
+    "vitaminB12": newItems.vitaminB12,
+    "vitaminC": newItems.vitaminC,
+    "vitaminD2": newItems.vitaminD2,
+    "vitaminD3": newItems.vitaminD3,
+    "vitaminE": newItems.vitaminE,
+    "vitaminK": newItems.vitaminK,
     "zinc": newItems.zinc
   });
 
@@ -494,7 +494,7 @@ const addToDiary = function(userId, itemInfo){
         "copper": itemInfo.copper,
         "fat": itemInfo.fat,
         "fiber": itemInfo.fiber,
-        "folic acid": itemInfo.folicAcid,
+        "folicAcid": itemInfo.folicAcid,
         "histidine": itemInfo.histidine,
         "iodine": itemInfo.iodine,
         "iron": itemInfo.iron,
@@ -517,20 +517,20 @@ const addToDiary = function(userId, itemInfo){
         "threonine": itemInfo.threonine,
         "tryptophan": itemInfo.tryptophan,
         "valine": itemInfo.valine,
-        "vitamin A": itemInfo.vitaminA,
-        "vitamin B1": itemInfo.vitaminA,
-        "vitamin B2": itemInfo.vitaminB2,
-        "vitamin B3": itemInfo.vitaminB3,
-        "vitamin B5": itemInfo.vitaminB5,
-        "vitamin B6": itemInfo.vitaminB6,
-        "vitamin B7": itemInfo.vitaminB7,
-        "vitamin B9": itemInfo.vitaminB9,
-        "vitamin B12": itemInfo.vitaminB12,
-        "vitamin C": itemInfo.vitaminC,
-        "vitamin D2": itemInfo.vitaminD2,
-        "vitamin D3": itemInfo.vitaminD3,
-        "vitamin E": itemInfo.vitaminE,
-        "vitamin K": itemInfo.vitaminK,
+        "vitaminA": itemInfo.vitaminA,
+        "vitaminB1": itemInfo.vitaminB1,
+        "vitaminB2": itemInfo.vitaminB2,
+        "vitaminB3": itemInfo.vitaminB3,
+        "vitaminB5": itemInfo.vitaminB5,
+        "vitaminB6": itemInfo.vitaminB6,
+        "vitaminB7": itemInfo.vitaminB7,
+        "vitaminB9": itemInfo.vitaminB9,
+        "vitaminB12": itemInfo.vitaminB12,
+        "vitaminC": itemInfo.vitaminC,
+        "vitaminD2": itemInfo.vitaminD2,
+        "vitaminD3": itemInfo.vitaminD3,
+        "vitaminE": itemInfo.vitaminE,
+        "vitaminK": itemInfo.vitaminK,
         "zinc": itemInfo.zinc
       }
     });
@@ -1041,13 +1041,14 @@ app.post('/updateUserGoals', (req, res)=>{
   const userId = (req.session.userDocId);
 
   updateUserDefaults(userId, topFourSelections, otherSelections, userGoals).then((data)=>{
+    
     if(data === true){ //successful update
       req.session.nutritionTopFour = topFourSelections;
       req.session.nutritionOther = otherSelections;
       req.session.nutritionGoals = userGoals;
+      console.log(userGoals);
       res.status(200).send({result:true});
     }else{
-      console.log(data);
       res.status(200).send({result:false});
     }
   });

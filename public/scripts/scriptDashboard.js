@@ -3,10 +3,10 @@
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
-const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber", "Folic Acid", "Histidine",
-"Iodine", "Iron","Isoleucine", "Leucine", "Lysine", "Magnesium", "Manganese", "Methionine", "Molybdenum","Phenylalanine", "Phosphorus", "Potassium", "Protein",
-"Saturated Fat", "Selenium", "Sodium", "Sugar", "Trans Fat", "Threonine", "Tryptophan", "Valine", "Vitamin A", "Vitamin B1", "Vitamin B2", "Vitamin B3",
-"Vitamin B5", "Vitamin B6", "Vitamin B7", "Vitamin B9", "Vitamin B12", "Vitamin C", "Vitamin D2", "Vitamin D3", "Vitamin E", "Vitamin K", "Zinc"]
+const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber", "folic acid", "histidine",
+"iodine", "iron","isoleucine", "leucine", "lysine", "magnesium", "manganese", "methionine", "molybdenum","phenylalanine", "phosphorus", "potassium", "protein",
+"saturated fat", "selenium", "sodium", "sugar", "trans fat", "threonine", "tryptophan", "valine", "vitamin a", "vitamin b1", "vitamin b2", "vitamin b3",
+"vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2", "vitamin d3", "vitamin e", "vitamin k", "zinc"]
 
 //When page loads
 $(window).on("load",()=>{
@@ -47,10 +47,10 @@ const setTopFourDropdownOptions = function (){
     });
 
     //set default dropdown selections
-    $("#topFourSelection1").val('Calories');
-    $("#topFourSelection2").val('Protein');
-    $("#topFourSelection3").val('Sodium');
-    $("#topFourSelection4").val('Carbs');
+    $("#topFourSelection1").val('calories');
+    $("#topFourSelection2").val('protein');
+    $("#topFourSelection3").val('sodium');
+    $("#topFourSelection4").val('carbs');
 }
 
 //Check for match in given array
@@ -129,6 +129,7 @@ const getTopFourSelections = function(){
     selections.push ($("#topFourSelection3").find('option:selected').val());
     selections.push ($("#topFourSelection4").find('option:selected').val());
 
+    console.log(selections)
     return(selections);
 }
 

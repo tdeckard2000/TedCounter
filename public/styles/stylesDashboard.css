@@ -483,6 +483,7 @@ button.close{
 
 .topFourSelection{
     margin: 5px;
+    text-transform: capitalize;
 }
 
 

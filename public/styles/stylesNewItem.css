@@ -109,6 +109,7 @@
     margin: 0 5px;
     max-width: 128px;
     text-align: left;
+    text-transform: capitalize;
     width: 60%;
 }
 

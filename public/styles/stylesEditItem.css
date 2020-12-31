@@ -221,6 +221,7 @@ button.close{
 .textBoxLabel{
     font-size: .8rem;
     margin: 5px 0 0 0;
+    text-transform: capitalize;
 }
 
 /* New Item Bottom Bar ========================================== */

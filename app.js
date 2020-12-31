@@ -178,11 +178,11 @@ const itemDiary = mongoose.model('itemDiary', itemDiarySchema);
 const user = mongoose.model('user', userSchema);
 const passwordKey = mongoose.model('passwordKey', passwordKeysSchema);
 
-const nutritionOptions = ["Caffeine", "Calcium", "Calories", "Carbs", "Chloride", "Choline", "Cholesterol", "Chromium", "Copper", "Fat", "Fiber",
-"Folic Acid", "Histidine", "Iodine", "Iron","Isoleucine", "Leucine", "Lysine", "Magnesium", "Manganese", "Methionine", "Molybdenum","Phenylalanine",
-"Phosphorus", "Potassium", "Protein", "Saturated Fat", "Selenium", "Sodium", "Sugar", "Trans Fat", "Threonine", "Tryptophan", "Valine", "Vitamin A",
-"Vitamin B1", "Vitamin B2", "Vitamin B3", "Vitamin B5", "Vitamin B6", "Vitamin B7", "Vitamin B9", "Vitamin B12", "Vitamin C", "Vitamin D2",
-"Vitamin D3", "Vitamin E", "Vitamin K", "Zinc"];
+const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber",
+"folic acid", "histidine", "iodine", "iron","isoleucine", "leucine", "lysine", "magnesium", "manganese", "methionine", "molybdenum","phenylalanine",
+"phosphorus", "potassium", "protein", "saturated fat", "selenium", "sodium", "sugar", "trans fat", "threonine", "tryptophan", "valine", "vitamin a",
+"vitamin b1", "vitamin b2", "vitamin b3", "vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2",
+"vitamin d3", "vitamin e", "vitamin k", "zinc"];
 
 // Functions ==========================================================
 
@@ -276,8 +276,8 @@ const calculateNutritionTotals = function(foodDiary){
   foodDiary.forEach(diaryItem =>{
     //total each nutrition option
     nutritionOptions.forEach(nutrient =>{
-      if(diaryItem.item[nutrient.toLowerCase()]){
-        diaryTotals[nutrient.toLowerCase()] += diaryItem.item[nutrient.toLowerCase()];
+      if(diaryItem.item[nutrient]){
+        diaryTotals[nutrient] += diaryItem.item[nutrient];
       }
     });
   });

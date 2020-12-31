@@ -8,20 +8,20 @@
 <div id="goals" data-userPreferences="<%=userPreferences%>" class="container">
   <div class="row headerRow">
     <div class=" topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[0].toLowerCase()]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[0].toLowerCase()]%> <%=nutritionTopFour[0].substring(0, 4)%></div> 
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[0]]%></div>
+      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[0]]%> <%=nutritionTopFour[0].substring(0, 4)%></div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[1].toLowerCase()]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[1].toLowerCase()]%> <%=nutritionTopFour[1].substring(0, 4)%></div> 
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[1]]%></div>
+      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[1]]%> <%=nutritionTopFour[1].substring(0, 4)%></div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[2].toLowerCase()]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[2].toLowerCase()]%> <%=nutritionTopFour[2].substring(0, 4)%></div> 
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[2]]%></div>
+      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[2]]%> <%=nutritionTopFour[2].substring(0, 4)%></div> 
     </div>
     <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[3].toLowerCase()]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[3].toLowerCase()]%> <%=nutritionTopFour[3].substring(0, 4)%></div> 
+      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[3]]%></div>
+      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[3]]%> <%=nutritionTopFour[3].substring(0, 4)%></div> 
     </div>
   </div>
 </div>
@@ -40,10 +40,10 @@
           <h2 class="itemName"><%=foodDiary[i].item.name%></h2>
         </div>
         <div class="col-3 itemValueDiv">
-          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[0].toLowerCase()]%> <%=nutritionTopFour[0].substring(0,4)%></h6>
-          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[1].toLowerCase()]%> <%=nutritionTopFour[1].substring(0,4)%></h6>
-          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[2].toLowerCase()]%> <%=nutritionTopFour[2].substring(0,4)%></h6>
-          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[3].toLowerCase()]%> <%=nutritionTopFour[3].substring(0,4)%></h6>
+          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[0]]%> <%=nutritionTopFour[0].substring(0,4)%></h6>
+          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[1]]%> <%=nutritionTopFour[1].substring(0,4)%></h6>
+          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[2]]%> <%=nutritionTopFour[2].substring(0,4)%></h6>
+          <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[3]]%> <%=nutritionTopFour[3].substring(0,4)%></h6>
         </div>
       </div>
       <div class="collapse itemDropdownBox" id="id<%=foodDiary[i]._id%>">
@@ -51,22 +51,22 @@
             <%for(e = 0; e < nutritionOther.length; e++){%>
               <tr>
                 <%if(e < 5){%>
-                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
               <tr>
                 <%if(e < 10 && e > 5){%>
-                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
               <tr>
                 <%if(e < 15 && e > 10){%>
-                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
               <tr>
                 <%if(e < 20 && e > 15){%>
-                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e].toLowerCase()]%></td>
+                  <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
             <%}%>

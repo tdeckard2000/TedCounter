@@ -419,6 +419,7 @@ button.close{
     display: block;
     font-size: .8rem;
     margin: 10px 0 1px 0;
+    text-transform: capitalize;
 }
 
 .loadingIndicatorDiv{
@@ -459,6 +460,7 @@ button.close{
 
 .otherItemsFlexRow label{
     margin-left: 5px;
+    text-transform: capitalize;
 }
 
 .otherFlexColumn1{

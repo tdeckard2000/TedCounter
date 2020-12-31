@@ -109,12 +109,12 @@ const setupDefaultsGoalsTextBoxes = function(){
 
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
-        $(".goalsFlexColumn1").append("<div><label for='" + list[i].toLowerCase() + "'>" + list[i] +
-         "</label><input id='" + list[i].toLowerCase() + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+        $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
+         "</label><input id='" + list[i] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
 
          if(list[i+1] !== undefined){
-            $(".goalsFlexColumn2").append("<div><label for='" + list[i+1].toLowerCase() + "'>" + list[i+1] +
-            "</label><input id='" + list[i+1].toLowerCase() + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+            $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + list[i+1] +
+            "</label><input id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
     }

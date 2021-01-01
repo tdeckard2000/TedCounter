@@ -7,23 +7,25 @@
 
 <div id="goals" data-userPreferences="<%=userPreferences%>" class="container">
   <div class="row headerRow">
-    <div class=" topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[0]]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[0]]%> <%=nutritionTopFour[0].substring(0, 4)%></div> 
+    <%if(nutritionTopFour != undefined && nutritionGoals != undefined){%>
+      <div class=" topCounterDiv col-3">
+        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[0]]%></div>
+        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[0]]%> <%=nutritionTopFour[0].substring(0, 4)%></div> 
+      </div>
+      <div class="topCounterDiv col-3">
+        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[1]]%></div>
+        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[1]]%> <%=nutritionTopFour[1].substring(0, 4)%></div> 
+      </div>
+      <div class="topCounterDiv col-3">
+        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[2]]%></div>
+        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[2]]%> <%=nutritionTopFour[2].substring(0, 4)%></div> 
+      </div>
+      <div class="topCounterDiv col-3">
+        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[3]]%></div>
+        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[3]]%> <%=nutritionTopFour[3].substring(0, 4)%></div> 
+      </div>
     </div>
-    <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[1]]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[1]]%> <%=nutritionTopFour[1].substring(0, 4)%></div> 
-    </div>
-    <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[2]]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[2]]%> <%=nutritionTopFour[2].substring(0, 4)%></div> 
-    </div>
-    <div class="topCounterDiv col-3">
-      <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[3]]%></div>
-      <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[3]]%> <%=nutritionTopFour[3].substring(0, 4)%></div> 
-    </div>
-  </div>
+  <%}%>
 </div>
 
 <!-- Diary Items List -->
@@ -113,7 +115,9 @@
               </div>
 
               <!-- show/hide extra input options -->
-              <p class="moreOptionsButton" data-toggle="collapse" href="#extraInputOptions">more options</p>
+              <%if(nutritionOther != undefined && nutritionOther[0]){%>
+                <p class="moreOptionsButton" data-toggle="collapse" href="#extraInputOptions">more options</p>
+              <%}%>
             </div>
         </div>
         <div class="modal-footer">

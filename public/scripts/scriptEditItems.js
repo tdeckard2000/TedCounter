@@ -72,6 +72,7 @@ const getFormData = function(){
     let formArray = $('#editItemForm').serializeArray();
     let formObject = arrayToObject(formArray);
     let jsonObject = JSON.stringify(formObject);
+    console.log(jsonObject)
     return(jsonObject);
 }
 
@@ -132,10 +133,7 @@ $("#editItemForm").on("submit", (data)=>{
     $("#saveButton").prop("textContent", "Saving...")
 
     let itemId = data.currentTarget.dataset.itemid;
-    console.log(itemId)
     let itemData = getFormData();
-
-    console.log("ajax")
 
     $.ajax({
         type: "POST",

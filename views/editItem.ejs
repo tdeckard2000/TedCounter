@@ -69,7 +69,7 @@
                 <div class="textBoxFlexColumn">
                   <%for(i=0; i<nutritionTopFour.length; i++){%>
                     <%if(i%2 == 0){%>
-                      <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=nutritionTopFour[i]%></label>
+                      <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=keyToHuman[nutritionTopFour[i]]%></label>
                       <input name="<%=nutritionTopFour[i]%>" class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                       </label>
                     <%}%>
@@ -78,7 +78,7 @@
                 <div class="textBoxFlexColumn">
                   <%for(i=0; i<nutritionTopFour.length; i++){%>
                     <%if(i%2 !== 0){%>
-                      <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=nutritionTopFour[i]%></label>
+                      <label class="textBoxLabel" for="<%=nutritionTopFour[i]%>"><%=keyToHuman[nutritionTopFour[i]]%></label>
                       <input name="<%=nutritionTopFour[i]%>" class="editItemTextBoxTopFour"id="<%=nutritionTopFour[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                       </label>
                     <%}%>
@@ -91,7 +91,7 @@
                 <div class="textBoxFlexColumn">
                   <%for(i=0; i<nutritionOther.length; i++){%>
                     <%if(i%2 == 0){%>
-                      <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
+                      <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=keyToHuman[nutritionOther[i]]%></label>
                       <input name="<%=nutritionOther[i]%>" class="editItemTextBoxGeneral"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                     <%}%>
                   <%}%>
@@ -99,7 +99,7 @@
                 <div class="textBoxFlexColumn">
                   <%for(i=0; i<nutritionOther.length; i++){%>
                     <%if(i%2 !== 0){%>
-                      <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=nutritionOther[i]%></label>
+                      <label class="textBoxLabel" for="<%=nutritionOther[i]%>"><%=keyToHuman[nutritionOther[i]]%></label>
                       <input name="<%=nutritionOther[i]%>" class="editItemTextBoxGeneral"id="<%=nutritionOther[i]%>" inputmode="numeric" maxlength="4" pattern="[0-9]*" type="text">
                     <%}%>
                   <%}%>

@@ -3,10 +3,117 @@
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
+
 const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber", "folic acid", "histidine",
 "iodine", "iron","isoleucine", "leucine", "lysine", "magnesium", "manganese", "methionine", "molybdenum","phenylalanine", "phosphorus", "potassium", "protein",
 "saturated fat", "selenium", "sodium", "sugar", "trans fat", "threonine", "tryptophan", "valine", "vitamin a", "vitamin b1", "vitamin b2", "vitamin b3",
 "vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2", "vitamin d3", "vitamin e", "vitamin k", "zinc"]
+
+//convert values into DB friendly format
+const keyToDB = {
+    "caffeine": "caffeine",
+    "calcium": "calcium",
+    "calories": "calories",
+    "carbs": "carbs",
+    "chloride": "chloride",
+    "choline": "choline",
+    "cholesterol": "cholesterol",
+    "chromium": "chromium",
+    "copper": "copper",
+    "fat": "fat",
+    "fiber": "fiber",
+    "folic acid": "folicAcid",
+    "histidine": "histidine",
+    "iodine": "iodine",
+    "iron": "iron",
+    "isoleucine": "isoleucine",
+    "leucine": "leucine",
+    "lysine": "lysine",
+    "magnesium": "magnesium",
+    "manganese": "manganese",
+    "methionine": "methionine",
+    "molybdenum": "molybdenum",
+    "phenylalanine": "phenylalanine",
+    "phosphorus": "phosphorus",
+    "potassium": "potassium",
+    "protein": "protein",
+    "saturated fat": "saturatedFat",
+    "selenium": "selenium",
+    "sodium": "sodium",
+    "sugar": "sugar",
+    "trans fat": "transFat",
+    "threonine": "threonine",
+    "tryptophan": "tryptophan",
+    "valine": "valine",
+    "vitamin a": "vitaminA",
+    "vitamin b1": "vitaminB1",
+    "vitamin b2": "vitaminB2",
+    "vitamin b3": "vitaminB3",
+    "vitamin b5": "vitaminB5",
+    "vitamin b6": "vitaminB6",
+    "vitamin b7": "vitaminB7",
+    "vitamin b9": "vitaminB9",
+    "vitamin b12": "vitaminB12",
+    "vitamin c": "vitaminC",
+    "vitamin d2": "vitaminD2",
+    "vitamin d3": "vitaminD3",
+    "vitamin e": "vitaminE",
+    "vitamin k": "vitaminK",
+    "zinc": "zinc"
+}
+
+//convert values into human readable format
+const keyToHuman = {
+    "caffeine": "Caffeine",
+    "calcium": "Calcium",
+    "calories": "Calories",
+    "carbs": "Carbs",
+    "chloride": "Chloride",
+    "choline": "Choline",
+    "cholesterol": "Cholesterol",
+    "chromium": "Chromium",
+    "copper": "Copper",
+    "fat": "Fat",
+    "fiber": "Fiber",
+    "folicAcid": "Folic Acid",
+    "histidine": "Histidine",
+    "iodine": "Iodine",
+    "iron": "Iron",
+    "isoleucine": "Isoleucine",
+    "leucine": "Leucine",
+    "lysine": "Lysine",
+    "magnesium": "Magnesium",
+    "manganese": "Manganese",
+    "methionine": "Methionine",
+    "molybdenum": "Molybdenum",
+    "phenylalanine": "Phenylalanine",
+    "phosphorus": "Phosphorus",
+    "potassium": "Potassium",
+    "protein": "Protein",
+    "saturatedFat": "Saturated Fat",
+    "selenium": "Selenium",
+    "sodium": "Sodium",
+    "sugar": "Sugar",
+    "transFat": "Trans Fat",
+    "threonine": "Threonine",
+    "tryptophan": "Tryptophan",
+    "valine": "Valine",
+    "vitaminA": "Vitamin A",
+    "vitaminB1": "Vitamin B1",
+    "vitaminB2": "Vitamin B2",
+    "vitaminB3": "Vitamin B3",
+    "vitaminB5": "Vitamin B5",
+    "vitaminB6": "Vitamin B6",
+    "vitaminB7": "Vitamin B7",
+    "vitaminB9": "Vitamin B9",
+    "vitaminB12": "Vitamin B12",
+    "vitaminC": "Vitamin C",
+    "vitaminD2": "Vitamin D2",
+    "vitaminD3": "Vitamin D3",
+    "vitaminE": "Vitamin E",
+    "vitaminK": "Vitamin K",
+    "zinc": "Zinc"
+}
 
 //When page loads
 $(window).on("load",()=>{
@@ -75,6 +182,9 @@ const setupDefaultsCheckboxes = function(){
 
     //remove top four selections from 'allOptions' array
     topFourSelections.forEach(element => {
+        element = keyToHuman[element]; //convert element to human readable version
+        element = element.toLowerCase(); //allOptions are lowercase, make element lowercase too
+
         let matchingIndex = allOptions.indexOf(element);
 
         if(matchingIndex !== -1){
@@ -109,11 +219,11 @@ const setupDefaultsGoalsTextBoxes = function(){
 
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
-        $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + list[i] +
+        $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + keyToHuman[list[i]] +
          "</label><input id='" + list[i] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
 
          if(list[i+1] !== undefined){
-            $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + list[i+1] +
+            $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + keyToHuman[list[i+1]] +
             "</label><input id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
@@ -124,12 +234,14 @@ const setupDefaultsGoalsTextBoxes = function(){
 //Get top four selected items
 const getTopFourSelections = function(){
     let selections = [];
-    selections.push ($("#topFourSelection1").find('option:selected').val());
-    selections.push ($("#topFourSelection2").find('option:selected').val());
-    selections.push ($("#topFourSelection3").find('option:selected').val());
-    selections.push ($("#topFourSelection4").find('option:selected').val());
-
-    console.log(selections)
+    let i = 1;
+    while(i < 5){
+        //get value of each dropdown box
+        let selection = ($("#topFourSelection" + i).find('option:selected').val());
+        //convert the value using keyToDB & save to array
+        selections.push(keyToDB[selection]);
+        i++;
+    }
     return(selections);
 }
 
@@ -137,7 +249,8 @@ const getTopFourSelections = function(){
 const getOtherSelections = function(){
     let selections = [];
     $(".otherCheckBoxes :checked").each(function(){
-        selections.push($(this).attr("id"));
+        let selection = ($(this).attr("id")); //get selection
+        selections.push(keyToDB[selection]); //convert selection to DB friendly format
     })
     return(selections);
 }
@@ -205,12 +318,10 @@ const postDefaultSelections = function(){
         if(data.result === true){
             setTimeout(()=>{
                 $(".defaultsTitle").prop("textContent", "Saved!");
-                console.log(1)
             }, 3000);
             setTimeout(()=>{
                 $(".defaultsTitle").prop("textContent", "Getting your account ready.");
                 $(".defaultsSubTitle").prop("textContent", "Adding some food items to get you started.");
-                console.log(2)
             }, 3000);
             setTimeout(()=>{
                 $(".defaultsTitle").prop("textContent", "All done!");
@@ -220,8 +331,7 @@ const postDefaultSelections = function(){
                 $(".defaultsFinalOptionsDiv").removeClass("hidden");
                 $("#defaultsNextButton").prop("disabled", false);
                 $("#defaultsBackButton").prop("disabled", false);
-                console.log(3)
-            }, 10000);
+            }, 8000);
 
         }else{
             console.warn("Error saving user preferences at AJAX. - Done Catch")
@@ -431,5 +541,4 @@ $("#buttonOpenDefaultsModal").on("click", ()=>{
     $("#userPreferencesModal").modal("toggle");
     $("#defaultsBackButton").prop("disabled", true)
     setTopFourDropdownOptions();
-    console.log("click")
 });

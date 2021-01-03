@@ -900,6 +900,7 @@ app.get('/newitem', (req, res)=>{
     const nutritionTopFour = req.session.nutritionTopFour;
     const nutritionOther = req.session.nutritionOther;
     res.render('newitem', {
+      keyToHuman:keyToHuman,
       nutritionTopFour:nutritionTopFour,
       nutritionOther:nutritionOther
     })
@@ -1000,6 +1001,7 @@ app.post('/newItem', (req, res)=>{
         req.body[key]=0
       }
     }
+    console.log(req.body)
     addNewItem(req.body, req.session.userDocId)
     .then(function(){
         res.redirect('/dashboard');  

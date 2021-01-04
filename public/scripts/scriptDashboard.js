@@ -168,6 +168,58 @@ const keyToNormal = {
     "zinc": "Zinc"
 }
 
+const keyGoalDefaults = {
+    "caffeine": 400,
+    "calcium": 2500,
+    "calories": 2000,
+    "carbs": 300,
+    "chloride": 2300,
+    "choline": 450,
+    "cholesterol": 300,
+    "chromium": 30,
+    "copper": 100,
+    "fat": 55,
+    "fiber": 30,
+    "folicAcid": 400,
+    "histidine": 14,
+    "iodine": 150,
+    "iron": 19,
+    "isoleucine": 19,
+    "leucine": 14,
+    "lysine": 1000,
+    "magnesium": 360,
+    "manganese": 2,
+    "methionine": 1400,
+    "molybdenum": 90,
+    "phenylalanine": 150,
+    "phosphorus": 700,
+    "potassium": 3600,
+    "protein": 70,
+    "saturatedFat": 16,
+    "selenium": 55,
+    "sodium": 2300,
+    "sugar": 36,
+    "transFat": 2,
+    "threonine": 500,
+    "tryptophan": 300,
+    "valine": 1700,
+    "vitaminA": 100,
+    "vitaminB1": 100,
+    "vitaminB2": 100,
+    "vitaminB3": 100,
+    "vitaminB5": 100,
+    "vitaminB6": 100,
+    "vitaminB7": 100,
+    "vitaminB9": 100,
+    "vitaminB12": 100,
+    "vitaminC": 100,
+    "vitaminD2": 100,
+    "vitaminD3": 100,
+    "vitaminE": 100,
+    "vitaminK": 100,
+    "zinc": 100
+}
+
 //When page loads
 $(window).on("load",()=>{
     //Store user nutrition info in window from DOM 
@@ -263,7 +315,7 @@ const setupDefaultsCheckboxes = function(){
 //Populate 'Goals' text input boxes
 const setupDefaultsGoalsTextBoxes = function(){
     let list = getUserSelections();
-
+    console.log(list)
     //order list alphabetically (keeping top four intact)
     list = orderAlphabetically(4, list);
 
@@ -273,11 +325,11 @@ const setupDefaultsGoalsTextBoxes = function(){
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
         $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + keyToHuman[list[i]] +
-         "</label><input id='" + list[i] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+         "</label><input placeholder=" + keyGoalDefaults[list[i]] + " id='" + list[i] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
 
          if(list[i+1] !== undefined){
             $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + keyToHuman[list[i+1]] +
-            "</label><input id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+            "</label><input placeholder=" + keyGoalDefaults[list[i]] + " id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
     }
@@ -490,7 +542,7 @@ $("#defaultsNextButton").on("click", function(){
         //change page title
         $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.");
+        $(".defaultsSubTitle").prop("innerHTML", "Values provided are for reference only. <br> Always consult your doctor.");
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages

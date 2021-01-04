@@ -9,7 +9,7 @@ const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride"
 "saturated fat", "selenium", "sodium", "sugar", "trans fat", "threonine", "tryptophan", "valine", "vitamin a", "vitamin b1", "vitamin b2", "vitamin b3",
 "vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2", "vitamin d3", "vitamin e", "vitamin k", "zinc"]
 
-//convert values into DB friendly format
+//Convert values to DB friendly format
 const keyToDB = {
     "caffeine": "caffeine",
     "calcium": "calcium",
@@ -62,8 +62,61 @@ const keyToDB = {
     "zinc": "zinc"
 }
 
-//convert values into human readable format
+//Convert values to human readable format
 const keyToHuman = {
+    "caffeine": "Caffeine mg",
+    "calcium": "Calcium mg",
+    "calories": "Calories",
+    "carbs": "Carbs g",
+    "chloride": "Chloride mg",
+    "choline": "Choline mg",
+    "cholesterol": "Cholesterol mg",
+    "chromium": "Chromium mcg",
+    "copper": "Copper %dv",
+    "fat": "Fat g",
+    "fiber": "Fiber g",
+    "folicAcid": "Folic Acid mcg",
+    "histidine": "Histidine mg",
+    "iodine": "Iodine mcg",
+    "iron": "Iron mg",
+    "isoleucine": "Isoleucine mg",
+    "leucine": "Leucine mg",
+    "lysine": "Lysine mg",
+    "magnesium": "Magnesium mg",
+    "manganese": "Manganese mg",
+    "methionine": "Methionine mg",
+    "molybdenum": "Molybdenum mcg",
+    "phenylalanine": "Phenylalanine mg",
+    "phosphorus": "Phosphorus mg",
+    "potassium": "Potassium mg",
+    "protein": "Protein g",
+    "saturatedFat": "Saturated Fat g",
+    "selenium": "Selenium mcg",
+    "sodium": "Sodium mg",
+    "sugar": "Sugar g",
+    "transFat": "Trans Fat g",
+    "threonine": "Threonine mg",
+    "tryptophan": "Tryptophan mg",
+    "valine": "Valine mg",
+    "vitaminA": "Vitamin A %dv",
+    "vitaminB1": "Vitamin B1 %dv",
+    "vitaminB2": "Vitamin B2 %dv",
+    "vitaminB3": "Vitamin B3 %dv",
+    "vitaminB5": "Vitamin B5 %dv",
+    "vitaminB6": "Vitamin B6 %dv",
+    "vitaminB7": "Vitamin B7 %dv",
+    "vitaminB9": "Vitamin B9 %dv",
+    "vitaminB12": "Vitamin B12 %dv",
+    "vitaminC": "Vitamin C %dv",
+    "vitaminD2": "Vitamin D2 %dv",
+    "vitaminD3": "Vitamin D3 %dv",
+    "vitaminE": "Vitamin E %dv",
+    "vitaminK": "Vitamin K %dv",
+    "zinc": "Zinc %dv"
+}
+
+//Convert Values to original format
+const keyToNormal = {
     "caffeine": "Caffeine",
     "calcium": "Calcium",
     "calories": "Calories",
@@ -182,7 +235,7 @@ const setupDefaultsCheckboxes = function(){
 
     //remove top four selections from 'allOptions' array
     topFourSelections.forEach(element => {
-        element = keyToHuman[element]; //convert element to human readable version
+        element = keyToNormal[element]; //convert element to human readable version
         element = element.toLowerCase(); //allOptions are lowercase, make element lowercase too
 
         let matchingIndex = allOptions.indexOf(element);

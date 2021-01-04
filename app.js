@@ -186,55 +186,55 @@ const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride"
 
 //Convert DB values into human readable format
 const keyToHuman = {
-  "caffeine": "Caffeine",
-  "calcium": "Calcium",
+  "caffeine": "Caffeine mg",
+  "calcium": "Calcium mg",
   "calories": "Calories",
-  "carbs": "Carbs",
-  "chloride": "Chloride",
-  "choline": "Choline",
-  "cholesterol": "Cholesterol",
-  "chromium": "Chromium",
-  "copper": "Copper",
-  "fat": "Fat",
-  "fiber": "Fiber",
-  "folicAcid": "Folic Acid",
-  "histidine": "Histidine",
-  "iodine": "Iodine",
-  "iron": "Iron",
-  "isoleucine": "Isoleucine",
-  "leucine": "Leucine",
-  "lysine": "Lysine",
-  "magnesium": "Magnesium",
-  "manganese": "Manganese",
-  "methionine": "Methionine",
-  "molybdenum": "Molybdenum",
-  "phenylalanine": "Phenylalanine",
-  "phosphorus": "Phosphorus",
-  "potassium": "Potassium",
-  "protein": "Protein",
-  "saturatedFat": "Saturated Fat",
-  "selenium": "Selenium",
-  "sodium": "Sodium",
-  "sugar": "Sugar",
-  "transFat": "Trans Fat",
-  "threonine": "Threonine",
-  "tryptophan": "Tryptophan",
-  "valine": "Valine",
-  "vitaminA": "Vitamin A",
-  "vitaminB1": "Vitamin B1",
-  "vitaminB2": "Vitamin B2",
-  "vitaminB3": "Vitamin B3",
-  "vitaminB5": "Vitamin B5",
-  "vitaminB6": "Vitamin B6",
-  "vitaminB7": "Vitamin B7",
-  "vitaminB9": "Vitamin B9",
-  "vitaminB12": "Vitamin B12",
-  "vitaminC": "Vitamin C",
-  "vitaminD2": "Vitamin D2",
-  "vitaminD3": "Vitamin D3",
-  "vitaminE": "Vitamin E",
-  "vitaminK": "Vitamin K",
-  "zinc": "Zinc"
+  "carbs": "Carbs g",
+  "chloride": "Chloride mg",
+  "choline": "Choline mg",
+  "cholesterol": "Cholesterol mg",
+  "chromium": "Chromium mcg",
+  "copper": "Copper %dv",
+  "fat": "Fat g",
+  "fiber": "Fiber g",
+  "folicAcid": "Folic Acid mcg",
+  "histidine": "Histidine mg",
+  "iodine": "Iodine mcg",
+  "iron": "Iron mg",
+  "isoleucine": "Isoleucine mg",
+  "leucine": "Leucine mg",
+  "lysine": "Lysine mg",
+  "magnesium": "Magnesium mg",
+  "manganese": "Manganese mg",
+  "methionine": "Methionine mg",
+  "molybdenum": "Molybdenum mcg",
+  "phenylalanine": "Phenylalanine mg",
+  "phosphorus": "Phosphorus mg",
+  "potassium": "Potassium mg",
+  "protein": "Protein g",
+  "saturatedFat": "Saturated Fat g",
+  "selenium": "Selenium mcg",
+  "sodium": "Sodium mg",
+  "sugar": "Sugar g",
+  "transFat": "Trans Fat g",
+  "threonine": "Threonine mg",
+  "tryptophan": "Tryptophan mg",
+  "valine": "Valine mg",
+  "vitaminA": "Vitamin A %dv",
+  "vitaminB1": "Vitamin B1 %dv",
+  "vitaminB2": "Vitamin B2 %dv",
+  "vitaminB3": "Vitamin B3 %dv",
+  "vitaminB5": "Vitamin B5 %dv",
+  "vitaminB6": "Vitamin B6 %dv",
+  "vitaminB7": "Vitamin B7 %dv",
+  "vitaminB9": "Vitamin B9 %dv",
+  "vitaminB12": "Vitamin B12 %dv",
+  "vitaminC": "Vitamin C %dv",
+  "vitaminD2": "Vitamin D2 %dv",
+  "vitaminD3": "Vitamin D3 %dv",
+  "vitaminE": "Vitamin E %dv",
+  "vitaminK": "Vitamin K %dv",
+  "zinc": "Zinc %dv"
 }
 
 // Functions ==========================================================
@@ -503,7 +503,6 @@ const addNewItem = function(newItems, userDocId){
 //Update Food Item Data
 const updateFoodItem = function(itemId, itemData){
   return new Promise((resolve, reject)=>{
-    console.log(itemData)
 
     foodItem.findOneAndUpdate({_id:itemId}, itemData, (err, data)=>{
       if(data){
@@ -993,6 +992,8 @@ app.post('/', (req, res)=>{
 });
 
 app.post('/newItem', (req, res)=>{
+  console.log(req.body)
+
   if(!req.session.userDocId){
     res.redirect('/');
   }else{
@@ -1001,7 +1002,6 @@ app.post('/newItem', (req, res)=>{
         req.body[key]=0
       }
     }
-    console.log(req.body)
     addNewItem(req.body, req.session.userDocId)
     .then(function(){
         res.redirect('/dashboard');  

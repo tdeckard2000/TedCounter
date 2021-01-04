@@ -62,7 +62,7 @@ html, body{
 }
 
 .itemDropdownBox.show{
-    height: 50px;
+    min-height: 50px;
 }
 
 /* .itemDropdownBox.collapsing{

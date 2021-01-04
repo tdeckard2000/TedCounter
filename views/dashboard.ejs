@@ -50,28 +50,31 @@
       </div>
       <div class="collapse itemDropdownBox" id="id<%=foodDiary[i]._id%>">
           <table class="itemDropdownTable">
-            <%for(e = 0; e < nutritionOther.length; e++){%>
+            <tr>
+              <%for(e = 0; e < 5 && e < nutritionOther.length; e++){%>
+                <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
+              <%}%>
+            </tr>
               <tr>
-                <%if(e < 5){%>
+                <%for(e = 5; e < 10 && e < nutritionOther.length; e++){%>
                   <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
               <tr>
-                <%if(e < 10 && e > 5){%>
+                <%for(e = 10; e < 15 && e < nutritionOther.length; e++){%>
                   <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
               <tr>
-                <%if(e < 15 && e > 10){%>
+                <%for(e = 15; e < 20 && e < nutritionOther.length; e++){%>
                   <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
               <tr>
-                <%if(e < 20 && e > 15){%>
+                <%for(e = 20; e < 25 && e < nutritionOther.length; e++){%>
                   <td><%=nutritionOther[e].substring(0,4)%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 <%}%>
               </tr>
-            <%}%>
           </table>
           <div class="itemDropdownButtons">
             <form action="/dashboard/modifyDiary" method="POST">

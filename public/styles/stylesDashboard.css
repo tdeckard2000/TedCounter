@@ -61,6 +61,14 @@ html, body{
     position: relative;
 }
 
+.itemDropdownBox.show{
+    height: 50px;
+}
+
+/* .itemDropdownBox.collapsing{
+    min-height: 50px;
+} */
+
 .itemDropdownButtons{
     position: absolute;
     right: 0px;

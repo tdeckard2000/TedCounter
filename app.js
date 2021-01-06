@@ -237,6 +237,59 @@ const keyToHuman = {
   "zinc": "Zinc %dv"
 }
 
+//Convert DB value into short-form version
+const keyShortForm = {
+  "caffeine": "caff",
+  "calcium": "ca",
+  "calories": "cal",
+  "carbs": "carb",
+  "chloride": "cl",
+  "choline": "cho",
+  "cholesterol": "chol",
+  "chromium": "Cr",
+  "copper": "Cu",
+  "fat": "fat",
+  "fiber": "fibr",
+  "folicAcid": "fa",
+  "histidine": "his",
+  "iodine": "iodi",
+  "iron": "iron",
+  "isoleucine": "ile",
+  "leucine": "leu",
+  "lysine": "lys",
+  "magnesium": "Mg",
+  "manganese": "Mn",
+  "methionine": "M",
+  "molybdenum": "Mo",
+  "phenylalanine": "Phe",
+  "phosphorus": "P",
+  "potassium": "K",
+  "protein": "prot",
+  "saturatedFat": "sf",
+  "selenium": "Se",
+  "sodium": "sdm",
+  "sugar": "sug",
+  "transFat": "sf",
+  "threonine": "thr",
+  "tryptophan": "trp",
+  "valine": "val",
+  "vitaminA": "vA",
+  "vitaminB1": "vB1",
+  "vitaminB2": "vB2",
+  "vitaminB3": "vB3",
+  "vitaminB5": "vB5",
+  "vitaminB6": "vB6",
+  "vitaminB7": "vB7",
+  "vitaminB9": "vB9",
+  "vitaminB12": "vB12",
+  "vitaminC": "vC",
+  "vitaminD2": "vD2",
+  "vitaminD3": "vD3",
+  "vitaminE": "vE",
+  "vitaminK": "vK",
+  "zinc": "Zn"
+}
+
 // Functions ==========================================================
 
 const adjustTime = function(startDate, subtractHours){
@@ -880,6 +933,7 @@ app.get('/dashboard', (req, res)=>{
       res.render('dashboard', {
         foodItemList: foodItemList,
         foodDiary: foodDiary,
+        keyShortForm: keyShortForm,
         keyToHuman: keyToHuman,
         nutritionOther: nutritionOther,
         nutritionGoals: nutritionGoals,

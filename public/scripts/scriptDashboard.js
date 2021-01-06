@@ -78,7 +78,7 @@ const keyToHuman = {
     "folicAcid": "Folic Acid mcg",
     "histidine": "Histidine mg",
     "iodine": "Iodine mcg",
-    "iron": "Iron mg",
+    "iron": "Iron %dv",
     "isoleucine": "Isoleucine mg",
     "leucine": "Leucine mg",
     "lysine": "Lysine mg",

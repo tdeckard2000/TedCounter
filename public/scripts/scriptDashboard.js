@@ -647,3 +647,27 @@ $("#buttonOpenDefaultsModal").on("click", ()=>{
     $("#defaultsBackButton").prop("disabled", true)
     setTopFourDropdownOptions();
 });
+
+//######################## Event Listeners (Main Settings Modal) ########################
+
+//Highlight tab when clicked
+$("#tabCharts, #tabPreferences, #tabProfile").on("click",function(){
+    $("#tabCharts, #tabPreferences, #tabProfile").removeClass("active");
+    $(this).addClass("active");
+});
+
+//Show content in modal based on selected tab
+$("#tabCharts, #tabPreferences, #tabProfile").on("click",function(){
+    $(".chartsPage, .preferencesPage, .profilePage").addClass("hidden");
+
+    let selectedTab = $(this).attr("id");
+    if(selectedTab === "tabCharts"){
+        $(".chartsPage").removeClass("hidden");
+
+    }else if(selectedTab == "tabPreferences"){
+        $(".preferencesPage").removeClass("hidden");
+
+    }else if(selectedTab === "tabProfile"){
+        $(".profilePage").removeClass("hidden");
+    }
+});

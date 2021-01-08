@@ -41,7 +41,7 @@ html, body{
     max-width: 350px;
     margin: auto;
     opacity: .2;
-    padding: 30px 30px 60px 30px;
+    padding: 30px 30px 125px 30px;
     position: relative;
     width: 100%;
 }
@@ -63,10 +63,6 @@ html, body{
     margin: 0 1px;
     position: relative;
 }
-
-/* .itemDropdownBox.collapsing{
-    min-height: 50px;
-} */
 
 .itemDropdownButtons{
     position: absolute;
@@ -192,10 +188,11 @@ button.close{
     overflow-x: auto;
 }
 
-.modal .btn{
+.modal .bottomButton{
     background-color: #464646;
     border: 0;
     bottom: 2px;
+    color: #fff;
     position: absolute;
     width: 40%;
 }
@@ -262,17 +259,6 @@ button.close{
     
 }
 
-/* .buttonNewEdit{
-    text-align: center;
-    padding: 7px 0 2px 0;
-}
-
-.buttonNewEdit a{
-    color: #464646;
-    font-weight: 300;
-    padding: 0 20px;
-} */
-
 .filterInput{
     max-width: 250px;
     width: 80%;
@@ -330,9 +316,27 @@ button.close{
 
 /* Settings Modal ================================================ */
 
+#settingsModal .modal-body{
+    height: 50vh;
+    text-align: center;
+}
+
+#settingsModal .navLink{
+    color: #5f65d8;
+}
+
 .settingsTabs{
     position: relative;
     top: -15px;
+}
+
+.settingsBodyButton{
+    background-color: #949494;
+    color: white;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* User Preferences Modal ========================================== */

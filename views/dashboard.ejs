@@ -124,8 +124,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
-          <button type="submit" name="save" class="btn btn-primary save">Save</button>
+          <button type="button" class="btn cancel bottomButton" data-dismiss="modal">Cancel</button>
+          <button type="submit" name="save" class="btn save bottomButton">Save</button>
         </div>
       </div>
     </form>
@@ -161,8 +161,8 @@
       </div>
         <div class="modal-footer">
           <form class="itemBottomForm" method="GET">
-            <button type="button" class="btn btn-secondary addEditButton cancel"onclick="document.location='./editItem'">Edit Items</button>
-            <button type="submit" class="btn btn-primary addEditButton save" formaction="./newitem">Add Item</button>
+            <button type="button" class="btn addEditButton cancel bottomButton"onclick="document.location='./editItem'">Edit Items</button>
+            <button type="submit" class="btn addEditButton save bottomButton" formaction="./newitem">Add Item</button>
           </form>
         </div>
     </div>
@@ -170,7 +170,7 @@
 </div>
 
 <!-- Settings -->
-<div class="modal" id="settings" tabindex="-1" role="dialog">
+<div class="modal" id="settingsModal" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -182,23 +182,38 @@
       <div class="modal-body">
         <ul class="nav nav-tabs settingsTabs">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Charts</a>
+            <a id="tabCharts" class="nav-link active" aria-current="page" href="#">Charts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Preferences</a>
+            <a id="tabPreferences" class="nav-link" href="#">Preferences</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
+            <a id="tabProfile" class="nav-link" href="#">Profile</a>
           </li>
         </ul>
-        <p>Settings and stats here.</p>
-        <p>Settings and stats here.</p>
-        <p>Settings and stats here.</p>
-        <button type="button" class="btn btn-secondary back" id="buttonOpenDefaultsModal">Open Defaults</button>
+        
+        <div class="chartsPage">
+
+        </div>
+
+        <div class="preferencesPage hidden">
+          <button class="btn settingsBodyButton" >Edit Nutrition Interests</button>
+          <button type="button" class="btn settingsBodyButton" id="buttonOpenDefaultsModal">Dev Tool</button>
+        </div>
+
+        <div class="profilePage hidden">
+          <h6>Change Username</h6>
+          <input id="userNameInput" type="text" placeholder="<%=userName%>">
+          <hr>
+          <h6>Change Password</h6>
+          <input id="currentPasswordInput" type="text" placeholder="current password">
+          <input id="newPasswordInput" type="text" placeholder="new password">
+        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary save">Save</button>
+        <button type="button" class="btn cancel bottomButton" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn save bottomButton" disabled>Save</button>
       </div>
     </div>
   </div>
@@ -207,7 +222,7 @@
 <object class="backgroundLogo" data="./files/TedCounterLogo.svg" type="image/svg+xml"></object>
 
 <nav class="bottomButtons fixed-bottom">
-  <button class="buttonSettings" data-target="#settings" data-toggle="modal">⚙</button>
+  <button class="buttonSettings" data-target="#settingsModal" data-toggle="modal">⚙</button>
   <button class="buttonAddItem" data-target="#itemAdd" data-toggle="modal">🍽</button>
   <button class="buttonQuickAdd" data-target="#quickAdd" data-toggle="modal">🔥</button>
 </nav>

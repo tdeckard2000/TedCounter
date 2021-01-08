@@ -37,8 +37,11 @@ html, body{
 /* Dashboard List ========================================== */
 .backgroundLogo{
     bottom: 60px;
+    display: block;
+    max-width: 350px;
+    margin: auto;
     opacity: .2;
-    padding: 30px;
+    padding: 30px 30px 60px 30px;
     position: relative;
     width: 100%;
 }

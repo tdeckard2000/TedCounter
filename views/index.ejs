@@ -36,13 +36,13 @@
       <form id="newUserForm">
         <div class="modal-body">
           <label for="newName" class="sr-only">Name</label>
-          <input name="newName" id="newName" class="form-control" placeholder="Username" autofocus>
+          <input name="newName" id="newName" class="form-control" placeholder="Nickname" autocomplete="nickname" autofocus>
           <label for="newEmail" class="sr-only">Email</label>
-          <input name="newEmail" type="email" id="newEmail" class="form-control" placeholder="Email* (used for password recovery)" required>
+          <input name="newEmail" type="email" id="newEmail" class="form-control" placeholder="Email* (used for password recovery)" autocomplete="email" required>
           <label for="newPassword" class="sr-only">newPassword</label>
-          <input name="newPassword" type="password" id="newPassword" class="form-control" placeholder="Password*" required>
+          <input name="newPassword" type="password" id="newPassword" class="form-control" placeholder="Password*" autocomplete="new-password" required>
           <label for="confirmPassword" class="sr-only">confirmPassword</label>
-          <input name="confirmPassword" type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password*" required>
+          <input name="confirmPassword" type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password*" autocomplete="new-password" required>
         </div>
         <div class="accountExistsNotification hideElement">This email address is already associated with an account.</div>
         <div class="passwordTooShortNotification hideElement">Password must be at least 8 characters long.</div>
@@ -65,7 +65,7 @@
   <label for="inputEmail" class="sr-only">Email address</label>
   <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
-  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="on" required>
   <button class="btn btn-lg btn-info btn-block" id="button-signIn" type="submit">Sign In</button>
 </form>
 

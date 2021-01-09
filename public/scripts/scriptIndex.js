@@ -1,7 +1,6 @@
 //immediately send the user's offset to the server
 $(document).ready(()=>{
     const offsetHours = (new Date().getTimezoneOffset())/60
-    console.log(offsetHours)
     $.ajax({
         contentType: "application/json",
         dataType:"json",
@@ -104,3 +103,22 @@ $('#newPassword, #confirmPassword').on("keyup", ()=>{
         $('.passwordTooShortNotification').addClass('hideElement');
     }
 })
+
+//Autofill username text box if username available
+if (localStorage.username && localStorage.username !== undefined) {
+    let username = localStorage.getItem("username");
+    $("#inputEmail").val(username);
+}
+
+//Store sing-in email address for autofill
+$("#button-signIn").on("click", ()=>{
+    let userName = $("#inputEmail").val();
+    localStorage.setItem('username', userName);
+});
+
+//Store signup email address for autofill
+$(".createAccount").on("click", ()=>{
+    let userName = $("#newEmail").val();
+    console.log("here" + userName)
+    localStorage.setItem('username', userName);
+});

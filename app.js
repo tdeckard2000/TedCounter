@@ -830,12 +830,17 @@ const sendSignInEmail = function(userId){
     }
   });
 
+  if(userId === process.env.disregard0 || userId === process.env.disregard1){
+    return
+  }
+
     transporter.sendMail({
       from:'"TedCounter"<tedcounter@gmail.com>',
       to: process.env.alertCenter,
       subject: "TedCounter Sign In",
       html: userId
     });
+    console.warn("Email Sent")
 }
 
 //Make API request to "OFF" Open Food Facts

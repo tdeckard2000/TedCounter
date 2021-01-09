@@ -670,3 +670,15 @@ $("#tabCharts, #tabPreferences, #tabProfile").on("click",function(){
         $(".profilePage").removeClass("hidden");
     }
 });
+
+//######################## Event Listeners (other) ########################
+
+//Autofocus cursor on Add Item modal
+$('#itemAdd').on('shown.bs.modal', ()=>{
+    $('.filterInput').trigger('focus');
+});
+
+//Autofocus cursor on Quick Add modal
+$('#quickAdd').on('shown.bs.modal', ()=>{
+    $('input.topFour').first().trigger('focus');
+});

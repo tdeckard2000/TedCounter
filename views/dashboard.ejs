@@ -217,7 +217,9 @@
           <input id="currentPasswordInput" type="text" placeholder="current password">
           <input id="newPasswordInput" type="text" placeholder="new password">
           <hr>
-          <button type="button" class="btn settingsBodyButton" id="buttonLogout">Logout</button>
+          <form action="/logout" method="GET">
+            <button type="submit" class="btn settingsBodyButton" id="buttonLogout">Logout</button>
+          </form>
         </div>
 
       </div>

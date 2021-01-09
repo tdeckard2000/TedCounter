@@ -1018,6 +1018,18 @@ app.get('/disclaimer', (req, res)=>{
   res.render("disclaimer")
 })
 
+//Handle Logout
+app.get('/logout', (req, res)=>{
+  req.session.destroy((error)=>{
+    if(error){
+      console.warn("error")
+      res.redirect('/')
+    }else{
+      res.redirect('/');
+    }
+  });
+});
+
 // Post Requests ==========================================================
 app.post('/signIn', (req, res)=>{
   req.session.data = null; //remove old session data
@@ -1060,7 +1072,7 @@ app.post('/newItem', (req, res)=>{
         req.body[key]=0
       }
     }
-    
+
     addNewItem(req.body, req.session.userDocId)
     .then(function(){
         res.redirect('/dashboard');  

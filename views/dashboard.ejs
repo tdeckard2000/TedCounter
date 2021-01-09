@@ -169,7 +169,7 @@
   </div>
 </div>
 
-<!-- Settings -->
+<!-- Settings Modal -->
 <div class="modal" id="settingsModal" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -211,7 +211,7 @@
 
         <div class="profilePage hidden">
           <h6>Change Username</h6>
-          <input id="userNameInput" type="text" placeholder="<%=userName%>">
+          <input id="usernameInput" type="text" placeholder="<%=userName%>">
           <hr>
           <h6>Change Password</h6>
           <input id="currentPasswordInput" type="text" placeholder="current password">
@@ -225,7 +225,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn cancel bottomButton" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn save bottomButton" disabled>Save</button>
+        <button id="settingsSaveButton" type="button" class="btn save bottomButton" >Save</button>
       </div>
     </div>
   </div>
@@ -323,7 +323,7 @@
 
 <!-- Bottom Navigation Bar -->
 <nav class=" bottomBar navbar fixed-bottom">
-  <a href="">
+  <a>
     <img class="bottomBarLogo" src="./files/logoCup.svg" alt="">
   </a>
   <a class="bottomBarDay" href="#">Today</a>

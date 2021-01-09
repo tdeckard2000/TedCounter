@@ -696,3 +696,16 @@ $("#foodItemFilter").on("keydown", (event)=>{
         firstRemainingItem.trigger("click");
     }
 });
+
+//Handle click of Save button on settings modal
+$("#settingsSaveButton").on("click",()=>{
+
+    //get checkbox and text selections
+    let checkboxAutoOpen = $("#checkboxAutoKeyboard").prop("checked");
+    let newUsername = $("#usernameInput").val();
+    let currentPassword = $("#currentPasswordInput").val();
+    let newPassword = $("#newPasswordInput").val();
+
+
+    console.log(checkboxAutoOpen + ", " + newUsername + ", " + currentPassword + ", " + newPassword);
+});

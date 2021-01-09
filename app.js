@@ -722,8 +722,8 @@ const removeFromDiary = function(itemId){
   return new Promise((resolve, reject)=>{
     itemDiary.deleteOne({_id:itemId}, (err)=>{
       if(err){
-      reject("error removing item from diary: "+err);
-      }else()=>{
+        reject("error removing item from diary: " + err);
+      }else{
         resolve();
       }
     })
@@ -1093,21 +1093,33 @@ app.post('/addToDiary',(req, res)=>{
 })
 
 app.post('/dashboard/modifyDiary', (req, res)=>{
+
   if(!req.session.userDocId){
     res.redirect('/');
+
   }else{
     let toDuplicate = (req.body.duplicateItem);
     let toRemove = (req.body.removeItem);
+
     if(toDuplicate){
       duplicateDiaryItem(toDuplicate).then(()=>{
         res.redirect('/dashboard');
+      }).catch((err)=>{
+        console.warn("error duplicating item at POST: " + err)
       })
+
     }else if(toRemove){
       removeFromDiary(toRemove).then(()=>{
         res.redirect('/dashboard');
-      }).catch(()=>{console.warn("error deleting item at POST")})
+      }).catch((err)=>{
+        console.log("here")
+        console.warn("error deleting item at POST: " + err)
+        res.redirect('/dashboard');
+    })
+    }else{
+      console.warn("modifyDiary: something weird happened")
+      res.redirect('/dashboard');
     }
-    res.redirect('/dashboard');
   }
 })
 

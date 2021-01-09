@@ -467,10 +467,10 @@ $('#foodItemFilter').on('keyup', (doc)=>{
         let singleListItem = $('#listItem'+i).text();
         singleListItem = singleListItem.toLowerCase();
         if (singleListItem.search(textEntered) == -1){
-            $('#listItem'+i).css({'position':'absolute', 'visibility':'hidden'})
+            $('#listItem'+i).css({'position':'absolute', 'display':'none'})
             //Else, place back into flow and un-hide. Handles backspace events.
         }else{
-            $('#listItem'+i).css({'position':'relative', 'visibility':'visible'})
+            $('#listItem'+i).css({'position':'relative', 'display':'inline-block'})
         }
     }
 });
@@ -682,3 +682,15 @@ $('#itemAdd').on('shown.bs.modal', ()=>{
 $('#quickAdd').on('shown.bs.modal', ()=>{
     $('input.topFour').first().trigger('focus');
 });
+
+//If item selector open, handle enter key
+// $("#foodItemFilter").on("keydown", (event)=>{
+//     // if(event.key === "enter")
+//     let key = event.key;
+
+//     if (key === "Enter"){
+//         event.preventDefault();
+//         let firstItem = $(".selectableItem").css("display", "inline-block").first().html();
+//         firstItem.click();
+//     }
+// })

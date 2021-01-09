@@ -315,7 +315,6 @@ const setupDefaultsCheckboxes = function(){
 //Populate 'Goals' text input boxes
 const setupDefaultsGoalsTextBoxes = function(){
     let list = getUserSelections();
-    console.log(list)
     //order list alphabetically (keeping top four intact)
     list = orderAlphabetically(4, list);
 

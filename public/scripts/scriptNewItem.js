@@ -7,7 +7,6 @@
 
 $(".barcodeSearchButton").on("click",()=>{
     let barcodeNumber = $("#barcodeField").val();
-    console.log(barcodeNumber)
 
     $.ajax({
         type: "GET",
@@ -18,6 +17,5 @@ $(".barcodeSearchButton").on("click",()=>{
         $("#itemData1").text("Calories: " + data.data.productNutrition.energy)
         $("#itemData2").text("Protein: " + data.data.productNutrition.protein)
         $("#itemData3").text(data.data.servingSize)
-        console.log(data);
     })
 })

@@ -11,7 +11,6 @@ $('#button-save').on("click",(data)=>{
     //Get key from url
     const fullUrl = window.location.href;
     const queryParam = fullUrl.split("resetKey=")[1]
-    console.log(queryParam)
     
     //Return if no key is in the url
     if(queryParam === undefined || queryParam.length < 20){
@@ -39,12 +38,12 @@ $('#button-save').on("click",(data)=>{
         }).done((data)=>{
             if(!data.message || data.message === false){ //reset key doesn't exist
                 $('.resetKeyExpired').removeClass('hideElement');
-                console.log("returned false")
+                console.warn("returned false")
             }else{ //password reset succeeded
                 window.location = '/passwordChanged'; //redirect
             }
         }).fail((err)=>{
-            console.log("ajax error:" + err)
+            console.warn("ajax error:" + err)
         });
     }
 });

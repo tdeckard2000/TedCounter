@@ -1051,7 +1051,6 @@ app.post('/', (req, res)=>{
 });
 
 app.post('/newItem', (req, res)=>{
-  console.log(req.body)
 
   if(!req.session.userDocId){
     res.redirect('/');
@@ -1061,6 +1060,7 @@ app.post('/newItem', (req, res)=>{
         req.body[key]=0
       }
     }
+    
     addNewItem(req.body, req.session.userDocId)
     .then(function(){
         res.redirect('/dashboard');  

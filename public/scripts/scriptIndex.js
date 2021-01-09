@@ -119,6 +119,10 @@ $("#button-signIn").on("click", ()=>{
 //Store signup email address for autofill
 $(".createAccount").on("click", ()=>{
     let userName = $("#newEmail").val();
-    console.log("here" + userName)
     localStorage.setItem('username', userName);
 });
+
+//Close toast on click
+$(".toast").on("click", ()=>{
+    $(".toast").addClass("hideElement");
+})

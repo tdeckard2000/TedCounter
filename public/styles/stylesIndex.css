@@ -55,6 +55,7 @@
 }
 
 #signInErrorToast, #newAccountToast, #newPasswordToast{
+    bottom: 30px;
     margin: auto;
     opacity: 0;
     position: absolute;

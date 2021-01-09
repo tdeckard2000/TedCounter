@@ -10,7 +10,6 @@ const getItemValues = function(itemId){
             url:"./getItemValues",
             data: {itemId: itemId},
             success: (data)=>{
-                console.log(data.data)
                 resolve(data.data);
             }
         }).done(()=>{
@@ -72,7 +71,6 @@ const getFormData = function(){
     let formArray = $('#editItemForm').serializeArray();
     let formObject = arrayToObject(formArray);
     let jsonObject = JSON.stringify(formObject);
-    console.log(jsonObject)
     return(jsonObject);
 }
 

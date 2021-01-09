@@ -238,7 +238,7 @@ button.close{
     position: relative;
 }
 
-/* Select Item Modal */
+/* Select Item Modal ========================================== */
 .addEditButton{
     margin-bottom: 5px;
 }
@@ -318,6 +318,7 @@ button.close{
 
 #settingsModal .modal-body{
     height: 50vh;
+    overflow-y: auto;
     text-align: center;
 }
 

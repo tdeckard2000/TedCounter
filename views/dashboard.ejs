@@ -193,12 +193,20 @@
         </ul>
         
         <div class="chartsPage">
-
+          <p>📊</p>
         </div>
 
         <div class="preferencesPage hidden">
-          <button class="btn settingsBodyButton" >Edit Nutrition Interests</button>
+          <button class="btn settingsBodyButton" >Edit Top Four Goals</button>
+          <button class="btn settingsBodyButton" >Edit Other Nutrition Goals</button>
           <button type="button" class="btn settingsBodyButton" id="buttonOpenDefaultsModal">Dev Tool</button>
+          <hr>
+          <table>
+            <tr>
+              <td><label for="checkboxAutoKeyboard">Auto-Open Item Selector Keyboard (mobile)</label></td>
+              <td><input id="checkboxAutoKeyboard" type="checkbox"></td>
+            </tr>
+          </table>
         </div>
 
         <div class="profilePage hidden">
@@ -208,6 +216,8 @@
           <h6>Change Password</h6>
           <input id="currentPasswordInput" type="text" placeholder="current password">
           <input id="newPasswordInput" type="text" placeholder="new password">
+          <hr>
+          <button type="button" class="btn settingsBodyButton" id="buttonLogout">Logout</button>
         </div>
 
       </div>

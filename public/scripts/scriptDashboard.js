@@ -462,15 +462,16 @@ $('#foodItemFilter').on('keyup', (doc)=>{
     textEntered = textEntered.toLowerCase();
     numListItems = $('.selectableItem').length
 
-    //If list item doesn't match inputted text, hide and remove from document flow.
+    //if list item doesn't match inputted text, hide and remove from document flow.
     for(i=0; i<numListItems; i++){
         let singleListItem = $('#listItem'+i).text();
         singleListItem = singleListItem.toLowerCase();
         if (singleListItem.search(textEntered) == -1){
-            $('#listItem'+i).css({'position':'absolute', 'display':'none'})
-            //Else, place back into flow and un-hide. Handles backspace events.
+            $('#listItem'+i).addClass("hidden").removeClass("visible");
+            //else, place back into flow and un-hide. Handles backspace events.
         }else{
-            $('#listItem'+i).css({'position':'relative', 'display':'inline-block'})
+            //visible class is used for determining enter key selection
+            $('#listItem'+i).removeClass("hidden").addClass("visible");
         }
     }
 });
@@ -684,13 +685,14 @@ $('#quickAdd').on('shown.bs.modal', ()=>{
 });
 
 //If item selector open, handle enter key
-// $("#foodItemFilter").on("keydown", (event)=>{
-//     // if(event.key === "enter")
-//     let key = event.key;
+$("#foodItemFilter").on("keydown", (event)=>{
+    let key = event.key;
 
-//     if (key === "Enter"){
-//         event.preventDefault();
-//         let firstItem = $(".selectableItem").css("display", "inline-block").first().html();
-//         firstItem.click();
-//     }
-// })
+    //enter key "clicks" first item in list, ignoring items filtered out
+    if (key === "Enter"){
+        event.preventDefault();
+        let firstRemainingItem = $(".selectableItem .visible").first();
+        console.log(firstRemainingItem)
+        firstRemainingItem.trigger("click");
+    }
+});

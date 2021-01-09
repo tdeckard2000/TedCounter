@@ -1243,6 +1243,32 @@ app.post('/updateUserGoals', (req, res)=>{
   });
 });
 
+app.post("/updateUserPreferences", (req, res)=>{
+  //store preference values
+  const checkboxAutoOpen = req.body.checkboxAutoOpen;
+  const newUsername = req.body.newUsername;
+  const currentPassword = req.body.currentPassword;
+  const newPassword = req.body.newPassword;
+
+  if(checkboxAutoOpen){
+    console.log("checkboxAutoOpen");
+  };
+
+  if(newUsername){
+    console.log("newUsername");
+  };
+
+  if(currentPassword){
+    console.log("currentPassword")
+  };
+
+  if(newPassword){
+    console.log("newPassword");
+  }
+
+  res.status(200).send({result:true})
+});
+
 // Server ==========================================================
 let port = process.env.PORT;
 if (port == null || port == "") {

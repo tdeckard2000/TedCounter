@@ -1,6 +1,5 @@
 //######################## Dashboard Script ########################
 
-
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
 
@@ -227,6 +226,8 @@ $(window).on("load",()=>{
 })
 
 //######################## Functions ########################
+
+//alphabetically order given array
 const orderAlphabetically = function(startingPoint, unorderedArray){
     let valueChanged = false;
     while(valueChanged === false){
@@ -248,6 +249,25 @@ const orderAlphabetically = function(startingPoint, unorderedArray){
         }
     }
     return unorderedArray //now ordered alphabetically
+}
+
+//disable or enable all elements on settings modal
+const settingsModalElementsDisabled = function(Boolean){
+    $("#usernameInput").attr("disabled", Boolean);
+    $("#currentPasswordInput").attr("disabled", Boolean);
+    $("#newPasswordInput").attr("disabled", Boolean);
+    $("#buttonLogout").attr("disabled", Boolean);
+    $("#checkboxAutoKeyboard").attr("disabled", Boolean);
+    $("#settingsCancelButton").attr("disabled", Boolean);
+    $("#topFourButton").attr("disabled", Boolean);
+    $("#otherNutritionButton").attr("disabled", Boolean);
+}
+
+//clear text fields on settings modal
+const settingsModalClearText = function(){
+    $("#usernameInput").val("");
+    $("#currentPasswordInput").val("");
+    $("#newPasswordInput").val("");
 }
 
 //######################## Functions (Defaults Modal) ########################
@@ -698,7 +718,11 @@ $("#foodItemFilter").on("keydown", (event)=>{
 });
 
 //Handle click of Save button on settings modal
-$("#settingsSaveButton").on("click",()=>{
+$("#settingsSaveButton").on("click", function(){
+
+    $(this).prop("innerText", "Saving...");
+    $("#settingsSaveButton").attr("disabled", true)
+    settingsModalElementsDisabled(true);
 
     //get checkbox and text selections
     let checkboxAutoOpen = $("#checkboxAutoKeyboard").prop("checked");
@@ -706,6 +730,41 @@ $("#settingsSaveButton").on("click",()=>{
     let currentPassword = $("#currentPasswordInput").val();
     let newPassword = $("#newPasswordInput").val();
 
+    $.ajax({
+        method:"POST",
+        url: "/updateUserPreferences",
+        data: {
+            checkboxAutoOpen: checkboxAutoOpen,
+            newUsername: newUsername,
+            currentPassword: currentPassword,
+            newPassword: newPassword
+        }
+    }).done((data)=>{
 
-    console.log(checkboxAutoOpen + ", " + newUsername + ", " + currentPassword + ", " + newPassword);
+        setTimeout(()=>{
+
+            //If save is successful
+            if(data.result === true){
+                $(this).prop("innerText", "Saved!");
+                settingsModalElementsDisabled(false);
+
+                //update username on modal
+                if(newUsername){
+                    $("#usernameInput").prop("placeholder", newUsername);
+                    $("#settingsModal .modal-title").prop("innerText", "Hello, " + newUsername)
+                }
+
+                //clear text fields
+                settingsModalClearText();
+
+            }else{
+                $(this).prop("innerText", "Unable to Save");
+                settingsModalElementsDisabled(false);
+            }
+
+            setTimeout(()=>{
+                $(this).prop("innerText", "Save");
+            }, 3000)
+        }, 5000)
+    })
 });

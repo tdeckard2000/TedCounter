@@ -160,7 +160,11 @@ const userSchema = new mongoose.Schema({
   'password': String,
   'nutritionTopFour': Array,
   'nutritionOther': Array,
-  'nutritionGoals':Object
+  'nutritionGoals':Object,
+  'settings':{
+    'autoKeyboardItemSelect': Boolean,
+    'autoKeyboardQuickAdd': Boolean
+  }
 });
 
 const passwordKeysSchema = new mongoose.Schema({
@@ -299,11 +303,15 @@ const adjustTime = function(startDate, subtractHours){
 
 const authenticateUser = function(email, password){
   email = email.toLowerCase();
+
   return new Promise((resolve, reject)=>{
+
     user.find({'email': email}, (err, doc)=>{
+
       if(doc.length > 0 && doc.length != undefined){
         const userHash = doc[0].password;
         bcrypt.compare(password, userHash, (err, result)=>{
+
           if(result === true){
             resolve([true, doc[0]]);
           }else if(err){
@@ -602,7 +610,11 @@ const addNewUser = function(name, email, pHashed){
   const newUser = new user({
     "name": name,
     "email": email,
-    "password": pHashed
+    "password": pHashed,
+    "settings":{
+      'autoKeyboardItemSelect': false,
+      'autoKeyboardQuickAdd': false
+    }
   });
 
   newUser.save((err,doc)=>{
@@ -922,7 +934,8 @@ app.get('/dashboard', (req, res)=>{
   const nutritionTopFour = req.session.nutritionTopFour;
   const nutritionOther = req.session.nutritionOther;
   const nutritionGoals = req.session.nutritionGoals;
-  const userPreferences = JSON.stringify({nutritionTopFour, nutritionOther, nutritionGoals});
+  const settings = req.session.settings;
+  const userPreferences = JSON.stringify({nutritionTopFour, nutritionOther, nutritionGoals, settings});
 
   if(!req.session.userDocId){
     res.redirect('/');
@@ -1048,6 +1061,7 @@ app.post('/signIn', (req, res)=>{
       req.session.nutritionTopFour = result[1].nutritionTopFour;
       req.session.nutritionOther = result[1].nutritionOther;
       req.session.nutritionGoals = result[1].nutritionGoals;
+      req.session.settings = result[1].settings;
       res.redirect('/dashboard')
     }else{
       console.warn('Error During Sign In')

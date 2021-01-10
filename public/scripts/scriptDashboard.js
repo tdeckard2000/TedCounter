@@ -221,8 +221,11 @@ const keyGoalDefaults = {
 
 //When page loads
 $(window).on("load",()=>{
-    //Store user nutrition info in window from DOM 
+    //store user nutrition info in window from DOM 
     userPreferences = $("#goals").data().userpreferences;
+    //set user defined settings
+    setAutoKeyboardSettings();
+
 })
 
 //######################## Functions ########################
@@ -257,7 +260,8 @@ const settingsModalElementsDisabled = function(Boolean){
     $("#currentPasswordInput").attr("disabled", Boolean);
     $("#newPasswordInput").attr("disabled", Boolean);
     $("#buttonLogout").attr("disabled", Boolean);
-    $("#checkboxAutoKeyboard").attr("disabled", Boolean);
+    $("#checkboxAutoKeyboardItemSelector").attr("disabled", Boolean);
+    $("#checkboxAutoKeyboardQuickAdd").attr("disabled", Boolean);
     $("#settingsCancelButton").attr("disabled", Boolean);
     $("#topFourButton").attr("disabled", Boolean);
     $("#otherNutritionButton").attr("disabled", Boolean);
@@ -268,6 +272,33 @@ const settingsModalClearText = function(){
     $("#usernameInput").val("");
     $("#currentPasswordInput").val("");
     $("#newPasswordInput").val("");
+}
+
+const setAutoKeyboardSettings = function(){
+    //Autofocus cursor on Add Item modal (based on user settings)
+    if(userPreferences.settings && userPreferences.settings.autoKeyboardItemSelect === true){
+        $('#itemAdd').on('shown.bs.modal', ()=>{
+            $('.filterInput').trigger('focus');
+        });
+        //check settings checkbox
+        $("#checkboxAutoKeyboardItemSelector").prop("checked", true);
+    }else{
+        $('#itemAdd').off('shown.bs.modal');
+        //uncheck settings checkbox
+        $("#checkboxAutoKeyboardItemSelector").prop("checked", false);
+    };
+
+    //Autofocus cursor on Quick Add modal (based on user settings)
+    if(userPreferences.settings && userPreferences.settings.autoKeyboardQuickAdd === true){
+        $('#quickAdd').on('shown.bs.modal', ()=>{
+            $('input.topFour').first().trigger('focus');
+        });
+        //Check settings checkbox
+        $("#checkboxAutoKeyboardQuickAdd").prop("checked", true);
+    }else{
+        $('#quickAdd').off('shown.bs.modal');
+        $("#checkboxAutoKeyboardQuickAdd").prop("checked", false);
+    };
 }
 
 //######################## Functions (Defaults Modal) ########################
@@ -694,16 +725,6 @@ $("#tabCharts, #tabPreferences, #tabProfile").on("click",function(){
 
 //######################## Event Listeners (other) ########################
 
-//Autofocus cursor on Add Item modal
-$('#itemAdd').on('shown.bs.modal', ()=>{
-    $('.filterInput').trigger('focus');
-});
-
-//Autofocus cursor on Quick Add modal
-$('#quickAdd').on('shown.bs.modal', ()=>{
-    $('input.topFour').first().trigger('focus');
-});
-
 //If item selector open, handle enter key
 $("#foodItemFilter").on("keydown", (event)=>{
     let key = event.key;
@@ -725,7 +746,8 @@ $("#settingsSaveButton").on("click", function(){
     settingsModalElementsDisabled(true);
 
     //get checkbox and text selections
-    let checkboxAutoOpen = $("#checkboxAutoKeyboard").prop("checked");
+    let checkboxAutoOpenItemSelector = $("#checkboxAutoKeyboardItemSelector").prop("checked");
+    let checkboxAutoOpenQuickAdd = $("#checkboxAutoKeyboardQuickAdd").prop("checked");
     let newUsername = $("#usernameInput").val();
     let currentPassword = $("#currentPasswordInput").val();
     let newPassword = $("#newPasswordInput").val();
@@ -734,7 +756,8 @@ $("#settingsSaveButton").on("click", function(){
         method:"POST",
         url: "/updateUserPreferences",
         data: {
-            checkboxAutoOpen: checkboxAutoOpen,
+            checkboxAutoOpenItemSelector: checkboxAutoOpenItemSelector,
+            checkboxAutoOpenQuickAdd: checkboxAutoOpenQuickAdd,
             newUsername: newUsername,
             currentPassword: currentPassword,
             newPassword: newPassword
@@ -753,6 +776,11 @@ $("#settingsSaveButton").on("click", function(){
                     $("#usernameInput").prop("placeholder", newUsername);
                     $("#settingsModal .modal-title").prop("innerText", "Hello, " + newUsername)
                 }
+
+                //update auto open keyboard settings
+                userPreferences.settings.autoKeyboardItemSelect = checkboxAutoOpenItemSelector;
+                userPreferences.settings.autoKeyboardQuickAdd = checkboxAutoOpenQuickAdd;
+                setAutoKeyboardSettings();
 
                 //clear text fields
                 settingsModalClearText();

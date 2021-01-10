@@ -1259,13 +1259,17 @@ app.post('/updateUserGoals', (req, res)=>{
 
 app.post("/updateUserPreferences", (req, res)=>{
   //store preference values
-  const checkboxAutoOpen = req.body.checkboxAutoOpen;
+  const checkboxAutoOpenItemSelector = req.body.checkboxAutoOpenItemSelector;
+  const checkboxAutoOpenQuickAdd = req.body.checkboxAutoOpenQuickAdd;
   const newUsername = req.body.newUsername;
   const currentPassword = req.body.currentPassword;
   const newPassword = req.body.newPassword;
 
-  if(checkboxAutoOpen){
-    console.log("checkboxAutoOpen");
+  console.log("QuickAdd: " + checkboxAutoOpenQuickAdd)
+  console.log("ItemSelector: " + checkboxAutoOpenItemSelector)
+
+
+  if(checkboxAutoOpenItemSelector){
   };
 
   if(newUsername){

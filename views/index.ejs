@@ -7,21 +7,6 @@
 <!-- Bootstrap Navbar -->
 <nav class="topBar navbar navbar-expand-md navbar-dark fixed-top">
   <a class="navbarTitle navbar-brand"><object data="./files/TedCounterLogo.svg" type="image/svg+xml"></object></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <hr>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/" tabindex="2">Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="3">Why TedCounter?</a>
-      </li>
-    </ul>
-
-  </div>
 </nav>
 
 <h3>Hello!</h3>
@@ -60,7 +45,7 @@
 
 <!-- Sign In Form -->
 <form class="form-signIn text-center" action="./signIn" method="POST">
-  <img class="mb-4" src="./files/smileyFaceWhiteV2.svg" alt="" width="72" height="72">
+  <img class="smileLogo" src="./files/smileyFaceWhiteV2.svg" alt="" width="72" height="72">
   <h1 class="h3 signInText mb-3 font-weight-normal">Welcome Back</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -68,6 +53,12 @@
   <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="on" required>
   <button class="btn btn-lg btn-info btn-block" id="button-signIn" type="submit">Sign In</button>
 </form>
+
+<!-- Triggers Modal -->
+<div class="signUp forgotPassword">
+  <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#signUpModal" id="button-signUp" type="">Sign Up</button>
+  <a class="forgotLink" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
+</div>
 
 <!-- Forgot Password Modal-->
 <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordIndex" aria-hidden="true">
@@ -92,13 +83,6 @@
   </div>
 </div>
 
-<!-- Triggers Modal -->
-<div class="signUp forgotPassword">
-  <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#signUpModal" id="button-signUp" type="">Sign Up</button>
-  <a class="forgotLink" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
-  <p class="mt-5 mb-3"><a class="copyYear">&copy; 2017-2020</a></p>  
-</div>
-
 <!-- Forgot Password Toast -->
 <div class="toast <%=toastAction%>" id="signInErrorToast" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-body ">
@@ -121,6 +105,10 @@
     <strong style="font-style: bold;">Your password has been changed.</strong><br>
     Sign in above.
   </div>
+</div>
+
+<div class="copyYearDiv">
+  <a class="copyYear">&copy; 2020-2021</a>
 </div>
 
 <%-include('footer');-%>

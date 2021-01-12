@@ -25,16 +25,26 @@
 .copyYear{
     bottom: 0;
     color: #3a3a3a;
-    left: 0;
-    position: absolute;
+    font-size: .77rem;
+    position: relative;
+    right: 4px;
+    width: 100%;
+}
+
+.copyYearDiv{
+    bottom: 10px;
+    padding-top: 120px;
+    position: fixed;
+    text-align: center;
     width: 100%;
 }
 
 .form-signIn{
-    width: 60%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 120px;
+    max-width: 260px;
+    width: 60%;
 }
 
 .indexBody{
@@ -42,11 +52,12 @@
 }
 
 .navbarTitle object{
-    position: absolute;
-    height: 52px;
-    top: 2px;
-    right: 100px;
     filter: invert(1);
+    height: 52px;
+    position: absolute;
+    right: 4px;
+    top: 2px;
+    width: 100%;
     z-index: 1035;
 }
 
@@ -74,6 +85,7 @@
 
 .signUp.forgotPassword{
     margin: auto;
+    max-width: 260px;
     text-align: center;
     width: 60%;
 }

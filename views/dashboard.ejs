@@ -226,10 +226,17 @@
           </form>
         </div>
 
+        <!-- Loading Indicator -->
+        <div id="loadSettings" class="loadingIndicatorDiv hidden">
+          <div class="loadingIndicator spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button id="settingsCancelButton" type="button" class="btn cancel bottomButton" data-dismiss="modal">Cancel</button>
-        <button id="settingsSaveButton" type="button" class="btn save bottomButton" >Save</button>
+        <button id="settingsSaveButton" type="button" class="btn save bottomButton" disabled >Save</button>
       </div>
     </div>
   </div>
@@ -308,7 +315,7 @@
           </div>
           
           <!-- Loading Indicator -->
-          <div class="loadingIndicatorDiv hidden">
+          <div id="loadPreferences" class="loadingIndicatorDiv hidden">
             <div class="loadingIndicator spinner-border text-info" role="status">
               <span class="sr-only">Loading...</span>
             </div>

@@ -453,7 +453,7 @@ const postDefaultSelections = function(){
     let otherSelections = JSON.stringify(getOtherSelections());
     let userGoals = JSON.stringify(getUserGoals());
 
-    $(".loadingIndicatorDiv").removeClass("hidden"); //show loading icon
+    $("#loadPreferences").removeClass("hidden"); //show loading icon
     $(".defaultsTitle").prop("textContent", "Saving your preferences.");
     $(".defaultsSubTitle").prop("textContent", "Please wait...");
     $("#defaultsNextButton").prop("disabled", true);
@@ -481,7 +481,7 @@ const postDefaultSelections = function(){
             setTimeout(()=>{
                 $(".defaultsTitle").prop("textContent", "All done!");
                 $(".defaultsSubTitle").prop("textContent", "What would you like to do now?");
-                $(".loadingIndicatorDiv").addClass("hidden");
+                $("#loadPreferences").addClass("hidden");
                 //show quick tips button & get started button
                 $(".defaultsFinalOptionsDiv").removeClass("hidden");
                 $("#defaultsNextButton").prop("disabled", false);
@@ -490,7 +490,7 @@ const postDefaultSelections = function(){
 
         }else{
             console.warn("Error saving user preferences at AJAX. - Done Catch")
-            $(".loadingIndicatorDiv").addClass("hidden");
+            $("#loadPreferences").addClass("hidden");
             $(".defaultsTitle").prop("textContent", "Error saving.. dang!");
             $(".defaultsSubTitle").prop("textContent", "Tap the Back button, then Submit again.");
             $("#defaultsBackButton").prop("disabled", false);
@@ -723,20 +723,7 @@ $("#tabCharts, #tabPreferences, #tabProfile").on("click",function(){
     }
 });
 
-//######################## Event Listeners (other) ########################
-
-//If item selector open, handle enter key
-$("#foodItemFilter").on("keydown", (event)=>{
-    let key = event.key;
-
-    //enter key "clicks" first item in list, ignoring items filtered out
-    if (key === "Enter"){
-        event.preventDefault();
-        let firstRemainingItem = $(".selectableItem .visible").first();
-        console.log(firstRemainingItem)
-        firstRemainingItem.trigger("click");
-    }
-});
+//######################## Event Listeners (Settings Modal Main) ########################
 
 //Handle click of Save button on settings modal
 $("#settingsSaveButton").on("click", function(){
@@ -744,6 +731,9 @@ $("#settingsSaveButton").on("click", function(){
     $(this).prop("innerText", "Saving...");
     $("#settingsSaveButton").attr("disabled", true)
     settingsModalElementsDisabled(true);
+    
+    //show loading icon
+    $("#loadSettings").removeClass("hidden");
 
     //get checkbox and text selections
     let checkboxAutoOpenItemSelector = $("#checkboxAutoKeyboardItemSelector").prop("checked");
@@ -766,16 +756,19 @@ $("#settingsSaveButton").on("click", function(){
 
         setTimeout(()=>{
 
-            //If save is successful
+            //if save is successful
             if(data.result === true){
                 $(this).prop("innerText", "Saved!");
                 settingsModalElementsDisabled(false);
 
-                //update username on modal
+                //hide loading icon
+                $("#loadSettings").addClass("hidden");
+
+                //update username on modal if changed
                 if(newUsername){
                     $("#usernameInput").prop("placeholder", newUsername);
                     $("#settingsModal .modal-title").prop("innerText", "Hello, " + newUsername)
-                }
+                };
 
                 //update auto open keyboard settings
                 userPreferences.settings.autoKeyboardItemSelect = checkboxAutoOpenItemSelector;
@@ -788,11 +781,46 @@ $("#settingsSaveButton").on("click", function(){
             }else{
                 $(this).prop("innerText", "Unable to Save");
                 settingsModalElementsDisabled(false);
-            }
+
+                //hide loading icon
+                $("#loadSettings").addClass("hidden");
+            };
 
             setTimeout(()=>{
                 $(this).prop("innerText", "Save");
-            }, 3000)
-        }, 5000)
-    })
+            }, 2500)
+        }, 4000)
+    });
+});
+
+//Enable save button on checkbox toggle
+$("#checkboxAutoKeyboardQuickAdd, #checkboxAutoKeyboardItemSelector").on("click", ()=>{
+    $("#settingsSaveButton").prop("disabled", false);
+});
+
+//Enable save button on new password text boxes use
+$("#usernameInput, #newPasswordInput").on("keyup", ()=>{
+    if($("#newPasswordInput").val().length >= 8 && $("#currentPasswordInput").val().length >= 8){
+        $("#settingsSaveButton").prop("disabled", false);
+    };
+});
+
+//Enable save button on new username text box use
+$("#usernameInput").on("keyup", ()=>{
+    $("#settingsSaveButton").prop("disabled", false);
+});
+
+//######################## Event Listeners (other) ########################
+
+//If item selector open, handle enter key
+$("#foodItemFilter").on("keydown", (event)=>{
+    let key = event.key;
+
+    //enter key "clicks" first item in list, ignoring items filtered out
+    if (key === "Enter"){
+        event.preventDefault();
+        let firstRemainingItem = $(".selectableItem .visible").first();
+        console.log(firstRemainingItem)
+        firstRemainingItem.trigger("click");
+    }
 });

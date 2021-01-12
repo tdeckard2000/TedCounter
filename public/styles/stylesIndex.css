@@ -90,6 +90,10 @@
     width: 60%;
 }
 
+.smileLogo{
+    margin-bottom: 30px;
+}
+
 .forgotLink{
     color: #000000;
     display: block;

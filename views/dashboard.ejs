@@ -215,11 +215,11 @@
 
         <div class="profilePage hidden">
           <h6>Change Username</h6>
-          <input id="usernameInput" type="text" placeholder="<%=userName%>" autocomplete="nickname">
+          <input id="usernameInput" type="text" placeholder="<%=userName%>" autocomplete="nickname" maxlength="25">
           <hr>
           <h6>Change Password</h6>
           <input id="currentPasswordInput" type="text" placeholder="current password" autocomplete="current-password">
-          <input id="newPasswordInput" type="text" placeholder="new password" autocomplete="new-password">
+          <input id="newPasswordInput" type="text" placeholder="new password" autocomplete="new-password" maxlength="128">
           <hr>
           <form action="/logout" method="GET">
             <button type="submit" class="btn settingsBodyButton" id="buttonLogout">Logout</button>

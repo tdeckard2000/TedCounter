@@ -12,7 +12,8 @@ const e = require('express');
 const { resolve } = require('path');
 const { json } = require('body-parser');
 const { data } = require('jquery');
-const request = require('request')
+const request = require('request');
+const { name } = require('ejs');
 
 require('dotenv').config();
 
@@ -299,7 +300,7 @@ const keyShortForm = {
 const adjustTime = function(startDate, subtractHours){
   let adjustedTime = moment.utc(startDate).subtract(subtractHours,'hour');
   return(adjustedTime.toISOString());
-}
+};
 
 const authenticateUser = function(email, password){
   email = email.toLowerCase();
@@ -330,7 +331,7 @@ const authenticateUser = function(email, password){
       }
     });
   });
-}
+};
 
 // Calculate nutrition totals
 const calculateNutritionTotals = function(foodDiary){
@@ -909,9 +910,37 @@ const convertToInt = function(jsonObject){
   for(const [key, value] of Object.entries(jsonObject)){
     jsonObject[key] = parseInt(value, 10);
   }
-
   return jsonObject;
-}
+};
+
+//Update user settings
+const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, keyboardQuickAdd){
+  
+  let changes = {settings:{}};
+  changes.settings.autoKeyboardQuickAdd = keyboardQuickAdd;
+  changes.settings.autoKeyboardItemSelect = keyboardItemSelect;
+
+  //if a new name was provided, add it to changes object
+  if(newUsername && newUsername.length > 0){
+    changes.name = newUsername;
+  };
+
+
+  return new Promise((resolve, reject)=>{
+    user.updateOne({_id: userId}, changes, (err, doc)=>{
+
+      if(err){
+        console.warn("Error updating user settings: " + err);
+        resolve();
+      }else{
+        console.log("here: " + doc);
+        resolve();
+      };
+    });
+  });
+
+};
+
 
 // Get Requests ==========================================================
 app.get(['/','/oops', '/accountCreated', '/passwordChanged'], (req, res)=>{
@@ -1259,30 +1288,17 @@ app.post('/updateUserGoals', (req, res)=>{
 
 app.post("/updateUserPreferences", (req, res)=>{
   //store preference values
-  const checkboxAutoOpenItemSelector = req.body.checkboxAutoOpenItemSelector;
-  const checkboxAutoOpenQuickAdd = req.body.checkboxAutoOpenQuickAdd;
+  const keyboardItemSelect = req.body.checkboxAutoOpenItemSelector;
+  const keyboardQuickAdd = req.body.checkboxAutoOpenQuickAdd;
   const newUsername = req.body.newUsername;
   const currentPassword = req.body.currentPassword;
   const newPassword = req.body.newPassword;
+  const userId = req.session.userDocId;
 
-  console.log("QuickAdd: " + checkboxAutoOpenQuickAdd)
-  console.log("ItemSelector: " + checkboxAutoOpenItemSelector)
+  //update changes in DB
+  updateUserPreferences(userId, newUsername, keyboardItemSelect, keyboardQuickAdd);
 
-
-  if(checkboxAutoOpenItemSelector){
-  };
-
-  if(newUsername){
-    console.log("newUsername");
-  };
-
-  if(currentPassword){
-    console.log("currentPassword")
-  };
-
-  if(newPassword){
-    console.log("newPassword");
-  }
+  //update password in DB
 
   res.status(200).send({result:true})
 });

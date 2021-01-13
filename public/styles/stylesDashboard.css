@@ -359,7 +359,7 @@ button.close{
 }
 
 .changePasswordError, .changePasswordSuccess{
-    font-size: .7rem;
+    font-size: .75rem;
     padding: 5px;
 }
 

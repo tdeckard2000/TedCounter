@@ -765,7 +765,7 @@ $("#settingsSaveButton").on("click", function(){
                     console.log("here")
                     $(".changePasswordError").removeClass("hidden");
                     $(".changePasswordSuccess").addClass("hidden");
-                }else{
+                }else if(data.passwordChanged != null){
                     $(".changePasswordError").addClass("hidden");
                     $(".changePasswordSuccess").removeClass("hidden");
                 }

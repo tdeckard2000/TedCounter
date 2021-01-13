@@ -953,15 +953,14 @@ const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, 
     changes.name = newUsername;
   };
 
-
   return new Promise((resolve, reject)=>{
     user.updateOne({_id: userId}, changes, (err, doc)=>{
 
       if(err){
         console.warn("Error updating user settings: " + err);
-        resolve();
+        resolve(false);
       }else{
-        resolve();
+        resolve(true);
       };
     });
   });
@@ -1323,18 +1322,26 @@ app.post("/updateUserPreferences", (req, res)=>{
 
   //update changes in DB
   updateUserPreferences(userId, newUsername, keyboardItemSelect, keyboardQuickAdd)
-  .then(()=>{
+  .then((success)=>{
+    //if name was updated in DB, update in user session too
+    if(success == true){
+      req.session.userName = newUsername;
+    }
+    //if a new password was submitted, try updating that too
     if(oldPassword.length >= 8 && newPassword.length >= 8){
       //update password in DB
       updatePassword(userId, oldPassword, newPassword)
       .then((result)=>{
 
         if(result == true){
+          //password changed successfully
           res.status(200).send({settingsChanged: true, passwordChanged: true});
         }else{
+          //password change failed (ex. incorrect old password)
           res.status(200).send({settingsChanged: true, passwordChanged: false})
         }
       });
+
     }else{
       res.status(200).send({settingsChanged:true})
     }

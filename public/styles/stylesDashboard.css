@@ -350,6 +350,11 @@ button.close{
     width: 150px;
 }
 
+#currentPasswordInput, #newPasswordInput{
+    display: block;
+    margin: 3px auto 0px auto;
+}
+
 #userPreferencesModal .modal-content{
     height: 80vh;
 }

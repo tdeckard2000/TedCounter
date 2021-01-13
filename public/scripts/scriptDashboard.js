@@ -757,8 +757,20 @@ $("#settingsSaveButton").on("click", function(){
         setTimeout(()=>{
 
             //if save is successful
-            if(data.result === true){
-                $(this).prop("innerText", "Saved!");
+            if(data.settingsChanged === true){
+
+                //if attempted password change failed
+                console.log(typeof data.passwordChanged)
+                if(data.passwordChanged != null && data.passwordChanged == false){
+                    console.log("here")
+                    $(".changePasswordError").removeClass("hidden");
+                    $(".changePasswordSuccess").addClass("hidden");
+                }else{
+                    $(".changePasswordError").addClass("hidden");
+                    $(".changePasswordSuccess").removeClass("hidden");
+                }
+
+                $(this).prop("innerText", "Done!");
                 settingsModalElementsDisabled(false);
 
                 //hide loading icon

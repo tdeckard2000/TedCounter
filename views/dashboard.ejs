@@ -220,6 +220,8 @@
           <h6>Change Password</h6>
           <input id="currentPasswordInput" type="text" placeholder="current password" autocomplete="current-password">
           <input id="newPasswordInput" type="text" placeholder="new password" autocomplete="new-password" maxlength="128">
+          <p class="changePasswordError hidden">Could not change password.<br>Please check that you entered your current password correctly.</p>
+          <p class="changePasswordSuccess hidden">Your password was changed successfully.</p>
           <hr>
           <form action="/logout" method="GET">
             <button type="submit" class="btn settingsBodyButton" id="buttonLogout">Logout</button>

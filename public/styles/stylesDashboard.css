@@ -341,7 +341,7 @@ button.close{
     margin-bottom: 10px;
 }
 
-/* User Preferences Modal ========================================== */
+/* User Preferences Modal (Main) ========================================== */
 #buttonCloseDefaults, #buttonQuickTips{
     background-color: #5ece5c;
     margin: 10px;
@@ -356,6 +356,11 @@ button.close{
 
 #userPreferencesModal{
     text-align: center;
+}
+
+.changePasswordError, .changePasswordSuccess{
+    font-size: .7rem;
+    padding: 5px;
 }
 
 .defaultsModalBody{

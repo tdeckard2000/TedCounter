@@ -788,7 +788,7 @@ const validatePassKey = function(key){
   })
 }
 
-//Change user password
+//Change user password with email address
 const changePassword = function(emailAddress, newPassword){
 
   const salt = bcrypt.genSaltSync(10);
@@ -796,9 +796,37 @@ const changePassword = function(emailAddress, newPassword){
   return new Promise((resolve, reject)=>{
     user.findOneAndUpdate({email:emailAddress}, {password:hashedPassword}, ()=>{
       resolve()
-    })
+    });
+  });
+};
 
-  })
+//Update user password with old password
+const updatePassword = function(userId, oldPassword, newPassword){
+
+  return new Promise((resolve, reject)=>{
+    user.findOne({_id:userId}, (err, doc)=>{
+
+      if(doc){
+        let hashedPassword = doc.password;
+        let email = doc.email;
+        //check if password matches
+        bcrypt.compare(oldPassword, hashedPassword, (err, result)=>{
+
+          if(result == true){
+            changePassword(email, newPassword)
+            .then(()=>{
+              resolve(true);
+            });
+          }else{
+            console.warn("Error or incorrect password: " + err + result);
+            resolve(false);
+          }
+        });
+      }else{
+        console.warn("Error at updatePassword(): " + err);
+      }
+    });
+  });
 }
 
 //Sends password reset email
@@ -915,7 +943,7 @@ const convertToInt = function(jsonObject){
 
 //Update user settings
 const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, keyboardQuickAdd){
-  
+
   let changes = {settings:{}};
   changes.settings.autoKeyboardQuickAdd = keyboardQuickAdd;
   changes.settings.autoKeyboardItemSelect = keyboardItemSelect;
@@ -933,7 +961,6 @@ const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, 
         console.warn("Error updating user settings: " + err);
         resolve();
       }else{
-        console.log("here: " + doc);
         resolve();
       };
     });
@@ -1155,7 +1182,6 @@ app.post('/dashboard/modifyDiary', (req, res)=>{
       removeFromDiary(toRemove).then(()=>{
         res.redirect('/dashboard');
       }).catch((err)=>{
-        console.log("here")
         console.warn("error deleting item at POST: " + err)
         res.redirect('/dashboard');
     })
@@ -1291,16 +1317,28 @@ app.post("/updateUserPreferences", (req, res)=>{
   const keyboardItemSelect = req.body.checkboxAutoOpenItemSelector;
   const keyboardQuickAdd = req.body.checkboxAutoOpenQuickAdd;
   const newUsername = req.body.newUsername;
-  const currentPassword = req.body.currentPassword;
+  const oldPassword = req.body.currentPassword;
   const newPassword = req.body.newPassword;
   const userId = req.session.userDocId;
 
   //update changes in DB
-  updateUserPreferences(userId, newUsername, keyboardItemSelect, keyboardQuickAdd);
+  updateUserPreferences(userId, newUsername, keyboardItemSelect, keyboardQuickAdd)
+  .then(()=>{
+    if(oldPassword.length >= 8 && newPassword.length >= 8){
+      //update password in DB
+      updatePassword(userId, oldPassword, newPassword)
+      .then((result)=>{
 
-  //update password in DB
-
-  res.status(200).send({result:true})
+        if(result == true){
+          res.status(200).send({settingsChanged: true, passwordChanged: true});
+        }else{
+          res.status(200).send({settingsChanged: true, passwordChanged: false})
+        }
+      });
+    }else{
+      res.status(200).send({settingsChanged:true})
+    }
+  })
 });
 
 // Server ==========================================================

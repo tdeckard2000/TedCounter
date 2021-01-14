@@ -8,12 +8,13 @@ const MongoStore = require ('connect-mongo')(session);
 const moment = require('moment');
 const nodemailer = require("nodemailer");
 const fs = require('fs');
-const e = require('express');
-const { resolve } = require('path');
-const { json } = require('body-parser');
-const { data } = require('jquery');
 const request = require('request');
-const { name } = require('ejs');
+// const e = require('express');
+// const { resolve } = require('path');
+// const { json } = require('body-parser');
+// const { data } = require('jquery');
+// const { name } = require('ejs');
+const foodItems = require('./public/scripts/starterItems.js');
 
 require('dotenv').config();
 
@@ -1323,7 +1324,7 @@ app.post("/updateUserPreferences", (req, res)=>{
   //update changes in DB
   updateUserPreferences(userId, newUsername, keyboardItemSelect, keyboardQuickAdd)
   .then((success)=>{
-    
+
     //if preferences successfully updated in DB, also update in user session
     if(success === true){
       if(newUsername != null && newUsername.length > 0){

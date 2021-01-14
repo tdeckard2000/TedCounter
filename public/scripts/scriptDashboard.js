@@ -760,7 +760,6 @@ $("#settingsSaveButton").on("click", function(){
             if(data.settingsChanged === true){
 
                 //if attempted password change failed
-                console.log(typeof data.passwordChanged)
                 if(data.passwordChanged != null && data.passwordChanged == false){
                     console.log("here")
                     $(".changePasswordError").removeClass("hidden");

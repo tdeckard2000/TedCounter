@@ -1323,17 +1323,31 @@ app.post("/updateUserPreferences", (req, res)=>{
   //update changes in DB
   updateUserPreferences(userId, newUsername, keyboardItemSelect, keyboardQuickAdd)
   .then((success)=>{
-    //if name was updated in DB, update in user session too
-    if(success == true){
-      req.session.userName = newUsername;
-    }
-    //if a new password was submitted, try updating that too
+    
+    //if preferences successfully updated in DB, also update in user session
+    if(success === true){
+      if(newUsername != null && newUsername.length > 0){
+        req.session.userName = newUsername;
+      }
+      if(keyboardItemSelect != null && keyboardItemSelect === "true"){
+        req.session.settings.autoKeyboardItemSelect = true;
+      }else if(keyboardItemSelect != null && keyboardItemSelect === "false"){
+        req.session.settings.autoKeyboardItemSelect = false;
+      }
+      if(keyboardQuickAdd != null && keyboardQuickAdd === "true"){
+        req.session.settings.autoKeyboardQuickAdd = true;
+      }else if(keyboardQuickAdd != null && keyboardQuickAdd === "false"){
+        req.session.settings.autoKeyboardQuickAdd = false;
+      }
+    };
+
+    //if new password submitted, update in DB
     if(oldPassword.length >= 8 && newPassword.length >= 8){
       //update password in DB
       updatePassword(userId, oldPassword, newPassword)
       .then((result)=>{
 
-        if(result == true){
+        if(result === true){
           //password changed successfully
           res.status(200).send({settingsChanged: true, passwordChanged: true});
         }else{

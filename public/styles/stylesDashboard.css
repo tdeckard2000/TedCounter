@@ -314,7 +314,19 @@ button.close{
     font-size: .7rem;
 }
 
-/* Settings Modal ================================================ */
+/* User Preferences Modal (Main) ========================================== */
+#buttonCloseDefaults, #buttonQuickTips{
+    background-color: #5ece5c;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    width: 150px;
+}
+
+#currentPasswordInput, #newPasswordInput, #usernameInput{
+    display: block;
+    margin: 0 auto 3px auto;
+}
 
 #settingsModal .modal-body{
     height: 50vh;
@@ -326,33 +338,8 @@ button.close{
     color: #5f65d8;
 }
 
-.settingsTabs{
-    margin: 0 -10px;
-    position: relative;
-    top: -15px;
-}
-
-.settingsBodyButton{
-    background-color: #949494;
-    color: white;
-    display: block;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* User Preferences Modal (Main) ========================================== */
-#buttonCloseDefaults, #buttonQuickTips{
-    background-color: #5ece5c;
-    margin: 10px;
-    padding: 10px;
-    position: relative;
-    width: 150px;
-}
-
-#currentPasswordInput, #newPasswordInput{
-    display: block;
-    margin: 3px auto 0px auto;
+#settingsModal label{
+    font-size: .9rem;
 }
 
 #userPreferencesModal .modal-content{
@@ -488,6 +475,27 @@ button.close{
 .otherFlexColumn2{
     text-align: left;
     padding-left: 10px;
+}
+
+.settingsTabs{
+    margin: 0 -10px;
+    position: relative;
+    top: -15px;
+}
+
+.settingsBodyButton{
+    background-color: #949494;
+    color: white;
+    display: block;
+    font-size: .9rem;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.settingsTable{
+    margin: auto;
 }
 
 .topFourFlexColumn{

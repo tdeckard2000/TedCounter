@@ -201,23 +201,23 @@
           <button id="otherNutritionButton" class="btn settingsBodyButton" >Edit Other Nutrition Goals</button>
           <button type="button" class="btn settingsBodyButton" id="buttonOpenDefaultsModal">Dev Tool</button>
           <hr>
-          <table>
+          <table class="settingsTable">
             <tr>
-              <td><label for="checkboxAutoKeyboardQuickAdd">Auto-Open Quick Add Keyboard (mobile)</label></td>
+              <td><label for="checkboxAutoKeyboardQuickAdd">Automatically open Quick Add keyboard on mobile.</label></td>
               <td><input id="checkboxAutoKeyboardQuickAdd" type="checkbox"></td>
             </tr>
             <tr>
-              <td><label for="checkboxAutoKeyboardItemSelector">Auto-Open Item Selector Keyboard (mobile)</label></td>
+              <td><label for="checkboxAutoKeyboardItemSelector">Automatically open Item Selector keyboard on mobile.</label></td>
               <td><input id="checkboxAutoKeyboardItemSelector" type="checkbox"></td>
             </tr>
           </table>
         </div>
 
         <div class="profilePage hidden">
-          <h6>Change Username</h6>
+          <label for="usernameInput">Change Username</label>
           <input id="usernameInput" type="text" placeholder="<%=userName%>" autocomplete="nickname" maxlength="25">
           <hr>
-          <h6>Change Password</h6>
+          <label for="currentPasswordInput">Change Password</label>
           <input id="currentPasswordInput" type="password" placeholder="current password" autocomplete="current-password">
           <input id="newPasswordInput" type="password" placeholder="new password" autocomplete="new-password" maxlength="128">
           <p class="changePasswordError hidden">Could not change password.<br>Please check that you entered your current password correctly.</p>

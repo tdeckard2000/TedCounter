@@ -857,3 +857,13 @@ $(".itemDuplicateIcon").on("click", function(){
 $(".itemTrashIcon").on("click", function(){
     $(this).css("filter", "saturate(0)");
 });
+
+//Darken Profile, Quick, and Add buttons on click
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("click", function(){
+    $(this).css("opacity", "1");
+    //fade back to starting
+    $(this).animate({
+        "opacity": "0.7"
+    }, 150);
+
+});

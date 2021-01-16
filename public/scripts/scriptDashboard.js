@@ -505,7 +505,7 @@ const postDefaultSelections = function(){
     });
 }
 
-//######################## Event Listeners (Select Item and Quick Add modal) ########################
+//######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 
 //Filter list items from meal selector modal based on text input.
 $('#foodItemFilter').on('keyup', (doc)=>{
@@ -550,11 +550,9 @@ $("#foodItemFilter").on("keydown", (event)=>{
     }
 });
 
-$(".selectableItem").on("click", function(data){
+//Highlight selected item in item selector
+$(".selectableItem").on("click", function(){
     $(this).css("background-color", "#e7f3ff")
-    console.log($(this).attr)
-    console.log(this.attr)
-    console.log(data.attr)
 })
 
 
@@ -840,4 +838,13 @@ $("#usernameInput").on("keyup", ()=>{
     $("#settingsSaveButton").prop("disabled", false);
 });
 
-//######################## Event Listeners (other) ########################
+//######################## Event Listeners (Diary List) ########################
+//Darken duplicate icon on select
+$(".itemDuplicateIcon").on("click", function(){
+    $(this).css("filter", "saturate(0)")
+});
+
+//Darken trash icon on select
+$(".itemTrashIcon").on("click", function(){
+    $(this).css("filter", "saturate(0)")
+})

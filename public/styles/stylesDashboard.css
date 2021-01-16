@@ -49,6 +49,7 @@ html, body{
 .buttonNoFormat{
     border: none;
     margin: 0;
+    outline: none;
     padding: 0;
 }
 
@@ -119,7 +120,9 @@ html, body{
 }
 
 .itemDuplicateIcon{
+    border: none;
     height: 25px;
+    outline: none;
 }
 
 .itemTrashIcon{

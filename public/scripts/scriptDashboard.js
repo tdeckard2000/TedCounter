@@ -839,12 +839,13 @@ $("#usernameInput").on("keyup", ()=>{
 });
 
 //######################## Event Listeners (Diary List) ########################
-//Darken diary title on select
+//Darken diary title when open
 $(".itemRow").on("click", function(){
-    $(this).css("background-color", "#fcfcfc");
-    setTimeout(()=>{
+    if($(this).hasClass("collapsed")){
+        $(this).css("background-color", "#fcfcfc");
+    }else{
         $(this).css("background-color", "#FFFFFF");
-    }, 200)
+    }
 });
 
 //Darken duplicate icon on select

@@ -36,7 +36,7 @@
     <%let minute = wholeISODate.getUTCMinutes()%>
     <%if(minute<10){minute = '0'+minute}%>
     <div class="container itemRowContainer">
-      <div class="row itemRow" value='<%=foodDiary[i]._id%>' data-toggle="collapse" data-target="#id<%=foodDiary[i]._id%>">
+      <div class="row itemRow collapsed" value='<%=foodDiary[i]._id%>' data-toggle="collapse" data-target="#id<%=foodDiary[i]._id%>">
         <div class="col-9 itemTimeNameDiv">
           <h2 class="itemTime <%=i%>"><%=hour%>:<%=minute%></h2>
           <h2 class="itemName"><%=foodDiary[i].item.name%></h2>

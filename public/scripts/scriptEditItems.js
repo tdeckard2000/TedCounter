@@ -15,7 +15,7 @@ const getItemValues = function(itemId){
         }).done(()=>{
         });
     })
-}
+};
 
 //Set Item Values in Edit Item Modal
 const setItemValues = function(itemId){
@@ -38,7 +38,7 @@ const setItemValues = function(itemId){
             $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem, #deleteButton").prop("disabled", false)
         }, 500)
     });
-}
+};
 
 //Set Item Name in Edit Item Modal
 const setItemName = function(itemName){
@@ -53,7 +53,7 @@ const setDeleteButton = function(itemId){
 
 const setSaveButton = function(){
     $("#saveButton").prop("textContent", "Save");
-}
+};
 
 //Convert array of key value pairs into one object.
 const arrayToObject = function(array){
@@ -64,7 +64,7 @@ const arrayToObject = function(array){
     });
 
     return(itemObject);
-}
+};
 
 //Get form data and convert to JSON object for Ajax post
 const getFormData = function(){
@@ -72,7 +72,7 @@ const getFormData = function(){
     let formObject = arrayToObject(formArray);
     let jsonObject = JSON.stringify(formObject);
     return(jsonObject);
-}
+};
 
 // Event Handlers #############################################################################################
 
@@ -115,13 +115,13 @@ $("#deleteButton").on("click", (data)=>{
     }else{
         $("#deleteButton").prop("textContent", "Are You Sure?");
     }
-})
+});
 
 //Respond to edit modal text box changes
 $(".editItemTextBoxGeneral, .editItemTextBoxTopFour, #nameOfItem").on("input", (data)=>{
     //Enable save button
     $("#saveButton").prop({"disabled": false, "textContent":"Save"});
-})
+});
 
 //Respond to save button click
 $("#editItemForm").on("submit", (data)=>{
@@ -151,4 +151,12 @@ $("#editItemForm").on("submit", (data)=>{
             $("#saveButton").prop("textContent", "Error Saving")
         }
     })
+});
+
+//Highlight selected item from Item Editor list
+$(".singleItem").on("click", function(){
+    $(this).css("background-color", "#e7f3ff")
+    setTimeout(()=>{
+        $(this).css("background-color", "transparent")
+    }, 200)
 })

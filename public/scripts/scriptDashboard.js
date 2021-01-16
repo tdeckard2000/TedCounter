@@ -553,7 +553,7 @@ $("#foodItemFilter").on("keydown", (event)=>{
 //Highlight selected item in item selector
 $(".selectableItem").on("click", function(){
     $(this).css("background-color", "#e7f3ff")
-})
+});
 
 
 //######################## Event Listeners (Default Settings Modal) ########################

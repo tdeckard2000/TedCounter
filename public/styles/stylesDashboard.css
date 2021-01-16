@@ -271,9 +271,9 @@ button.close{
 }
 
 .selectableItems button{
-    background-color: #ffffff;
+    background-color: transparent;
     border: none;
-    outline-color: #5f65d8;
+    outline: none;
     padding: 2px 0;
     white-space: nowrap;
     width: 100%;

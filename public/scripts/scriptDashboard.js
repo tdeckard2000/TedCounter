@@ -505,7 +505,7 @@ const postDefaultSelections = function(){
     });
 }
 
-//######################## Event Listeners (Filter and Quick Add) ########################
+//######################## Event Listeners (Select Item and Quick Add modal) ########################
 
 //Filter list items from meal selector modal based on text input.
 $('#foodItemFilter').on('keyup', (doc)=>{
@@ -536,6 +536,27 @@ $(".moreOptionsButton").on("click",()=>{
         $(".moreOptionsButton").text("more options");
     }
 });
+
+//If item selector open, handle enter key
+$("#foodItemFilter").on("keydown", (event)=>{
+    let key = event.key;
+
+    //enter key "clicks" first item in list, ignoring items filtered out
+    if (key === "Enter"){
+        event.preventDefault();
+        let firstRemainingItem = $(".selectableItem .visible").first();
+        console.log(firstRemainingItem)
+        firstRemainingItem.trigger("click");
+    }
+});
+
+$(".selectableItem").on("click", function(data){
+    $(this).css("background-color", "#e7f3ff")
+    console.log($(this).attr)
+    console.log(this.attr)
+    console.log(data.attr)
+})
+
 
 //######################## Event Listeners (Default Settings Modal) ########################
 
@@ -723,8 +744,6 @@ $("#tabCharts, #tabPreferences, #tabProfile").on("click",function(){
     }
 });
 
-//######################## Event Listeners (Settings Modal Main) ########################
-
 //Handle click of Save button on settings modal
 $("#settingsSaveButton").on("click", function(){
 
@@ -822,16 +841,3 @@ $("#usernameInput").on("keyup", ()=>{
 });
 
 //######################## Event Listeners (other) ########################
-
-//If item selector open, handle enter key
-$("#foodItemFilter").on("keydown", (event)=>{
-    let key = event.key;
-
-    //enter key "clicks" first item in list, ignoring items filtered out
-    if (key === "Enter"){
-        event.preventDefault();
-        let firstRemainingItem = $(".selectableItem .visible").first();
-        console.log(firstRemainingItem)
-        firstRemainingItem.trigger("click");
-    }
-});

@@ -336,56 +336,12 @@ const authenticateUser = function(email, password){
 
 // Calculate nutrition totals
 const calculateNutritionTotals = function(foodDiary){
-  let diaryTotals = {
-    "caffeine": 0,
-    "calcium": 0,
-    "calories": 0,
-    "carbs": 0,
-    "chloride": 0,
-    "choline": 0,
-    "cholesterol": 0,
-    "chromium": 0,
-    "copper": 0,
-    "fat": 0,
-    "fiber": 0,
-    "folicAcid": 0,
-    "histidine": 0,
-    "iodine": 0,
-    "iron": 0,
-    "isoleucine": 0,
-    "leucine": 0,
-    "lysine": 0,
-    "magnesium": 0,
-    "manganese": 0,
-    "methionine": 0,
-    "molybdenum": 0,
-    "phenylalanine": 0,
-    "phosphorus": 0,
-    "potassium": 0,
-    "protein": 0,
-    "saturatedFat": 0,
-    "selenium": 0,
-    "sodium": 0,
-    "sugar": 0,
-    "transFat": 0,
-    "threonine": 0,
-    "tryptophan": 0,
-    "valine": 0,
-    "vitaminA": 0,
-    "vitaminB1": 0,
-    "vitaminB2": 0,
-    "vitaminB3": 0,
-    "vitaminB5": 0,
-    "vitaminB6": 0,
-    "vitaminB7": 0,
-    "vitaminB9": 0,
-    "vitaminB12": 0,
-    "vitaminC": 0,
-    "vitaminD2": 0,
-    "vitaminD3": 0,
-    "vitaminE": 0,
-    "vitaminK": 0,
-    "zinc": 0
+  let diaryTotals = {"caffeine": 0, "calcium": 0, "calories": 0, "carbs": 0, "chloride": 0, "choline": 0, "cholesterol": 0, "chromium": 0,
+    "copper": 0, "fat": 0, "fiber": 0, "folicAcid": 0, "histidine": 0, "iodine": 0, "iron": 0, "isoleucine": 0, "leucine": 0, "lysine": 0,
+    "magnesium": 0, "manganese": 0, "methionine": 0, "molybdenum": 0, "phenylalanine": 0, "phosphorus": 0, "potassium": 0, "protein": 0,
+    "saturatedFat": 0, "selenium": 0, "sodium": 0, "sugar": 0, "transFat": 0, "threonine": 0, "tryptophan": 0, "valine": 0, "vitaminA": 0,
+    "vitaminB1": 0, "vitaminB2": 0, "vitaminB3": 0, "vitaminB5": 0, "vitaminB6": 0, "vitaminB7": 0, "vitaminB9": 0, "vitaminB12": 0,
+    "vitaminC": 0, "vitaminD2": 0, "vitaminD3": 0, "vitaminE": 0, "vitaminK": 0, "zinc": 0
   };
 
   //Loop through each item in diary
@@ -399,7 +355,7 @@ const calculateNutritionTotals = function(foodDiary){
   });
 
   return(diaryTotals);
-}
+};
 
 // Return All User Food Items
 const findFoodItems = function(userDocId){
@@ -968,8 +924,9 @@ const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, 
 
 };
 
-
-// Get Requests ==========================================================
+// =======================================================================
+// ============================ Get Requests =============================
+// =======================================================================
 app.get(['/','/oops', '/accountCreated', '/passwordChanged'], (req, res)=>{
   if(req.originalUrl === '/oops'){
     res.render('index', {toastAction: "showFailedToast"})
@@ -1099,7 +1056,9 @@ app.get('/logout', (req, res)=>{
   });
 });
 
-// Post Requests ==========================================================
+// =======================================================================
+// ============================ Post Requests ============================
+// =======================================================================
 app.post('/signIn', (req, res)=>{
   req.session.data = null; //remove old session data
   const email = req.body.email;
@@ -1363,7 +1322,9 @@ app.post("/updateUserPreferences", (req, res)=>{
   })
 });
 
-// Server ==========================================================
+// =======================================================================
+// ================================ Server ===============================
+// =======================================================================
 let port = process.env.PORT;
 if (port == null || port == "") {
   app.listen('3000', ()=>{

@@ -59,7 +59,8 @@ html, body{
 }
 
 .itemDropdownBox{
-    background-color: #f1efef;
+    /* background-color: #f1efef; */
+    background: linear-gradient(180deg, rgb(236 236 236) 0%, rgba(249,249,249,1) 16%);
     border-radius: 0 0 5px 5px;
     font-size: .6rem;
     margin: 0 1px;

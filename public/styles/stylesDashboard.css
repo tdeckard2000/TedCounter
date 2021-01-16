@@ -191,6 +191,13 @@ html, body{
     right: 10px;
 }
 
+.buttonQuickAdd img{
+    left: 1px;
+    position: relative;
+    top: 1px;
+    width: 43px;
+}
+
 /* Dashboard Modal Pop-Ups ========================================== */
 
 /* All Dashboard Modals */

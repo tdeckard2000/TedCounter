@@ -839,12 +839,20 @@ $("#usernameInput").on("keyup", ()=>{
 });
 
 //######################## Event Listeners (Diary List) ########################
+//Darken diary title on select
+$(".itemRow").on("click", function(){
+    $(this).css("background-color", "#fcfcfc");
+    setTimeout(()=>{
+        $(this).css("background-color", "#FFFFFF");
+    }, 200)
+});
+
 //Darken duplicate icon on select
 $(".itemDuplicateIcon").on("click", function(){
-    $(this).css("filter", "saturate(0)")
+    $(this).css("filter", "saturate(0)");
 });
 
 //Darken trash icon on select
 $(".itemTrashIcon").on("click", function(){
-    $(this).css("filter", "saturate(0)")
-})
+    $(this).css("filter", "saturate(0)");
+});

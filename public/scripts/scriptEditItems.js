@@ -159,4 +159,4 @@ $(".singleItem").on("click", function(){
     setTimeout(()=>{
         $(this).css("background-color", "transparent")
     }, 200)
-})
+});

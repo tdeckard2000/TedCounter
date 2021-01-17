@@ -185,10 +185,10 @@ const user = mongoose.model('user', userSchema);
 const passwordKey = mongoose.model('passwordKey', passwordKeysSchema);
 
 const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber",
-"folic acid", "histidine", "iodine", "iron","isoleucine", "leucine", "lysine", "magnesium", "manganese", "methionine", "molybdenum","phenylalanine",
-"phosphorus", "potassium", "protein", "saturated fat", "selenium", "sodium", "sugar", "trans fat", "threonine", "tryptophan", "valine", "vitamin a",
-"vitamin b1", "vitamin b2", "vitamin b3", "vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2",
-"vitamin d3", "vitamin e", "vitamin k", "zinc"];
+"folicAcid", "histidine", "iodine", "iron","isoleucine", "leucine", "lysine", "magnesium", "manganese", "methionine", "molybdenum","phenylalanine",
+"phosphorus", "potassium", "protein", "saturatedFat", "selenium", "sodium", "sugar", "transFat", "threonine", "tryptophan", "valine", "vitaminA",
+"vitaminB1", "vitaminB2", "vitaminB3", "vitaminB5", "vitaminB6", "vitaminB7", "vitaminB9", "vitaminB12", "vitaminC", "vitaminD2",
+"vitaminD3", "vitaminE", "vitaminK", "zinc"];
 
 //Convert DB values into human readable format
 const keyToHuman = {

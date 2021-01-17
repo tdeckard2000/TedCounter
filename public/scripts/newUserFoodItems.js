@@ -860,7 +860,7 @@ module.exports = {
     greenBeans: greenBeans,
     orange: orange,
     peach: peach,
-    pear: peach,
+    pear: pear,
     potato: potato,
     salmon: salmon,
     strawberries: strawberries,

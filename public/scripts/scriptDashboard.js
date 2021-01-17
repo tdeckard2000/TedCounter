@@ -545,7 +545,6 @@ $("#foodItemFilter").on("keydown", (event)=>{
     if (key === "Enter"){
         event.preventDefault();
         let firstRemainingItem = $(".selectableItem .visible").first();
-        console.log(firstRemainingItem)
         firstRemainingItem.trigger("click");
     }
 });
@@ -778,7 +777,6 @@ $("#settingsSaveButton").on("click", function(){
 
                 //if attempted password change failed
                 if(data.passwordChanged != null && data.passwordChanged == false){
-                    console.log("here")
                     $(".changePasswordError").removeClass("hidden");
                     $(".changePasswordSuccess").addClass("hidden");
                 }else if(data.passwordChanged != null){

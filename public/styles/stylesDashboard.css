@@ -362,6 +362,10 @@ button.close{
     color: #5f65d8;
 }
 
+#topFourButton{
+    margin-top: 0;
+}
+
 #userPreferencesModal .modal-content{
     height: 80vh;
 }
@@ -538,7 +542,7 @@ button.close{
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 200px;
+    width: 195px;
 }
 
 .settingsTabs{

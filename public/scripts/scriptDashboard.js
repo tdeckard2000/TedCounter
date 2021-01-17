@@ -379,7 +379,7 @@ const setupDefaultsGoalsTextBoxes = function(){
 
          if(list[i+1] !== undefined){
             $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + keyToHuman[list[i+1]] +
-            "</label><input placeholder=" + keyGoalDefaults[list[i]] + " id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+            "</label><input placeholder=" + keyGoalDefaults[list[i+1]] + " id='" + list[i+1] + "'type='number' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
     }

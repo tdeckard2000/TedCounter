@@ -14,7 +14,7 @@ const request = require('request');
 // const { json } = require('body-parser');
 // const { data } = require('jquery');
 // const { name } = require('ejs');
-const foodItems = require('./public/scripts/starterItems.js');
+const newUserFoodItems = require('./public/scripts/newUserFoodItems.js');
 
 require('dotenv').config();
 
@@ -48,8 +48,8 @@ mongoose.connect(process.env.DB_URI2, {useNewUrlParser: true, useUnifiedTopology
 const foodItemSchema = new mongoose.Schema({
   "userId": String,
   "name": String,
-  "caffeine": String,
-  "calcium": String,
+  "caffeine": Number,
+  "calcium": Number,
   "calories": Number,
   "carbs": Number,
   "chloride": Number,
@@ -59,7 +59,7 @@ const foodItemSchema = new mongoose.Schema({
   "copper": Number,
   "fat": Number,
   "fiber": Number,
-  "folic acid": Number,
+  "folicAcid": Number,
   "histidine": Number,
   "iodine": Number,
   "iron": Number,
@@ -104,8 +104,8 @@ const itemDiarySchema = new mongoose.Schema({
   "date": Date,
   "item":{
     "name": String,
-    "caffeine": String,
-    "calcium": String,
+    "caffeine": Number,
+    "calcium": Number,
     "calories": Number,
     "carbs": Number,
     "chloride": Number,
@@ -115,7 +115,7 @@ const itemDiarySchema = new mongoose.Schema({
     "copper": Number,
     "fat": Number,
     "fiber": Number,
-    "folic acid": Number,
+    "folicAcid": Number,
     "histidine": Number,
     "iodine": Number,
     "iron": Number,

@@ -345,7 +345,7 @@ button.close{
     padding: 10px;
     position: relative;
     width: 150px;
-}
+} 
 
 #currentPasswordInput, #newPasswordInput, #usernameInput{
     display: block;
@@ -362,10 +362,6 @@ button.close{
     color: #5f65d8;
 }
 
-#settingsModal label{
-    font-size: .9rem;
-}
-
 #userPreferencesModal .modal-content{
     height: 80vh;
 }
@@ -377,6 +373,10 @@ button.close{
 .changePasswordError, .changePasswordSuccess{
     font-size: .75rem;
     padding: 5px;
+}
+
+.chartsPage{
+    font-weight: 300;
 }
 
 .defaultsModalBody{
@@ -501,6 +501,28 @@ button.close{
     padding-left: 10px;
 }
 
+.preferencesPage{
+    font-weight: 300;
+}
+
+.profilePage input{
+    font-weight: 300;
+    font-size: .85rem;
+}
+
+.profilePage label{
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.settingsTable input{
+    margin-left: 5px;
+}
+
+.settingsTable label{
+    font-size: .85rem;
+}
+
 .settingsTabs{
     margin: 0 -10px;
     position: relative;
@@ -511,11 +533,16 @@ button.close{
     background-color: #949494;
     color: white;
     display: block;
-    font-size: .9rem;
+    font-size: .85rem;
+    font-weight: 300;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     width: 200px;
+}
+
+.settingsTabs{
+    font-weight: 300;
 }
 
 .settingsTable{

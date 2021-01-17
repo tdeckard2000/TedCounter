@@ -170,7 +170,7 @@
 </div>
 
 <!-- Settings Modal (Main) -->
-<div class="modal" id="settingsModal" tabindex="-1" role="dialog">
+<div class="modal settingsModal" id="settingsModal" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -197,10 +197,12 @@
         </div>
 
         <div class="preferencesPage hidden">
+          <label>Goals</label>
           <button id="topFourButton" class="btn settingsBodyButton" >Edit Top Four Goals</button>
           <button id="otherNutritionButton" class="btn settingsBodyButton" >Edit Other Nutrition Goals</button>
           <button type="button" class="btn settingsBodyButton" id="buttonOpenDefaultsModal">Dev Tool</button>
           <hr>
+          <label>Options</label>
           <table class="settingsTable">
             <tr>
               <td><label for="checkboxAutoKeyboardQuickAdd">Automatically open Quick Add keyboard on mobile.</label></td>

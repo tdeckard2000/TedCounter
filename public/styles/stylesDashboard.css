@@ -507,7 +507,7 @@ button.close{
 
 .profilePage input{
     font-weight: 300;
-    font-size: .85rem;
+    font-size: .9rem;
 }
 
 .profilePage label{
@@ -520,7 +520,7 @@ button.close{
 }
 
 .settingsTable label{
-    font-size: .85rem;
+    font-size: .9rem;
 }
 
 .settingsTabs{
@@ -533,7 +533,7 @@ button.close{
     background-color: #949494;
     color: white;
     display: block;
-    font-size: .85rem;
+    font-size: .9rem;
     font-weight: 300;
     margin: auto;
     margin-top: 10px;

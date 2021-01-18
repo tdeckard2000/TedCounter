@@ -1251,7 +1251,7 @@ app.post('/deleteFoodItem', (req,res)=>{
   })
 })
 
-app.post('/updateUserGoals', (req, res)=>{
+app.post('/newUserGoals', (req, res)=>{
   const topFourSelections = JSON.parse(req.body.topFourSelections);
   const otherSelections = JSON.parse(req.body.otherSelections);
   const userGoalsRaw = JSON.parse(req.body.userGoals);

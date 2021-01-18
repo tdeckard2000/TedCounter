@@ -1258,6 +1258,17 @@ app.post('/newUserGoals', (req, res)=>{
   const userGoals = convertToInt(userGoalsRaw); //convert object value strings to numbers
   const userId = (req.session.userDocId);
 
+  //if no food items, add starter items
+  findFoodItems(userId).then((data)=>{
+    if(data.length === 0){
+      console.log("Adding starter items: " + data.length);
+
+      newUserFoodItems.forEach(element => {
+        addNewItem(element, userId);
+      });
+    }
+  });
+
   updateUserDefaults(userId, topFourSelections, otherSelections, userGoals).then((data)=>{
     
     if(data === true){ //successful update

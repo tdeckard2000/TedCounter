@@ -848,21 +848,21 @@ const sweetPotato = {
     "zinc": 0
 };
 
-module.exports = {
-    apple: apple,
-    avocado: avocado,
-    banana: banana,
-    broccoli: broccoli,
-    carrots: carrots,
-    chickenBreast: chickenBreast,
-    egg: egg,
-    grapes: grapes,
-    greenBeans: greenBeans,
-    orange: orange,
-    peach: peach,
-    pear: pear,
-    potato: potato,
-    salmon: salmon,
-    strawberries: strawberries,
-    sweetPotato: sweetPotato
-}
+module.exports = [
+    apple,
+    avocado,
+    banana,
+    broccoli,
+    carrots,
+    chickenBreast,
+    egg,
+    grapes,
+    greenBeans,
+    orange,
+    peach,
+    pear,
+    potato,
+    salmon,
+    strawberries,
+    sweetPotato
+]

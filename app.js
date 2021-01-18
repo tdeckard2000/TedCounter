@@ -1262,7 +1262,7 @@ app.post('/newUserGoals', (req, res)=>{
   findFoodItems(userId).then((data)=>{
     if(data.length === 0){
       console.log("Adding starter items: " + data.length);
-
+      console.log(element)
       newUserFoodItems.forEach(element => {
         addNewItem(element, userId);
       });

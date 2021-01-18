@@ -1,7 +1,7 @@
 //These are added to every new user's collection
 
 const apple = {
-    "name": "Apple Red Delicious",
+    "itemName": "Apple Red Delicious",
     "caffeine": 0,
     "calcium": 13,
     "calories": 125,
@@ -54,7 +54,7 @@ const apple = {
 };
 
 const avocado = {
-    "name": "Avocado 1/3",
+    "itemName": "Avocado 1/3",
     "caffeine": 0,
     "calcium": 10,
     "calories": 80,
@@ -107,7 +107,7 @@ const avocado = {
 };
 
 const banana = {
-    "name": "Banana Medium Size",
+    "itemName": "Banana Medium Size",
     "caffeine": 0,
     "calcium": 0,
     "calories": 105,
@@ -160,7 +160,7 @@ const banana = {
 };
 
 const broccoli = {
-    "name": "Broccoli 1 Cup Chopped",
+    "itemName": "Broccoli 1 Cup Chopped",
     "caffeine": 0,
     "calcium": 43,
     "calories": 31,
@@ -213,7 +213,7 @@ const broccoli = {
 };
 
 const carrots = {
-    "name": "Carrots 1 Cup Chopped",
+    "itemName": "Carrots 1 Cup Chopped",
     "caffeine": 0,
     "calcium": 42,
     "calories": 52,
@@ -266,7 +266,7 @@ const carrots = {
 };
 
 const chickenBreast = {
-    "name": "Chicken Breast 4oz Boneless Skinless",
+    "itemName": "Chicken Breast 4oz Boneless Skinless",
     "caffeine": 0,
     "calcium": 0,
     "calories": 110,
@@ -319,7 +319,7 @@ const chickenBreast = {
 };
 
 const egg = {
-    "name": "Egg Large",
+    "itemName": "Egg Large",
     "caffeine": 0,
     "calcium": 28,
     "calories": 70,
@@ -372,7 +372,7 @@ const egg = {
 };
 
 const grapes = {
-    "name": "Red Seedless 1.5 Cups",
+    "itemName": "Red Seedless 1.5 Cups",
     "caffeine": 0,
     "calcium": 50,
     "calories": 90,
@@ -425,7 +425,7 @@ const grapes = {
 };
 
 const greenBeans = {
-    "name": "Green Beans 1 Cup",
+    "itemName": "Green Beans 1 Cup",
     "caffeine": 0,
     "calcium": 30,
     "calories": 25,
@@ -478,7 +478,7 @@ const greenBeans = {
 };
 
 const orange = {
-    "name": "Navel Orange Medium",
+    "itemName": "Navel Orange Medium",
     "caffeine": 0,
     "calcium": 52,
     "calories": 62,
@@ -531,7 +531,7 @@ const orange = {
 };
 
 const peach = {
-    "name": "Peach Medium",
+    "itemName": "Peach Medium",
     "caffeine": 0,
     "calcium": 0,
     "calories": 59,
@@ -584,7 +584,7 @@ const peach = {
 };
 
 const pear = {
-    "name": "Asian Pear Medium",
+    "itemName": "Asian Pear Medium",
     "caffeine": 0,
     "calcium": 5,
     "calories": 51,
@@ -637,7 +637,7 @@ const pear = {
 };
 
 const potato = {
-    "name": "Idaho Potato Medium 148g",
+    "itemName": "Idaho Potato Medium 148g",
     "caffeine": 0,
     "calcium": 20,
     "calories": 110,
@@ -690,7 +690,7 @@ const potato = {
 };
 
 const salmon = {
-    "name": "Salmon 4oz Pink Skinless Fillet Frozen",
+    "itemName": "Salmon 4oz Pink Skinless Fillet Frozen",
     "caffeine": 0,
     "calcium": 0,
     "calories": 100,
@@ -743,7 +743,7 @@ const salmon = {
 };
 
 const strawberries = {
-    "name": "Strawberries 1 Cup Whole",
+    "itemName": "Strawberries 1 Cup Whole",
     "caffeine": 0,
     "calcium": 50,
     "calories": 47,
@@ -796,7 +796,7 @@ const strawberries = {
 };
 
 const sweetPotato = {
-    "name": 'Sweet Potato 5" Long',
+    "itemName": 'Sweet Potato 5" Long',
     "caffeine": 0,
     "calcium": 3,
     "calories": 112,

@@ -861,7 +861,7 @@ $(".itemTrashIcon").on("click", function(){
 $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mousedown", function(){
     // $(this).css("filter", "brightness(0.7)");
     $(this).css("opacity", ".55");
-    $(this).css("border", "5px solid #5f65d8");
+    $(this).css("border", "5px solid #404040");
 
 });
 

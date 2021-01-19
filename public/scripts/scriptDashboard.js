@@ -860,7 +860,9 @@ $(".itemTrashIcon").on("click", function(){
 //Darken Profile, Quick, and Add buttons on mouse down
 $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mousedown", function(){
     // $(this).css("filter", "brightness(0.7)");
-    $(this).css("opacity", ".45");
+    $(this).css("opacity", ".55");
+    $(this).css("border", "5px solid #5f65d8");
+
 });
 
 //Un-darken Profile, Quick, and Add buttons on mouseup
@@ -868,6 +870,7 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseup", function(){
     setTimeout(()=>{
         // $(this).css("filter", "brightness(1)");
         $(this).css("opacity", ".7");
+        $(this).css("border", "0px");
     }, 100)
 });
 
@@ -876,5 +879,6 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseleave", function(
     setTimeout(()=>{
         // $(this).css("filter", "brightness(1)");
         $(this).css("opacity", ".7");
+        $(this).css("border", "0px");
     }, 100)
 });

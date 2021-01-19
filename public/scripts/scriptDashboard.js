@@ -311,12 +311,12 @@ const setTopFourDropdownOptions = function (){
 
     //set default dropdown selections
     $("#topFourSelection1").val('calories');
-    $("#topFourSelection2").val('protein');
-    $("#topFourSelection3").val('sodium');
-    $("#topFourSelection4").val('carbs');
+    $("#topFourSelection2").val('none');
+    $("#topFourSelection3").val('none');
+    $("#topFourSelection4").val('none');
 }
 
-//Check for match in given array
+//Check for match in given array, ignores "none"
 const duplicateExists = function(array){
     let item = ""
     while(array.length > 1){
@@ -393,12 +393,17 @@ const getTopFourSelections = function(){
     while(i < 5){
         //get value of each dropdown box
         let selection = ($("#topFourSelection" + i).find('option:selected').val());
-        //convert the value using keyToDB & save to array
-        selections.push(keyToDB[selection]);
-        i++;
+
+        //convert value using keyToDB & save to array
+        //skip "---" selections
+        if(selection !== "none"){
+            selections.push(keyToDB[selection]);
+        };
+
+        i++
     }
     return(selections);
-}
+};
 
 //Get 'other' checkbox selected items
 const getOtherSelections = function(){

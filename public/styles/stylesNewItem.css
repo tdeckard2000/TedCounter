@@ -72,6 +72,9 @@
 }
 
 .newItemDiv{
+    max-height: 60vh;
+    min-height: 40vh;
+    overflow: auto;
     padding-top: 10px;
     text-align: center;
 }

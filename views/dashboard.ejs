@@ -8,22 +8,12 @@
 <div id="goals" data-userPreferences="<%=userPreferences%>" class="container">
   <div class="row headerRow">
     <%if(nutritionTopFour != undefined && nutritionGoals != undefined){%>
-      <div class=" topCounterDiv col-3">
-        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[0]]%></div>
-        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[0]]%> <%=keyShortForm[nutritionTopFour[0]]%></div> 
-      </div>
-      <div class="topCounterDiv col-3">
-        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[1]]%></div>
-        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[1]]%> <%=keyShortForm[nutritionTopFour[1]]%></div> 
-      </div>
-      <div class="topCounterDiv col-3">
-        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[2]]%></div>
-        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[2]]%> <%=keyShortForm[nutritionTopFour[2]]%></div> 
-      </div>
-      <div class="topCounterDiv col-3">
-        <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[3]]%></div>
-        <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[3]]%> <%=keyShortForm[nutritionTopFour[3]]%></div> 
-      </div>
+      <%for(let i = 0; i < nutritionTopFour.length; i++){%>
+        <div class=" topCounterDiv col-<%=12 / nutritionTopFour.length%>">
+          <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[i]]%></div>
+          <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[i]]%> <%=keyShortForm[nutritionTopFour[0]]%></div> 
+        </div>
+      <%}%>
     </div>
   <%}%>
 </div>
@@ -96,7 +86,7 @@
 <!-- Quick Add -->
 <div class="modal" id="quickAdd" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">
-    <form action="./quickAdd" method="POST">
+    <form class="quickAddForm" action="./quickAdd" method="POST">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Quick Add</h5>
@@ -205,11 +195,11 @@
           <label>Options</label>
           <table class="settingsTable">
             <tr>
-              <td><label for="checkboxAutoKeyboardQuickAdd">Automatically open Quick Add keyboard on mobile.</label></td>
+              <td><label for="checkboxAutoKeyboardQuickAdd">Auto open Quick Add keyboard on mobile.</label></td>
               <td><input id="checkboxAutoKeyboardQuickAdd" type="checkbox"></td>
             </tr>
             <tr>
-              <td><label for="checkboxAutoKeyboardItemSelector">Automatically open Item Selector keyboard on mobile.</label></td>
+              <td><label for="checkboxAutoKeyboardItemSelector">Auto open Item Selector keyboard on mobile.</label></td>
               <td><input id="checkboxAutoKeyboardItemSelector" type="checkbox"></td>
             </tr>
           </table>
@@ -276,12 +266,15 @@
               <select name="topFourSelection" class="topFourSelection" id="topFourSelection1">
               </select>
               <select name="topFourSelection" class="topFourSelection" id="topFourSelection3">
+                <option value="none">---</option>
               </select>
             </div>
             <div class="topFourFlexColumn">
               <select name="topFourSelection" class="topFourSelection" id="topFourSelection2">
+                <option value="none">---</option>
               </select>
               <select name="topFourSelection" class="topFourSelection" id="topFourSelection4">
+                <option value="none">---</option>
               </select>
             </div>
           </div>

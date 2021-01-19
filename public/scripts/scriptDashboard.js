@@ -860,7 +860,7 @@ $(".itemTrashIcon").on("click", function(){
 //Darken Profile, Quick, and Add buttons on mouse down
 $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mousedown", function(){
     // $(this).css("filter", "brightness(0.7)");
-    $(this).css("opacity", ".55");
+    $(this).css("opacity", ".45");
 });
 
 //Un-darken Profile, Quick, and Add buttons on mouseup

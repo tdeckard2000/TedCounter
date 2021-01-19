@@ -372,7 +372,7 @@ const egg = {
 };
 
 const grapes = {
-    "itemName": "Red Seedless 1.5 Cups",
+    "itemName": "Grapes Red Seedless 1.5 Cups",
     "caffeine": 0,
     "calcium": 50,
     "calories": 90,
@@ -478,7 +478,7 @@ const greenBeans = {
 };
 
 const orange = {
-    "itemName": "Navel Orange Medium",
+    "itemName": "Orange Navel Medium",
     "caffeine": 0,
     "calcium": 52,
     "calories": 62,
@@ -584,7 +584,7 @@ const peach = {
 };
 
 const pear = {
-    "itemName": "Asian Pear Medium",
+    "itemName": "Pear Asian Medium",
     "caffeine": 0,
     "calcium": 5,
     "calories": 51,
@@ -637,7 +637,7 @@ const pear = {
 };
 
 const potato = {
-    "itemName": "Idaho Potato Medium 148g",
+    "itemName": "Potato Medium 148g",
     "caffeine": 0,
     "calcium": 20,
     "calories": 110,

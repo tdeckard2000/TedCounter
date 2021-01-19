@@ -461,7 +461,7 @@ const postDefaultSelections = function(){
 
     $.ajax({
         type: 'POST',
-        url: '/updateUserGoals',
+        url: '/newUserGoals',
         data: {
             topFourSelections: topFourSelections,
             otherSelections: otherSelections,

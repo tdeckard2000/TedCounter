@@ -1251,12 +1251,22 @@ app.post('/deleteFoodItem', (req,res)=>{
   })
 })
 
-app.post('/updateUserGoals', (req, res)=>{
+app.post('/newUserGoals', (req, res)=>{
   const topFourSelections = JSON.parse(req.body.topFourSelections);
   const otherSelections = JSON.parse(req.body.otherSelections);
   const userGoalsRaw = JSON.parse(req.body.userGoals);
   const userGoals = convertToInt(userGoalsRaw); //convert object value strings to numbers
   const userId = (req.session.userDocId);
+
+  //if no food items, add starter items
+  findFoodItems(userId).then((data)=>{
+    if(data.length === 0){
+      console.log("Adding starter items: " + data.length);
+      newUserFoodItems.forEach(element => {
+        addNewItem(element, userId);
+      });
+    }
+  });
 
   updateUserDefaults(userId, topFourSelections, otherSelections, userGoals).then((data)=>{
     

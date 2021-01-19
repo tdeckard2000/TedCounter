@@ -291,7 +291,7 @@ button.close{
 
 .selectableItems{
     /* Set height to 45% of viewport */
-    height: 45vh;
+    height: 42vh;
     overflow: auto;
 }
 

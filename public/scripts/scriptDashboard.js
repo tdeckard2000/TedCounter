@@ -311,12 +311,12 @@ const setTopFourDropdownOptions = function (){
 
     //set default dropdown selections
     $("#topFourSelection1").val('calories');
-    $("#topFourSelection2").val('none');
-    $("#topFourSelection3").val('none');
-    $("#topFourSelection4").val('none');
+    $("#topFourSelection2").val('protein');
+    $("#topFourSelection3").val('carbs');
+    $("#topFourSelection4").val('fat');
 }
 
-//Check for match in given array, ignores "none"
+//Check for match in given array
 const duplicateExists = function(array){
     let item = ""
     while(array.length > 1){

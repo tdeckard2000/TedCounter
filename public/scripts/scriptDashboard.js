@@ -857,12 +857,24 @@ $(".itemTrashIcon").on("click", function(){
     $(this).css("filter", "saturate(0)");
 });
 
-//Darken Profile, Quick, and Add buttons on click
-$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("click", function(){
-    $(this).css("opacity", "1");
-    //fade back to starting
-    $(this).animate({
-        "opacity": "0.7"
-    }, 150);
+//Darken Profile, Quick, and Add buttons on mouse down
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mousedown", function(){
+    // $(this).css("filter", "brightness(0.7)");
+    $(this).css("opacity", ".55");
+});
 
+//Un-darken Profile, Quick, and Add buttons on mouseup
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseup", function(){
+    setTimeout(()=>{
+        // $(this).css("filter", "brightness(1)");
+        $(this).css("opacity", ".7");
+    }, 100)
+});
+
+//Un-darken Profile, Quick, and Add buttons if mouse leaves button
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseleave", function(){
+    setTimeout(()=>{
+        // $(this).css("filter", "brightness(1)");
+        $(this).css("opacity", ".7");
+    }, 100)
 });

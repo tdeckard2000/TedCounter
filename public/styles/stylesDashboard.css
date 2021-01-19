@@ -338,14 +338,27 @@ button.close{
     font-size: .7rem;
 }
 
-/* User Preferences Modal (Main) ========================================== */
-#buttonCloseDefaults, #buttonQuickTips{
-    background-color: #5ece5c;
+#buttonCloseDefaults{
+    background-color: #949494;
     margin: 10px;
     padding: 10px;
     position: relative;
     width: 150px;
-} 
+}
+
+#buttonQuickTips{
+    background-color: #5ece5c;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    width: 150px; 
+}
+
+/* User Preferences Modal (Main) ========================================== */
+
+#buttonOpenQuickTipsModal{
+    background-color: #5ece5c;
+}
 
 #currentPasswordInput, #newPasswordInput, #usernameInput{
     display: block;

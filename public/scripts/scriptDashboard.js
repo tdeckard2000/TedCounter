@@ -454,7 +454,7 @@ const postDefaultSelections = function(){
     let userGoals = JSON.stringify(getUserGoals());
 
     $("#loadPreferences").removeClass("hidden"); //show loading icon
-    $(".defaultsTitle").prop("textContent", "Saving your preferences.");
+    $(".defaultsTitle").prop("textContent", "Getting your profile ready.");
     $(".defaultsSubTitle").prop("textContent", "Please wait...");
     $("#defaultsNextButton").prop("disabled", true);
     $("#defaultsBackButton").prop("disabled", true);
@@ -472,10 +472,6 @@ const postDefaultSelections = function(){
 
         if(data.result === true){
             setTimeout(()=>{
-                $(".defaultsTitle").prop("textContent", "Saved!");
-            }, 3000);
-            setTimeout(()=>{
-                $(".defaultsTitle").prop("textContent", "Getting your account ready.");
                 $(".defaultsSubTitle").prop("textContent", "Adding some food items to get you started.");
             }, 3000);
             setTimeout(()=>{
@@ -595,7 +591,7 @@ $("#defaultsNextButton").on("click", function(){
         //change page title
         $(".defaultsTitle").prop("textContent", "Anything else?");
         //change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These are optional.");
+        $(".defaultsSubTitle").prop("textContent", "If there are other nutrients you would like to track, select them here.");
         //hide top four selectors
         $(".topFourFlexRow").addClass("hidden");
         //hide disclaimer checkbox and link
@@ -611,7 +607,7 @@ $("#defaultsNextButton").on("click", function(){
         //change page title
         $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "Values provided are for reference only. <br> Always consult your doctor.");
+        $(".defaultsSubTitle").prop("innerHTML", "Enter your goals for each nutrient. <br> Values provided are for reference only. <br> Always consult your doctor.");
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages
@@ -639,7 +635,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Which nutrients are you most interested in?");
         //Change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These four will always be visible.");
+        $(".defaultsSubTitle").prop("textContent", "These will always be visible at the top of the page, so select your favorites.");
         //show top four selectors
         $(".topFourFlexRow").removeClass("hidden");
         //show disclaimer link and checkbox
@@ -655,7 +651,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Anything else?");
         //change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These are optional.");
+        $(".defaultsSubTitle").prop("textContent", "If there are other nutrients you would like to track, select them here.");
         //hide top four selectors
         $(".topFourFlexRow").addClass("hidden");
         //populate checkbox options
@@ -675,7 +671,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "Everyone's goals are different! <br> Always consult your doctor.");
+        $(".defaultsSubTitle").prop("innerHTML", "Enter your goals for each nutrient. <br> Values provided are for reference only. <br> Always consult your doctor.");
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
         //update & show Next button
@@ -711,7 +707,7 @@ $("#buttonCloseDefaults").on("click", ()=>{
 })
 
 //(dev) Re-open defaults modal
-$("#buttonOpenDefaultsModal").on("click", ()=>{
+$("#buttonOpenQuickTipsModal").on("click", ()=>{
     $("#userPreferencesModal").modal("toggle");
     $("#defaultsBackButton").prop("disabled", true)
     setTopFourDropdownOptions();

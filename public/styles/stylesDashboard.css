@@ -593,6 +593,21 @@ button.close{
 
 
 /* Dashboard Bottom Bar ========================================== */
+#diaryBackButton{
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+#diaryForwardButton{
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+#diaryTodayButton{
+    cursor: pointer;
+    margin: 0 5px;
+}
+
 .bottomBar{
     background-color: #5f65d8;
     height: 50px;

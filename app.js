@@ -944,7 +944,7 @@ app.get('/dashboard', (req, res)=>{
   const userDocId = req.session.userDocId;
   const userName = req.session.userName;
   const timezoneOffset = req.session.timezoneOffset;
-  const usrDay = new Date().toISOString(); //this route will always use 'today'
+  const usrDay = moment().format(); //this route will always use 'today'
   console.log(usrDay);
   const nutritionTopFour = req.session.nutritionTopFour;
   const nutritionOther = req.session.nutritionOther;

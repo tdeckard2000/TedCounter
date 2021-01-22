@@ -3,10 +3,17 @@
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
 
+//All nutrition options
 const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber", "folic acid", "histidine",
 "iodine", "iron","isoleucine", "leucine", "lysine", "magnesium", "manganese", "methionine", "molybdenum","phenylalanine", "phosphorus", "potassium", "protein",
 "saturated fat", "selenium", "sodium", "sugar", "trans fat", "threonine", "tryptophan", "valine", "vitamin a", "vitamin b1", "vitamin b2", "vitamin b3",
 "vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2", "vitamin d3", "vitamin e", "vitamin k", "zinc"]
+
+//For tracking date shown in diary; starts with today
+let currentDay = new Date()
+
+//Number of milliseconds in a day
+const day = 86400000;
 
 //Convert values to DB friendly format
 const keyToDB = {
@@ -878,4 +885,51 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseleave", function(
         borderWidth: 0,
         opacity: .7
     }, 120);
+});
+
+//######################## Event Listeners (Bottom Date Selector) ########################
+$("#diaryBackButton").on("click", ()=>{
+
+    currentDay = new Date(currentDay - day); //subtract a day
+    console.log(currentDay)
+
+    //update displayed date
+   let dateText = (currentDay.toDateString()).slice(0, 10);
+   $("#diaryTodayButton").text(dateText);
+    
+    //hide or show forward button
+    if(currentDay.toDateString() === new Date().toDateString()){
+        $("#diaryForwardButton").css("opacity", 0);
+        $("#diaryForwardButton").attr("disabled", true);
+        $("#diaryForwardButton").css("cursor", "default");
+        $("#diaryTodayButton").text("Today");
+    }else{
+        $("#diaryForwardButton").css("opacity", 1);
+        $("#diaryForwardButton").attr("disabled", false);
+        $("#diaryForwardButton").css("cursor", "pointer");
+    };
+
+});
+
+$("#diaryForwardButton").on("click", ()=>{
+
+    let milliseconds = (currentDay.getTime() + day); //add a day (in ms)
+    currentDay = new Date(milliseconds); //convert ms to date
+    
+    //update displayed date
+    let dateText = (currentDay.toDateString()).slice(0, 10);
+    $("#diaryTodayButton").text(dateText);
+
+    //hide or show forward button
+    if(currentDay.toDateString() === new Date().toDateString()){
+        $("#diaryForwardButton").css("opacity", 0);
+        $("#diaryForwardButton").attr("disabled", true);
+        $("#diaryForwardButton").css("cursor", "default");
+        $("#diaryTodayButton").text("Today");
+    }else{
+        $("#diaryForwardButton").css("opacity", 1);
+        $("#diaryForwardButton").attr("disabled", false);
+        $("#diaryForwardButton").css("cursor", "pointer");
+    };
+
 });

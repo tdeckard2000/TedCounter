@@ -374,7 +374,6 @@ const findFoodItems = function(userDocId){
 // Return user diary items based on day
 const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
   usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
-  console.log("usrDayAdj: " + usrDayAdj)
   startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
   endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
   //add timezone offset to start and end of day, since DB times are UTC.
@@ -945,7 +944,6 @@ app.get('/dashboard', (req, res)=>{
   const userName = req.session.userName;
   const timezoneOffset = req.session.timezoneOffset;
   const usrDay = moment().format(); //this route will always use 'today'
-  console.log(usrDay);
   const nutritionTopFour = req.session.nutritionTopFour;
   const nutritionOther = req.session.nutritionOther;
   const nutritionGoals = req.session.nutritionGoals;
@@ -1263,7 +1261,6 @@ app.post('/newUserGoals', (req, res)=>{
   //if no food items, add starter items
   findFoodItems(userId).then((data)=>{
     if(data.length === 0){
-      console.log("Adding starter items: " + data.length);
       newUserFoodItems.forEach(element => {
         addNewItem(element, userId);
       });

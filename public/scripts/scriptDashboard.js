@@ -949,4 +949,5 @@ $(".buttonToday").on("click", ()=>{
     $("#diaryListMain").removeClass("hidden");
     $(".buttonToday").addClass("hidden");
     $("#diaryListPast").addClass("hidden");
+    currentDay = new Date();
 });

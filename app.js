@@ -373,6 +373,7 @@ const findFoodItems = function(userDocId){
 
 // Return user diary items based on day
 const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
+  //ordered objects is for passing data down promise chain
   usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
   startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
   endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
@@ -1043,6 +1044,18 @@ app.get('/getBarcodeData', (req, res)=>{
 app.get('/disclaimer', (req, res)=>{
   res.render("disclaimer")
 })
+
+//Get Past Diary Items
+app.get("/getDiary", (req, res)=>{
+  const diaryDate = req.query.diaryDate;
+  const userId = req.session.userDocId;
+  const timezoneOffset = req.session.timezoneOffset;
+
+  findDiaryItems(userId, diaryDate, timezoneOffset, null)
+  .then((data)=>{
+    res.json({diaryList: data[0]});
+  });
+});
 
 //Handle Logout
 app.get('/logout', (req, res)=>{

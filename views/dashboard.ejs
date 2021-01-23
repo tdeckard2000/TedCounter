@@ -10,7 +10,7 @@
     <%if(nutritionTopFour != undefined && nutritionGoals != undefined){%>
       <%for(let i = 0; i < nutritionTopFour.length; i++){%>
         <div class=" topCounterDiv col-<%=12 / nutritionTopFour.length%>">
-          <div class="topTotalCount"><%=nutritionTotals[nutritionTopFour[i]]%></div>
+          <div class="topTotalCount todayView"><%=nutritionTotals[nutritionTopFour[i]]%></div>
           <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[i]]%> <%=keyShortForm[nutritionTopFour[i]]%></div> 
         </div>
       <%}%>
@@ -19,7 +19,7 @@
 </div>
 
 <!-- Diary Items List -->
-<div id="diaryListMain" class="itemListContainer">
+<div class="itemListContainer todayView">
   <%for(i=0; i<foodDiary.length; i++){%>
     <%let wholeISODate=(foodDiary[i].date)%>
     <%let hour = wholeISODate.getUTCHours();%>
@@ -82,7 +82,7 @@
 </div>
 
 <!-- Past Diary Item List -->
-<div id="diaryListPast" class="itemListContainer hidden">
+<div class="itemListContainer pastView hidden">
 </div>
 
 <!-- BootStrap Modals ==================== -->

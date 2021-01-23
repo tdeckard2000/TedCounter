@@ -238,7 +238,7 @@ $(window).on("load",()=>{
 
 })
 
-//######################## Functions ########################
+//######################## Functions (Other)########################
 
 //alphabetically order given array
 const orderAlphabetically = function(startingPoint, unorderedArray){
@@ -263,6 +263,9 @@ const orderAlphabetically = function(startingPoint, unorderedArray){
     }
     return unorderedArray //now ordered alphabetically
 }
+
+//######################## Functions (Settings Modal)########################
+
 
 //disable or enable all elements on settings modal
 const settingsModalElementsDisabled = function(Boolean){
@@ -515,6 +518,93 @@ const postDefaultSelections = function(){
         $("#defaultsBackButton").prop("disabled", false);
     });
 }
+
+//######################## Functions (Diary) ########################
+const updatePastDiary = async function(diaryDate){
+    let pastDiary =  await getDiary(diaryDate);
+    pastDiary = pastDiary.diaryList;
+    pastDiary.forEach(element => {
+        console.log(element)
+        $(".pastView").append(
+
+            "<div class='container itemRowContainer'>" +
+                "<div class='row itemRow collapsed' value='" + element._id + "'data-toggle='collapse' data-target='#id" + element._id + "'>" +
+                    "<div class='col-9 itemTimeNameDiv'>" +
+                        "<h1>" + element.item.name + "</h1>" +
+                    "</div>" +
+                "</div>"+
+            "</div>"
+            
+            );
+    //     <div class="container itemRowContainer">
+    //   <div class="row itemRow collapsed" value='<%=foodDiary[i]._id%>' data-toggle="collapse" data-target="#id<%=foodDiary[i]._id%>">
+    //     <div class="col-9 itemTimeNameDiv">
+    //       <h2 class="itemTime <%=i%>"><%=hour%>:<%=minute%></h2>
+    //       <h2 class="itemName"><%=foodDiary[i].item.name%></h2>
+    //     </div>
+    //     <div class="col-3 itemValueDiv">
+    //       <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[0]]%> <%=keyShortForm[nutritionTopFour[0]]%></h6>
+    //       <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[1]]%> <%=keyShortForm[nutritionTopFour[1]]%></h6>
+    //       <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[2]]%> <%=keyShortForm[nutritionTopFour[2]]%></h6>
+    //       <h6 class="itemValue"><%=foodDiary[i].item[nutritionTopFour[3]]%> <%=keyShortForm[nutritionTopFour[3]]%></h6>
+    //     </div>
+    //   </div>
+    //   <div class="collapse itemDropdownBox" id="id<%=foodDiary[i]._id%>">
+    //       <table class="itemDropdownTable">
+    //         <tr>
+    //           <%for(e = 0; e < 5 && e < nutritionOther.length; e++){%>
+    //             <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
+    //           <%}%>
+    //         </tr>
+    //           <tr>
+    //             <%for(e = 5; e < 10 && e < nutritionOther.length; e++){%>
+    //               <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
+    //             <%}%>
+    //           </tr>
+    //           <tr>
+    //             <%for(e = 10; e < 15 && e < nutritionOther.length; e++){%>
+    //               <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
+    //             <%}%>
+    //           </tr>
+    //           <tr>
+    //             <%for(e = 15; e < 20 && e < nutritionOther.length; e++){%>
+    //               <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
+    //             <%}%>
+    //           </tr>
+    //           <tr>
+    //             <%for(e = 20; e < 25 && e < nutritionOther.length; e++){%>
+    //               <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
+    //             <%}%>
+    //           </tr>
+    //       </table>
+    //       <div class="itemDropdownButtons">
+    //         <form action="/dashboard/modifyDiary" method="POST">
+    //           <button name="duplicateItem" class="buttonNoFormat" value="<%=JSON.stringify(foodDiary[i])%>">
+    //             <img class="itemDuplicateIcon" src="./files/duplicateIcon.svg" alt="duplicateItem">
+    //           </button>
+    //           <button name="removeItem" class="buttonNoFormat" value="<%=foodDiary[i]._id%>">
+    //             <img class="itemTrashIcon" src="./files/trashCan.svg" alt="removeItem">
+    //           </button>
+    //         </form>
+    //       </div>
+    //   </div>
+    // </div>
+    });
+};
+
+const getDiary = function(diaryDate){
+    diaryDate = diaryDate.toISOString();
+    return new Promise((resolve, reject)=>{
+        $.ajax({
+            type: 'GET',
+            url: "./getDiary",
+            data: {diaryDate: diaryDate}
+        }).done((diaryList)=>{
+            resolve(diaryList);
+        });
+    })
+};
+
 
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 
@@ -892,7 +982,7 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings, .buttonToday").on("mouselea
 
 //######################## Event Listeners (Bottom Date Selector) ########################
 
-//Handle back button click
+//Back button click
 $("#diaryBackButton").on("click", ()=>{
 
     currentDay = new Date(currentDay - day); //subtract a day from currentDay
@@ -907,12 +997,16 @@ $("#diaryBackButton").on("click", ()=>{
     $("#diaryForwardButton").css("cursor", "pointer");
     $(".buttonAddItem").addClass("hidden");
     $(".buttonQuickAdd").addClass("hidden");
-    $("#diaryListMain").addClass("hidden");
+    $(".todayView").addClass("hidden");
     $(".buttonToday").removeClass("hidden");
-    $("#diaryListPast").removeClass("hidden");
+    $(".pastView").removeClass("hidden");
+
+    //update pastDiary view
+    updatePastDiary(currentDay);
+
 });
 
-//Handle forward button click
+//Forward button click
 $("#diaryForwardButton").on("click", ()=>{
 
     let milliseconds = (currentDay.getTime() + day); //add a day (in ms)
@@ -932,13 +1026,13 @@ $("#diaryForwardButton").on("click", ()=>{
         $("#diaryTodayButton").text("Today");
         $(".buttonAddItem").removeClass("hidden");
         $(".buttonQuickAdd").removeClass("hidden");
-        $("#diaryListMain").removeClass("hidden");
+        $(".todayView").removeClass("hidden");
         $(".buttonToday").addClass("hidden");
-        $("#diaryListPast").addClass("hidden");
+        $(".pastView").addClass("hidden");
     };
 });
 
-//Handle cancel button click
+//Cancel button click
 $(".buttonToday").on("click", ()=>{
     //hide forward button, show select buttons, show present diary
     $("#diaryForwardButton").css("opacity", 0);
@@ -946,8 +1040,8 @@ $(".buttonToday").on("click", ()=>{
     $("#diaryTodayButton").text("Today");
     $(".buttonAddItem").removeClass("hidden");
     $(".buttonQuickAdd").removeClass("hidden");
-    $("#diaryListMain").removeClass("hidden");
+    $(".todayView").removeClass("hidden");
     $(".buttonToday").addClass("hidden");
-    $("#diaryListPast").addClass("hidden");
+    $(".pastView").addClass("hidden");
     currentDay = new Date();
 });

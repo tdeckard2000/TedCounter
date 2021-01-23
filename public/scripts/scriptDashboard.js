@@ -10,7 +10,10 @@ const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride"
 "vitamin b5", "vitamin b6", "vitamin b7", "vitamin b9", "vitamin b12", "vitamin c", "vitamin d2", "vitamin d3", "vitamin e", "vitamin k", "zinc"]
 
 //For tracking date shown in diary; starts with today
-let currentDay = new Date()
+let currentDay = new Date();
+
+//Const for comparing dates
+const todayStr = new Date().toDateString();
 
 //Number of milliseconds in a day
 const day = 86400000;
@@ -865,14 +868,14 @@ $(".itemTrashIcon").on("click", function(){
 });
 
 //Darken Profile, Quick, and Add buttons on mouse down
-$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mousedown", function(){
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings, .buttonToday").on("mousedown", function(){
     // $(this).css("filter", "brightness(0.7)");
     $(this).css("opacity", ".55");
     $(this).css("border", "5px solid #404040");
 });
 
 //Un-darken Profile, Quick, and Add buttons on mouseup
-$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseup", function(){
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings, .buttonToday").on("mouseup", function(){
     $(this).animate({
         borderWidth: 0,
         opacity: .7
@@ -880,7 +883,7 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseup", function(){
 });
 
 //Un-darken Profile, Quick, and Add buttons if mouse leaves button
-$(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseleave", function(){
+$(".buttonQuickAdd, .buttonAddItem, .buttonSettings, .buttonToday").on("mouseleave", function(){
     $(this).animate({
         borderWidth: 0,
         opacity: .7
@@ -888,48 +891,62 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings").on("mouseleave", function(
 });
 
 //######################## Event Listeners (Bottom Date Selector) ########################
+
+//Handle back button click
 $("#diaryBackButton").on("click", ()=>{
 
-    currentDay = new Date(currentDay - day); //subtract a day
-    console.log(currentDay)
+    currentDay = new Date(currentDay - day); //subtract a day from currentDay
 
     //update displayed date
-   let dateText = (currentDay.toDateString()).slice(0, 10);
-   $("#diaryTodayButton").text(dateText);
+    let dateText = (currentDay.toDateString()).slice(0, 10);
+    $("#diaryTodayButton").text(dateText);
     
-    //hide or show forward button
-    if(currentDay.toDateString() === new Date().toDateString()){
-        $("#diaryForwardButton").css("opacity", 0);
-        $("#diaryForwardButton").attr("disabled", true);
-        $("#diaryForwardButton").css("cursor", "default");
-        $("#diaryTodayButton").text("Today");
-    }else{
-        $("#diaryForwardButton").css("opacity", 1);
-        $("#diaryForwardButton").attr("disabled", false);
-        $("#diaryForwardButton").css("cursor", "pointer");
-    };
-
+    //show forward button, hide item select buttons & main diary
+    $("#diaryForwardButton").css("opacity", 1);
+    $("#diaryForwardButton").attr("disabled", false);
+    $("#diaryForwardButton").css("cursor", "pointer");
+    $(".buttonAddItem").addClass("hidden");
+    $(".buttonQuickAdd").addClass("hidden");
+    $("#diaryListMain").addClass("hidden");
+    $(".buttonToday").removeClass("hidden");
+    $("#diaryListPast").removeClass("hidden");
 });
 
+//Handle forward button click
 $("#diaryForwardButton").on("click", ()=>{
 
     let milliseconds = (currentDay.getTime() + day); //add a day (in ms)
     currentDay = new Date(milliseconds); //convert ms to date
-    
-    //update displayed date
-    let dateText = (currentDay.toDateString()).slice(0, 10);
-    $("#diaryTodayButton").text(dateText);
 
-    //hide or show forward button
-    if(currentDay.toDateString() === new Date().toDateString()){
+    //if past date is currently selected
+    if(Date.parse(currentDay.toDateString()) < Date.parse(todayStr)){
+
+        //update displayed date
+        let dateText = (currentDay.toDateString()).slice(0, 10);
+        $("#diaryTodayButton").text(dateText);
+
+    }else{
+        //hide forward button, show select buttons, show present diary
         $("#diaryForwardButton").css("opacity", 0);
-        $("#diaryForwardButton").attr("disabled", true);
         $("#diaryForwardButton").css("cursor", "default");
         $("#diaryTodayButton").text("Today");
-    }else{
-        $("#diaryForwardButton").css("opacity", 1);
-        $("#diaryForwardButton").attr("disabled", false);
-        $("#diaryForwardButton").css("cursor", "pointer");
+        $(".buttonAddItem").removeClass("hidden");
+        $(".buttonQuickAdd").removeClass("hidden");
+        $("#diaryListMain").removeClass("hidden");
+        $(".buttonToday").addClass("hidden");
+        $("#diaryListPast").addClass("hidden");
     };
+});
 
+//Handle cancel button click
+$(".buttonToday").on("click", ()=>{
+    //hide forward button, show select buttons, show present diary
+    $("#diaryForwardButton").css("opacity", 0);
+    $("#diaryForwardButton").css("cursor", "default");
+    $("#diaryTodayButton").text("Today");
+    $(".buttonAddItem").removeClass("hidden");
+    $(".buttonQuickAdd").removeClass("hidden");
+    $("#diaryListMain").removeClass("hidden");
+    $(".buttonToday").addClass("hidden");
+    $("#diaryListPast").addClass("hidden");
 });

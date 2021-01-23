@@ -19,7 +19,7 @@
 </div>
 
 <!-- Diary Items List -->
-<div class="itemListContainer">
+<div id="diaryListMain" class="itemListContainer">
   <%for(i=0; i<foodDiary.length; i++){%>
     <%let wholeISODate=(foodDiary[i].date)%>
     <%let hour = wholeISODate.getUTCHours();%>
@@ -79,6 +79,10 @@
       </div>
     </div>
   <%};%>
+</div>
+
+<!-- Past Diary Item List -->
+<div id="diaryListPast" class="itemListContainer hidden">
 </div>
 
 <!-- BootStrap Modals ==================== -->
@@ -239,9 +243,10 @@
 <object class="backgroundLogo" data="./files/TedCounterLogo.svg" type="image/svg+xml"></object>
 
 <nav class="bottomButtons fixed-bottom">
-  <button class="buttonSettings" data-target="#settingsModal" data-toggle="modal"><img src="./files/profileButton.svg" alt=""></button>
-  <button class="buttonAddItem" data-target="#itemAdd" data-toggle="modal"><img src="./files/itemSelectButton.svg" alt=""></button>
-  <button class="buttonQuickAdd" data-target="#quickAdd" data-toggle="modal"><img src="./files/quickAddButton.svg" alt=""></button>
+  <button class="buttonSettings" data-target="#settingsModal" data-toggle="modal"><img src="./files/profileButton.svg" alt="User Settings"></button>
+  <button class="buttonAddItem" data-target="#itemAdd" data-toggle="modal"><img src="./files/itemSelectButton.svg" alt="Item Library"></button>
+  <button class="buttonQuickAdd" data-target="#quickAdd" data-toggle="modal"><img src="./files/quickAddButton.svg" alt="Quick Add"></button>
+  <button class="buttonToday hidden">X</button>
 </nav>
 
 <!-- Default Settings Modal -->
@@ -338,7 +343,7 @@
   <div class="bottomBarDay">
     <span id="diaryBackButton"> < </span>
     <span id="diaryTodayButton">Today</span>
-    <span id="diaryForwardButton" disabled> > </span>
+    <span id="diaryForwardButton"> > </span>
   </div>
 </nav>
 

@@ -579,9 +579,11 @@ const updatePastDiary = async function(diaryDate){
     let pastDiary =  await getDiary(diaryDate); //get diary elements
     foodDiary = pastDiary.diaryList;
     const nutritionTopFour = userPreferences.nutritionTopFour;
+    const nutritionOther = userPreferences.nutritionOther;
 
     //loop through each item and create diary tile for each
     for(let i = 0; i < foodDiary.length; i++){
+        // for(e = 0; e < 5 && e < nutritionOther.length; e++){
         $(".pastView").append(
             "<div class='container itemRowContainer'>" +
                 "<div class='row itemRow collapsed' value='" + foodDiary[i]._id + "' data-toggle='collapse' data-target='#id" + foodDiary[i]._id + "'>" +
@@ -599,11 +601,9 @@ const updatePastDiary = async function(diaryDate){
 
                 "<div class='collapse itemDropdownBox' id='id" + foodDiary[i]._id + "'>" +
                     "<table class='itemDropdownTable'>" +
-                        "<tr>" +
-                //             <%for(e = 0; e < 5 && e < nutritionOther.length; e++){%>
-                //             <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
-                //             <%}%>
-                        "</tr>" +
+                        '<tr>' +
+                            // '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>' +
+                        '</tr>' +
                 //         <tr>
                 //             <%for(e = 5; e < 10 && e < nutritionOther.length; e++){%>
                 //                 <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
@@ -624,22 +624,22 @@ const updatePastDiary = async function(diaryDate){
                 //                 <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
                 //             <%}%>
                 //         </tr>
-                    "</table>" +
-                    "<div class='itemDropdownButtons'>" +
-                        "<form action='/dashboard/modifyDiary' method='POST'>" +
-                            "<button name='duplicateItem' class='buttonNoFormat' value='" + JSON.stringify(foodDiary[i]) + "'>" +
-                                "<img style='padding-right: 15px' class='itemDuplicateIcon' src='./files/todayPurpleButton.svg' alt='duplicateItem'>" +
-                            "</button>" +
-                            // "<button name='removeItem' class='buttonNoFormat' value='" + foodDiary[i]._id + "'>" +
-                            //     "<img class='itemTrashIcon' src='./files/trashCan.svg' alt='removeItem'>" +
-                            // "</button>" +
-                        "</form>" +
+                        "</table>" +
+                        "<div class='itemDropdownButtons'>" +
+                            "<form action='/dashboard/modifyDiary' method='POST'>" +
+                                "<button name='duplicateItem' class='buttonNoFormat' value='" + JSON.stringify(foodDiary[i]) + "'>" +
+                                    "<img style='padding-right: 15px' class='itemDuplicateIcon' src='./files/todayPurpleButton.svg' alt='duplicateItem'>" +
+                                "</button>" +
+                                // "<button name='removeItem' class='buttonNoFormat' value='" + foodDiary[i]._id + "'>" +
+                                //     "<img class='itemTrashIcon' src='./files/trashCan.svg' alt='removeItem'>" +
+                                // "</button>" +
+                            "</form>" +
+                        "</div>" +
                     "</div>" +
-                "</div>" +
-            "</div>"
-
-        );
-    }
+                "</div>"
+            );
+        // };                           
+    };
 };
 
 const getDiary = function(diaryDate){
@@ -1075,6 +1075,8 @@ $("#diaryForwardButton").on("click", ()=>{
         //update displayed date
         let dateText = (currentDay.toDateString()).slice(0, 10);
         $("#diaryTodayButton").text(dateText);
+            //update pastDiary view
+            updatePastDiary(currentDay);
 
     }else{
         //hide forward button, show select buttons, show present diary

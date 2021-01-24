@@ -575,9 +575,11 @@ const postDefaultSelections = function(){
 
 //######################## Functions (Diary) ########################
 const updatePastDiary = async function(diaryDate){
-    let pastDiary =  await getDiary(diaryDate);
+    $(".pastView").empty(); //clear any pastDiary elements
+    let pastDiary =  await getDiary(diaryDate); //get diary elements
     foodDiary = pastDiary.diaryList;
     const nutritionTopFour = userPreferences.nutritionTopFour;
+
     //loop through each item and create diary tile for each
     for(let i = 0; i < foodDiary.length; i++){
         $(".pastView").append(
@@ -636,7 +638,7 @@ const updatePastDiary = async function(diaryDate){
                 "</div>" +
             "</div>"
 
-        )
+        );
     }
 };
 

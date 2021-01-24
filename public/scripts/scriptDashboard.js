@@ -628,11 +628,11 @@ const updatePastDiary = async function(diaryDate){
                     "<div class='itemDropdownButtons'>" +
                         "<form action='/dashboard/modifyDiary' method='POST'>" +
                             "<button name='duplicateItem' class='buttonNoFormat' value='" + JSON.stringify(foodDiary[i]) + "'>" +
-                                "<img class='itemDuplicateIcon' src='./files/duplicateIcon.svg' alt='duplicateItem'>" +
+                                "<img style='padding-right: 15px' class='itemDuplicateIcon' src='./files/todayPurpleButton.svg' alt='duplicateItem'>" +
                             "</button>" +
-                            "<button name='removeItem' class='buttonNoFormat' value='" + foodDiary[i]._id + "'>" +
-                                "<img class='itemTrashIcon' src='./files/trashCan.svg' alt='removeItem'>" +
-                            "</button>" +
+                            // "<button name='removeItem' class='buttonNoFormat' value='" + foodDiary[i]._id + "'>" +
+                            //     "<img class='itemTrashIcon' src='./files/trashCan.svg' alt='removeItem'>" +
+                            // "</button>" +
                         "</form>" +
                     "</div>" +
                 "</div>" +
@@ -999,12 +999,19 @@ $(".itemRow").on("click", function(){
 
 //Darken duplicate icon on select
 $(".itemDuplicateIcon").on("click", function(){
+    console.log("here")
     $(this).css("filter", "saturate(0)");
 });
 
 //Darken trash icon on select
 $(".itemTrashIcon").on("click", function(){
     $(this).css("filter", "saturate(0)");
+});
+
+//Darken purple today button on select
+$(".pastView").on("click", "button", function(){
+    console.log("here2")
+    $(this).css("filter", "saturate(0)")
 });
 
 //Darken Profile, Quick, and Add buttons on mouse down

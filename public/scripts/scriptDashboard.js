@@ -584,10 +584,9 @@ const updatePastDiary = async function(diaryDate){
     //loop through each item and create diary tile for each
     for(let i = 0; i < foodDiary.length; i++){
 
+        //if null, blank, or undefined = 0
         for(let a = 0; a < 4; a++){
-            if(foodDiary[i].item[nutritionTopFour[a]] === undefined){
-                foodDiary[i].item[nutritionTopFour[a]] = 0;
-            }
+            foodDiary[i].item[nutritionTopFour[a]] = foodDiary[i].item[nutritionTopFour[a]] || 0;
         };
 
         $(".pastView").append(
@@ -626,9 +625,8 @@ const updatePastDiary = async function(diaryDate){
 
         for(e = 0; e < 5 && e < nutritionOther.length; e++){
 
-            if(foodDiary[i].item[nutritionOther[e]] === undefined){
-                foodDiary[i].item[nutritionOther[e]] = 0;
-            };
+            //if blank, null, or undefined = 0
+            foodDiary[i].item[nutritionOther[e]] = foodDiary[i].item[nutritionOther[e]] || 0;
 
             $(".itemDropdownTable .tr1." + foodDiary[i]._id).append(
                         '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
@@ -637,9 +635,7 @@ const updatePastDiary = async function(diaryDate){
 
         for(e = 5; e < 10 && e < nutritionOther.length; e++){
 
-            if(foodDiary[i].item[nutritionOther[e]] === undefined){
-                foodDiary[i].item[nutritionOther[e]] = 0;
-            };
+            foodDiary[i].item[nutritionOther[e]] = foodDiary[i].item[nutritionOther[e]] || 0;
 
             $(".itemDropdownTable .tr2." + foodDiary[i]._id).append(
                         '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
@@ -648,9 +644,7 @@ const updatePastDiary = async function(diaryDate){
 
         for(e = 10; e < 15 && e < nutritionOther.length; e++){
 
-            if(foodDiary[i].item[nutritionOther[e]] === undefined){
-                foodDiary[i].item[nutritionOther[e]] = 0;
-            };
+            foodDiary[i].item[nutritionOther[e]] = foodDiary[i].item[nutritionOther[e]] || 0;
 
             $(".itemDropdownTable .tr3." + foodDiary[i]._id).append(
                         '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
@@ -659,9 +653,7 @@ const updatePastDiary = async function(diaryDate){
 
         for(e = 15; e < 20 && e < nutritionOther.length; e++){
 
-            if(foodDiary[i].item[nutritionOther[e]] === undefined){
-                foodDiary[i].item[nutritionOther[e]] = 0;
-            };
+            foodDiary[i].item[nutritionOther[e]] = foodDiary[i].item[nutritionOther[e]] || 0;
 
             $(".itemDropdownTable .tr4." + foodDiary[i]._id).append(
                         '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
@@ -670,9 +662,7 @@ const updatePastDiary = async function(diaryDate){
 
         for(e = 20; e < 25 && e < nutritionOther.length; e++){
 
-            if(foodDiary[i].item[nutritionOther[e]] === undefined){
-                foodDiary[i].item[nutritionOther[e]] = 0;
-            };
+            foodDiary[i].item[nutritionOther[e]] = foodDiary[i].item[nutritionOther[e]] || 0;
 
             $(".itemDropdownTable .tr5." + foodDiary[i]._id).append(
                         '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'

@@ -583,7 +583,6 @@ const updatePastDiary = async function(diaryDate){
 
     //loop through each item and create diary tile for each
     for(let i = 0; i < foodDiary.length; i++){
-        // for(e = 0; e < 5 && e < nutritionOther.length; e++){
         $(".pastView").append(
             "<div class='container itemRowContainer'>" +
                 "<div class='row itemRow collapsed' value='" + foodDiary[i]._id + "' data-toggle='collapse' data-target='#id" + foodDiary[i]._id + "'>" +
@@ -598,47 +597,58 @@ const updatePastDiary = async function(diaryDate){
                         "<h6 class='itemValue'>" + foodDiary[i].item[nutritionTopFour[3]] + ' ' + keyShortForm[nutritionTopFour[3]] + "</h6>" +
                     "</div>" +
                 "</div>" +
-
                 "<div class='collapse itemDropdownBox' id='id" + foodDiary[i]._id + "'>" +
-                    "<table class='itemDropdownTable'>" +
-                        '<tr>' +
-                            // '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>' +
-                        '</tr>' +
-                //         <tr>
-                //             <%for(e = 5; e < 10 && e < nutritionOther.length; e++){%>
-                //                 <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
-                //             <%}%>
-                //         </tr>
-                //         <tr>
-                //             <%for(e = 10; e < 15 && e < nutritionOther.length; e++){%>
-                //                 <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
-                //             <%}%>
-                //         </tr>
-                //         <tr>
-                //             <%for(e = 15; e < 20 && e < nutritionOther.length; e++){%>
-                //                 <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
-                //             <%}%>
-                //         </tr>
-                //         <tr>
-                //             <%for(e = 20; e < 25 && e < nutritionOther.length; e++){%>
-                //                 <td><%=keyShortForm[nutritionOther[e]]%> : <%=foodDiary[i].item[nutritionOther[e]]%></td>
-                //             <%}%>
-                //         </tr>
-                        "</table>" +
-                        "<div class='itemDropdownButtons'>" +
-                            "<form action='/dashboard/modifyDiary' method='POST'>" +
-                                "<button name='duplicateItem' class='buttonNoFormat' value='" + JSON.stringify(foodDiary[i]) + "'>" +
-                                    "<img style='padding-right: 15px' class='itemDuplicateIcon' src='./files/todayPurpleButton.svg' alt='duplicateItem'>" +
-                                "</button>" +
+                    "<table class='itemDropdownTable'>"+
+                    //table items are appended here later
+                    "<tr class='tr1 " + foodDiary[i]._id + "'></tr>" +
+                    "<tr class='tr2 " + foodDiary[i]._id + "'></tr>" +
+                    "<tr class='tr3 " + foodDiary[i]._id + "'></tr>" +
+                    "<tr class='tr4 " + foodDiary[i]._id + "'></tr>" +
+                    "<tr class='tr5 " + foodDiary[i]._id + "'></tr>" +
+                    "</table>" +
+                    "<div class='itemDropdownButtons'>" +
+                        "<form action='/dashboard/modifyDiary' method='POST'>" +
+                            "<button name='duplicateItem' class='buttonNoFormat' value='" + JSON.stringify(foodDiary[i]) + "'>" +
+                                "<img style='padding-right: 15px' class='itemDuplicateIcon' src='./files/todayPurpleButton.svg' alt='duplicateItem'>" +
+                            "</button>" +
                                 // "<button name='removeItem' class='buttonNoFormat' value='" + foodDiary[i]._id + "'>" +
                                 //     "<img class='itemTrashIcon' src='./files/trashCan.svg' alt='removeItem'>" +
                                 // "</button>" +
-                            "</form>" +
-                        "</div>" +
+                        "</form>" +
                     "</div>" +
-                "</div>"
+                "</div>" +
+            "</div>"
+        );
+
+        for(e = 0; e < 5 && e < nutritionOther.length; e++){
+            $(".itemDropdownTable .tr1." + foodDiary[i]._id).append(
+                        '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
             );
-        // };                           
+        };
+
+        for(e = 5; e < 10 && e < nutritionOther.length; e++){
+            $(".itemDropdownTable .tr2." + foodDiary[i]._id).append(
+                        '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
+            );
+        };
+
+        for(e = 10; e < 15 && e < nutritionOther.length; e++){
+            $(".itemDropdownTable .tr3." + foodDiary[i]._id).append(
+                        '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
+            );
+        };
+
+        for(e = 15; e < 20 && e < nutritionOther.length; e++){
+            $(".itemDropdownTable .tr4." + foodDiary[i]._id).append(
+                        '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
+            );
+        };
+
+        for(e = 20; e < 25 && e < nutritionOther.length; e++){
+            $(".itemDropdownTable .tr5." + foodDiary[i]._id).append(
+                        '<td>' + keyShortForm[nutritionOther[e]] + ':' + foodDiary[i].item[nutritionOther[e]] + '</td>'
+            );
+        }
     };
 };
 

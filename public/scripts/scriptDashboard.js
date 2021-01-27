@@ -589,11 +589,17 @@ const updatePastDiary = async function(diaryDate){
             foodDiary[i].item[nutritionTopFour[a]] = foodDiary[i].item[nutritionTopFour[a]] || 0;
         };
 
+        let wholeISODate = foodDiary[i].date;
+        let hour = new Date(wholeISODate).getUTCHours();
+        let minutes = new Date(wholeISODate).getUTCMinutes();
+        
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+
         $(".pastView").append(
             "<div class='container itemRowContainer'>" +
                 "<div class='row itemRow collapsed' value='" + foodDiary[i]._id + "' data-toggle='collapse' data-target='#id" + foodDiary[i]._id + "'>" +
                     "<div class='col-9 itemTimeNameDiv'>" +
-                        "<h2 class='itemTime'" + i + "'>1:01</h2>" +
+                        "<h2 class='itemTime'" + i + "'>" + hour + ":" + minutes  +"</h2>" +
                         "<h2 class='itemName'>" + foodDiary[i].item.name + "</h2>" +
                     "</div>" +
                     "<div class='col-3 itemValueDiv'>" +

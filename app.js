@@ -1046,15 +1046,15 @@ app.get('/disclaimer', (req, res)=>{
 })
 
 //Get Past Diary Items
-app.get("/getDiary", (req, res)=>{
+app.get("/getDiary", async (req, res)=>{
   const diaryDate = req.query.diaryDate;
   const userId = req.session.userDocId;
   const timezoneOffset = req.session.timezoneOffset;
 
-  findDiaryItems(userId, diaryDate, timezoneOffset, null)
-  .then((data)=>{
-    res.json({diaryList: data[0]});
-  });
+  const diaryList = await findDiaryItems(userId, diaryDate, timezoneOffset, null);
+  const diaryTotals = calculateNutritionTotals(diaryList[0]);
+  
+  res.json({diaryList: diaryList[0], diaryTotals: diaryTotals});
 });
 
 //Handle Logout

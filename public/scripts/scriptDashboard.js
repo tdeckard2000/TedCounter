@@ -575,9 +575,11 @@ const postDefaultSelections = function(){
 
 //######################## Functions (Diary) ########################
 const updatePastDiary = async function(diaryDate){
-    $(".pastView").empty(); //clear any pastDiary elements
-    let pastDiary =  await getDiary(diaryDate); //get diary elements
-    foodDiary = pastDiary.diaryList;
+    $(".itemListContainer.pastView").empty(); //clear any pastDiary elements
+    let pastDiary =  await getDiary(diaryDate); //get diary list and totals
+    let foodDiary = pastDiary.diaryList;
+    let diaryTotals = pastDiary.diaryTotals;
+
     const nutritionTopFour = userPreferences.nutritionTopFour;
     const nutritionOther = userPreferences.nutritionOther;
 
@@ -595,7 +597,7 @@ const updatePastDiary = async function(diaryDate){
         
         minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-        $(".pastView").append(
+        $(".itemListContainer.pastView").append(
             "<div class='container itemRowContainer'>" +
                 "<div class='row itemRow collapsed' value='" + foodDiary[i]._id + "' data-toggle='collapse' data-target='#id" + foodDiary[i]._id + "'>" +
                     "<div class='col-9 itemTimeNameDiv'>" +
@@ -629,6 +631,7 @@ const updatePastDiary = async function(diaryDate){
             "</div>"
         );
 
+        //append table data to tile dropdown
         for(e = 0; e < 5 && e < nutritionOther.length; e++){
 
             //if blank, null, or undefined = 0
@@ -675,8 +678,12 @@ const updatePastDiary = async function(diaryDate){
             );
         };
     };
+    
+    //calculate and display pastDiary totals
+    updatePastDiaryTotals(diaryTotals);
 };
 
+//get diary list and totals
 const getDiary = function(diaryDate){
     diaryDate = diaryDate.toISOString();
     return new Promise((resolve, reject)=>{
@@ -684,12 +691,20 @@ const getDiary = function(diaryDate){
             type: 'GET',
             url: "./getDiary",
             data: {diaryDate: diaryDate}
-        }).done((diaryList)=>{
-            resolve(diaryList);
+        }).done((data)=>{
+            let diaryList = data.diaryList;
+            let diaryTotals = data.diaryTotals;
+            resolve({diaryList:diaryList, diaryTotals:diaryTotals});
         });
     })
 };
 
+const updatePastDiaryTotals = function(diaryTotals){
+    let topFour = (userPreferences.nutritionTopFour);
+    console.log(diaryTotals);
+
+
+}
 
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 

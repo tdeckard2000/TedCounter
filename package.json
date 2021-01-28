@@ -1,5 +1,5 @@
 {
-  "name": "countingted",
+  "name": "tedcounter",
   "version": "1.0.0",
   "description": "Calorie Counting Web Application",
   "main": "index.js",

@@ -275,7 +275,7 @@ const keyShortForm = {
   "selenium": "Se",
   "sodium": "sdm",
   "sugar": "sug",
-  "transFat": "sf",
+  "transFat": "tf",
   "threonine": "thr",
   "tryptophan": "trp",
   "valine": "val",

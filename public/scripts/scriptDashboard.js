@@ -262,7 +262,7 @@ const keyShortForm = {
     "selenium": "Se",
     "sodium": "sdm",
     "sugar": "sug",
-    "transFat": "sf",
+    "transFat": "tf",
     "threonine": "thr",
     "tryptophan": "trp",
     "valine": "val",
@@ -515,7 +515,6 @@ const getUserGoals = function(){
             userGoals[itemName] = itemValue;
     });
 
-
     return userGoals;
 }
 
@@ -699,12 +698,17 @@ const getDiary = function(diaryDate){
     })
 };
 
+//Update pastDiary totals in top bar
 const updatePastDiaryTotals = function(diaryTotals){
     let topFour = (userPreferences.nutritionTopFour);
-    console.log(diaryTotals);
 
-
-}
+    for(i=0; i<topFour.length; i++){
+        let itemName = topFour[i];
+        let itemTotal = diaryTotals[itemName];
+        //update the values (assumes order is correct)
+        $(".topTotalCount.pastView").eq(i).text(itemTotal);
+    }
+};
 
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 
@@ -1049,7 +1053,6 @@ $(".itemRow").on("click", function(){
 
 //Darken duplicate icon on select
 $(".itemDuplicateIcon").on("click", function(){
-    console.log("here")
     $(this).css("filter", "saturate(0)");
 });
 
@@ -1060,7 +1063,6 @@ $(".itemTrashIcon").on("click", function(){
 
 //Darken purple today button on select
 $(".pastView").on("click", "button", function(){
-    console.log("here2")
     $(this).css("filter", "saturate(0)")
 });
 

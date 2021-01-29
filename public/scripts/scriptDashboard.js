@@ -586,9 +586,6 @@ const updatePastDiary = async function(diaryDate){
     for(let i = 0; i < foodDiary.length; i++){
 
         //if null, blank, or undefined = 0
-        for(let a = 0; a < 4; a++){
-            foodDiary[i].item[nutritionTopFour[a]] = foodDiary[i].item[nutritionTopFour[a]] || 0;
-        };
 
         let wholeISODate = foodDiary[i].date;
         let hour = new Date(wholeISODate).getUTCHours();
@@ -603,11 +600,8 @@ const updatePastDiary = async function(diaryDate){
                         "<h2 class='itemTime'" + i + "'>" + hour + ":" + minutes  +"</h2>" +
                         "<h2 class='itemName'>" + foodDiary[i].item.name + "</h2>" +
                     "</div>" +
-                    "<div class='col-3 itemValueDiv'>" +
-                        "<h6 class='itemValue'>" + foodDiary[i].item[nutritionTopFour[0]] + ' ' + keyShortForm[nutritionTopFour[0]] + "</h6>" +
-                        "<h6 class='itemValue'>" + foodDiary[i].item[nutritionTopFour[1]] + ' ' + keyShortForm[nutritionTopFour[1]] + "</h6>" +
-                        "<h6 class='itemValue'>" + foodDiary[i].item[nutritionTopFour[2]] + ' ' + keyShortForm[nutritionTopFour[2]] + "</h6>" +
-                        "<h6 class='itemValue'>" + foodDiary[i].item[nutritionTopFour[3]] + ' ' + keyShortForm[nutritionTopFour[3]] + "</h6>" +
+                    "<div class='col-3 itemValueDiv " + foodDiary[i]._id + "'>" +
+                        //values are append here later
                     "</div>" +
                 "</div>" +
                 "<div class='collapse itemDropdownBox' id='id" + foodDiary[i]._id + "'>" +
@@ -629,6 +623,17 @@ const updatePastDiary = async function(diaryDate){
                 "</div>" +
             "</div>"
         );
+
+        //append item info to right of tile
+        for(let a = 0; a < nutritionTopFour.length; a++){
+
+            //if blank, null, or undefined = 0
+            foodDiary[i].item[nutritionTopFour[a]] = foodDiary[i].item[nutritionTopFour[a]] || 0;
+
+            $(".itemValueDiv." + foodDiary[i]._id).append(
+                "<h6 class='itemValue'>" + foodDiary[i].item[nutritionTopFour[a]] + ' ' + keyShortForm[nutritionTopFour[a]] + "</h6>"
+            );
+        };
 
         //append table data to tile dropdown
         for(e = 0; e < 5 && e < nutritionOther.length; e++){

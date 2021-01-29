@@ -683,8 +683,8 @@ const updatePastDiary = async function(diaryDate){
         };
     };
     
-    //calculate and display pastDiary totals
-    updatePastDiaryTotals(diaryTotals);
+    updatePastDiaryTotals(diaryTotals); //calculate and display pastDiary totals
+    noItemsPastDiary(); //user feedback if empty
 };
 
 //get diary list and totals
@@ -713,6 +713,19 @@ const updatePastDiaryTotals = function(diaryTotals){
         //update the values (assumes order is correct)
         $(".topTotalCount.pastView").eq(i).text(itemTotal);
     }
+};
+
+//empty pastDiary user feedback
+const noItemsPastDiary = function(){
+    let listItems = $(".itemListContainer.pastView .itemRowContainer");
+    let numberListItems = listItems.length;
+    console.log(numberListItems)
+    if(!numberListItems){
+        // console.log(numberListItems)
+        $(".itemListContainer.pastView").append(
+            "<div class='noItemsDiv'>No Items</div>"
+        );
+    };
 };
 
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################

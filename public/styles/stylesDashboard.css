@@ -152,6 +152,12 @@ html, body{
     border-radius: 0 0 4px 4px;
 }
 
+/* for pastView */
+.noItemsDiv{
+    padding-top: 50px;
+    text-align: center;
+}
+
 /* Dashboard Modal Bottom Buttons ========================================== */
 .bottomButtons button{
     background-color: #000000;

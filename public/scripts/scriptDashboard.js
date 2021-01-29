@@ -719,9 +719,7 @@ const updatePastDiaryTotals = function(diaryTotals){
 const noItemsPastDiary = function(){
     let listItems = $(".itemListContainer.pastView .itemRowContainer");
     let numberListItems = listItems.length;
-    console.log(numberListItems)
     if(!numberListItems){
-        // console.log(numberListItems)
         $(".itemListContainer.pastView").append(
             "<div class='noItemsDiv'>No Items</div>"
         );

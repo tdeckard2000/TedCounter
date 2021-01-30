@@ -395,10 +395,6 @@ button.close{
     color: #5f65d8;
 }
 
-#topFourButton{
-    margin-top: 0;
-}
-
 #userPreferencesModal .modal-content{
     height: 80vh;
 }

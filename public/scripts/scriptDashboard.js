@@ -726,6 +726,13 @@ const noItemsPastDiary = function(){
     };
 };
 
+//######################## Functions (Diary) ########################
+const setupTopFourEditor = function(){
+    $("#defaultsBackButton").prop("disabled", true);
+    setTopFourDropdownOptions();
+    $("#userPreferencesModal .modal-title").text("Top Four Goals");
+};
+
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 
 //Filter list items from meal selector modal based on text input.
@@ -931,11 +938,11 @@ $("#buttonCloseDefaults").on("click", ()=>{
     location.reload();
 })
 
-//(dev) Re-open defaults modal
-$("#buttonOpenQuickTipsModal").on("click", ()=>{
+//Open Goals Editor (reuses intro modal)
+$("#topFourButton").on("click", ()=>{
     $("#userPreferencesModal").modal("toggle");
-    $("#defaultsBackButton").prop("disabled", true)
-    setTopFourDropdownOptions();
+    $("#settingsModal").modal("toggle");
+    setupTopFourEditor();
 });
 
 //######################## Event Listeners (Main Settings Modal) ########################

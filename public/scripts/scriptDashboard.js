@@ -832,7 +832,7 @@ $("#defaultsNextButton").on("click", function(){
         //change page title
         $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "Enter your goals for each nutrient. <br> Values provided are for reference only. <br> Always consult your doctor.");
+        $(".defaultsSubTitle").prop("innerHTML", "Enter your daily goals for each nutrient.<br>Values provided are for reference only.<br>Always consult your doctor.");
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages
@@ -896,7 +896,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Let's talk goals.");
         //change subtitle
-        $(".defaultsSubTitle").prop("innerHTML", "Enter your goals for each nutrient. <br> Values provided are for reference only. <br> Always consult your doctor.");
+        $(".defaultsSubTitle").prop("innerHTML", "Enter your daily goals for each nutrient.<br>Values provided are for reference only.<br>Always consult your doctor.");
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
         //update & show Next button

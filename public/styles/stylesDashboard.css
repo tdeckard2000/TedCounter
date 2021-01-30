@@ -570,12 +570,12 @@ button.close{
     background-color: #949494;
     color: white;
     display: block;
-    font-size: .9rem;
+    font-size: 1rem;
     font-weight: 300;
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 195px;
+    width: 210px;
 }
 
 .settingsTabs{

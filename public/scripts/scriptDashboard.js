@@ -860,7 +860,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //change page title
         $(".defaultsTitle").prop("textContent", "Which nutrients are you most interested in?");
         //Change subtitle
-        $(".defaultsSubTitle").prop("textContent", "These will always be visible at the top of the page, so select your favorites.");
+        $(".defaultsSubTitle").prop("textContent", "These will be displayed at the top of the page, so select your favorites. You can always make changes later.");
         //show top four selectors
         $(".topFourFlexRow").removeClass("hidden");
         //show disclaimer link and checkbox

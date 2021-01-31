@@ -330,7 +330,7 @@ const settingsModalElementsDisabled = function(Boolean){
     $("#checkboxAutoKeyboardItemSelector").attr("disabled", Boolean);
     $("#checkboxAutoKeyboardQuickAdd").attr("disabled", Boolean);
     $("#settingsCancelButton").attr("disabled", Boolean);
-    $("#topFourButton").attr("disabled", Boolean);
+    $("#editGoalsButton").attr("disabled", Boolean);
     $("#otherNutritionButton").attr("disabled", Boolean);
 }
 
@@ -726,13 +726,6 @@ const noItemsPastDiary = function(){
     };
 };
 
-//######################## Functions (Diary) ########################
-const setupTopFourEditor = function(){
-    $("#defaultsBackButton").prop("disabled", true);
-    setTopFourDropdownOptions();
-    $("#userPreferencesModal .modal-title").text("Top Four Goals");
-};
-
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 
 //Filter list items from meal selector modal based on text input.
@@ -934,15 +927,24 @@ $(".defaultsForm").on("submit", (e)=>{
      postDefaultSelections();
 });
 
+//refresh page
 $("#buttonCloseDefaults").on("click", ()=>{
     location.reload();
 })
 
-//Open Goals Editor (reuses intro modal)
-$("#topFourButton").on("click", ()=>{
+//open intro modal (dev tool)
+$("#buttonOpenQuickTipsModal").on("click", ()=>{
     $("#userPreferencesModal").modal("toggle");
     $("#settingsModal").modal("toggle");
-    setupTopFourEditor();
+    $("#defaultsBackButton").prop("disabled", true)
+    setTopFourDropdownOptions();
+});
+
+//######################## Event Listeners (Goals Editor) ########################
+
+//Open Goals Editor
+$("#editGoalsButton").on("click", ()=>{
+console.log("clickedTopFour")
 });
 
 //######################## Event Listeners (Main Settings Modal) ########################

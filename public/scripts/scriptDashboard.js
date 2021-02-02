@@ -370,17 +370,20 @@ const setAutoKeyboardSettings = function(){
 
 //######################## Functions (Defaults Modal) ########################
 //Populate top four dropdown lists on defaults modal
-const setTopFourDropdownOptions = function (){
+const setTopFourDropdownOptions = function (dropdownArray, defaultsArray){
+
+    let dropDownSelectors = dropdownArray.join(", ");
+
     nutritionOptions.forEach(element => {
-        $("#topFourSelection1, #topFourSelection2, #topFourSelection3, #topFourSelection4")
+        $(dropDownSelectors)
         .append("<option value='" + element + "'>" + element + "</option>");
     });
 
     //set default dropdown selections
-    $("#topFourSelection1").val('calories');
-    $("#topFourSelection2").val('protein');
-    $("#topFourSelection3").val('carbs');
-    $("#topFourSelection4").val('fat');
+    $(dropdownArray[0]).val(defaultsArray[0]);
+    $(dropdownArray[1]).val(defaultsArray[1]);
+    $(dropdownArray[2]).val(defaultsArray[2]);
+    $(dropdownArray[3]).val(defaultsArray[3]);
 }
 
 //Check for match in given array
@@ -398,10 +401,10 @@ const duplicateExists = function(array){
 }
 
 //Populate 'Other Options' check boxes for defaults modal
-const setupDefaultsCheckboxes = function(){
+const setupDefaultsCheckboxes = function(dropdownIDs, columnClass1, columnClass2){
     //Array.from creates a copy of the array, otherwise it's just a reference
     let allOptions = Array.from(nutritionOptions);
-    let topFourSelections = getTopFourSelections();
+    let topFourSelections = getTopFourSelections(dropdownIDs);
 
     //remove top four selections from 'allOptions' array
     topFourSelections.forEach(element => {
@@ -416,23 +419,23 @@ const setupDefaultsCheckboxes = function(){
     });
 
     //remove any existing checkboxes (if the user toggles pages)
-    $(".otherFlexColumn1, .otherFlexColumn2").children("div").remove();
+    $(columnClass1 + ", " + columnClass2).children("div").remove();
 
     //populate checkboxes split into two columns
     for(i=0; i < allOptions.length; i=i+2){
-        $(".otherFlexColumn1").append("<div><input type='checkbox' id='" 
+        $(columnClass1).append("<div><input type='checkbox' id='" 
         + allOptions[i] + "'name='test'></input><label for='" + allOptions[i] + "'>" + allOptions[i] + "</label></div>");
 
         if(allOptions[i+1] !== undefined){
-            $(".otherFlexColumn2").append("<div><input type='checkbox' id='" + allOptions[i+1] 
+            $(columnClass2).append("<div><input type='checkbox' id='" + allOptions[i+1] 
             + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
         }
     }
 }
 
 //Populate 'Goals' text input boxes
-const setupDefaultsGoalsTextBoxes = function(){
-    let list = getUserSelections();
+const setupDefaultsGoalsTextBoxes = function(dropdownIDs, checkboxesClass){
+    let list = getUserSelections(dropdownIDs, checkboxesClass);
     //order list alphabetically (keeping top four intact)
     list = orderAlphabetically(4, list);
 
@@ -454,28 +457,26 @@ const setupDefaultsGoalsTextBoxes = function(){
 }
 
 //Get top four selected items
-const getTopFourSelections = function(){
+const getTopFourSelections = function(dropdownArray){
     let selections = [];
     let i = 1;
-    while(i < 5){
+    dropdownArray.forEach((element)=>{
         //get value of each dropdown box
-        let selection = ($("#topFourSelection" + i).find('option:selected').val());
+        let selection = ($(element).find('option:selected').val());
 
         //convert value using keyToDB & save to array
         //skip "---" selections
         if(selection !== "none"){
             selections.push(keyToDB[selection]);
         };
-
-        i++
-    }
+    })
     return(selections);
 };
 
 //Get 'other' checkbox selected items
-const getOtherSelections = function(){
+const getOtherSelections = function(checkboxesClass){
     let selections = [];
-    $(".otherCheckBoxes :checked").each(function(){
+    $(checkboxesClass + " :checked").each(function(){
         let selection = ($(this).attr("id")); //get selection
         selections.push(keyToDB[selection]); //convert selection to DB friendly format
     })
@@ -483,16 +484,16 @@ const getOtherSelections = function(){
 }
 
 //Get combined list of user 'top four' and 'other' selected items
-const getUserSelections = function(){
-    let topFourSelections = getTopFourSelections();
-    let otherSelections = getOtherSelections();
+const getUserSelections = function(dropdownIDs, checkboxesClass){
+    let topFourSelections = getTopFourSelections(dropdownIDs);
+    let otherSelections = getOtherSelections(checkboxesClass);
     let combinesSelections = topFourSelections.concat(otherSelections);
     return(combinesSelections);
 }
 
 //Disable or enable next button on first page of defaults modal
-const toggleDefaultsNextButton = function(){
-    let topFourSelections = getTopFourSelections();
+const toggleDefaultsNextButton = function(dropdownIDs){
+    let topFourSelections = getTopFourSelections(dropdownIDs);
     let disclaimerChecked = $("#disclaimerCheckbox").prop("checked");
 
     //Check if disclaimer box is checked & if top four selections match
@@ -504,12 +505,12 @@ const toggleDefaultsNextButton = function(){
 }
 
 //Get goals from text inputs
-const getUserGoals = function(){
+const getUserGoals = function(inputBoxesClass){
     let userGoals = {};
     let itemName = "";
     let itemValue = 0;
 
-    $(".goalsFlexRow input").each(function(data){
+    $(inputBoxesClass + " input").each(function(){
             itemName = this.id;
             itemValue = $(this).val();
             userGoals[itemName] = itemValue;
@@ -519,10 +520,10 @@ const getUserGoals = function(){
 }
 
 //Send user goals to server to be saved
-const postDefaultSelections = function(){
-    let topFourSelections = JSON.stringify(getTopFourSelections());
-    let otherSelections = JSON.stringify(getOtherSelections());
-    let userGoals = JSON.stringify(getUserGoals());
+const postDefaultSelections = function(dropdownIDs, checkboxesClass, inputBoxesClass){
+    let topFourSelections = JSON.stringify(getTopFourSelections(dropdownIDs));
+    let otherSelections = JSON.stringify(getOtherSelections(checkboxesClass));
+    let userGoals = JSON.stringify(getUserGoals(inputBoxesClass));
 
     $("#loadPreferences").removeClass("hidden"); //show loading icon
     $(".defaultsTitle").prop("textContent", "Getting your profile ready.");
@@ -783,19 +784,43 @@ $(window).on("load", ()=>{
     if(userPreferences.nutritionTopFour.length < 1){
         $("#userPreferencesModal").modal("toggle");
         $("#defaultsBackButton").prop("disabled", true)
-        setTopFourDropdownOptions();
+
+        const dropdownIDs = [
+            "#topFourSelection1",
+            "#topFourSelection2",
+            "#topFourSelection3",
+            "#topFourSelection4"
+        ];
+        const defaultSelections = ["calories", "protein", "carbs", "fat"];
+
+        setTopFourDropdownOptions(dropdownIDs, defaultSelections);
     }
 });
 
 //Disclaimer checkbox -> enable Next button if no top four matches and disclaimer checked
 $("#disclaimerCheckbox").on("click", function(){
-    toggleDefaultsNextButton();
+
+    const dropdownIDs = [
+        "#topFourSelection1",
+        "#topFourSelection2",
+        "#topFourSelection3",
+        "#topFourSelection4"
+    ];
+
+    toggleDefaultsNextButton(dropdownIDs);
 });
 
 //Top Four drop-down -> enable Next button if no matches or disclaimer unchecked
 $(".topFourSelection").on("change", ()=>{
-    let topFourSelections = getTopFourSelections();
-    toggleDefaultsNextButton();
+    const dropdownIDs = [
+        "#topFourSelection1",
+        "#topFourSelection2",
+        "#topFourSelection3",
+        "#topFourSelection4"
+    ];
+
+    let topFourSelections = getTopFourSelections(dropdownIDs);
+    toggleDefaultsNextButton(dropdownIDs);
     
     if(duplicateExists(topFourSelections) === true){
         $(".duplicateSelectionWarning").removeClass('hidden');
@@ -807,6 +832,14 @@ $(".topFourSelection").on("change", ()=>{
 //On Next button click, mimic next page
 $("#defaultsNextButton").on("click", function(){
     let currentPageNumber = $(".defaultsModalBody").attr("data-page");
+
+    const checkboxesClass = ".otherCheckBoxes"
+    const dropdownIDs = [
+        "#topFourSelection1",
+        "#topFourSelection2",
+        "#topFourSelection3",
+        "#topFourSelection4"
+    ];
 
     if(currentPageNumber === "1"){
         //store page number in modal body
@@ -822,7 +855,7 @@ $("#defaultsNextButton").on("click", function(){
         //hide disclaimer checkbox and link
         $(".disclaimerDiv, .disclaimerLink").addClass("hidden");
         //populate checkbox options
-        setupDefaultsCheckboxes();
+        setupDefaultsCheckboxes(dropdownIDs, ".otherFlexColumn1", ".otherFlexColumn2");
         //show checkboxes
         $(".otherItemsFlexRow").removeClass("hidden");
 
@@ -836,7 +869,7 @@ $("#defaultsNextButton").on("click", function(){
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages
-        setupDefaultsGoalsTextBoxes();
+        setupDefaultsGoalsTextBoxes(dropdownIDs, checkboxesClass);
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
         //change Next button text to 'Submit'
@@ -879,8 +912,6 @@ $("#defaultsBackButton").on("click", ()=>{
         $(".defaultsSubTitle").prop("textContent", "If there are other nutrients you would like to track, select them here.");
         //hide top four selectors
         $(".topFourFlexRow").addClass("hidden");
-        //populate checkbox options
-        // setupDefaultsCheckboxes();
         //show checkboxes
         $(".otherItemsFlexRow").removeClass("hidden");
         //hide goals input boxes
@@ -910,6 +941,17 @@ $("#defaultsBackButton").on("click", ()=>{
 
 //Validate 'Submit' action on page 3 'goal' inputs
 $(".defaultsForm").on("submit", (e)=>{
+
+    const checkboxesClass = ".otherCheckBoxes";
+    const inputBoxesClass = ".goalsFlexRow";
+    
+    const dropdownIDs = [
+        "#topFourSelection1",
+        "#topFourSelection2",
+        "#topFourSelection3",
+        "#topFourSelection4"
+    ];
+
     e.preventDefault();
      //store page number in modal body
      $(".defaultsModalBody").attr("data-page", "4");
@@ -924,7 +966,7 @@ $(".defaultsForm").on("submit", (e)=>{
     $("#defaultsSubmitButton").addClass("hidden");
     $("#defaultsNextButton").text("Close").prop("type", "button").attr("data-dismiss", "modal");
     //send selections to server to be saved
-     postDefaultSelections();
+     postDefaultSelections(dropdownIDs, checkboxesClass, inputBoxesClass);
 });
 
 //refresh page
@@ -937,7 +979,16 @@ $("#buttonOpenQuickTipsModal").on("click", ()=>{
     $("#userPreferencesModal").modal("toggle");
     $("#settingsModal").modal("toggle");
     $("#defaultsBackButton").prop("disabled", true)
-    setTopFourDropdownOptions();
+
+    const dropdownIDs = [
+        "#topFourSelection1",
+        "#topFourSelection2",
+        "#topFourSelection3",
+        "#topFourSelection4"
+    ];
+    const defaultsArray = ["calories", "protein", "carbs", "fat"];
+
+    setTopFourDropdownOptions(dropdownIDs, defaultsArray);
 });
 
 //######################## Event Listeners (Goals Editor) ########################

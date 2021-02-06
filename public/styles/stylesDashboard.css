@@ -558,7 +558,7 @@ button.close{
     margin: 10px 0 1px 0;
 }
 
-.otherItemsFlexRow{
+.otherItemsFlexRow, .editOtherFlexRow{
     display: flex;
     height: 50%;
     justify-content: center;
@@ -568,16 +568,16 @@ button.close{
     -webkit-overflow-scrolling: touch;
 }
 
-.otherItemsFlexRow label{
+.otherItemsFlexRow label, .editOtherFlexRow label{
     margin-left: 5px;
     text-transform: capitalize;
 }
 
-.otherFlexColumn1{
+.otherFlexColumn1, .editOtherFlexColumn1{
     text-align: left;
 }
 
-.otherFlexColumn2{
+.otherFlexColumn2, .editOtherFlexColumn2{
     text-align: left;
     padding-left: 10px;
 }

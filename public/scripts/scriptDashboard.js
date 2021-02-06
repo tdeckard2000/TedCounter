@@ -71,7 +71,7 @@ const keyToDB = {
     "zinc": "zinc"
 }
 
-//Convert values to human readable format
+//Convert values to original with UOM
 const keyToHuman = {
     "caffeine": "Caffeine mg",
     "calcium": "Calcium mg",
@@ -368,7 +368,7 @@ const setAutoKeyboardSettings = function(){
     };
 }
 
-//######################## Functions (Defaults Modal) ########################
+//######################## Functions (Intro Modal) ########################
 //Populate top four dropdown lists on defaults modal
 const setTopFourDropdownOptions = function (dropdownArray, defaultsArray){
 
@@ -423,12 +423,12 @@ const setupDefaultsCheckboxes = function(dropdownIDs, columnClass1, columnClass2
 
     //populate checkboxes split into two columns
     for(i=0; i < allOptions.length; i=i+2){
-        $(columnClass1).append("<div><input type='checkbox' id='" 
-        + allOptions[i] + "'name='test'></input><label for='" + allOptions[i] + "'>" + allOptions[i] + "</label></div>");
+        $(columnClass1).append("<div><input type='checkbox' id='" + keyToDB[allOptions[i]]
+        + "'></input><label for='" + keyToDB[allOptions[i]] + "'>" + allOptions[i] + "</label></div>");
 
         if(allOptions[i+1] !== undefined){
-            $(columnClass2).append("<div><input type='checkbox' id='" + allOptions[i+1] 
-            + "'name='test'></input><label for='" + allOptions[i+1] + "'>" + allOptions[i+1] + "</label></div>");
+            $(columnClass2).append("<div><input type='checkbox' id='" + keyToDB[allOptions[i+1]] 
+            + "'></input><label for='" + keyToDB[allOptions[i+1]] + "'>" + allOptions[i+1] + "</label></div>");
         }
     }
 }
@@ -478,7 +478,7 @@ const getOtherSelections = function(checkboxesClass){
     let selections = [];
     $(checkboxesClass + " :checked").each(function(){
         let selection = ($(this).attr("id")); //get selection
-        selections.push(keyToDB[selection]); //convert selection to DB friendly format
+        selections.push(selection); //convert selection to DB friendly format
     })
     return(selections);
 }
@@ -572,6 +572,14 @@ const postDefaultSelections = function(dropdownIDs, checkboxesClass, inputBoxesC
         $("#defaultsBackButton").prop("disabled", false);
     });
 }
+
+//######################## Functions (Edit Goals Modal) ########################
+const tickDefaultsCheckboxes = function(itemsToTick, checkboxColumn1, checkboxColumn2){
+    itemsToTick.forEach((item)=>{
+        console.log(keyToNormal[item]);
+    })
+}
+
 
 //######################## Functions (Diary) ########################
 const updatePastDiary = async function(diaryDate){
@@ -777,7 +785,7 @@ $(".selectableItem").on("click", function(){
 });
 
 
-//######################## Event Listeners (Default Settings Modal) ########################
+//######################## Event Listeners (Intro Modal) ########################
 
 //Display defaults modal if no Top Four data exists
 $(window).on("load", ()=>{
@@ -993,20 +1001,99 @@ $("#buttonOpenQuickTipsModal").on("click", ()=>{
 
 //######################## Event Listeners (Goals Editor) ########################
 
-//Open Goals Editor
+//Edit Goals button
 $("#editGoalsButton").on("click", ()=>{
-    let currentTopFour = userPreferences.nutritionTopFour;
-    const dropDownArray = [
+    //get users current top four 
+    let currentTopFourDB = userPreferences.nutritionTopFour;
+
+    //convert each top four string
+    let currentTopFour =[];
+    currentTopFourDB.forEach((item)=>{
+        currentTopFour.push(keyToNormal[item].toLowerCase());
+    });
+    
+    const dropdownArray = [
         "#topFourEdit1", 
         "#topFourEdit3",
         "#topFourEdit2", 
         "#topFourEdit4"
     ];
-    
-    $("#settingsModal").modal("toggle");
-    setTopFourDropdownOptions(dropDownArray, currentTopFour);
 
+    //close settings modal
+    $("#settingsModal").modal("toggle");
+
+    //reset to page 1
+    $("#editGoalsModal").attr("data-page", 1);
+    $(".defaultsModalBody").addClass("hidden");
+    $(".editModalPage1").removeClass("hidden");
+
+    //populate dropdown options
+    setTopFourDropdownOptions(dropdownArray, currentTopFour);
 });
+
+//Dropdown selection
+$(".topFourSelection").on("change", ()=>{
+    const dropdownArray = [
+        "#topFourEdit1", 
+        "#topFourEdit3",
+        "#topFourEdit2", 
+        "#topFourEdit4"
+    ];
+    let selections = getTopFourSelections(dropdownArray);
+
+    if(duplicateExists(selections)){
+        $("#goalsEditNextButton").attr("disabled", true)
+        $(".duplicateSelectionWarning").removeClass("hidden");
+    }else{
+        $("#goalsEditNextButton").attr("disabled", false)
+        $(".duplicateSelectionWarning").addClass("hidden");
+    };
+});
+
+//Next button
+$("#goalsEditNextButton").on("click", ()=>{
+    const dropdownArray = [
+        "#topFourEdit1", 
+        "#topFourEdit3",
+        "#topFourEdit2", 
+        "#topFourEdit4"
+    ];
+    let currentOther = userPreferences.nutritionOther;
+
+    //update page number
+    let page = $("#editGoalsModal").attr("data-page");
+    page++
+    $("#editGoalsModal").attr("data-page", page);
+
+    //hide all pages
+    $(".defaultsModalBody").addClass("hidden");
+
+    //show appropriate page
+    if(page === 2){
+        $(".editModalPage2").removeClass("hidden");
+        //populate checkboxes
+        setupDefaultsCheckboxes(
+            dropdownArray,
+            ".editOtherFlexColumn1",
+            ".editOtherFlexColumn2"
+        );
+        //pre-check based on user preferences
+        tickDefaultsCheckboxes(
+            currentOther, 
+            ".editOtherFlexColumn1",
+            ".editOtherFlexColumn2"
+        );
+
+    }else if(page === 3){
+        $(".editModalPage3").removeClass("hidden");
+
+    }else if(page === 4){
+        $(".editModalPage4").removeClass("hidden");
+    }
+    
+
+
+})
 
 //######################## Event Listeners (Main Settings Modal) ########################
 

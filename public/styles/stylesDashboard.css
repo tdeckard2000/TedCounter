@@ -605,6 +605,9 @@ button.close{
     text-align: center;
 }
 
+#editGoalsModal .modal-content{
+    height: 80vh;
+}
 
 /* Dashboard Bottom Bar ========================================== */
 #diaryBackButton{

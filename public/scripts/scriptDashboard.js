@@ -851,7 +851,7 @@ $("#defaultsNextButton").on("click", function(){
         //change subtitle
         $(".defaultsSubTitle").prop("textContent", "If there are other nutrients you would like to track, select them here.");
         //hide top four selectors
-        $(".topFourFlexRow").addClass("hidden");
+        $(".topFourFlexRow.introModal").addClass("hidden");
         //hide disclaimer checkbox and link
         $(".disclaimerDiv, .disclaimerLink").addClass("hidden");
         //populate checkbox options
@@ -895,7 +895,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //Change subtitle
         $(".defaultsSubTitle").prop("textContent", "These will be displayed at the top of the page, so select your favorites. You can always make changes later.");
         //show top four selectors
-        $(".topFourFlexRow").removeClass("hidden");
+        $(".topFourFlexRow.introModal").removeClass("hidden");
         //show disclaimer link and checkbox
         $(".disclaimerDiv, .disclaimerLink").removeClass("hidden");
         //hide checkboxes from page 2
@@ -911,7 +911,7 @@ $("#defaultsBackButton").on("click", ()=>{
         //change subtitle
         $(".defaultsSubTitle").prop("textContent", "If there are other nutrients you would like to track, select them here.");
         //hide top four selectors
-        $(".topFourFlexRow").addClass("hidden");
+        $(".topFourFlexRow.introModal").addClass("hidden");
         //show checkboxes
         $(".otherItemsFlexRow").removeClass("hidden");
         //hide goals input boxes
@@ -995,7 +995,16 @@ $("#buttonOpenQuickTipsModal").on("click", ()=>{
 
 //Open Goals Editor
 $("#editGoalsButton").on("click", ()=>{
+    let currentTopFour = userPreferences.nutritionTopFour;
+    const dropDownArray = [
+        "#topFourEdit1", 
+        "#topFourEdit3",
+        "#topFourEdit2", 
+        "#topFourEdit4"
+    ];
+    
     $("#settingsModal").modal("toggle");
+    setTopFourDropdownOptions(dropDownArray, currentTopFour);
 
 });
 

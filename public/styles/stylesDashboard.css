@@ -375,7 +375,6 @@ button.close{
 }
 
 /* Settings Modal (Main) ========================================== */
-
 #buttonOpenQuickTipsModal{
     background-color: #5ece5c;
 }
@@ -395,14 +394,6 @@ button.close{
     color: #5f65d8;
 }
 
-#userPreferencesModal .modal-content{
-    height: 80vh;
-}
-
-#userPreferencesModal{
-    text-align: center;
-}
-
 .changePasswordError, .changePasswordSuccess{
     font-size: .75rem;
     padding: 5px;
@@ -410,6 +401,89 @@ button.close{
 
 .chartsPage{
     font-weight: 300;
+}
+
+.loadingIndicatorDiv{
+    display: flex;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.loadingIndicator{
+    margin: auto;
+}
+
+.modal-footer .back{
+    font-weight: 300;
+    left: 15px;
+    position: absolute;
+    left: 10px;
+}
+
+.modal-footer .next{
+    font-weight: 300;
+    position: absolute;
+    right: 15px;
+}
+
+.preferencesPage{
+    font-weight: 300;
+}
+
+.profilePage input{
+    font-weight: 300;
+    font-size: .9rem;
+}
+
+.profilePage label{
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.settingsTable input{
+    margin-left: 5px;
+}
+
+.settingsTable label{
+    font-size: .9rem;
+}
+
+.settingsTabs{
+    margin: 0 -10px;
+    position: relative;
+    top: -15px;
+}
+
+.settingsBodyButton{
+    background-color: #949494;
+    color: white;
+    display: block;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 210px;
+}
+
+.settingsTabs{
+    font-weight: 300;
+}
+
+.settingsTable{
+    margin: auto;
+}
+
+/* Intro  Modal ================================================== */
+#userPreferencesModal .modal-content{
+    height: 80vh;
+}
+
+#userPreferencesModal{
+    text-align: center;
 }
 
 .defaultsModalBody{
@@ -484,32 +558,6 @@ button.close{
     margin: 10px 0 1px 0;
 }
 
-.loadingIndicatorDiv{
-    display: flex;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-}
-
-.loadingIndicator{
-    margin: auto;
-}
-
-.modal-footer .back{
-    font-weight: 300;
-    left: 15px;
-    position: absolute;
-    left: 10px;
-}
-
-.modal-footer .next{
-    font-weight: 300;
-    position: absolute;
-    right: 15px;
-}
-
 .otherItemsFlexRow{
     display: flex;
     height: 50%;
@@ -534,54 +582,6 @@ button.close{
     padding-left: 10px;
 }
 
-.preferencesPage{
-    font-weight: 300;
-}
-
-.profilePage input{
-    font-weight: 300;
-    font-size: .9rem;
-}
-
-.profilePage label{
-    font-weight: 300;
-    font-size: 1rem;
-}
-
-.settingsTable input{
-    margin-left: 5px;
-}
-
-.settingsTable label{
-    font-size: .9rem;
-}
-
-.settingsTabs{
-    margin: 0 -10px;
-    position: relative;
-    top: -15px;
-}
-
-.settingsBodyButton{
-    background-color: #949494;
-    color: white;
-    display: block;
-    font-size: 1rem;
-    font-weight: 300;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 210px;
-}
-
-.settingsTabs{
-    font-weight: 300;
-}
-
-.settingsTable{
-    margin: auto;
-}
-
 .topFourFlexColumn{
     display: flex;
     flex-direction: column;
@@ -598,6 +598,7 @@ button.close{
     margin: 5px;
     text-transform: capitalize;
 }
+
 
 /* Edit Goals Modal ============================================== */
 #editGoalsModal{

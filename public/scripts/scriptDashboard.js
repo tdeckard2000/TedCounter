@@ -1024,7 +1024,7 @@ $("#editGoalsButton").on("click", ()=>{
 
     //reset to page 1
     $("#editGoalsModal").attr("data-page", 1);
-    $(".defaultsModalBody").addClass("hidden");
+    $(".editModalBody").addClass("hidden");
     $(".editModalPage1").removeClass("hidden");
 
     //populate dropdown options
@@ -1066,7 +1066,7 @@ $("#goalsEditNextButton").on("click", ()=>{
     $("#editGoalsModal").attr("data-page", page);
 
     //hide all pages
-    $(".defaultsModalBody").addClass("hidden");
+    $(".editModalBody").addClass("hidden");
 
     //show appropriate page
     if(page === 2){

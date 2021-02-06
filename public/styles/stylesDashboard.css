@@ -486,7 +486,7 @@ button.close{
     text-align: center;
 }
 
-.defaultsModalBody{
+.defaultsModalBody, .editModalBody{
     height: 100%;
     overflow: auto;
 }

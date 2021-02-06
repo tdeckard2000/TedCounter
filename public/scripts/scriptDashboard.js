@@ -995,7 +995,8 @@ $("#buttonOpenQuickTipsModal").on("click", ()=>{
 
 //Open Goals Editor
 $("#editGoalsButton").on("click", ()=>{
-console.log("clickedTopFour")
+    $("#settingsModal").modal("toggle");
+
 });
 
 //######################## Event Listeners (Main Settings Modal) ########################

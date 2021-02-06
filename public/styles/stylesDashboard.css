@@ -374,7 +374,7 @@ button.close{
     width: 100%;
 }
 
-/* User Preferences Modal (Main) ========================================== */
+/* Settings Modal (Main) ========================================== */
 
 #buttonOpenQuickTipsModal{
     background-color: #5ece5c;
@@ -597,6 +597,11 @@ button.close{
     height: 25px;
     margin: 5px;
     text-transform: capitalize;
+}
+
+/* Edit Goals Modal ============================================== */
+#editGoalsModal{
+    text-align: center;
 }
 
 

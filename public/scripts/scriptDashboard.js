@@ -519,7 +519,7 @@ const getUserGoals = function(inputBoxesClass){
     return userGoals;
 }
 
-//Send user goals to server to be saved
+//Send intro goals to server to be saved
 const postDefaultSelections = function(dropdownIDs, checkboxesClass, inputBoxesClass){
     let topFourSelections = JSON.stringify(getTopFourSelections(dropdownIDs));
     let otherSelections = JSON.stringify(getOtherSelections(checkboxesClass));
@@ -571,14 +571,39 @@ const postDefaultSelections = function(dropdownIDs, checkboxesClass, inputBoxesC
         $(".defaultsSubTitle").html("Tap the Back button, then Submit again. <br/> Be sure to check your internet connection.");
         $("#defaultsBackButton").prop("disabled", false);
     });
-}
+};
 
 //######################## Functions (Edit Goals Modal) ########################
-const tickDefaultsCheckboxes = function(itemsToTick, checkboxColumn1, checkboxColumn2){
+const tickDefaultsCheckboxes = function(itemsToTick, checkboxClass){
     itemsToTick.forEach((item)=>{
-        console.log(keyToNormal[item]);
-    })
-}
+        $(checkboxClass + " #" + item).prop('checked', true);
+    });
+};
+
+//Send edited user goals to server to be saved
+const postEditedSelections = function(dropdownIDs, checkboxesClass, inputBoxesClass){
+    let topFourSelections = JSON.stringify(getTopFourSelections(dropdownIDs));
+    let otherSelections = JSON.stringify(getOtherSelections(checkboxesClass));
+    let userGoals = JSON.stringify(getUserGoals(inputBoxesClass));
+
+    $.ajax({
+        type: 'POST',
+        url: '/newUserGoals',
+        data: {
+            topFourSelections: topFourSelections,
+            otherSelections: otherSelections,
+            userGoals: userGoals
+        }
+
+    }).done((data)=>{
+        if(data.result === true){
+            return true
+        }else{
+            return false
+        };
+    });
+
+};
 
 
 //######################## Functions (Diary) ########################
@@ -1068,7 +1093,6 @@ $("#goalsEditNextButton").on("click", ()=>{
     //hide all pages
     $(".editModalBody").addClass("hidden");
 
-    //show appropriate page
     if(page === 2){
         $(".editModalPage2").removeClass("hidden");
         //populate checkboxes
@@ -1078,16 +1102,15 @@ $("#goalsEditNextButton").on("click", ()=>{
             ".editOtherFlexColumn2"
         );
         //pre-check based on user preferences
-        tickDefaultsCheckboxes(
-            currentOther, 
-            ".editOtherFlexColumn1",
-            ".editOtherFlexColumn2"
-        );
+        tickDefaultsCheckboxes(currentOther, ".editOtherFlexRow");
 
     }else if(page === 3){
         $(".editModalPage3").removeClass("hidden");
+        setupDefaultsGoalsTextBoxes(dropdownArray, ".editOtherFlexRow");
+        $("#goalsEditNextButton").text("Submit").css("background-color", "#5ece5c");
 
     }else if(page === 4){
+        postEditedSelections(dropdownArray, ".editOtherFlexRow", ".goalsFlexRow");
         $(".editModalPage4").removeClass("hidden");
     }
     

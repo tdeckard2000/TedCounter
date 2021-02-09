@@ -333,7 +333,7 @@
 <!-- Edit Goals Modal -->
 <div class="modal" id="editGoalsModal" tabindex="-1" role="dialog" data-page="1">
   <div class="modal-dialog modal-dialog-centered">
-    <form action="" class="" method="POST">
+    <form action="" class="editGoalsForm" method="POST">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit Goals</h5>
@@ -366,6 +366,7 @@
             </div>
           </div>
           <p class="duplicateSelectionWarning hidden">You can't select the same one twice : )</p>
+          <hr>
         </div>
 
         <!-- Page 2 -->
@@ -386,30 +387,35 @@
         <div class="modal-body editModalBody editModalPage3 hidden">
           <h4 class="defaultsTitle">What are your goals?</h4>
           <hr>
-          <p class="defaultsSubTitle">Edit your daily goals for each nutrient.<br>
+          <p class="defaultsSubTitle">Enter your daily goals for each nutrient.<br>
           Values provided are for reference only.<br> Always consult your doctor.</p>
 
           <div class="goalsFlexRow">
-            <div class="goalsFlexColumn1">
+            <div class="editGoalsFlexColumn1">
             </div>
-            <div class="goalsFlexColumn2">
+            <div class="editGoalsFlexColumn2">
             </div>
           </div>
           <hr>
         </div>
 
         <!-- Page 4 -->
-        <!-- <div class="modal-body editModalBody editModalPage4 hidden">
-          <h4 class="defaultsTitle">Choose your top four!</h4>
+        <div class="modal-body editModalBody editModalPage4 hidden">
+          <h4 class="defaultsTitle">Saving</h4>
           <hr>
-          <p class="defaultsSubTitle">Edit what's shown on the bar at the top.<br>
-            If you change your mind later, reselect your original goals. No data will be lost.</p>
-        </div> -->
+          <p class="defaultsSubTitle">Saving your changes...</p>
+          <!-- Loading Indicator -->
+          <div id="loadEditModal" class="loadingIndicatorDiv hidden">
+            <div class="loadingIndicator spinner-border text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
 
         <div class="modal-footer">
           <button type="button" id="goalsEditBackButton"class="btn btn-secondary back bottomButton" disabled>Back</button>
           <button type="button" id="goalsEditNextButton" class="btn next bottomButton">Next</button>
-          <button type="submit" id="goalsEditSubmitButton" class="btn hidden defaultsSubmitButton next bottomButton">Submit</button>
+          <button type="submit" id="goalsEditSubmitButton" class="btn defaultsSubmitButton next bottomButton hidden">Save</button>
         </div>
       </div>
     </form>

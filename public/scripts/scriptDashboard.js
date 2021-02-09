@@ -380,11 +380,14 @@ const setTopFourDropdownOptions = function (dropdownArray, defaultsArray){
     });
 
     //set default dropdown selections
-    $(dropdownArray[0]).val(defaultsArray[0]);
-    $(dropdownArray[1]).val(defaultsArray[1]);
-    $(dropdownArray[2]).val(defaultsArray[2]);
-    $(dropdownArray[3]).val(defaultsArray[3]);
-}
+    for(i=0; i<4; i++){
+        //if null, set default to "---"
+        if(!defaultsArray[i]){
+            defaultsArray[i] = "none";
+        };
+        $(dropdownArray[i]).val(defaultsArray[i]);
+    };
+};
 
 //Check for match in given array
 const duplicateExists = function(array){
@@ -434,21 +437,21 @@ const setupDefaultsCheckboxes = function(dropdownIDs, columnClass1, columnClass2
 }
 
 //Populate 'Goals' text input boxes
-const setupDefaultsGoalsTextBoxes = function(dropdownIDs, checkboxesClass){
+const setupDefaultsGoalsTextBoxes = function(dropdownIDs, checkboxesClass, columnClass1, columnClass2){
     let list = getUserSelections(dropdownIDs, checkboxesClass);
     //order list alphabetically (keeping top four intact)
     list = orderAlphabetically(4, list);
 
     //remove any existing input boxes (if user toggles pages)
-    $(".goalsFlexColumn1, .goalsFlexColumn2").children("div").remove();
+    $(columnClass1 + ", " + columnClass2).children("div").remove();
 
     //populate input boxes split into two columns
     for(i=0; i < list.length; i = i+2){
-        $(".goalsFlexColumn1").append("<div><label for='" + list[i] + "'>" + keyToHuman[list[i]] +
+        $(columnClass1).append("<div><label for='" + list[i] + "'>" + keyToHuman[list[i]] +
          "</label><input placeholder=" + keyGoalDefaults[list[i]] + " id='" + list[i] + "'type='text' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
 
          if(list[i+1] !== undefined){
-            $(".goalsFlexColumn2").append("<div><label for='" + list[i+1] + "'>" + keyToHuman[list[i+1]] +
+            $(columnClass2).append("<div><label for='" + list[i+1] + "'>" + keyToHuman[list[i+1]] +
             "</label><input placeholder=" + keyGoalDefaults[list[i+1]] + " id='" + list[i+1] + "'type='text' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
@@ -586,23 +589,24 @@ const postEditedSelections = function(dropdownIDs, checkboxesClass, inputBoxesCl
     let otherSelections = JSON.stringify(getOtherSelections(checkboxesClass));
     let userGoals = JSON.stringify(getUserGoals(inputBoxesClass));
 
-    $.ajax({
-        type: 'POST',
-        url: '/newUserGoals',
-        data: {
-            topFourSelections: topFourSelections,
-            otherSelections: otherSelections,
-            userGoals: userGoals
-        }
-
-    }).done((data)=>{
-        if(data.result === true){
-            return true
-        }else{
-            return false
-        };
+    return new Promise((resolve, reject)=>{
+        $.ajax({
+            type: 'POST',
+            url: '/newUserGoals',
+            data: {
+                topFourSelections: topFourSelections,
+                otherSelections: otherSelections,
+                userGoals: userGoals
+            }
+    
+        }).done((data)=>{
+            if(data.result === true){
+                resolve(true)
+            }else{
+                resolve(false)
+            };
+        });
     });
-
 };
 
 
@@ -902,7 +906,7 @@ $("#defaultsNextButton").on("click", function(){
         //hide checkboxes from page 2
         $(".otherItemsFlexRow").addClass("hidden");
         //get array of user's selections from first two pages
-        setupDefaultsGoalsTextBoxes(dropdownIDs, checkboxesClass);
+        setupDefaultsGoalsTextBoxes(dropdownIDs, checkboxesClass, ".goalsFlexColumn1", ".goalsFlexColumn2");
         //show goals input boxes
         $(".goalsFlexRow").removeClass("hidden");
         //change Next button text to 'Submit'
@@ -1031,12 +1035,13 @@ $("#editGoalsButton").on("click", ()=>{
     //get users current top four 
     let currentTopFourDB = userPreferences.nutritionTopFour;
 
-    //convert each top four string
+    //convert each top four item using key
     let currentTopFour =[];
     currentTopFourDB.forEach((item)=>{
         currentTopFour.push(keyToNormal[item].toLowerCase());
     });
     
+    //id for each top four dropdown
     const dropdownArray = [
         "#topFourEdit1", 
         "#topFourEdit3",
@@ -1051,6 +1056,9 @@ $("#editGoalsButton").on("click", ()=>{
     $("#editGoalsModal").attr("data-page", 1);
     $(".editModalBody").addClass("hidden");
     $(".editModalPage1").removeClass("hidden");
+    $("#goalsEditSubmitButton").addClass("hidden");
+    $("#goalsEditNextButton").removeClass("hidden");
+    $("#goalsEditBackButton").attr("disabled", true)
 
     //populate dropdown options
     setTopFourDropdownOptions(dropdownArray, currentTopFour);
@@ -1084,17 +1092,16 @@ $("#goalsEditNextButton").on("click", ()=>{
         "#topFourEdit4"
     ];
     let currentOther = userPreferences.nutritionOther;
-
     //update page number
     let page = $("#editGoalsModal").attr("data-page");
     page++
     $("#editGoalsModal").attr("data-page", page);
-
     //hide all pages
     $(".editModalBody").addClass("hidden");
 
     if(page === 2){
         $(".editModalPage2").removeClass("hidden");
+        $("#goalsEditBackButton").attr("disabled", false)
         //populate checkboxes
         setupDefaultsCheckboxes(
             dropdownArray,
@@ -1106,17 +1113,61 @@ $("#goalsEditNextButton").on("click", ()=>{
 
     }else if(page === 3){
         $(".editModalPage3").removeClass("hidden");
-        setupDefaultsGoalsTextBoxes(dropdownArray, ".editOtherFlexRow");
-        $("#goalsEditNextButton").text("Submit").css("background-color", "#5ece5c");
+        setupDefaultsGoalsTextBoxes(dropdownArray, ".editOtherFlexRow", ".editGoalsFlexColumn1", ".editGoalsFlexColumn2");
+        //hide next button and show submit button
+        $("#goalsEditNextButton").addClass("hidden");
+        $("#goalsEditSubmitButton").removeClass("hidden");
+    };
+});
 
-    }else if(page === 4){
-        postEditedSelections(dropdownArray, ".editOtherFlexRow", ".goalsFlexRow");
-        $(".editModalPage4").removeClass("hidden");
+//Back button
+$("#goalsEditBackButton").on("click", ()=>{
+    //update page number
+    let page = $("#editGoalsModal").attr("data-page");
+    page--
+    $("#editGoalsModal").attr("data-page", page);
+
+    //hide all pages
+    $(".editModalBody").addClass("hidden");
+
+    if(page === 1){
+        $(".editModalPage1").removeClass("hidden");
+        $("#goalsEditBackButton").attr("disabled", true);
+    }else if(page === 2){
+        $(".editModalPage2").removeClass("hidden");
+        $("#goalsEditSubmitButton").addClass("hidden");
+        $("#goalsEditNextButton").removeClass("hidden");
+    };
+});
+
+//Save button (form)
+$(".editGoalsForm").on("submit", async(e)=>{
+    e.preventDefault();
+    const dropdownArray = [
+        "#topFourEdit1", 
+        "#topFourEdit3",
+        "#topFourEdit2", 
+        "#topFourEdit4"
+    ];
+    $(".editModalPage3").addClass("hidden");
+    $(".editModalPage4").removeClass("hidden");
+    $("#goalsEditBackButton").attr("disabled", true);
+    $("#loadEditModal").removeClass("hidden");
+    $("#goalsEditSubmitButton").attr("disabled", true);
+    //send data to server
+    let postResult = await postEditedSelections(dropdownArray,".editOtherFlexRow", ".goalsFlexRow");
+    if(postResult === true){
+        $("#loadEditModal").addClass("hidden");
+        $(".editModalPage4 .defaultsTitle").text("Done");
+        $(".editModalPage4 .defaultsSubTitle").text("Saved successfully.");
+        //FINISH THIS
+    }else{
+        $("#loadEditModal").addClass("hidden");
+        $(".editModalPage4 .defaultsSubTitle").text("Huh. Check your internet connection. Then try saving again.");
+        $("#goalsEditSubmitButton").attr("disabled", false);
+        //FINISH THIS
     }
-    
-
-
-})
+});
 
 //######################## Event Listeners (Main Settings Modal) ########################
 

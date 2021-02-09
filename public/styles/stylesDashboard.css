@@ -608,6 +608,11 @@ button.close{
     height: 80vh;
 }
 
+.editGoalsForm{
+    max-width: 500px;
+    width: 100vw;
+}
+
 /* Dashboard Bottom Bar ========================================== */
 #diaryBackButton{
     cursor: pointer;

@@ -1,5 +1,5 @@
 # TedCounter
-### Unique Calorie Counting Web Application - Started 5.30.20
+### Unique Nutrition Counting Web Application - Started 5.30.20
 
 View it here: https://www.TedCounter.com
 

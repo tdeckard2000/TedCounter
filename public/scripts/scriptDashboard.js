@@ -289,8 +289,9 @@ $(window).on("load",()=>{
     userPreferences = $("#goals").data().userpreferences;
     //set user defined settings
     setAutoKeyboardSettings();
-
-})
+    //draw default chart
+    drawChart();
+});
 
 //######################## Functions (Other)########################
 
@@ -765,25 +766,28 @@ const noItemsPastDiary = function(){
 };
 
 //######################## Functions (Charts.js) ########################
-var ctx = document.getElementById('diaryChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
+const drawChart = function(){
+    var ctx = document.getElementById('diaryChart').getContext('2d');
+    const nutritionTopFour = userPreferences.nutritionTopFour;
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'horizontalBar',
+    
+        // The data for our dataset
+        data: {
+            labels: nutritionTopFour,
+            datasets: [{
+                label: 'Totals',
+                backgroundColor: '#5f65d8',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45]
+            }]
+        },
+    
+        // Configuration options go here
+        options: {}
+    });
+};
 
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 

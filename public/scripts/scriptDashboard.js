@@ -769,13 +769,16 @@ const noItemsPastDiary = function(){
 const drawChart = function(){
     var ctx = document.getElementById('diaryChart').getContext('2d');
     const nutritionTopFour = userPreferences.nutritionTopFour;
+    const nutritionOther = userPreferences.nutritionOther;
+    const nutritionBoth = nutritionTopFour.concat(nutritionOther);
+
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'horizontalBar',
     
         // The data for our dataset
         data: {
-            labels: nutritionTopFour,
+            labels: nutritionBoth,
             datasets: [{
                 label: 'Totals',
                 backgroundColor: '#5f65d8',

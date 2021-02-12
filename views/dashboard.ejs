@@ -188,7 +188,8 @@
         </ul>
         
         <div class="chartsPage">
-          <p>📊</p>
+          <p>Diary Chart</p>
+          <canvas id="diaryChart"></canvas>
         </div>
 
         <div class="preferencesPage hidden">
@@ -439,5 +440,7 @@
 </html>
 
 <%-include('footer');-%>
+<!-- Charts.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <!-- Custom Script -->
 <script src="/scripts/scriptDashboard.js"></script>

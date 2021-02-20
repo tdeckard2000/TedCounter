@@ -327,14 +327,6 @@ button.close{
 }
 
 /* Quick Add Form ========================================== */
-#buttonCloseDefaults{
-    background-color: #949494;
-    margin: 10px;
-    padding: 10px;
-    position: relative;
-    width: 150px;
-}
-
 #buttonQuickTips{
     background-color: #5ece5c;
     margin: 10px;
@@ -478,6 +470,14 @@ button.close{
 }
 
 /* Intro  Modal ================================================== */
+#buttonCloseDefaults{
+    background-color: #949494;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    width: 150px;
+}
+
 #userPreferencesModal .modal-content{
     height: 80vh;
 }
@@ -600,6 +600,14 @@ button.close{
 }
 
 /* Edit Goals Modal ============================================== */
+#buttonCloseEditGoalsModal{
+    background-color: #949494;
+    margin: 90px 10px 10px 10px;
+    padding: 6px;
+    position: relative;
+    width: 150px;
+}
+
 #editGoalsModal{
     text-align: center;
 }

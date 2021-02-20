@@ -1046,7 +1046,7 @@ $(".defaultsForm").on("submit", (e)=>{
 //refresh page
 $("#buttonCloseDefaults").on("click", ()=>{
     location.reload();
-})
+});
 
 //open intro modal (dev tool)
 $("#buttonOpenQuickTipsModal").on("click", ()=>{
@@ -1189,21 +1189,26 @@ $(".editGoalsForm").on("submit", async(e)=>{
     $(".editModalPage3").addClass("hidden");
     $(".editModalPage4").removeClass("hidden");
     $("#goalsEditBackButton").attr("disabled", true);
+    $("#editGoalsModal .close").addClass("hidden");
     $("#loadEditModal").removeClass("hidden");
     $("#goalsEditSubmitButton").attr("disabled", true);
     //send data to server
     let postResult = await postEditedSelections(dropdownArray,".editOtherFlexRow", ".goalsFlexRow");
     if(postResult === true){
         $("#loadEditModal").addClass("hidden");
-        $(".editModalPage4 .defaultsTitle").text("Done");
+        $(".editModalPage4 .defaultsTitle").text("Saved");
         $(".editModalPage4 .defaultsSubTitle").text("Saved successfully.");
-        //FINISH THIS
+        $("#buttonCloseEditGoalsModal").removeClass("hidden");
     }else{
         $("#loadEditModal").addClass("hidden");
         $(".editModalPage4 .defaultsSubTitle").text("Huh. Check your internet connection. Then try saving again.");
         $("#goalsEditSubmitButton").attr("disabled", false);
-        //FINISH THIS
-    }
+    };
+});
+
+//Close (finished) Button
+$("#buttonCloseEditGoalsModal").on("click", ()=>{
+    location.reload();
 });
 
 //######################## Event Listeners (Main Settings Modal) ########################

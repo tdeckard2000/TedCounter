@@ -797,7 +797,9 @@ const drawChart = async function(){
         },
     
         // Configuration options go here
-        options: {}
+        options: {
+            // maintainAspectRatio: false
+        }
     });
 };
 

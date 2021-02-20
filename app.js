@@ -19,7 +19,7 @@ const newUserFoodItems = require('./public/scripts/newUserFoodItems.js');
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public', {maxAge: 86400000})); //cache for 24h
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 

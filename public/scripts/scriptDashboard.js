@@ -290,7 +290,7 @@ $(window).on("load",()=>{
     //set user defined settings
     setAutoKeyboardSettings();
     //draw default chart
-    drawChart();
+    drawChart(currentDay, "percentage");
 });
 
 //######################## Functions (Other)########################
@@ -766,18 +766,28 @@ const noItemsPastDiary = function(){
 };
 
 //######################## Functions (Charts.js) ########################
-const drawChart = async function(){
+const drawChart = async function(date, displayDataType){
     var ctx = document.getElementById('diaryChart').getContext('2d');
+    const nutritionGoals = userPreferences.nutritionGoals;
     const nutritionTopFour = userPreferences.nutritionTopFour;
     const nutritionOther = userPreferences.nutritionOther;
     const nutritionBoth = nutritionTopFour.concat(nutritionOther);
-    const fullDiary = await getDiary(currentDay);//using today for place holder
+    const fullDiary = await getDiary(date);//using today for place holder
     const diaryTotals = fullDiary.diaryTotals;
     //push each item total to array
     let totalsForBoth = [];
-    nutritionBoth.forEach((item)=>{
-        totalsForBoth.push(diaryTotals[item])
-    });
+    if(displayDataType === "total"){
+        nutritionBoth.forEach((item)=>{
+            totalsForBoth.push(diaryTotals[item])
+        });
+    }else if(displayDataType === "percentage"){
+        let percentage = 0;
+        nutritionBoth.forEach((item)=>{
+            percentage = (diaryTotals[item] / nutritionGoals[item]) * 100;
+            percentage = Math.round(percentage);
+            totalsForBoth.push(percentage);
+        });
+    }
     //set chart container height (canvas inherits this)
     const chartHeight = nutritionBoth.length * 30
     $("#chartsContainer").css("height", chartHeight + "px")
@@ -790,7 +800,6 @@ const drawChart = async function(){
         data: {
             labels: nutritionBoth,
             datasets: [{
-                label: 'Totals',
                 backgroundColor: '#5f65d8',
                 borderColor: 'rgb(255, 99, 132)',
                 data: totalsForBoth
@@ -802,7 +811,14 @@ const drawChart = async function(){
             legend: {
                 display: false
             },
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        suggestedMax: 100
+                    }
+                }]
+            }
         }
     });
 };

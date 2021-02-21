@@ -371,12 +371,6 @@ button.close{
     background-color: #5ece5c;
 }
 
-#chartsContainer{
-    /* height is edited in script */
-    height: inherit;
-    width: inherit;
-}
-
 #currentPasswordInput, #newPasswordInput, #usernameInput{
     display: block;
     margin: 0 auto 3px auto;
@@ -473,6 +467,25 @@ button.close{
 
 .settingsTable{
     margin: auto;
+}
+
+/* Charts ======================================================== */
+#chartsContainer{
+    /* height is edited in script */
+    height: inherit;
+    width: inherit;
+}
+
+.chartsButton{
+    background-color: #949494;
+    color: white;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 110px;
 }
 
 /* Intro  Modal ================================================== */

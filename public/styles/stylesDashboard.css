@@ -371,6 +371,12 @@ button.close{
     background-color: #5ece5c;
 }
 
+#chartsContainer{
+    /* height is edited in script */
+    height: inherit;
+    width: inherit;
+}
+
 #currentPasswordInput, #newPasswordInput, #usernameInput{
     display: block;
     margin: 0 auto 3px auto;

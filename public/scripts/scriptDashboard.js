@@ -778,8 +778,9 @@ const drawChart = async function(){
     nutritionBoth.forEach((item)=>{
         totalsForBoth.push(diaryTotals[item])
     });
-
-    console.log(diaryTotals)
+    //set chart container height (canvas inherits this)
+    const chartHeight = nutritionBoth.length * 30
+    $("#chartsContainer").css("height", chartHeight + "px")
 
     var chart = new Chart(ctx, {
         // The type of chart we want to create
@@ -798,7 +799,10 @@ const drawChart = async function(){
     
         // Configuration options go here
         options: {
-            // maintainAspectRatio: false
+            legend: {
+                display: false
+            },
+            maintainAspectRatio: false
         }
     });
 };

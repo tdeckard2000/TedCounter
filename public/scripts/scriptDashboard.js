@@ -774,6 +774,7 @@ const drawChart = async function(date, displayDataType){
     const nutritionBoth = nutritionTopFour.concat(nutritionOther);
     const fullDiary = await getDiary(date);//using today for place holder
     const diaryTotals = fullDiary.diaryTotals;
+
     //push each item total to array
     let totalsForBoth = [];
     if(displayDataType === "total"){
@@ -788,6 +789,7 @@ const drawChart = async function(date, displayDataType){
             totalsForBoth.push(percentage);
         });
     }
+
     //set chart container height (canvas inherits this)
     const chartHeight = nutritionBoth.length * 30
     $("#chartsContainer").css("height", chartHeight + "px")
@@ -812,6 +814,28 @@ const drawChart = async function(date, displayDataType){
                 display: false
             },
             maintainAspectRatio: false,
+            plugins: {
+                datalabels: {
+                    color: function(context){
+                        let index = context.dataIndex;
+                        let value = context.dataset.data[index];
+                        if(displayDataType === "percentage"){
+                            return value > 100 ? "#ff97c2"
+                                : value > 0 ? "white"
+                                : "transparent";
+                        }else if(displayDataType === "total"){
+                            return value > 0 ? "white"
+                                : "transparent";
+                        };
+                    },
+                    formatter: function(value, context){
+                        if(displayDataType === "percentage"){
+                            console.log(context.dataIndex)
+                            return value + "%";
+                        };
+                    }
+                }
+            },
             scales: {
                 xAxes: [{
                     ticks: {
@@ -1356,6 +1380,12 @@ $("#usernameInput").on("keyup", ()=>{
 $(".chartsButton").on("click", function(){
     $(".chartsButton").removeClass("chartsButtonSelected");
     $(this).addClass("chartsButtonSelected");
+    let buttonId = $(this).attr("id");
+    if(buttonId === "chartsButtonPercent"){
+        drawChart(currentDay, "percentage")
+    }else if(buttonId === "chartsButtonTotal"){
+        drawChart(currentDay, "total")
+    }
 });
 
 //######################## Event Listeners (Diary List) ########################

@@ -191,8 +191,8 @@
           <div id="chartsContainer">
             <canvas id="diaryChart"></canvas>
           </div>
-          <button class="btn chartsButton chartsButtonSelected">% of Goal</button>
-          <button class="btn chartsButton">Total</button>
+          <button id="chartsButtonPercent" class="btn chartsButton chartsButtonSelected">% of Goal</button>
+          <button id="chartsButtonTotal" class="btn chartsButton">Total</button>
         </div>
 
         <div class="preferencesPage hidden">
@@ -446,5 +446,6 @@
 <%-include('footer');-%>
 <!-- Charts.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <!-- Custom Script -->
 <script src="/scripts/scriptDashboard.js"></script>

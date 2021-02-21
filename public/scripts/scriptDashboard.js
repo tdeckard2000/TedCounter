@@ -1352,6 +1352,12 @@ $("#usernameInput").on("keyup", ()=>{
     $("#settingsSaveButton").prop("disabled", false);
 });
 
+//######################## Event Listeners (Charts Tab) ########################
+$(".chartsButton").on("click", function(){
+    $(".chartsButton").removeClass("chartsButtonSelected");
+    $(this).addClass("chartsButtonSelected");
+});
+
 //######################## Event Listeners (Diary List) ########################
 //Darken diary title when open
 $(".itemRow").on("click", function(){

@@ -2,6 +2,7 @@
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
+let chart;
 
 //All nutrition options
 const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber", "folic acid", "histidine",
@@ -290,7 +291,7 @@ $(window).on("load",()=>{
     //set user defined settings
     setAutoKeyboardSettings();
     //draw default chart
-    drawChart(currentDay, "percentage");
+    setupChart(currentDay, "percentage");
 });
 
 //######################## Functions (Other)########################
@@ -766,8 +767,7 @@ const noItemsPastDiary = function(){
 };
 
 //######################## Functions (Charts.js) ########################
-const drawChart = async function(date, displayDataType){
-    var ctx = document.getElementById('diaryChart').getContext('2d');
+const setupChart = async function(date, displayDataType){
     const nutritionGoals = userPreferences.nutritionGoals;
     const nutritionTopFour = userPreferences.nutritionTopFour;
     const nutritionOther = userPreferences.nutritionOther;
@@ -791,20 +791,28 @@ const drawChart = async function(date, displayDataType){
     }
 
     //set chart container height (canvas inherits this)
-    const chartHeight = nutritionBoth.length * 30
+    const chartHeight = nutritionBoth.length * 40
     $("#chartsContainer").css("height", chartHeight + "px")
 
-    var chart = new Chart(ctx, {
+    drawChart(nutritionBoth, totalsForBoth, displayDataType);
+};
+
+const drawChart = function(labels, data, displayDataType){
+    if(typeof chart != "undefined"){
+        chart.destroy();
+    }
+    let ctx = document.getElementById('diaryChart').getContext('2d');
+    chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'horizontalBar',
     
         // The data for our dataset
         data: {
-            labels: nutritionBoth,
+            labels: labels,
             datasets: [{
                 backgroundColor: '#5f65d8',
                 borderColor: 'rgb(255, 99, 132)',
-                data: totalsForBoth
+                data: data
             }]
         },
     
@@ -821,7 +829,6 @@ const drawChart = async function(date, displayDataType){
                         let index = context.dataIndex;
                         let value = context.dataset.data[index];
                         if(displayDataType === "percentage"){
-                            console.log(value)
                             return value > 100 ? "#ff97c2"
                                 : value > 0 ? "white"
                                 : "transparent";
@@ -832,7 +839,6 @@ const drawChart = async function(date, displayDataType){
                     },
                     formatter: function(value, context){
                         if(displayDataType === "percentage"){
-                            console.log(context.dataIndex)
                             return value + "%";
                         };
                     }
@@ -1384,9 +1390,9 @@ $(".chartsButton").on("click", function(){
     $(this).addClass("chartsButtonSelected");
     let buttonId = $(this).attr("id");
     if(buttonId === "chartsButtonPercent"){
-        drawChart(currentDay, "percentage")
+        setupChart(currentDay, "percentage")
     }else if(buttonId === "chartsButtonTotal"){
-        drawChart(currentDay, "total")
+        setupChart(currentDay, "total")
     }
 });
 

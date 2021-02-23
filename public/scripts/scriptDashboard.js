@@ -816,10 +816,12 @@ const drawChart = async function(date, displayDataType){
             maintainAspectRatio: false,
             plugins: {
                 datalabels: {
+                    clamp: true,
                     color: function(context){
                         let index = context.dataIndex;
                         let value = context.dataset.data[index];
                         if(displayDataType === "percentage"){
+                            console.log(value)
                             return value > 100 ? "#ff97c2"
                                 : value > 0 ? "white"
                                 : "transparent";

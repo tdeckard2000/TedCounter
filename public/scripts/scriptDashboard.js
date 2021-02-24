@@ -812,7 +812,40 @@ const drawChart = function(labels, data, displayDataType){
             datasets: [{
                 backgroundColor: '#5f65d8',
                 borderColor: 'rgb(255, 99, 132)',
-                data: data
+                data: data,
+                datalabels: {
+                    labels: {
+                        name: {
+                            align: 'right',
+                            anchor: 'start',
+                            color: 'black',
+                            formatter: function(value, context) {
+                                return context.chart.data.labels[context.dataIndex];
+                            }
+                        },
+                        value: {
+                            align: 'left',
+                            anchor: 'end',
+                            color: function(context){
+                                let index = context.dataIndex;
+                                let value = context.dataset.data[index];
+                                if(displayDataType === "percentage"){
+                                    return value > 100 ? "#ff97c2"
+                                        : value > 0 ? "white"
+                                        : "transparent";
+                                }else if(displayDataType === "total"){
+                                    return value > 0 ? "white"
+                                        : "transparent";
+                                };
+                            },
+                            formatter: function(value, context){
+                                if(displayDataType === "percentage"){
+                                    return value + "%";
+                                };
+                            }
+                        }
+                    }
+                }
             }]
         },
     
@@ -822,32 +855,29 @@ const drawChart = function(labels, data, displayDataType){
                 display: false
             },
             maintainAspectRatio: false,
-            plugins: {
-                datalabels: {
-                    clamp: true,
-                    color: function(context){
-                        let index = context.dataIndex;
-                        let value = context.dataset.data[index];
-                        if(displayDataType === "percentage"){
-                            return value > 100 ? "#ff97c2"
-                                : value > 0 ? "white"
-                                : "transparent";
-                        }else if(displayDataType === "total"){
-                            return value > 0 ? "white"
-                                : "transparent";
-                        };
-                    },
-                    formatter: function(value, context){
-                        if(displayDataType === "percentage"){
-                            return value + "%";
-                        };
-                    }
-                }
-            },
+            // plugins: {
+            //     datalabels: {
+            //         //datalabels settings
+            //     }
+            // },
             scales: {
                 xAxes: [{
+                    gridLines: {
+                        display: false,
+                        // drawBorder: false
+                    },
                     ticks: {
+                        beginAtZero: true,
                         suggestedMax: 100
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        display: false
                     }
                 }]
             }

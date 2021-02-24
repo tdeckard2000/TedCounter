@@ -290,8 +290,6 @@ $(window).on("load",()=>{
     userPreferences = $("#goals").data().userpreferences;
     //set user defined settings
     setAutoKeyboardSettings();
-    //draw default chart
-    setupChart(currentDay, "percentage");
 });
 
 //######################## Functions (Other)########################
@@ -1472,6 +1470,14 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings, .buttonToday").on("mouselea
         borderWidth: 0,
         opacity: .7
     }, 120);
+});
+
+//Settings button click
+$(".buttonSettings").on("click", ()=>{
+    //draw nutrition chart once (requires db query) if page has loaded
+    if(typeof(chart) === "undefined" && document.readyState === "complete"){
+        setupChart(currentDay, "percentage");
+    };
 });
 
 //######################## Event Listeners (Bottom Date Selector) ########################

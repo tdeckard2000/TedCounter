@@ -1412,7 +1412,7 @@ $("#usernameInput").on("keyup", ()=>{
     $("#settingsSaveButton").prop("disabled", false);
 });
 
-//######################## Event Listeners (Charts Tab) ########################
+//######################## Event Listeners (Charts Tab - Charts.js) ########################
 $(".chartsButton").on("click", function(){
     $(".chartsButton").removeClass("chartsButtonSelected");
     $(this).addClass("chartsButtonSelected");
@@ -1423,6 +1423,21 @@ $(".chartsButton").on("click", function(){
         setupChart(currentDay, "total")
     }
 });
+
+//Date Range Selection
+$("#chartDateRange").on("change", function(){
+    let selection = $(this).val(); //dropdown selection
+    let displayDataType = $(".chartsButtonSelected").attr("id");
+    //determine if percent or totals view is selected
+    if(displayDataType === "chartsButtonPercent"){
+        displayDataType = "percentage";
+    }else{
+        displayDataType = "total";
+    };
+    console.log(displayDataType) 
+    console.log(selection);
+    //FINISH THIS
+})
 
 //######################## Event Listeners (Diary List) ########################
 //Darken diary title when open

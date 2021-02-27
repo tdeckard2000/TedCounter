@@ -191,17 +191,18 @@
           <div id="chartsContainer">
             <canvas id="diaryChart"></canvas>
           </div>
-          <button id="chartsButtonPercent" class="chartsButton chartsButtonSelected">% of Goal</button>
-          <button id="chartsButtonTotal" class="chartsButton">Total</button>
-          <select name="chartDateRange" id="chartDateRange">
-            <option value="today">Today</option>
-            <option value="oneDay">1 Day</option>
-            <option value="oneWeek">1 Week</option>
-            <option value="oneMonth">1 Month</option>
-            <option value="threeMonths">3 Month</option>
-            <option value="oneYear">1 Year</option>
-            <option value="allTime">All</option>
-          </select>
+          <div class="chartButtonDiv1">
+            <button id="chartsButtonPercent" class="chartsButton chartsButtonSelected">Goal %</button>
+            <button id="chartsButtonTotal" class="chartsButton">Total</button>
+          </div>
+          <div class="chartButtonDiv2">
+            <button class="chartRangeButton" id="button1D">1D</button>
+            <button class="chartRangeButton" id="button1M">1M</button>
+            <button class="chartRangeButton" id="button1W">1W</button>
+            <button class="chartRangeButton" id="button3M">3M</button>
+            <button class="chartRangeButton" id="button1Y">1Y</button>
+            <button class="chartRangeButton" id="buttonAll">All</button>
+          </div>
         </div>
 
         <div class="preferencesPage hidden">

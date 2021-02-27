@@ -470,6 +470,14 @@ button.close{
 }
 
 /* Charts ======================================================== */
+#button1D{
+    border-radius: 5px 0 0 5px;
+}
+
+#buttonAll{
+    border-radius: 0 5px 5px 0;
+}
+
 #chartsButtonPercent{
     border-radius: 5px 0 0 5px;
     margin-right: -2px;
@@ -498,6 +506,11 @@ button.close{
     width: 90px;
 }
 
+.chartButtonDiv1, .chartButtonDiv2{
+    display: inline-block;
+    padding-top: 5px;
+}
+
 .chartsButton{
     background-color: #b5b5b5;
     border: none;
@@ -507,7 +520,7 @@ button.close{
     font-weight: 300;
     margin: 0px;
     padding: 6px;
-    width: 80px;
+    width: 70px;
 }
 
 .chartsButton:focus{
@@ -517,6 +530,29 @@ button.close{
 .chartsButtonSelected{
     background-color: #949494;
     color: black;
+    font-weight: 400;
+}
+
+.chartRangeButton{
+    background-color: #b5b5b5;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: .8rem;
+    font-weight: 300;
+    margin: 0 -5px 0 0;
+    padding: 6px 0;
+    width: 30px;
+}
+
+.chartRangeButton:focus{
+    outline: none;
+}
+
+.chartsRangeButtonSelected{
+    background-color: #949494;
+    color: black;
+    font-weight: 400;
 }
 
 /* Intro  Modal ================================================== */

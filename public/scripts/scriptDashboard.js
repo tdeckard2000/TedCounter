@@ -1425,9 +1425,13 @@ $(".chartsButton").on("click", function(){
 });
 
 //Date Range Selection
-$("#chartDateRange").on("change", function(){
-    let selection = $(this).val(); //dropdown selection
+$(".chartRangeButton").on("click", function(){
+    //highlight selection
+    $(".chartRangeButton").removeClass("chartsRangeButtonSelected");
+    $(this).addClass("chartsRangeButtonSelected");
+    let selection = $(this).attr("id"); //dropdown selection
     let displayDataType = $(".chartsButtonSelected").attr("id");
+    
     //determine if percent or totals view is selected
     if(displayDataType === "chartsButtonPercent"){
         displayDataType = "percentage";

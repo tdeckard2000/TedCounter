@@ -1454,7 +1454,7 @@ $(".chartRangeButton").on("click", function(){
                             selection === "button1Y" ? 365 : 
                             userActivationDate //for All
         //calculate start date
-        let startDate = currentDay;
+        let startDate = new Date();
         startDate.setDate(startDate.getDate() - subtractNumDays);
         console.log(startDate)
     }

@@ -1434,6 +1434,7 @@ $(".chartRangeButton").on("click", function(){
     $(".chartRangeButton").removeClass("chartsRangeButtonSelected");
     $(this).addClass("chartsRangeButtonSelected");
     let selection = $(this).attr("id"); //dropdown selection
+    let startDate = new Date();
     let displayDataType = $(".chartsButtonSelected").attr("id");
     
     //determine if percent or totals view is selected
@@ -1445,7 +1446,7 @@ $(".chartRangeButton").on("click", function(){
 
     if(selection === "button1D"){
         //only return data for today
-        setupChart(currentDay, displayDataType);
+        setupChart(startDate, displayDataType);
     }else{
         //determine days to go back
         let subtractNumDays = selection === "button1W" ? 7 :
@@ -1454,7 +1455,6 @@ $(".chartRangeButton").on("click", function(){
                             selection === "button1Y" ? 365 : 
                             userActivationDate //for All
         //calculate start date
-        let startDate = new Date();
         startDate.setDate(startDate.getDate() - subtractNumDays);
         console.log(startDate)
     }

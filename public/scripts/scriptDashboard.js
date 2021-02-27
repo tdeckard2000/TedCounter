@@ -2,6 +2,7 @@
 
 //Variable for storing user nutrition and other defaults for use in script
 let userPreferences = {};
+let userActivationDate = 0; //need this data
 let chart;
 
 //All nutrition options
@@ -853,11 +854,13 @@ const drawChart = function(labels, data, displayDataType){
                 display: false
             },
             maintainAspectRatio: false,
-            // plugins: {
-            //     datalabels: {
-            //         //datalabels settings
-            //     }
-            // },
+            plugins: {
+                datalabels: {
+                    font: {
+                        weight: 600
+                    }
+                }
+            },
             scales: {
                 xAxes: [{
                     gridLines: {
@@ -1413,6 +1416,7 @@ $("#usernameInput").on("keyup", ()=>{
 });
 
 //######################## Event Listeners (Charts Tab - Charts.js) ########################
+//View Selection
 $(".chartsButton").on("click", function(){
     $(".chartsButton").removeClass("chartsButtonSelected");
     $(this).addClass("chartsButtonSelected");
@@ -1438,10 +1442,29 @@ $(".chartRangeButton").on("click", function(){
     }else{
         displayDataType = "total";
     };
+
+    if(selection === "button1D"){
+        //only return data for today
+        setupChart(currentDay, displayDataType);
+    }else{
+        //determine days to go back
+        let subtractNumDays = selection === "button1W" ? 7 :
+                            selection === "button1M" ? 30 :
+                            selection === "button3M" ? 90 :
+                            selection === "button1Y" ? 365 : 
+                            userActivationDate //for All
+        //calculate start date
+        let startDate = currentDay;
+        startDate.setDate(startDate.getDate() - subtractNumDays);
+        console.log(startDate)
+    }
+
     console.log(displayDataType) 
     console.log(selection);
-    //FINISH THIS
-})
+   
+    // setupChart()
+
+});
 
 //######################## Event Listeners (Diary List) ########################
 //Darken diary title when open

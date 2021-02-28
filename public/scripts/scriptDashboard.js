@@ -728,7 +728,14 @@ const updatePastDiary = async function(diaryDate){
 
 //get diary list and totals
 const getDiary = function(diaryDate){
-    diaryDate = diaryDate.toISOString();
+    //takes single date or date range [start, end]
+    if(diaryDate.length > 1){
+        diaryDate[0] = diaryDate[0].toISOString();
+        diaryDate[1] = diaryDate[1].toISOString();
+    }else{
+        diaryDate = diaryDate.toISOString();
+    };
+
     return new Promise((resolve, reject)=>{
         $.ajax({
             type: 'GET',
@@ -1433,9 +1440,10 @@ $(".chartRangeButton").on("click", function(){
     //highlight selection
     $(".chartRangeButton").removeClass("chartsRangeButtonSelected");
     $(this).addClass("chartsRangeButtonSelected");
+    let dateRange = []
+    let displayDataType = $(".chartsButtonSelected").attr("id");
     let selection = $(this).attr("id"); //dropdown selection
     let startDate = new Date();
-    let displayDataType = $(".chartsButtonSelected").attr("id");
     
     //determine if percent or totals view is selected
     if(displayDataType === "chartsButtonPercent"){
@@ -1456,14 +1464,11 @@ $(".chartRangeButton").on("click", function(){
                             userActivationDate //for All
         //calculate start date
         startDate.setDate(startDate.getDate() - subtractNumDays);
-        console.log(startDate)
+        //save date range
+        dateRange = [startDate, new Date()]
+        //build chart
+        setupChart(dateRange, displayDataType);
     }
-
-    console.log(displayDataType) 
-    console.log(selection);
-   
-    // setupChart()
-
 });
 
 //######################## Event Listeners (Diary List) ########################

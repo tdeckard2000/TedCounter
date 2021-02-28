@@ -15,6 +15,7 @@ const request = require('request');
 // const { data } = require('jquery');
 // const { name } = require('ejs');
 const newUserFoodItems = require('./public/scripts/newUserFoodItems.js');
+const { start } = require('repl');
 
 require('dotenv').config();
 
@@ -371,12 +372,23 @@ const findFoodItems = function(userDocId){
   });
 }
 
-// Return user diary items based on day
+// Return Diary Items By Date OR Date Range [start, end]
 const findDiaryItems = function(userDocId, usrDay, timezoneOffset, orderedObjects){
-  //ordered objects is for passing data down promise chain
-  usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
-  startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
-  endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
+  //orderedObjects is for passing data down promise chain
+  let usrDayAdj, startOfDay, endOfDay;
+
+  //if date range [start, end]
+  if(Array.isArray(usrDay)){
+    usrDayAdj = adjustTime(usrDay[0], timezoneOffset); //start date
+    startOfDay = (moment(usrDayAdj).startOf('day')).toISOString();
+    usrDayAdj = adjustTime(usrDay[1], timezoneOffset); //end date
+    endOfDay = (moment(usrDayAdj).endOf('day')).toISOString();
+  }else{
+    usrDayAdj = adjustTime(usrDay, timezoneOffset); //adjust time to user's timezone to determine day.
+    startOfDay = (moment(usrDayAdj).startOf('day')).toISOString(); //get beginning of day
+    endOfDay = (moment(usrDayAdj).endOf('day')).toISOString(); //get end of day
+  }
+
   //add timezone offset to start and end of day, since DB times are UTC.
   startOfDay = (moment(startOfDay).add(timezoneOffset, 'hours')).toISOString();
   endOfDay = (moment(endOfDay).add(timezoneOffset, 'hours')).toISOString();
@@ -1050,7 +1062,6 @@ app.get("/getDiary", async (req, res)=>{
   const diaryDate = req.query.diaryDate;
   const userId = req.session.userDocId;
   const timezoneOffset = req.session.timezoneOffset;
-
   const diaryList = await findDiaryItems(userId, diaryDate, timezoneOffset, null);
   const diaryTotals = calculateNutritionTotals(diaryList[0]);
   

@@ -344,10 +344,12 @@ const calculateNutritionTotals = function(foodDiary){
     "vitaminB1": 0, "vitaminB2": 0, "vitaminB3": 0, "vitaminB5": 0, "vitaminB6": 0, "vitaminB7": 0, "vitaminB9": 0, "vitaminB12": 0,
     "vitaminC": 0, "vitaminD2": 0, "vitaminD3": 0, "vitaminE": 0, "vitaminK": 0, "zinc": 0
   };
-
+  let counter = 0
   //Loop through each item in diary
   foodDiary.forEach(diaryItem =>{
     //total each nutrition option
+    console.log(counter)
+    counter ++
     nutritionOptions.forEach(nutrient =>{
       if(diaryItem.item[nutrient]){
         diaryTotals[nutrient] += diaryItem.item[nutrient];
@@ -1060,12 +1062,17 @@ app.get('/disclaimer', (req, res)=>{
 //Get Past Diary Items
 app.get("/getDiary", async (req, res)=>{
   const diaryDate = req.query.diaryDate;
+  const returnOnlyTotals = req.query.returnOnlyTotals ? true : false;
   const userId = req.session.userDocId;
   const timezoneOffset = req.session.timezoneOffset;
   const diaryList = await findDiaryItems(userId, diaryDate, timezoneOffset, null);
   const diaryTotals = calculateNutritionTotals(diaryList[0]);
-  
-  res.json({diaryList: diaryList[0], diaryTotals: diaryTotals});
+
+  if(returnOnlyTotals === true){
+    res.json({diaryTotals: diaryTotals});
+  }else{
+    res.json({diaryList: diaryList[0], diaryTotals: diaryTotals});
+  };
 });
 
 //Handle Logout

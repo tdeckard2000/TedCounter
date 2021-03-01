@@ -727,8 +727,9 @@ const updatePastDiary = async function(diaryDate){
 };
 
 //get diary list and totals
-const getDiary = function(diaryDate){
+const getDiary = function(diaryDate, returnOnlyTotals){
     //takes single date or date range [start, end]
+    //if returnOnlyTotals is True, don't return diary items
     if(diaryDate.length > 1){
         diaryDate[0] = diaryDate[0].toISOString();
         diaryDate[1] = diaryDate[1].toISOString();
@@ -736,11 +737,17 @@ const getDiary = function(diaryDate){
         diaryDate = diaryDate.toISOString();
     };
 
+    let data = {diaryDate: diaryDate}
+    
+    if(returnOnlyTotals === true){
+        data.returnOnlyTotals = true;
+    };
+
     return new Promise((resolve, reject)=>{
         $.ajax({
             type: 'GET',
             url: "./getDiary",
-            data: {diaryDate: diaryDate}
+            data: data
         }).done((data)=>{
             let diaryList = data.diaryList;
             let diaryTotals = data.diaryTotals;
@@ -778,7 +785,7 @@ const setupChart = async function(date, displayDataType){
     const nutritionTopFour = userPreferences.nutritionTopFour;
     const nutritionOther = userPreferences.nutritionOther;
     const nutritionBoth = nutritionTopFour.concat(nutritionOther);
-    const fullDiary = await getDiary(date);//using today for place holder
+    const fullDiary = await getDiary(date, true);//using today for place holder
     const diaryTotals = fullDiary.diaryTotals;
 
     //push each item total to array

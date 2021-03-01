@@ -1465,10 +1465,11 @@ $(".chartRangeButton").on("click", function(){
     }else{
         //determine days to go back
         let subtractNumDays = selection === "button1W" ? 7 :
+                            selection === "button2W" ? 14 :
                             selection === "button1M" ? 30 :
+                            selection === "button2M" ? 60 :
                             selection === "button3M" ? 90 :
-                            selection === "button1Y" ? 365 : 
-                            userActivationDate //for All
+                            0 //shouldn't get here
         //calculate start date
         startDate.setDate(startDate.getDate() - subtractNumDays);
         //save date range
@@ -1531,7 +1532,14 @@ $(".buttonSettings").on("click", ()=>{
     //draw nutrition chart once (requires db query) if page has loaded
     if(typeof(chart) === "undefined" && document.readyState === "complete"){
         setupChart(currentDay, "percentage");
-    };
+    }else if(typeof(chart) === "undefined" && document.readyState !== "complete"){
+        setTimeout(()=>{
+            if(typeof(chart) === "undefined" && document.readyState === "complete"){
+            setupChart(currentDay, "percentage")
+            }
+            console.log("savedIt!")
+        }, 5000)
+    }
 });
 
 //######################## Event Listeners (Bottom Date Selector) ########################

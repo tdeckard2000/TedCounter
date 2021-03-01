@@ -4,6 +4,7 @@
 let userPreferences = {};
 let userActivationDate = 0; //need this data
 let chart;
+let chartDisplayDate;
 
 //All nutrition options
 const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber", "folic acid", "histidine",
@@ -780,7 +781,8 @@ const noItemsPastDiary = function(){
 };
 
 //######################## Functions (Charts.js) ########################
-const setupChart = async function(date, displayDataType){
+const setupChart = async function(date, numDays, displayDataType){
+    //date: day or range, numDays: days covered, displayDateType: % or total
     const nutritionGoals = userPreferences.nutritionGoals;
     const nutritionTopFour = userPreferences.nutritionTopFour;
     const nutritionOther = userPreferences.nutritionOther;
@@ -791,13 +793,16 @@ const setupChart = async function(date, displayDataType){
     //push each item total to array
     let totalsForBoth = [];
     if(displayDataType === "total"){
+        let total = 0;
         nutritionBoth.forEach((item)=>{
-            totalsForBoth.push(diaryTotals[item])
+            total = diaryTotals[item]/numDays;
+            total = Math.round(total);
+            totalsForBoth.push(total);
         });
     }else if(displayDataType === "percentage"){
         let percentage = 0;
         nutritionBoth.forEach((item)=>{
-            percentage = (diaryTotals[item] / nutritionGoals[item]) * 100;
+            percentage = (((diaryTotals[item] / nutritionGoals[item])) / numDays) * 100;
             percentage = Math.round(percentage);
             totalsForBoth.push(percentage);
         });
@@ -1436,9 +1441,9 @@ $(".chartsButton").on("click", function(){
     $(this).addClass("chartsButtonSelected");
     let buttonId = $(this).attr("id");
     if(buttonId === "chartsButtonPercent"){
-        setupChart(currentDay, "percentage")
+        setupChart(currentDay, 1, "percentage")
     }else if(buttonId === "chartsButtonTotal"){
-        setupChart(currentDay, "total")
+        setupChart(currentDay, 1, "total")
     }
 });
 
@@ -1461,7 +1466,7 @@ $(".chartRangeButton").on("click", function(){
 
     if(selection === "button1D"){
         //only return data for today
-        setupChart(startDate, displayDataType);
+        setupChart(startDate, 1, displayDataType);
     }else{
         //determine days to go back
         let subtractNumDays = selection === "button1W" ? 7 :
@@ -1475,7 +1480,7 @@ $(".chartRangeButton").on("click", function(){
         //save date range
         dateRange = [startDate, new Date()]
         //build chart
-        setupChart(dateRange, displayDataType);
+        setupChart(dateRange, subtractNumDays, displayDataType);
     }
 });
 
@@ -1531,15 +1536,15 @@ $(".buttonQuickAdd, .buttonAddItem, .buttonSettings, .buttonToday").on("mouselea
 $(".buttonSettings").on("click", ()=>{
     //draw nutrition chart once (requires db query) if page has loaded
     if(typeof(chart) === "undefined" && document.readyState === "complete"){
-        setupChart(currentDay, "percentage");
-    }else if(typeof(chart) === "undefined" && document.readyState !== "complete"){
-        setTimeout(()=>{
-            if(typeof(chart) === "undefined" && document.readyState === "complete"){
-            setupChart(currentDay, "percentage")
-            }
-            console.log("savedIt!")
-        }, 5000)
-    }
+        setupChart(currentDay, 1, "percentage");
+        chartDisplayDate = new Date(currentDay);
+    }else if(Date.parse(currentDay.toDateString()) !== Date.parse(chartDisplayDate.toDateString())){
+        //if date doesn't match day currently shown on chart
+        let selectedButton = $(".chartsButtonSelected").attr("id");
+        selectedButton = selectedButton == "chartsButtonPercent" ? "percentage" : "total"
+        setupChart(currentDay, 1, selectedButton);
+        chartDisplayDate = new Date(currentDay);
+    };
 });
 
 //######################## Event Listeners (Bottom Date Selector) ########################
@@ -1566,6 +1571,11 @@ $("#diaryBackButton").on("click", ()=>{
     //update pastDiary view
     updatePastDiary(currentDay);
 
+    //set chart date range to D1 and disable
+    $(".chartRangeButton").prop("disabled", true)
+    .removeClass("chartsRangeButtonSelected");
+    $("#button1D").addClass("chartsRangeButtonSelected");
+
 });
 
 //Forward button click
@@ -1582,6 +1592,11 @@ $("#diaryForwardButton").on("click", ()=>{
         $("#diaryTodayButton").text(dateText);
             //update pastDiary view
             updatePastDiary(currentDay);
+        
+            //set chart date range to D1 and disable
+            $(".chartRangeButton").prop("disabled", true)
+            .removeClass("chartsRangeButtonSelected");
+            $("#button1D").addClass("chartsRangeButtonSelected");
 
     }else{
         //hide forward button, show select buttons, show present diary
@@ -1593,10 +1608,13 @@ $("#diaryForwardButton").on("click", ()=>{
         $(".todayView").removeClass("hidden");
         $(".buttonToday").addClass("hidden");
         $(".pastView").addClass("hidden");
+
+        //Enable chart date range buttons
+        $(".chartRangeButton").prop("disabled", false);
     };
 });
 
-//Cancel button click
+//Cancel Button Click
 $(".buttonToday").on("click", ()=>{
     //hide forward button, show select buttons, show present diary
     $("#diaryForwardButton").css("opacity", 0);
@@ -1608,4 +1626,7 @@ $(".buttonToday").on("click", ()=>{
     $(".buttonToday").addClass("hidden");
     $(".pastView").addClass("hidden");
     currentDay = new Date();
+
+    //Enable chart date range buttons
+    $(".chartRangeButton").prop("disabled", false);
 });

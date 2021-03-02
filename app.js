@@ -167,6 +167,15 @@ const userSchema = new mongoose.Schema({
   'settings':{
     'autoKeyboardItemSelect': Boolean,
     'autoKeyboardQuickAdd': Boolean
+  },
+  'quickTips':{
+    'openPantry': Boolean,
+    'addDiaryItem': Boolean,
+    'tapTile': Boolean,
+    'createNewItem': Boolean,
+    'quickAdd': Boolean,
+    'diaryHistory': Boolean,
+    'chartsAndSettings': Boolean
   }
 });
 
@@ -583,6 +592,15 @@ const addNewUser = function(name, email, pHashed){
     "settings":{
       'autoKeyboardItemSelect': false,
       'autoKeyboardQuickAdd': false
+    },
+    'quickTips':{
+      'openPantry': false,
+      'addDiaryItem': false,
+      'tapTile': false,
+      'createNewItem': false,
+      'quickAdd': false,
+      'diaryHistory': false,
+      'chartsAndSettings': false
     }
   });
 
@@ -959,7 +977,8 @@ app.get('/dashboard', (req, res)=>{
   const nutritionOther = req.session.nutritionOther;
   const nutritionGoals = req.session.nutritionGoals;
   const settings = req.session.settings;
-  const userPreferences = JSON.stringify({nutritionTopFour, nutritionOther, nutritionGoals, settings});
+  const quickTips = req.session.quickTips;
+  const userPreferences = JSON.stringify({nutritionTopFour, nutritionOther, nutritionGoals, settings, quickTips});
 
   if(!req.session.userDocId){
     res.redirect('/');
@@ -1104,6 +1123,7 @@ app.post('/signIn', (req, res)=>{
       req.session.nutritionOther = result[1].nutritionOther;
       req.session.nutritionGoals = result[1].nutritionGoals;
       req.session.settings = result[1].settings;
+      req.session.quickTips = result[1].quickTips;
       res.redirect('/dashboard')
     }else{
       console.warn('Error During Sign In')

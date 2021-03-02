@@ -549,6 +549,10 @@ button.close{
     outline: none;
 }
 
+.chartRangeButtonDisabled{
+    color: #cecece;
+}
+
 .chartsRangeButtonSelected{
     background-color: #949494;
     color: black;

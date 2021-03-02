@@ -1575,6 +1575,7 @@ $("#diaryBackButton").on("click", ()=>{
     $(".chartRangeButton").prop("disabled", true)
     .removeClass("chartsRangeButtonSelected");
     $("#button1D").addClass("chartsRangeButtonSelected");
+    $(".chartRangeButton").addClass("chartRangeButtonDisabled");
 
 });
 

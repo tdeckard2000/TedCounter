@@ -1465,9 +1465,13 @@ $(".chartRangeButton").on("click", function(){
     };
 
     if(selection === "button1D"){
+        //hide daily average note
+        $("#dailyAverageNote").addClass("hidden");
         //only return data for today
         setupChart(startDate, 1, displayDataType);
     }else{
+        //show daily average note
+        $("#dailyAverageNote").removeClass("hidden");
         //determine days to go back
         let subtractNumDays = selection === "button1W" ? 7 :
                             selection === "button2W" ? 14 :
@@ -1576,11 +1580,16 @@ $("#diaryBackButton").on("click", ()=>{
     .removeClass("chartsRangeButtonSelected");
     $("#button1D").addClass("chartsRangeButtonSelected");
     $(".chartRangeButton").addClass("chartRangeButtonDisabled");
-
+    $("#dailyAverageNote").addClass("hidden");
 });
 
 //Forward button click
-$("#diaryForwardButton").on("click", ()=>{
+$("#diaryForwardButton").on("click", function(){
+
+    //ignore clicks if button hidden
+    if($(this).css("opacity") === "0"){
+        return
+    };
 
     let milliseconds = (currentDay.getTime() + day); //add a day (in ms)
     currentDay = new Date(milliseconds); //convert ms to date
@@ -1593,16 +1602,11 @@ $("#diaryForwardButton").on("click", ()=>{
         $("#diaryTodayButton").text(dateText);
             //update pastDiary view
             updatePastDiary(currentDay);
-        
-            //set chart date range to D1 and disable
-            $(".chartRangeButton").prop("disabled", true)
-            .removeClass("chartsRangeButtonSelected");
-            $("#button1D").addClass("chartsRangeButtonSelected");
 
     }else{
         //hide forward button, show select buttons, show present diary
-        $("#diaryForwardButton").css("opacity", 0);
-        $("#diaryForwardButton").css("cursor", "default");
+        $(this).css("opacity", 0);
+        $(this).css("cursor", "default");
         $("#diaryTodayButton").text("Today");
         $(".buttonAddItem").removeClass("hidden");
         $(".buttonQuickAdd").removeClass("hidden");
@@ -1612,6 +1616,7 @@ $("#diaryForwardButton").on("click", ()=>{
 
         //Enable chart date range buttons
         $(".chartRangeButton").prop("disabled", false);
+        $(".chartRangeButton").removeClass("chartRangeButtonDisabled");
     };
 });
 
@@ -1630,4 +1635,5 @@ $(".buttonToday").on("click", ()=>{
 
     //Enable chart date range buttons
     $(".chartRangeButton").prop("disabled", false);
+    $(".chartRangeButton").removeClass("chartRangeButtonDisabled");
 });

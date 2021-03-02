@@ -88,6 +88,28 @@
 
 <!-- BootStrap Modals ==================== -->
 
+<!-- Quick Tips -->
+<div class="modal" id="quickTip" tabindex="-1" role="dialog">
+  <div class="modalQuickTip modal-dialog modal-dialog-centered">
+    <form class="quickAddForm" action="./quickAdd" method="POST">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Quick Tip</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Quick Tip Info Here</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bottomButton closeTip" data-dismiss="modal">Close</button>
+          <button type="submit" name="dontShowTipAgain" class="btn dontShowTipAgain bottomButton">Don't Show Again</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- Quick Add -->
 <div class="modal" id="quickAdd" tabindex="-1" role="dialog">
   <div class="modalQuickAdd modal-dialog modal-dialog-centered">

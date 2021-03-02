@@ -5,6 +5,7 @@ let userPreferences = {};
 let userActivationDate = 0; //need this data
 let chart;
 let chartDisplayDate;
+let quickTips;
 
 //All nutrition options
 const nutritionOptions = ["caffeine", "calcium", "calories", "carbs", "chloride", "choline", "cholesterol", "chromium", "copper", "fat", "fiber", "folic acid", "histidine",
@@ -290,6 +291,7 @@ const keyShortForm = {
 $(window).on("load",()=>{
     //store user nutrition info in window from DOM 
     userPreferences = $("#goals").data().userpreferences;
+    quickTips = userPreferences.quickTips;
     //set user defined settings
     setAutoKeyboardSettings();
 });
@@ -1636,4 +1638,45 @@ $(".buttonToday").on("click", ()=>{
     //Enable chart date range buttons
     $(".chartRangeButton").prop("disabled", false);
     $(".chartRangeButton").removeClass("chartRangeButtonDisabled");
+});
+
+//######################## Event Listeners (Quick Tips) ########################
+
+$(window).on("load",()=>{
+    //Open Pantry #1
+    if(!quickTips.openPantry){
+        console.log("quickTip: openPantry")
+    };
+
+    //Tap Tile #3
+    if(!quickTips.tapTile && quickTips.openPantry && $("div.itemRowContainer").length !== 0){
+        console.log("quickTip: expandTile")
+    };
+
+     //Add New Pantry Item #4
+     if(!quickTips.createNewItem && quickTips.openPantry && quickTips.tapTile){
+        console.log("quickTip: createNewItem")
+    };
+
+    //Quick Add #5
+    if(!quickTips.quickAdd && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem){
+        console.log("quickTip: quickAdd")
+    };
+
+    //View Past Diaries #6
+    if(!quickAdd.diaryHistory && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd){
+        console.log("quickTip: diaryHistory")
+    };
+
+    //View Charts & Settings #7
+    if(!quickAdd.chartsAndSettings && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd && quickAdd.diaryHistory){
+        console.log("quickTip: chartsAndSettings")
+    };
+});
+
+//Add Item To Daily Diary #2
+$(".buttonAddItem").on("click", ()=>{
+    if(!quickTips.addDiaryItem){
+        console.log("quickTip: addDiaryItem")
+    };
 });

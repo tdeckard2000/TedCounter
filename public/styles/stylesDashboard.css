@@ -715,8 +715,41 @@ button.close{
 }
 
 .editGoalsForm{
+    margin: auto;
     max-width: 500px;
     width: 100vw;
+}
+
+/* Quick Tips Modal ============================================== */
+#quickTip .modal-content{
+    margin: auto;
+    max-width: 350px;
+}
+
+.gotItButton{
+    background-color: #464646;
+    border: 0;
+    bottom: 4px;
+    color: #fff;
+    margin: auto;
+    position: relative;
+    width: 60%;
+}
+
+.quickTipBody{
+    margin: 10px 0 0 0;
+    text-align: center;
+}
+
+.quickTipCounter{
+    display: block;
+    margin: 0 -4px -13px 0;
+    text-align: right;
+}
+
+.quickTipImage{
+    display: block;
+    text-align: center;
 }
 
 /* Dashboard Bottom Bar ========================================== */

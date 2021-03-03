@@ -1456,7 +1456,7 @@ $(".chartRangeButton").on("click", function(){
     $(this).addClass("chartsRangeButtonSelected");
     let dateRange = []
     let displayDataType = $(".chartsButtonSelected").attr("id");
-    let selection = $(this).attr("id"); //dropdown selection
+    let selection = $(this).attr("id"); //range selection
     let startDate = new Date();
     
     //determine if percent or totals view is selected
@@ -1645,7 +1645,10 @@ $(".buttonToday").on("click", ()=>{
 $(window).on("load",()=>{
     //Open Pantry #1
     if(!quickTips.openPantry){
-        console.log("quickTip: openPantry")
+        $(".quickTipsTitle").html("The Pantry")
+        $(".quickTipImage").append("<img src='./files/itemSelectButton.svg' alt='Item Library' style='height:40px; filter: contrast(0.1);'>")
+        $(".quickTipBody").append("Tap this button to open your pantry. From there, you can add items to today's food diary.")
+        // $("#quickTip").modal("toggle");
     };
 
     //Tap Tile #3

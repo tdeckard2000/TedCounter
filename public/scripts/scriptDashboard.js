@@ -287,6 +287,17 @@ const keyShortForm = {
     "zinc": "Zn"
   };
 
+//Quick Tip Keys
+keyQuickTip = {
+    1: "openPantry",
+    2: "addDiaryItem",
+    3: "tapTile",
+    4: "createNewItem",
+    5: "quickAdd",
+    6: "diaryHistory",
+    7: "chartsAndSettings"
+};
+
 //When page loads
 $(window).on("load",()=>{
     //store user nutrition info in window from DOM 
@@ -906,6 +917,20 @@ const drawChart = function(labels, data, displayDataType){
         }
     });
 };
+
+//######################## Functions (Charts.js) ########################
+//Update Quick Tip Progress in DB
+const updateQuickTipProgress = function(quickTipName){
+    console.log(quickTipName);
+
+    $.ajax({
+        method: "POST",
+        url: "./updateQuickTipProgress",
+        data: {quickTipName: quickTipName} 
+    }).done((data)=>{
+        console.log(data)
+    });
+}
 
 //######################## Event Listeners (Select Item Modal and Quick Add modal) ########################
 
@@ -1648,7 +1673,8 @@ $(window).on("load",()=>{
         $(".quickTipsTitle").html("The Pantry")
         $(".quickTipImage").append("<img src='./files/itemSelectButton.svg' alt='Item Library' style='height:40px; filter: contrast(0.1);'>")
         $(".quickTipBody").append("Tap this button to open your pantry. From there, you can add items to today's food diary.")
-        // $("#quickTip").modal("toggle");
+        $("#quickTip").attr("data-number", 1)
+        $("#quickTip").modal("toggle");
     };
 
     //Tap Tile #3
@@ -1683,3 +1709,12 @@ $(".buttonAddItem").on("click", ()=>{
         console.log("quickTip: addDiaryItem")
     };
 });
+
+//Got it button
+$(".gotItButton").on("click", ()=>{
+    let quickTipNumber = $("#quickTip").attr("data-number");
+    let quickTipName = keyQuickTip[quickTipNumber];
+
+    //update in DB
+    updateQuickTipProgress(quickTipName);
+})

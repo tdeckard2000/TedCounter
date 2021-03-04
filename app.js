@@ -950,7 +950,16 @@ const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, 
       };
     });
   });
+};
 
+//Update Quick Tip Progress
+const updateQuickTipProgress = function(userDocId, quickTipName){
+  const path = "quickTips." + quickTipName;
+  user.updateOne({_id: userDocId}, {"quickTips.openPantry": true}, (err, doc)=>{
+    if(err){
+      console.err(doc)
+    };
+  });
 };
 
 // =======================================================================
@@ -1376,6 +1385,18 @@ app.post("/updateUserPreferences", (req, res)=>{
       res.status(200).send({settingsChanged:true})
     }
   })
+});
+
+app.post("/updateQuickTipProgress", (req, res)=>{
+  const quickTipToUpdate = req.body.quickTipName;
+  const userDocId = req.session.userDocId;
+
+  //update DB
+  updateQuickTipProgress(userDocId, quickTipToUpdate);
+  //update Session
+  req.session.quickTips[quickTipToUpdate] = true;
+
+  res.status(200).send("complete");
 });
 
 // =======================================================================

@@ -954,10 +954,11 @@ const updateUserPreferences = function(userId, newUsername, keyboardItemSelect, 
 
 //Update Quick Tip Progress
 const updateQuickTipProgress = function(userDocId, quickTipName){
-  const path = "quickTips." + quickTipName;
-  user.updateOne({_id: userDocId}, {"quickTips.openPantry": true}, (err, doc)=>{
+  let pathToUpdate = "quickTips." + quickTipName;
+  //brackets around key to evaluate variable [pathToUpdate]
+  user.updateOne({_id: userDocId}, {[pathToUpdate]: true}, (err, doc)=>{
     if(err){
-      console.err(doc)
+      console.warn(err)
     };
   });
 };

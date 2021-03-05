@@ -336,6 +336,10 @@ button.close{
     width: 150px; 
 }
 
+#quickTip{
+    z-index: 1055;
+}
+
 .newItemDiv{
     max-height: 360px;
     overflow: auto;

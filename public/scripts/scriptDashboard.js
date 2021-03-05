@@ -788,7 +788,7 @@ const noItemsPastDiary = function(){
     let numberListItems = listItems.length;
     if(!numberListItems){
         $(".itemListContainer.pastView").append(
-            "<div class='noItemsDiv'>No Items</div>"
+            "<div class='noItemsDiv'>No items for this day.</div>"
         );
     };
 };
@@ -1668,45 +1668,81 @@ $(".buttonToday").on("click", ()=>{
 //######################## Event Listeners (Quick Tips) ########################
 
 $(window).on("load",()=>{
-    //Open Pantry #1
-    if(!quickTips.openPantry){
-        $(".quickTipsTitle").html("The Pantry")
-        $(".quickTipImage").append("<img src='./files/itemSelectButton.svg' alt='Item Library' style='height:40px; filter: contrast(0.1);'>")
-        $(".quickTipBody").append("Tap this button to open your pantry. From there, you can add items to today's food diary.")
-        $("#quickTip").attr("data-number", 1)
-        $("#quickTip").modal("toggle");
-    };
 
-    //Tap Tile #3
-    if(!quickTips.tapTile && quickTips.openPantry && $("div.itemRowContainer").length !== 0){
-        console.log("quickTip: expandTile")
-    };
+    //Before doing anything, check if user has been setup and some quick tips have not been completed
+    if(Object.keys(userPreferences.nutritionGoals.length > 0) && Object.values(userPreferences.quickTips).includes(false)){
 
-     //Add New Pantry Item #4
-     if(!quickTips.createNewItem && quickTips.openPantry && quickTips.tapTile){
-        console.log("quickTip: createNewItem")
-    };
+        //Open Pantry #1
+        if(!quickTips.openPantry){
+            $(".quickTipsTitle").html("The Pantry");
+            $(".quickTipImage").append("<img src='./files/itemSelectButton.svg' alt='Item Library' style='height:40px; filter: contrast(0.1);'>");
+            $(".quickTipBody").append("Tap this button to open your pantry. From there, you can add items to today's food diary.");
+            $("#quickTip").attr("data-number", 1);
+            $("#quickTip").modal("toggle");
+        };
 
-    //Quick Add #5
-    if(!quickTips.quickAdd && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem){
-        console.log("quickTip: quickAdd")
-    };
+        //Tap Tile #3
+        if(!quickTips.tapTile && quickTips.openPantry && quickTips.addDiaryItem && $("div.itemRowContainer").length >= 0){
+            //Clear existing text
+            $(".quickTipImage").empty();
+            $(".quickTipBody").empty();
+            //Setup modal
+            $(".quickTipsTitle").html("Duplicate and Remove");
+            $(".quickTipImage").append("<img src='./files/duplicateIcon.svg' style='height:35px;'><img src='./files/trashCan.svg' style='height:35px; margin-left: 40px'>");
+            $(".quickTipBody").append("Tap on an item in your diary to easily duplicate or remove it.");
+            $(".quickTipCounter").text("3 of 7");
+            $("#quickTip").attr("data-number", 3);
+            $("#quickTip").modal("toggle");
+        };
 
-    //View Past Diaries #6
-    if(!quickAdd.diaryHistory && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd){
-        console.log("quickTip: diaryHistory")
-    };
+        //Add New Pantry Item #4
+        if(!quickTips.createNewItem && quickTips.openPantry && quickTips.tapTile){
+            //Clear existing text
+            $(".quickTipImage").empty();
+            $(".quickTipBody").empty();
+            //Setup modal
+            $(".quickTipsTitle").html("Add Pantry Item");
+            $(".quickTipImage").append("<div style='background-color: #8e8e8e; border-radius: .25rem; color: white; height: 36px; font-weight: 300; line-height: 35px; margin: auto; width: 126px;' >New Item</div>");
+            $(".quickTipBody").append('Open your pantry and tap "New Item" to create a new pantry item.');
+            $(".quickTipCounter").text("4 of 7");
+            $("#quickTip").attr("data-number", 4);
+            $("#quickTip").modal("toggle");
+        };
 
-    //View Charts & Settings #7
-    if(!quickAdd.chartsAndSettings && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd && quickAdd.diaryHistory){
-        console.log("quickTip: chartsAndSettings")
-    };
-});
+        //Quick Add #5
+        if(!quickTips.quickAdd && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem){
+            console.log("quickTip: quickAdd")
+        };
 
-//Add Item To Daily Diary #2
-$(".buttonAddItem").on("click", ()=>{
-    if(!quickTips.addDiaryItem){
-        console.log("quickTip: addDiaryItem")
+        //View Past Diaries #6
+        if(!quickAdd.diaryHistory && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd){
+            console.log("quickTip: diaryHistory")
+        };
+
+        //View Charts & Settings #7
+        if(!quickAdd.chartsAndSettings && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd && quickAdd.diaryHistory){
+            console.log("quickTip: chartsAndSettings")
+        };
+
+        //Add Item To Daily Diary #2
+        $(".buttonAddItem").on("click", ()=>{
+            if(!quickTips.addDiaryItem){
+                //Clear existing text
+                $(".quickTipImage").empty();
+                $(".quickTipBody").empty();
+
+                //Fade-out item selector
+                $("#quickTip").css("background-color", "rgba(0,0,0,.5)");
+
+                //Setup modal
+                $(".quickTipsTitle").html("Selecting Items");
+                $(".quickTipImage").append("<p style='background-color: #cfd9ff; border-radius: 3px;'>Apple</p>");
+                $(".quickTipBody").append("Select an item to add it to today's diary. Use the filter to quickly find specific food items.");
+                $(".quickTipCounter").text("2 of 7");
+                $("#quickTip").attr("data-number", 2);
+                $("#quickTip").modal("toggle");
+            };
+        });
     };
 });
 
@@ -1714,7 +1750,8 @@ $(".buttonAddItem").on("click", ()=>{
 $(".gotItButton").on("click", ()=>{
     let quickTipNumber = $("#quickTip").attr("data-number");
     let quickTipName = keyQuickTip[quickTipNumber];
-
     //update in DB
     updateQuickTipProgress(quickTipName);
-})
+    //close modal
+    $("#quickTip").modal("toggle");
+});

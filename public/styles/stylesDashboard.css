@@ -756,12 +756,14 @@ button.close{
 /* Dashboard Bottom Bar ========================================== */
 #diaryBackButton{
     cursor: pointer;
+    font-weight: 500;
     padding: 5px 10px;
     user-select: none;
 }
 
 #diaryForwardButton{
     cursor: default;
+    font-weight: 500;
     opacity: 0;
     padding: 5px 10px;
     user-select: none;
@@ -770,6 +772,7 @@ button.close{
 #diaryTodayButton{
     cursor: pointer;
     display: inline-block;
+    font-weight: 500;
     min-width: 100px;
     text-align: center;
     user-select: none;

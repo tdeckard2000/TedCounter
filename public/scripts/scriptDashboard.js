@@ -841,15 +841,18 @@ const drawChart = function(labels, data, displayDataType){
         data: {
             labels: labels,
             datasets: [{
-                backgroundColor: '#5f65d8',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(95, 101, 216, .8)',
+                barThickness: 50,
+                borderColor: 'rgb(255, 255, 255, 1)',
+                borderWidth: 4,
                 data: data,
                 datalabels: {
                     labels: {
                         name: {
-                            align: 'right',
+                            align: 308,
                             anchor: 'start',
                             color: 'black',
+                            offset: 3,
                             formatter: function(value, context) {
                                 return context.chart.data.labels[context.dataIndex];
                             }
@@ -876,7 +879,7 @@ const drawChart = function(labels, data, displayDataType){
                             }
                         }
                     }
-                }
+                },
             }]
         },
     
@@ -889,7 +892,8 @@ const drawChart = function(labels, data, displayDataType){
             plugins: {
                 datalabels: {
                     font: {
-                        weight: 600
+                        size: 12,
+                        weight: 300
                     }
                 }
             },

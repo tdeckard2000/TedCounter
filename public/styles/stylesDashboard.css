@@ -25,13 +25,14 @@ html, body{
 .topOutOf{
     color: #545454;
     font-size: .8rem;
+    font-weight: 600;
     padding-bottom: 1px;
 }
 
 .topTotalCount{
     color: white;
     font-size: 2rem;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 100%;
 }
 
@@ -372,10 +373,6 @@ button.close{
 }
 
 /* Settings Modal (Main) ========================================== */
-#buttonOpenQuickTipsModal{
-    background-color: #5ece5c;
-}
-
 #currentPasswordInput, #newPasswordInput, #usernameInput{
     display: block;
     margin: 0 auto 3px auto;

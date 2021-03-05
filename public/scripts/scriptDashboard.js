@@ -1701,9 +1701,11 @@ $(window).on("load",()=>{
             $(".quickTipImage").empty();
             $(".quickTipBody").empty();
             //Setup modal
+            const style1 = 'background-color: #8e8e8e; border-radius: .25rem; color: white; height: 36px;'
+            const style2 = 'font-weight: 300; line-height: 35px; margin: auto; width: 126px;'
             $(".quickTipsTitle").html("Add Pantry Item");
-            $(".quickTipImage").append("<div style='background-color: #8e8e8e; border-radius: .25rem; color: white; height: 36px; font-weight: 300; line-height: 35px; margin: auto; width: 126px;' >New Item</div>");
-            $(".quickTipBody").append('Open your pantry and tap "New Item" to create a new pantry item.');
+            $(".quickTipImage").append("<div style='" + style1 + style2 + "'>New Item</div>");
+            $(".quickTipBody").append('Open your pantry and tap "New Item" to create a new pantry item. Add items you frequently eat to your pantry for quick access later.');
             $(".quickTipCounter").text("4 of 7");
             $("#quickTip").attr("data-number", 4);
             $("#quickTip").modal("toggle");
@@ -1711,17 +1713,46 @@ $(window).on("load",()=>{
 
         //Quick Add #5
         if(!quickTips.quickAdd && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem){
-            console.log("quickTip: quickAdd")
+            //Clear existing text
+            $(".quickTipImage").empty();
+            $(".quickTipBody").empty();
+            //Setup modal
+            $(".quickTipsTitle").html("Quick Add");
+            $(".quickTipImage").append("<img src='./files/quickAddButton.svg' alt='Item Library' style='height:40px; filter: contrast(0.1);'>");
+            $(".quickTipBody").append("Tap the Quick Add button to quickly add nutrition information to your diary. Items added here will not be saved to your pantry.<br>Try it!");
+            $(".quickTipCounter").text("5 of 7");
+            $("#quickTip").attr("data-number", 5);
+            $("#quickTip").modal("toggle");
         };
 
         //View Past Diaries #6
-        if(!quickAdd.diaryHistory && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd){
-            console.log("quickTip: diaryHistory")
+        if(!quickTips.diaryHistory && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd){
+            //Clear existing text
+            $(".quickTipImage").empty();
+            $(".quickTipBody").empty();
+            //Setup modal
+            const style1 = 'background-color: #8d92ff; border-radius: 3px; color: white; font-weight: 300; height: 30px;'
+            const style2 = 'line-height: 27px; margin: auto; padding-right: 25px; width: 200px; word-spacing: 20px;'
+            $(".quickTipsTitle").html("Diary History");
+            $(".quickTipImage").append("<div style='" + style1 + style2 + "'>< Today</div>");
+            $(".quickTipBody").append("Tap the back arrow below to view previous day's diaries.");
+            $(".quickTipCounter").text("6 of 7");
+            $("#quickTip").attr("data-number", 6);
+            $("#quickTip").modal("toggle");
         };
 
         //View Charts & Settings #7
-        if(!quickAdd.chartsAndSettings && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd && quickAdd.diaryHistory){
-            console.log("quickTip: chartsAndSettings")
+        if(!quickTips.chartsAndSettings && quickTips.openPantry && quickTips.tapTile && quickTips.createNewItem && quickTips.quickAdd && quickTips.diaryHistory){
+            //Clear existing text
+            $(".quickTipImage").empty();
+            $(".quickTipBody").empty();
+            //Setup modal
+            $(".quickTipsTitle").html("Charts and Settings");
+            $(".quickTipImage").append("<img src='./files/profileButton.svg' alt='Item Library' style='height:40px; filter: contrast(0.1);'>");
+            $(".quickTipBody").append("Tap the profile button to view your nutrition charts, edit your goals, and more.");
+            $(".quickTipCounter").text("7 of 7");
+            $("#quickTip").attr("data-number", 7);
+            $("#quickTip").modal("toggle");
         };
 
         //Add Item To Daily Diary #2

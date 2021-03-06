@@ -1143,9 +1143,10 @@ app.get('/resetDemo', (req, res)=>{
   resetDemoAccount();
   const style = "background-color: #93e493; color: white; font-family:monospace; padding: 5px; text-align: center;"
   const link = "https://www.TedCounter.com"
+  const header = "<head><meta name='viewport' content='width=device-width, initial-scale=1'></head>"
   const title = "<h4 style='" + style + "'>Demo Reset Successfully<h4>"
   const button = "<a style='text-decoration: none;' href='" + link + "'><button style='display: block; margin:auto;'>Go Back</button></a>"
-  res.send(title + button);
+  res.send(header + title + button);
 })
 
 // =======================================================================

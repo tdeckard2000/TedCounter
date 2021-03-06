@@ -896,7 +896,7 @@ const drawChart = function(labels, data, displayDataType){
                                     let index = context.dataIndex;
                                     let itemName = context.chart.data.labels[index];
                                     let userGoal = userPreferences.nutritionGoals[itemName];
-                                    return value + " / " + userGoal;
+                                    return value + "/" + userGoal;
                                 }
                             }
                         }

@@ -3,6 +3,8 @@
 /* NewItem Header ========================================== */
 .headerRow{
     background-color: #ff9c3e;
+    box-shadow: 0 -3px 10px;
+    min-height: 56px;
     left: 0;
     margin: 0;
     padding: 2px 0;
@@ -19,6 +21,7 @@
 .topOutOf{
     color: #545454;
     font-size: .8rem;
+    font-weight: 600;
     padding-bottom: 1px;
 }
 
@@ -27,10 +30,6 @@
     font-size: 2rem;
     font-weight: 300;
     line-height: 100%;
-}
-
-.topBar{
-    background-color: #ff9c3e;
 }
 
 /* Item List & Done Button Div */
@@ -231,8 +230,13 @@ button.close{
 
 .bottomBarDay{
     color: white;
-    font-weight: 300;
     margin: auto;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    min-width: 100px;
+    text-align: center;
+    user-select: none;
 }
 
 .bottomBarLogo{

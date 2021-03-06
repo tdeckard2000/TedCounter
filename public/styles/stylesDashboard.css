@@ -40,9 +40,9 @@ html, body{
 .backgroundLogo{
     bottom: 60px;
     display: block;
-    max-width: 350px;
+    max-width: 290px;
     margin: auto;
-    opacity: .2;
+    opacity: .12;
     padding: 30px 30px 125px 30px;
     position: relative;
     width: 100%;
@@ -785,7 +785,6 @@ button.close{
 
 .bottomBarDay{
     color: white;
-    font-weight: 300;
     margin: auto;
 }
 

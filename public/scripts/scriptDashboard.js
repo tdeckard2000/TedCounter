@@ -566,7 +566,7 @@ const postDefaultSelections = function(dropdownIDs, checkboxesClass, inputBoxesC
             }, 3000);
             setTimeout(()=>{
                 $(".defaultsTitle").prop("textContent", "All done!");
-                $(".defaultsSubTitle").prop("textContent", "What would you like to do now?");
+                $(".defaultsSubTitle").prop("textContent", "Tap below to start using the app.");
                 $("#loadPreferences").addClass("hidden");
                 //show quick tips button & get started button
                 $(".defaultsFinalOptionsDiv").removeClass("hidden");
@@ -1714,7 +1714,7 @@ $(".buttonToday").on("click", ()=>{
 $(window).on("load",()=>{
 
     //Before doing anything, check if user has been setup and some quick tips have not been completed
-    if(Object.keys(userPreferences.nutritionGoals.length > 0) && Object.values(userPreferences.quickTips).includes(false)){
+    if(Object.keys(userPreferences.nutritionGoals).length > 0 && Object.values(userPreferences.quickTips).includes(false)){
 
         //Open Pantry #1
         if(!quickTips.openPantry){

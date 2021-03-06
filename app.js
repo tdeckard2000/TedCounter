@@ -16,6 +16,7 @@ const request = require('request');
 // const { name } = require('ejs');
 const newUserFoodItems = require('./public/scripts/newUserFoodItems.js');
 const { start } = require('repl');
+const { NONAME } = require('dns');
 
 require('dotenv').config();
 
@@ -963,6 +964,29 @@ const updateQuickTipProgress = function(userDocId, quickTipName){
   });
 };
 
+//Reset Demo Account
+const resetDemoAccount = function(){
+
+  const update = {
+    'quickTips':{
+      'openPantry': false,
+      'addDiaryItem': false,
+      'tapTile': false,
+      'createNewItem': false,
+      'quickAdd': false,
+      'diaryHistory': false,
+      'chartsAndSettings': false
+  },
+    nutritionGoals: {},
+    nutritionOther: [],
+    nutritionTopFour: []
+  };
+
+  user.findOneAndUpdate({email: "demo@gmail.com"}, {$set: update}, (err, doc)=>{
+    console.warn("Err: " + err);
+  })
+};
+
 // =======================================================================
 // ============================ Get Requests =============================
 // =======================================================================
@@ -1111,6 +1135,16 @@ app.get('/logout', (req, res)=>{
     }
   });
 });
+
+//Reset Demo Account
+app.get('/resetDemo', (req, res)=>{
+  resetDemoAccount();
+  const style = "background-color: #93e493; color: white; font-family:monospace; padding: 5px; text-align: center;"
+  const link = "https://www.TedCounter.com"
+  const title = "<h4 style='" + style + "'>Demo Reset Successfully<h4>"
+  const button = "<a style='text-decoration: none;' href='" + link + "'><button style='display: block; margin:auto;'>Go Back</button></a>"
+  res.send(title + button);
+})
 
 // =======================================================================
 // ============================ Post Requests ============================
@@ -1411,4 +1445,4 @@ if (port == null || port == "") {
 }else{
   app.listen(port);
   console.warn('Listening on Port 5000') 
-}
+};

@@ -983,7 +983,9 @@ const resetDemoAccount = function(){
   };
 
   user.findOneAndUpdate({email: "demo@gmail.com"}, {$set: update}, (err, doc)=>{
-    console.warn("Err: " + err);
+    if(err){
+      console.warn("Err: " + err);
+    };
   })
 };
 

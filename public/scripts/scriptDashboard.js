@@ -880,8 +880,7 @@ const drawChart = function(labels, data, displayDataType){
                                 let value = context.dataset.data[index];
                                 if(displayDataType === "percentage"){
                                     return value > 100 ? "#ff89ba"
-                                        : value > 0 ? "black"
-                                        : "transparent";
+                                        : "black";
                                 }else if(displayDataType === "total"){
                                     let itemName = context.chart.data.labels[index];
                                     let userGoal = userPreferences.nutritionGoals[itemName];
@@ -1504,14 +1503,14 @@ $(".chartsButton").on("click", function(){
                             0; //shouldn't get here
     if(buttonId === "chartsButtonPercent"){
         if(rangeSelected === "button1D"){
-            setupChart(startDate, subtractNumDays, "percentage")
+            setupChart(currentDay, subtractNumDays, "percentage")
         }else{
             startDate.setDate(startDate.getDate() - subtractNumDays);
             setupChart([startDate, new Date()], subtractNumDays, "percentage")
         };
     }else if(buttonId === "chartsButtonTotal"){
         if(rangeSelected === "button1D"){
-            setupChart(startDate, subtractNumDays, "total")
+            setupChart(currentDay, subtractNumDays, "total")
         }else{
             startDate.setDate(startDate.getDate() - subtractNumDays);
             setupChart([startDate, new Date()], subtractNumDays, "total")

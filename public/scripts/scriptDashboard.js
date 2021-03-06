@@ -840,10 +840,21 @@ const drawChart = function(labels, data, displayDataType){
         data: {
             labels: labels,
             datasets: [{
-                backgroundColor: 'rgb(95, 101, 216, .8)',
-                barThickness: 50,
-                borderColor: 'rgb(255, 255, 255, 1)',
-                borderWidth: 4,
+                backgroundColor: function(context){
+                    let index = context.dataIndex;
+                    let value = context.dataset.data[index];
+                    if(displayDataType === "percentage"){
+                        return value > 100 ? "#ff89ba"
+                            : "#bcf17f";
+                    }else if(displayDataType === "total"){
+                        let itemName = context.chart.data.labels[index];
+                        let userGoal = userPreferences.nutritionGoals[itemName];
+                        return value > userGoal ? "#ff89ba"
+                            : "#bcf17f";
+                    };
+                },
+                borderColor: '#8e8e8e',
+                borderWidth: 1,
                 data: data,
                 datalabels: {
                     labels: {
@@ -853,28 +864,40 @@ const drawChart = function(labels, data, displayDataType){
                             color: 'black',
                             offset: 3,
                             formatter: function(value, context) {
-                                return context.chart.data.labels[context.dataIndex];
+                                let index = context.dataIndex;
+                                let databaseLabel = context.chart.data.labels[index];
+                                let humanReadableLabel = keyToNormal[databaseLabel];
+                                return humanReadableLabel;
                             }
                         },
                         value: {
-                            align: 'left',
-                            anchor: 'end',
+                            align: 351,
+                            anchor: 'start',
+                            color: 'black',
+                            offset: 73,
                             color: function(context){
                                 let index = context.dataIndex;
                                 let value = context.dataset.data[index];
                                 if(displayDataType === "percentage"){
-                                    return value > 100 ? "#ff97c2"
-                                        : value > 0 ? "white"
+                                    return value > 100 ? "#ff89ba"
+                                        : value > 0 ? "black"
                                         : "transparent";
                                 }else if(displayDataType === "total"){
-                                    return value > 0 ? "white"
-                                        : "transparent";
+                                    let itemName = context.chart.data.labels[index];
+                                    let userGoal = userPreferences.nutritionGoals[itemName];
+                                    return value > userGoal ? "#ff89ba"
+                                        : "black";
                                 };
                             },
                             formatter: function(value, context){
                                 if(displayDataType === "percentage"){
                                     return value + "%";
-                                };
+                                }else if(displayDataType === "total"){
+                                    let index = context.dataIndex;
+                                    let itemName = context.chart.data.labels[index];
+                                    let userGoal = userPreferences.nutritionGoals[itemName];
+                                    return value + " / " + userGoal;
+                                }
                             }
                         }
                     }
@@ -890,9 +913,10 @@ const drawChart = function(labels, data, displayDataType){
             maintainAspectRatio: false,
             plugins: {
                 datalabels: {
+                    clipping: false,
                     font: {
                         size: 12,
-                        weight: 300
+                        weight: 600
                     }
                 }
             },
@@ -900,7 +924,6 @@ const drawChart = function(labels, data, displayDataType){
                 xAxes: [{
                     gridLines: {
                         display: false,
-                        // drawBorder: false
                     },
                     ticks: {
                         beginAtZero: true,
@@ -908,6 +931,7 @@ const drawChart = function(labels, data, displayDataType){
                     }
                 }],
                 yAxes: [{
+                    barPercentage: 0.5,
                     gridLines: {
                         display: false,
                         drawBorder: false

@@ -824,7 +824,6 @@ const setupChart = async function(date, numDays, displayDataType){
     //set chart container height (canvas inherits this)
     const chartHeight = nutritionBoth.length * 40
     $("#chartsContainer").css("height", chartHeight + "px")
-
     drawChart(nutritionBoth, totalsForBoth, displayDataType);
 };
 
@@ -925,14 +924,12 @@ const drawChart = function(labels, data, displayDataType){
 //######################## Functions (Charts.js) ########################
 //Update Quick Tip Progress in DB
 const updateQuickTipProgress = function(quickTipName){
-    console.log(quickTipName);
-
     $.ajax({
         method: "POST",
         url: "./updateQuickTipProgress",
         data: {quickTipName: quickTipName} 
     }).done((data)=>{
-        console.log(data)
+        //output
     });
 }
 
@@ -1471,10 +1468,29 @@ $(".chartsButton").on("click", function(){
     $(".chartsButton").removeClass("chartsButtonSelected");
     $(this).addClass("chartsButtonSelected");
     let buttonId = $(this).attr("id");
+    let rangeSelected = $(".chartsRangeButtonSelected").attr("id");
+    let startDate = new Date();
+    let subtractNumDays = rangeSelected === "button1D" ? 1 :
+                            rangeSelected === "button1W" ? 7 :
+                            rangeSelected === "button2W" ? 14 :
+                            rangeSelected === "button1M" ? 30 :
+                            rangeSelected === "button2M" ? 60 :
+                            rangeSelected === "button3M" ? 90 :
+                            0; //shouldn't get here
     if(buttonId === "chartsButtonPercent"){
-        setupChart(currentDay, 1, "percentage")
+        if(rangeSelected === "button1D"){
+            setupChart(startDate, subtractNumDays, "percentage")
+        }else{
+            startDate.setDate(startDate.getDate() - subtractNumDays);
+            setupChart([startDate, new Date()], subtractNumDays, "percentage")
+        };
     }else if(buttonId === "chartsButtonTotal"){
-        setupChart(currentDay, 1, "total")
+        if(rangeSelected === "button1D"){
+            setupChart(startDate, subtractNumDays, "total")
+        }else{
+            startDate.setDate(startDate.getDate() - subtractNumDays);
+            setupChart([startDate, new Date()], subtractNumDays, "total")
+        }
     }
 });
 

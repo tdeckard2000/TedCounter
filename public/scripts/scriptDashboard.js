@@ -822,7 +822,7 @@ const setupChart = async function(date, numDays, displayDataType){
     }
 
     //set chart container height (canvas inherits this)
-    const chartHeight = nutritionBoth.length * 45;
+    const chartHeight = nutritionBoth.length * 46;
     $("#chartsContainer").css("height", chartHeight + "px")
     drawChart(nutritionBoth, totalsForBoth, displayDataType);
 };
@@ -862,7 +862,7 @@ const drawChart = function(labels, data, displayDataType){
                             align: 308,
                             anchor: 'start',
                             color: 'black',
-                            offset: 3,
+                            offset: 5,
                             formatter: function(value, context) {
                                 let index = context.dataIndex;
                                 let databaseLabel = context.chart.data.labels[index];
@@ -874,7 +874,7 @@ const drawChart = function(labels, data, displayDataType){
                             align: 351,
                             anchor: 'start',
                             color: 'black',
-                            offset: 73,
+                            offset: 75,
                             color: function(context){
                                 let index = context.dataIndex;
                                 let value = context.dataset.data[index];
@@ -913,6 +913,7 @@ const drawChart = function(labels, data, displayDataType){
             maintainAspectRatio: false,
             plugins: {
                 datalabels: {
+                    // clamping: true,
                     clipping: false,
                     font: {
                         size: 12,

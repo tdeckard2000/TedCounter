@@ -822,7 +822,7 @@ const setupChart = async function(date, numDays, displayDataType){
     }
 
     //set chart container height (canvas inherits this)
-    const chartHeight = nutritionBoth.length * 40
+    const chartHeight = nutritionBoth.length * 45;
     $("#chartsContainer").css("height", chartHeight + "px")
     drawChart(nutritionBoth, totalsForBoth, displayDataType);
 };

@@ -822,7 +822,18 @@ const setupChart = async function(date, numDays, displayDataType){
     }
 
     //set chart container height (canvas inherits this)
-    const chartHeight = nutritionBoth.length * 46;
+    let chartHeight = nutritionBoth.length * 50;
+
+    if(nutritionBoth.length === 1){
+        chartHeight = 80;
+    }else if(nutritionBoth.length === 2){
+        chartHeight = 120;
+    }else if(nutritionBoth.length === 3){
+        chartHeight = 175;
+    }else if(nutritionBoth.length === 4){
+        chartHeight = 210;
+    };
+
     $("#chartsContainer").css("height", chartHeight + "px")
     drawChart(nutritionBoth, totalsForBoth, displayDataType);
 };
@@ -1725,8 +1736,8 @@ $(window).on("load",()=>{
             $("#quickTip").modal("toggle");
         };
 
-        //Tap Tile #3
-        if(!quickTips.tapTile && quickTips.openPantry && quickTips.addDiaryItem && $("div.itemRowContainer").length >= 0){
+        //Tap Tile #3 (if previous quick tips completed and at least one item in diary)
+        if(!quickTips.tapTile && quickTips.openPantry && quickTips.addDiaryItem && $("div.itemRowContainer").length >= 1){
             //Clear existing text
             $(".quickTipImage").empty();
             $(".quickTipBody").empty();
@@ -1806,16 +1817,16 @@ $(window).on("load",()=>{
                 $(".quickTipImage").empty();
                 $(".quickTipBody").empty();
 
-                //Fade-out item selector
-                $("#quickTip").css("background-color", "rgba(0,0,0,.5)");
-
                 //Setup modal
                 $(".quickTipsTitle").html("Selecting Items");
-                $(".quickTipImage").append("<p style='background-color: #cfd9ff; border-radius: 3px;'>Apple</p>");
+                $(".quickTipImage").append("<p style='background-color: #cfd9ff; border-radius: 3px;'>Apple Red Delicious</p>");
                 $(".quickTipBody").append("Select an item to add it to today's diary. Use the filter to quickly find specific food items.");
                 $(".quickTipCounter").text("2 of 7");
                 $("#quickTip").attr("data-number", 2);
                 $("#quickTip").modal("toggle");
+                
+                //Fade-out item selector
+                $(".modal-backdrop").css({"z-index": "1052", "": ""})
             };
         });
     };

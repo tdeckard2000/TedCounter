@@ -1490,14 +1490,24 @@ $("#usernameInput").on("keyup", ()=>{
 });
 
 //Reset Quick Tips
-$("#buttonOpenQuickTipsModal").on("click", ()=>{
-    $.ajax({
-        method: "POST",
-        url: '/updateQuickTipProgress',
-        data: {resetAll: true}
-    }).done((data)=>{
-        location.reload();
-    });
+$("#buttonOpenQuickTipsModal").on("click", function(){
+    let buttonText = this.textContent;
+    this.textContent = "Tap Again To Confirm";
+    setTimeout(()=>{
+        this.textContent = "Reset Quick Tips"
+    }, 5000)
+
+    //if button is tapped twice
+    if(buttonText === "Tap Again To Confirm"){
+        // $.ajax({
+        //     method: "POST",
+        //     url: '/updateQuickTipProgress',
+        //     data: {resetAll: true}
+        // }).done((data)=>{
+        //     location.reload();
+        // });
+        console.log("yes")
+    };
 });
 
 //######################## Event Listeners (Charts Tab - Charts.js) ########################

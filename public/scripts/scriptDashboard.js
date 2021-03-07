@@ -462,13 +462,14 @@ const setupDefaultsGoalsTextBoxes = function(dropdownIDs, checkboxesClass, colum
     $(columnClass1 + ", " + columnClass2).children("div").remove();
 
     //populate input boxes split into two columns
+    //B is added to IDs to prevent duplicates with checkbox IDs
     for(i=0; i < list.length; i = i+2){
         $(columnClass1).append("<div><label for='" + list[i] + "'>" + keyToHuman[list[i]] +
-         "</label><input placeholder=" + keyGoalDefaults[list[i]] + " id='" + list[i] + "'type='text' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+         "</label><input placeholder=" + keyGoalDefaults[list[i]] + " id='" + list[i] + "B" + "'type='text' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
 
          if(list[i+1] !== undefined){
             $(columnClass2).append("<div><label for='" + list[i+1] + "'>" + keyToHuman[list[i+1]] +
-            "</label><input placeholder=" + keyGoalDefaults[list[i+1]] + " id='" + list[i+1] + "'type='text' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
+            "</label><input placeholder=" + keyGoalDefaults[list[i+1]] + " id='" + list[i+1] + "B" + "'type='text' inputmode='numeric' maxlength='4' min='1' pattern= '[0-9]*' required></div>")
          }
 
     }
@@ -531,6 +532,9 @@ const getUserGoals = function(inputBoxesClass){
 
     $(inputBoxesClass + " input").each(function(){
             itemName = this.id;
+            //remove "B" from end of ID
+            //B prevents duplicate IDs with checkboxes
+            itemName = itemName.slice(0,-1);
             itemValue = $(this).val();
             userGoals[itemName] = itemValue;
     });
@@ -593,6 +597,17 @@ const postDefaultSelections = function(dropdownIDs, checkboxesClass, inputBoxesC
 };
 
 //######################## Functions (Edit Goals Modal) ########################
+const autofillGoalsTextBoxes = function(){
+    currentGoals = userPreferences.nutritionGoals;
+    let goalValue;
+    for(key of Object.keys(currentGoals)){
+        goalValue = currentGoals[key];
+        //Each input box ID ends with B for
+        //preventing duplicate IDs
+        $("#" + key + "B").val(goalValue);
+    };
+};
+
 const tickDefaultsCheckboxes = function(itemsToTick, checkboxClass){
     itemsToTick.forEach((item)=>{
         $(checkboxClass + " #" + item).prop('checked', true);
@@ -624,7 +639,6 @@ const postEditedSelections = function(dropdownIDs, checkboxesClass, inputBoxesCl
         });
     });
 };
-
 
 //######################## Functions (Diary) ########################
 const updatePastDiary = async function(diaryDate){
@@ -1313,6 +1327,8 @@ $("#goalsEditNextButton").on("click", ()=>{
         //hide next button and show submit button
         $("#goalsEditNextButton").addClass("hidden");
         $("#goalsEditSubmitButton").removeClass("hidden");
+        //populate text boxes with user's goals
+        autofillGoalsTextBoxes();
     };
 });
 
@@ -1736,8 +1752,8 @@ $(".buttonToday").on("click", ()=>{
 
 $(window).on("load",()=>{
 
-    //Before doing anything, check if user has been setup and some quick tips have not been completed
-    if(Object.keys(userPreferences.nutritionGoals).length > 0 && Object.values(userPreferences.quickTips).includes(false)){
+    //Before doing anything, check if user has been setup and quick tips have not been completed
+    if(userPreferences.nutritionGoals && Object.keys(userPreferences.nutritionGoals).length > 0 && Object.values(userPreferences.quickTips).includes(false)){
 
         //Open Pantry #1
         if(!quickTips.openPantry){

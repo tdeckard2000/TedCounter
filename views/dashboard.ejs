@@ -9,10 +9,14 @@
   <div class="row headerRow">
     <%if(nutritionTopFour != undefined && nutritionGoals != undefined){%>
       <%for(let i = 0; i < nutritionTopFour.length; i++){%>
+        <%let textDecoration = "none";%>
+        <%if(nutritionTotals[nutritionTopFour[i]] > nutritionGoals[nutritionTopFour[i]]){%>
+          <%textDecoration = "underline";%>
+        <%}%>
         <div class=" topCounterDiv col-<%=12 / nutritionTopFour.length%>">
           <div class="topTotalCount todayView"><%=nutritionTotals[nutritionTopFour[i]]%></div>
           <div class="topTotalCount pastView hidden">0</div>
-          <div class="topOutOf">/ <%=nutritionGoals[nutritionTopFour[i]]%> <%=keyShortForm[nutritionTopFour[i]]%></div> 
+          <div class="topOutOf">/ <span style="text-decoration:<%=textDecoration%>;"><%=nutritionGoals[nutritionTopFour[i]]%> <%=keyShortForm[nutritionTopFour[i]]%></span></div> 
         </div>
       <%}%>
     </div>

@@ -964,10 +964,9 @@ const updateQuickTipProgress = function(userDocId, quickTipName){
   });
 };
 
-//Reset Demo Account
-const resetDemoAccount = function(){
-
-  const update = {
+//Reset Quick Tips
+const resetQuickTips = function(userId){
+  update = {
     'quickTips':{
       'openPantry': false,
       'addDiaryItem': false,
@@ -976,10 +975,42 @@ const resetDemoAccount = function(){
       'quickAdd': false,
       'diaryHistory': false,
       'chartsAndSettings': false
+    }
+  };
+
+  return new Promise((resolve, reject)=>{
+    user.updateOne({_id: userId}, update, (err, doc)=>{
+      if(err){
+        console.warn(err);
+      };
+
+      resolve();
+    });
+  });
+};
+
+//Reset Demo Account
+const resetDemoAccount = function(){
+
+  const update = {
+    'name': "Github",
+    'quickTips': {
+      'openPantry': false,
+      'addDiaryItem': false,
+      'tapTile': false,
+      'createNewItem': false,
+      'quickAdd': false,
+      'diaryHistory': false,
+      'chartsAndSettings': false
   },
-    nutritionGoals: {},
-    nutritionOther: [],
-    nutritionTopFour: []
+    'nutritionGoals': {},
+    'nutritionOther': [],
+    'nutritionTopFour': [],
+    'settings': {
+      'autoKeyboardQuickAdd': false,
+      'autoKeyboardItemSelect': false
+    },
+    'password': "$2a$10$p3h5dqWxQItUWFYeC/iBTe1lFGeAt3WeJlEWkIbLHZ.hL6/YLor2G"
   };
 
   user.findOneAndUpdate({email: "demo@gmail.com"}, {$set: update}, (err, doc)=>{
@@ -1425,14 +1456,24 @@ app.post("/updateUserPreferences", (req, res)=>{
   })
 });
 
-app.post("/updateQuickTipProgress", (req, res)=>{
+app.post("/updateQuickTipProgress", async(req, res)=>{
   const quickTipToUpdate = req.body.quickTipName;
   const userDocId = req.session.userDocId;
+  const resetAll = req.body.resetAll;
 
-  //update DB
-  updateQuickTipProgress(userDocId, quickTipToUpdate);
-  //update Session
-  req.session.quickTips[quickTipToUpdate] = true;
+  if(resetAll){
+    //set all quickTips to false
+    await resetQuickTips(userDocId);
+    for(let key of Object.keys(req.session.quickTips)){
+      if(key != "undefined"){
+        req.session.quickTips[key] = false;
+      };
+    };
+  }else{
+    //set completed quickTip to true
+    updateQuickTipProgress(userDocId, quickTipToUpdate);
+    req.session.quickTips[quickTipToUpdate] = true;
+  };
 
   res.status(200).send("complete");
 });

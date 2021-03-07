@@ -1210,26 +1210,9 @@ $(".defaultsForm").on("submit", (e)=>{
      postDefaultSelections(dropdownIDs, checkboxesClass, inputBoxesClass);
 });
 
-//refresh page
+//Refresh Page
 $("#buttonCloseDefaults").on("click", ()=>{
     location.reload();
-});
-
-//open intro modal (dev tool)
-$("#buttonOpenQuickTipsModal").on("click", ()=>{
-    $("#userPreferencesModal").modal("toggle");
-    $("#settingsModal").modal("toggle");
-    $("#defaultsBackButton").prop("disabled", true)
-
-    const dropdownIDs = [
-        "#topFourSelection1",
-        "#topFourSelection2",
-        "#topFourSelection3",
-        "#topFourSelection4"
-    ];
-    const defaultsArray = ["calories", "protein", "carbs", "fat"];
-
-    setTopFourDropdownOptions(dropdownIDs, defaultsArray);
 });
 
 //######################## Event Listeners (Goals Editor) ########################
@@ -1495,6 +1478,17 @@ $("#usernameInput, #newPasswordInput").on("keyup", ()=>{
 //Enable save button on new username text box use
 $("#usernameInput").on("keyup", ()=>{
     $("#settingsSaveButton").prop("disabled", false);
+});
+
+//Reset Quick Tips
+$("#buttonOpenQuickTipsModal").on("click", ()=>{
+    $.ajax({
+        method: "POST",
+        url: '/updateQuickTipProgress',
+        data: {resetAll: true}
+    }).done((data)=>{
+        location.reload();
+    });
 });
 
 //######################## Event Listeners (Charts Tab - Charts.js) ########################
@@ -1826,7 +1820,7 @@ $(window).on("load",()=>{
                 $("#quickTip").modal("toggle");
                 
                 //Fade-out item selector
-                $(".modal-backdrop").css({"z-index": "1052", "": ""})
+                $(".modal-backdrop").css({"z-index": "1052", "opacity": ".3"})
             };
         });
     };

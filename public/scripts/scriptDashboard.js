@@ -305,6 +305,7 @@ $(window).on("load",()=>{
     quickTips = userPreferences.quickTips;
     //set user defined settings
     setAutoKeyboardSettings();
+    setChartHeight();
 });
 
 //######################## Functions (Other)########################
@@ -821,20 +822,6 @@ const setupChart = async function(date, numDays, displayDataType){
         });
     }
 
-    //set chart container height (canvas inherits this)
-    let chartHeight = nutritionBoth.length * 50;
-
-    if(nutritionBoth.length === 1){
-        chartHeight = 80;
-    }else if(nutritionBoth.length === 2){
-        chartHeight = 120;
-    }else if(nutritionBoth.length === 3){
-        chartHeight = 175;
-    }else if(nutritionBoth.length === 4){
-        chartHeight = 210;
-    };
-
-    $("#chartsContainer").css("height", chartHeight + "px")
     drawChart(nutritionBoth, totalsForBoth, displayDataType);
 };
 
@@ -955,6 +942,28 @@ const drawChart = function(labels, data, displayDataType){
         }
     });
 };
+
+//Set Chart Container Height (canvas inherits this)
+const setChartHeight = function(){
+    //set on load to prevents modal height from changing
+    //when chart is opened, which is jarring to user
+    const nutritionOtherLength = userPreferences.nutritionOther.length;
+    const nutritionTopFourLength = userPreferences.nutritionTopFour.length;
+    const bothLength = nutritionOtherLength + nutritionTopFourLength;
+    let chartHeight = bothLength * 50;
+
+    if(bothLength === 1){
+        chartHeight = 80;
+    }else if(bothLength.length === 2){
+        chartHeight = 120;
+    }else if(bothLength.length === 3){
+        chartHeight = 175;
+    }else if(bothLength.length === 4){
+        chartHeight = 210;
+    };
+
+    $("#chartsContainer").css("height", chartHeight + "px")
+}
 
 //######################## Functions (Charts.js) ########################
 //Update Quick Tip Progress in DB

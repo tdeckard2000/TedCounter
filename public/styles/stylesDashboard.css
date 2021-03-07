@@ -492,6 +492,7 @@ button.close{
 
 #chartsContainer{
     /* height is edited in script */
+    min-height: 150px;
     height: inherit;
     width: inherit;
 }

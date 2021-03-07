@@ -246,14 +246,17 @@
         </div>
 
         <div class="profilePage hidden">
-          <label for="usernameInput">Change Username</label>
-          <input id="usernameInput" type="text" placeholder="<%=userName%>" autocomplete="nickname" maxlength="25">
-          <hr>
-          <label for="currentPasswordInput">Change Password</label>
-          <input id="currentPasswordInput" type="password" placeholder="current password" autocomplete="current-password">
-          <input id="newPasswordInput" type="password" placeholder="new password" autocomplete="new-password" maxlength="128">
-          <p class="changePasswordError hidden">Could not change password.<br>Please check that you entered your current password correctly.</p>
-          <p class="changePasswordSuccess hidden">Your password was changed successfully.</p>
+          <!-- form to prevent DOM warning -->
+          <form action="">
+            <label for="usernameInput">Change Username</label>
+            <input id="usernameInput" type="text" placeholder="<%=userName%>" autocomplete="username" maxlength="25">
+            <hr>
+            <label for="currentPasswordInput">Change Password</label>
+            <input id="currentPasswordInput" type="password" placeholder="current password" autocomplete="current-password">
+            <input id="newPasswordInput" type="password" placeholder="new password" autocomplete="new-password" maxlength="128">
+            <p class="changePasswordError hidden">Could not change password.<br>Please check that you entered your current password correctly.</p>
+            <p class="changePasswordSuccess hidden">Your password was changed successfully.</p>
+          </form>
           <hr>
           <form action="/logout" method="GET">
             <button type="submit" class="btn settingsBodyButton" id="buttonLogout">Logout</button>

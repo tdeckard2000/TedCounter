@@ -1499,14 +1499,13 @@ $("#buttonOpenQuickTipsModal").on("click", function(){
 
     //if button is tapped twice
     if(buttonText === "Tap Again To Confirm"){
-        // $.ajax({
-        //     method: "POST",
-        //     url: '/updateQuickTipProgress',
-        //     data: {resetAll: true}
-        // }).done((data)=>{
-        //     location.reload();
-        // });
-        console.log("yes")
+        $.ajax({
+            method: "POST",
+            url: '/updateQuickTipProgress',
+            data: {resetAll: true}
+        }).done((data)=>{
+            location.reload();
+        });
     };
 });
 

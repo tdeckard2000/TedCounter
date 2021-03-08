@@ -873,7 +873,7 @@ const sendSignInEmail = function(userId){
 
 //Make API request to "OFF" Open Food Facts
 const openFoodFactsRequest = function(barcodeNumber){
-//DONT FORGET TO INCLUDE A HEADER
+//DON'T FORGET TO INCLUDE A HEADER
   return new Promise((resolve, reject)=>{
     request('https://world.openfoodfacts.org/api/v0/product/' + barcodeNumber + '.json', (err, res, body)=>{
       const productInfo = JSON.parse(body);

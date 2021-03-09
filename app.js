@@ -162,6 +162,7 @@ const userSchema = new mongoose.Schema({
   'name': String,
   'email': String,
   'password': String,
+  'createdOn': Date,
   'nutritionTopFour': Array,
   'nutritionOther': Array,
   'nutritionGoals':Object,
@@ -590,6 +591,7 @@ const addNewUser = function(name, email, pHashed){
     "name": name,
     "email": email,
     "password": pHashed,
+    "createdOn": new Date(),
     "settings":{
       'autoKeyboardItemSelect': false,
       'autoKeyboardQuickAdd': false

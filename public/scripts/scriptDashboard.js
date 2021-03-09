@@ -1772,7 +1772,7 @@ $(window).on("load",()=>{
             //Setup modal
             $(".quickTipsTitle").html("Duplicate and Remove");
             $(".quickTipImage").append("<img src='./files/duplicateIcon.svg' style='height:35px;'><img src='./files/trashCan.svg' style='height:35px; margin-left: 40px'>");
-            $(".quickTipBody").append("Tap on an item in your diary to easily duplicate or remove it.");
+            $(".quickTipBody").append("Now tap the item you just added to easily duplicate or remove it.");
             $(".quickTipCounter").text("3 of 7");
             $("#quickTip").attr("data-number", 3);
             $("#quickTip").modal("toggle");

@@ -48,5 +48,6 @@ To reset the demo, simply go to https://www.TedCounter.com/resetDemo
 ---
 
 ### Images
-
-![alt text](https://raw.githubusercontent.com/tdeckard2000/TedCounter/master/IMG_0726.jpg)
+<image style="width:250px" src="https://raw.githubusercontent.com/tdeckard2000/TedCounter/master/IMG_0728.jpg"></image>
+<image style="width:250px" src="https://raw.githubusercontent.com/tdeckard2000/TedCounter/master/IMG_0726.jpg"></image>
+<image style="width:250px" src="https://raw.githubusercontent.com/tdeckard2000/TedCounter/master/IMG_0729.jpg"></image>

@@ -44,3 +44,9 @@ To reset the demo, simply go to https://www.TedCounter.com/resetDemo
   * Uses one-time-use, expiring, unique hashed verification key
 * Password salting and hashing means your passwords are safe
 * Login feedback informs of incorrect login info or newly created accounts
+
+---
+
+### Images
+
+![alt text](https://raw.githubusercontent.com/tdeckard2000/TedCounter/master/IMG_0726.jpg)

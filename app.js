@@ -37,7 +37,7 @@ app.use(session({
   resave: false,
   rolling: true, //renew session unless idle
   saveUninitialized: false,
-  secret: 'DrPepper Cherries',
+  secret: process.env.SESSION_SECRET,
   store: new MongoStore({mongooseConnection:mongoose.connection})
 }));
 

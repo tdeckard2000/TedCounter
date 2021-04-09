@@ -1544,14 +1544,14 @@ $(".chartsButton").on("click", function(){
         if(rangeSelected === "button1D"){
             setupChart(currentDay, subtractNumDays, "percentage")
         }else{
-            startDate.setDate(startDate.getDate() - subtractNumDays);
+            startDate.setDate(startDate.getDate() - subtractNumDays + 1);
             setupChart([startDate, new Date()], subtractNumDays, "percentage")
         };
     }else if(buttonId === "chartsButtonTotal"){
         if(rangeSelected === "button1D"){
             setupChart(currentDay, subtractNumDays, "total")
         }else{
-            startDate.setDate(startDate.getDate() - subtractNumDays);
+            startDate.setDate(startDate.getDate() - subtractNumDays + 1);
             setupChart([startDate, new Date()], subtractNumDays, "total")
         }
     }
@@ -1590,7 +1590,7 @@ $(".chartRangeButton").on("click", function(){
                             selection === "button3M" ? 90 :
                             0 //shouldn't get here
         //calculate start date
-        startDate.setDate(startDate.getDate() - subtractNumDays);
+        startDate.setDate(startDate.getDate() - subtractNumDays + 1);
         //save date range
         dateRange = [startDate, new Date()]
         //build chart

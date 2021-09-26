@@ -313,6 +313,7 @@ button.close{
     background-color: transparent;
     border: none;
     color: black;
+    font-size: 1rem;
     outline: none;
     padding: 2px 0;
     white-space: nowrap;

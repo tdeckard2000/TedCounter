@@ -310,7 +310,7 @@ button.close{
 }
 
 .selectableItems button{
-    background-color: red;
+    background-color: transparent;
     border: none;
     color: black;
     outline: none;

@@ -312,6 +312,7 @@ button.close{
 .selectableItems button{
     background-color: red;
     border: none;
+    color: black;
     outline: none;
     padding: 2px 0;
     white-space: nowrap;

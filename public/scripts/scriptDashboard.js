@@ -1869,3 +1869,10 @@ $(".gotItButton").on("click", ()=>{
     //close modal
     $("#quickTip").modal("toggle");
 });
+
+//Enter Key Opens Pantry - Keyboard Shortcut
+$(document).on( 'keypress', (event)=> {
+    if (event.keyCode === 13) {
+        $("#itemAdd").modal("toggle");
+    };
+  }); 

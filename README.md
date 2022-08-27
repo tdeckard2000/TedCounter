@@ -9,7 +9,7 @@ Make a free account, or sign in with:
 
 - demo@gmail.com
 
-- urAwesome
+- demoPass
 
 Note: I recommend resetting the demo before beginning.
 To reset the demo, simply go to https://www.TedCounter.com/resetDemo
